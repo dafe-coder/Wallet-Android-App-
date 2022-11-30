@@ -1,3 +1,5 @@
 export * from './WalletButton'
 export * from './WalletText'
 export * from './SubscribeBlock'
+export * from './WalletTitle'
+export * from './WalletInput'

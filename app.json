@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0C0B07"
-      }
+      },
+      "package": "com.daffek.WalletApk"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e46236a0-9104-4a89-b556-aff6c60a003c"
+      }
     }
   }
 }

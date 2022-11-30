@@ -12,7 +12,7 @@ export const PhraseScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View>
-				<WalletText style={{ marginBottom: 20 }} color='white' center size='m'>
+				<WalletText style={{ marginBottom: 40 }} color='white' center size='m'>
 					Recover a wallet using your Secret {'\n'} Recovery Phrase.
 				</WalletText>
 				<PhraseBox />
@@ -22,6 +22,7 @@ export const PhraseScreen = ({ navigation }) => {
 					paddingHorizontal: 16,
 				}}>
 				<WalletButton
+					checked
 					disabled={btnDisabled}
 					onPress={() => navigation.navigate('Login')}>
 					Import Wallet

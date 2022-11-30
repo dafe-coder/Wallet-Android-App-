@@ -42,6 +42,7 @@ export const SubscribeScreen = ({ navigation }) => {
 					paddingHorizontal: 16,
 				}}>
 				<WalletButton
+					checked
 					disabled={btnDisabled}
 					onPress={() => navigation.navigate('RecoverPhrase')}>
 					Recover My wallet

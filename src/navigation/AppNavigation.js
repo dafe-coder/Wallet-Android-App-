@@ -1,14 +1,13 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
 import { LoginScreen, CreateScreen } from '../screens'
-import { SubscribeScreen } from '../screens'
-import { PhraseScreen } from '../screens'
+import { SubscribeScreen, PhraseScreen, CreatePasswordScreen } from '../screens'
 const Stack = createStackNavigator()
 
 export function MyStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='Login'
+			initialRouteName='CreatePassword'
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
@@ -17,6 +16,8 @@ export function MyStack() {
 				headerTitleStyle: {
 					fontFamily: 'gt-medium',
 					color: THEME.GOLD_DARK,
+					textTransform: 'uppercase',
+					fontSize: 14,
 				},
 			}}>
 			<Stack.Screen
@@ -40,6 +41,13 @@ export function MyStack() {
 					title: 'Before We Begin',
 				}}
 				component={SubscribeScreen}
+			/>
+			<Stack.Screen
+				name='CreatePassword'
+				options={{
+					title: 'Game Stop Wallet',
+				}}
+				component={CreatePasswordScreen}
 			/>
 		</Stack.Navigator>
 	)

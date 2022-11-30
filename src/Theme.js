@@ -10,4 +10,5 @@ export const THEME = {
 	BROWN_DARK: '#201A10',
 	BROWN: '#292720',
 	WHITE_DARK_TEXT: '#D3D0C9',
+	RED: '#B61E1E',
 }

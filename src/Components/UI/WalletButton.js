@@ -8,9 +8,14 @@ export const WalletButton = ({
 	style,
 	children,
 	onPress,
+	checked = false,
 }) => {
 	const onPressButton = () => {
-		if (!disabled) {
+		if (checked) {
+			if (!disabled) {
+				onPress()
+			}
+		} else {
 			onPress()
 		}
 	}

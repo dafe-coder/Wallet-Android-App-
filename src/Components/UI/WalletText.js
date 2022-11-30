@@ -56,12 +56,12 @@ export const WalletText = ({
 					</Text>
 				</View>
 			)
-		case 'browm':
+		case 'brown':
 			return (
 				<View>
 					<Text
 						style={[
-							styles.gold,
+							styles.brown,
 							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
