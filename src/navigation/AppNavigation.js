@@ -1,13 +1,19 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
 import { LoginScreen, CreateScreen } from '../screens'
-import { SubscribeScreen, PhraseScreen, CreatePasswordScreen } from '../screens'
+import {
+	SubscribeScreen,
+	PhraseScreen,
+	CreatePasswordScreen,
+	AllSetScreen,
+	NftScreen,
+} from '../screens'
 const Stack = createStackNavigator()
 
 export function MyStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='CreatePassword'
+			initialRouteName='Nft'
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
@@ -45,9 +51,23 @@ export function MyStack() {
 			<Stack.Screen
 				name='CreatePassword'
 				options={{
-					title: 'Game Stop Wallet',
+					title: 'By Bit Wallet',
 				}}
 				component={CreatePasswordScreen}
+			/>
+			<Stack.Screen
+				name='AllSet'
+				options={{
+					title: 'By Bit Wallet',
+				}}
+				component={AllSetScreen}
+			/>
+			<Stack.Screen
+				name='Nft'
+				options={{
+					title: 'By Bit Wallet',
+				}}
+				component={NftScreen}
 			/>
 		</Stack.Navigator>
 	)

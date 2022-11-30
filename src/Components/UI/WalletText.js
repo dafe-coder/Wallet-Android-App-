@@ -9,6 +9,7 @@ export const WalletText = ({
 	style,
 	upperCase = false,
 	center = false,
+	fw = 'regular',
 }) => {
 	switch (color) {
 		case 'white':
@@ -21,6 +22,9 @@ export const WalletText = ({
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
 						]}>
 						{children}
 					</Text>
@@ -36,6 +40,9 @@ export const WalletText = ({
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
 						]}>
 						{children}
 					</Text>
@@ -51,6 +58,9 @@ export const WalletText = ({
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
 						]}>
 						{children}
 					</Text>
@@ -66,6 +76,27 @@ export const WalletText = ({
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
+						]}>
+						{children}
+					</Text>
+				</View>
+			)
+		case 'green-light':
+			return (
+				<View>
+					<Text
+						style={[
+							styles.greenLigth,
+							style,
+							size == 'sm' ? styles.sm : styles.m,
+							upperCase && styles.upperCase,
+							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
 						]}>
 						{children}
 					</Text>
@@ -99,6 +130,9 @@ const styles = StyleSheet.create({
 	},
 	brown: {
 		color: THEME.BROWN_TEXT,
+	},
+	greenLigth: {
+		color: THEME.SUCCESS,
 	},
 	upperCase: {
 		textTransform: 'uppercase',
