@@ -38,7 +38,6 @@ export const LoginScreen = () => {
 
 const styles = StyleSheet.create({
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingHorizontal: 16,
 	},

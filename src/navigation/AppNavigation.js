@@ -7,13 +7,14 @@ import {
 	CreatePasswordScreen,
 	AllSetScreen,
 	NftScreen,
+	ContactsScreen,
 } from '../screens'
 const Stack = createStackNavigator()
 
 export function MyStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='Nft'
+			initialRouteName='Contacts'
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
@@ -24,6 +25,9 @@ export function MyStack() {
 					color: THEME.GOLD_DARK,
 					textTransform: 'uppercase',
 					fontSize: 14,
+				},
+				cardStyle: {
+					backgroundColor: THEME.PRIMARY,
 				},
 			}}>
 			<Stack.Screen
@@ -68,6 +72,13 @@ export function MyStack() {
 					title: 'By Bit Wallet',
 				}}
 				component={NftScreen}
+			/>
+			<Stack.Screen
+				name='Contacts'
+				options={{
+					title: 'Contacts',
+				}}
+				component={ContactsScreen}
 			/>
 		</Stack.Navigator>
 	)

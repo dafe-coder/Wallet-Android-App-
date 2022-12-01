@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 	},
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingHorizontal: 16,
 		justifyContent: 'space-between',

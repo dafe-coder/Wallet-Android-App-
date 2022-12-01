@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 		marginBottom: 100,
 	},
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingHorizontal: 16,
 		justifyContent: 'flex-end',

@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
 		marginBottom: 100,
 	},
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingTop: 40,
 		justifyContent: 'space-between',

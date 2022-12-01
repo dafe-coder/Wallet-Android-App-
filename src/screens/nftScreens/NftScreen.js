@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../../Theme'
-import {
-	WalletButton,
-	WalletTitle,
-	WalletText,
-	SwitchButton,
-} from '../../Components/UI'
+import { WalletTitle, WalletText } from '../../Components/UI'
 import { NftList } from '../../Components'
 
 export const NftScreen = ({ navigation }) => {
@@ -44,7 +39,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 	},
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingHorizontal: 16,
 		justifyContent: 'space-between',

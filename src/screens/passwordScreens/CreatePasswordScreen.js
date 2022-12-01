@@ -27,7 +27,6 @@ export const CreatePasswordScreen = () => {
 
 const styles = StyleSheet.create({
 	body: {
-		backgroundColor: THEME.PRIMARY,
 		flex: 1,
 		paddingTop: 40,
 		justifyContent: 'space-between',
