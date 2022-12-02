@@ -10,3 +10,6 @@ export * from './nftScreens/NftScreen'
 
 //  ---\\\///--- Contacts Screens ---\\\///---
 export * from './ContactsScreen'
+
+//  ---\\\///--- Activity Screens ---\\\///---
+export * from './ActivityScreen'
