@@ -9,13 +9,15 @@ import {
 	NftScreen,
 	ContactsScreen,
 	ActivityScreen,
+	AccountScreen,
+	SettingsScreen,
 } from '../screens'
 const Stack = createStackNavigator()
 
 export function MyStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='Activity'
+			initialRouteName='Settings'
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
@@ -87,6 +89,20 @@ export function MyStack() {
 					title: 'Ethereum',
 				}}
 				component={ActivityScreen}
+			/>
+			<Stack.Screen
+				name='Account'
+				options={{
+					title: 'Ethereum',
+				}}
+				component={AccountScreen}
+			/>
+			<Stack.Screen
+				name='Settings'
+				options={{
+					title: 'Settings',
+				}}
+				component={SettingsScreen}
 			/>
 		</Stack.Navigator>
 	)

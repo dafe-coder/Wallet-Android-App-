@@ -1,24 +1,10 @@
-import React, { useState } from 'react'
-import {
-	Text,
-	View,
-	TextInput,
-	StyleSheet,
-	TouchableOpacity,
-	Image,
-} from 'react-native'
+import React from 'react'
+import { Text, View, TextInput, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI/WalletText'
+import { CopyButton } from './UI/CopyButton'
 
 export const PhraseBox = ({ style }) => {
-	const [colorCopy, setColorCopy] = useState(false)
-	const changeColorCopy = () => {
-		setColorCopy(true)
-		const timer = setTimeout(() => {
-			setColorCopy(false)
-			clearTimeout(timer)
-		}, 500)
-	}
 	return (
 		<View style={{ ...styles.wrap, style }}>
 			<View style={{ flexDirection: 'row' }}>
@@ -38,18 +24,7 @@ export const PhraseBox = ({ style }) => {
 				placeholderTextColor={THEME.BROWN_TEXT}
 				underlineColorAndroid='transparent'
 			/>
-			<TouchableOpacity onPress={changeColorCopy} activeOpacity={1}>
-				<Image
-					source={
-						!colorCopy
-							? require('../../assets/copy.png')
-							: require('../../assets/copy-active.png')
-					}
-					width={24}
-					height={24}
-					style={[styles.copyBtn]}
-				/>
-			</TouchableOpacity>
+			<CopyButton />
 			<Text style={styles.errorText}>Invalid Secret Recovery Phrase!</Text>
 		</View>
 	)
@@ -68,13 +43,6 @@ const styles = StyleSheet.create({
 	},
 	wrap: {
 		paddingHorizontal: 16,
-	},
-	copyBtn: {
-		position: 'absolute',
-		right: 15,
-		bottom: 15,
-		width: 24,
-		height: 24,
 	},
 	errorText: {
 		color: THEME.RED,

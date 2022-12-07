@@ -13,3 +13,9 @@ export * from './ContactsScreen'
 
 //  ---\\\///--- Activity Screens ---\\\///---
 export * from './ActivityScreen'
+
+//  ---\\\///--- Activity Screens ---\\\///---
+export * from './accountScreen/AccountScreen'
+
+//  ---\\\///--- Activity Screens ---\\\///---
+export * from './settingsScreen/SettingsScreen'
