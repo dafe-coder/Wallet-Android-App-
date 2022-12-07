@@ -23,7 +23,7 @@ export const AccountCard = ({ style }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.BROWN_DARK,
 		borderRadius: 5,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
