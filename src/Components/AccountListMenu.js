@@ -2,12 +2,13 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { AccountItemMenu } from './AccountItemMenu'
 
-export const AccountListMenu = () => {
+export const AccountListMenu = ({ onPress }) => {
 	const menuData = [
 		{
 			image: require('../../assets/menuIcon/plus.png'),
 			title: 'Add Account',
 			topLine: true,
+			onPress: onPress,
 		},
 		{
 			image: require('../../assets/menuIcon/download.png'),
@@ -23,6 +24,7 @@ export const AccountListMenu = () => {
 			image: require('../../assets/menuIcon/phone.png'),
 			title: 'Contacts',
 			topLine: true,
+			onPress: onPress,
 		},
 		{
 			image: require('../../assets/menuIcon/settings.png'),
@@ -48,6 +50,7 @@ export const AccountListMenu = () => {
 					image={m.image}
 					title={m.title}
 					topLine={m.topLine}
+					onPress={m.onPress}
 				/>
 			))}
 		</View>

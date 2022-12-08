@@ -30,11 +30,11 @@ export const SettingsScreen = () => {
 	}, [])
 	return (
 		<GestureHandlerRootView style={{ flex: 1, paddingTop: 29 }}>
+			<View style={[styles.overlay, { display: showOverlay }]} />
 			<View style={{ paddingHorizontal: 16 }}>
 				<AccountCard />
 			</View>
 			<SettingsListMenu openCurrentNetwork={handlePresentPress} />
-			<View style={[styles.overlay, { display: showOverlay }]} />
 			<BottomSheet
 				ref={bottomSheetRef}
 				index={-1}

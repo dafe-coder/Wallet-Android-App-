@@ -3,9 +3,9 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { THEME } from '../Theme'
 import { WalletText } from './UI'
 
-export const AccountItemMenu = ({ image, title, topLine }) => {
+export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 	return (
-		<TouchableOpacity activeOpacity={0.7}>
+		<TouchableOpacity activeOpacity={0.7} onPress={() => onPress(title)}>
 			<View style={[{ ...styles.item }, topLine ? { ...styles.topLine } : {}]}>
 				<Image width={20} height={20} style={styles.img} source={image} />
 				<WalletText color='white' size='m' fw='medium'>
