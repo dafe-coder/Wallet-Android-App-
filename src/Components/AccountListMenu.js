@@ -14,6 +14,7 @@ export const AccountListMenu = ({ onPress }) => {
 			image: require('../../assets/menuIcon/download.png'),
 			title: 'Import Account',
 			topLine: true,
+			onPress: onPress,
 		},
 		{
 			image: require('../../assets/menuIcon/lock.png'),

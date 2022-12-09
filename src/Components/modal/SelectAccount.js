@@ -6,13 +6,13 @@ import { THEME } from '../../Theme'
 export const SelectAccount = () => {
 	const networks = [
 		{
-			id: new Date().toString(),
+			id: Math.random().toString(),
 			title: 'Ethereum',
 			img: require('../../../assets/avatar.png'),
 			choose: true,
 		},
 		{
-			id: new Date().toString(),
+			id: Math.random().toString(),
 			title: 'Loopring',
 			img: require('../../../assets/avatar2.png'),
 			choose: false,
@@ -26,7 +26,10 @@ export const SelectAccount = () => {
 			<View>
 				{networks.map((n) => {
 					return (
-						<TouchableOpacity activeOpacity={0.7} style={styles.item}>
+						<TouchableOpacity
+							activeOpacity={0.7}
+							style={styles.item}
+							key={n.id}>
 							<View style={styles.info}>
 								<Image source={n.img} />
 								<WalletText style={{ marginLeft: 12 }} size='m'>

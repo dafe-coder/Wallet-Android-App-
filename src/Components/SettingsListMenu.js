@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { SettingsItemMenu } from './SettingsItemMenu'
 
 export const SettingsListMenu = ({ openCurrentNetwork }) => {
@@ -44,7 +44,7 @@ export const SettingsListMenu = ({ openCurrentNetwork }) => {
 		},
 	]
 	return (
-		<ScrollView style={styles.list}>
+		<View style={styles.list}>
 			{menuData.map((m) => (
 				<SettingsItemMenu
 					onPress={m.onPress}
@@ -55,7 +55,7 @@ export const SettingsListMenu = ({ openCurrentNetwork }) => {
 					switchButton={m.switchButton}
 				/>
 			))}
-		</ScrollView>
+		</View>
 	)
 }
 

@@ -1,37 +1,26 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { AccountCard } from '../../Components'
 import { AccountListMenu } from './../../Components'
-import BottomSheet from '@gorhom/bottom-sheet'
-import { AddAccount, SelectAccount } from './../../Components/modal'
-import { THEME } from './../../Theme'
+import { WalletBottomSheet } from '../../Components/'
+import { AddAccount, ImportAccount } from './../../Components/modal'
 
-export const AccountScreen = () => {
-	const [currentLink, setCurrentLink] = useState('')
-	const [showOverlay, setShowOverlay] = useState('none')
-
+export const AccountScreen = ({ navigation }) => {
 	// ref
-	const bottomSheetRef = useRef(null)
-
-	// variables
-	const snapPoints = useMemo(() => ['1%', '55%'], [])
+	const addAccountRef = useRef(null)
+	const importAccountRef = useRef(null)
 
 	// callbacks
 	function handlePresentPress(title) {
-		bottomSheetRef.current.expand()
-		setShowOverlay('flex')
-		setCurrentLink(title)
-	}
-	const handleSheetChanges = useCallback((index) => {
-		if (index == 0) {
-			bottomSheetRef.current.close()
-			setShowOverlay('none')
+		if (title == 'Import Account') {
+			importAccountRef.current.expand()
+		} else {
+			addAccountRef.current.expand()
 		}
-	}, [])
+	}
+
 	return (
 		<View style={styles.wrap}>
-			<View style={[styles.overlay, { display: showOverlay }]} />
-
 			<View
 				style={{
 					paddingHorizontal: 16,
@@ -39,19 +28,12 @@ export const AccountScreen = () => {
 				<AccountCard />
 			</View>
 			<AccountListMenu onPress={handlePresentPress} />
-			<BottomSheet
-				ref={bottomSheetRef}
-				index={-1}
-				snapPoints={snapPoints}
-				handleStyle={styles.line}
-				handleIndicatorStyle={{ width: 64, height: 4 }}
-				backgroundStyle={styles.sheetContainer}
-				detached={true}
-				onChange={handleSheetChanges}>
-				<View style={styles.contentContainer}>
-					{currentLink == 'Add Account' ? <AddAccount /> : <SelectAccount />}
-				</View>
-			</BottomSheet>
+			<WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
+				<AddAccount onPress={() => navigation.navigate('Contacts')} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={importAccountRef} snapPoints={['81%']}>
+				<ImportAccount />
+			</WalletBottomSheet>
 		</View>
 	)
 }
@@ -60,26 +42,7 @@ const styles = StyleSheet.create({
 	wrap: {
 		flex: 1,
 		paddingTop: 30,
-	},
-	overlay: {
-		display: 'none',
-		opacity: 0.5,
-		backgroundColor: THEME.PRIMARY,
-		position: 'absolute',
-		bottom: 0,
-		height: '100%',
-		width: '100%',
-		left: 0,
+		position: 'relative',
 		zIndex: 0,
-	},
-	contentContainer: {
-		flex: 1,
-		alignItems: 'center',
-		backgroundColor: THEME.BROWN_DARK,
-		paddingTop: 40,
-	},
-	sheetContainer: {
-		backgroundColor: THEME.BROWN_DARK,
-		borderRadius: 10,
 	},
 })

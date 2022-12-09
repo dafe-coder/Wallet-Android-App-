@@ -9,31 +9,39 @@ import {
 import { THEME } from '../../Theme'
 import { WalletText } from './WalletText'
 
-export const WalletInput = ({ style }) => {
+export const WalletInput = ({ style, placeholder, text = '', password }) => {
 	const [showPass, setShowPass] = useState(false)
 	return (
 		<View style={{ ...styles.body, ...style }}>
 			<TextInput
 				secureTextEntry={!showPass}
 				style={{ ...styles.input }}
-				placeholder='Enter your password'
+				placeholder={placeholder}
 				placeholderTextColor={THEME.BROWN_TEXT}
 			/>
-			<WalletText color='brown' style={{ marginTop: 5 }}>
-				Passwords must be a minimum of 8 characters
-			</WalletText>
-			<TouchableOpacity
-				activeOpacity={1}
-				style={styles.btnEye}
-				onPress={() => setShowPass(!showPass)}>
-				<Image
-					source={
-						!showPass
-							? require('../../../assets/eye.png')
-							: require('../../../assets/eye-active.png')
-					}
-				/>
-			</TouchableOpacity>
+			{text != '' ? (
+				<WalletText color='brown' style={{ marginTop: 5 }}>
+					{text}
+				</WalletText>
+			) : (
+				<></>
+			)}
+			{password ? (
+				<TouchableOpacity
+					activeOpacity={1}
+					style={styles.btnEye}
+					onPress={() => setShowPass(!showPass)}>
+					<Image
+						source={
+							!showPass
+								? require('../../../assets/eye.png')
+								: require('../../../assets/eye-active.png')
+						}
+					/>
+				</TouchableOpacity>
+			) : (
+				<></>
+			)}
 		</View>
 	)
 }

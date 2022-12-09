@@ -9,9 +9,9 @@ export const PhraseBox = ({ style }) => {
 		<View style={{ ...styles.wrap, style }}>
 			<View style={{ flexDirection: 'row' }}>
 				<WalletText style={{ color: '#DADEDE', marginBottom: 7 }}>
-					Recovery Phrase{' '}
+					Recovery Phrase
 				</WalletText>
-				<WalletText color='brown' style={{ marginLeft: 10 }}>
+				<WalletText color='brown' style={{ marginLeft: 15 }}>
 					Private Key
 				</WalletText>
 			</View>
