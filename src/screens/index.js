@@ -14,8 +14,19 @@ export * from './ContactsScreen'
 //  ---\\\///--- Activity Screens ---\\\///---
 export * from './ActivityScreen'
 
-//  ---\\\///--- Activity Screens ---\\\///---
+//  ---\\\///--- Accounts Screens ---\\\///---
 export * from './accountScreen/AccountScreen'
 
-//  ---\\\///--- Activity Screens ---\\\///---
+//  ---\\\///--- Settings Screens ---\\\///---
 export * from './settingsScreen/SettingsScreen'
+
+//  ---\\\///--- Export Account Screens ---\\\///---
+export * from './ExportPrivateKeyScreen'
+export * from './ExportPhraseScreen'
+
+//  ---\\\///--- Sent Screens ---\\\///---
+export * from './SentScreen'
+export * from './ConfirmTransactionScreen'
+
+//  ---\\\///--- Swap Screens ---\\\///---
+export * from './SwapScreen'

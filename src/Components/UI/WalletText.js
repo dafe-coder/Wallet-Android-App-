@@ -18,13 +18,13 @@ export const WalletText = ({
 					<Text
 						style={[
 							styles.white,
-							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
 								: { fontFamily: 'ub-medium' },
+							style,
 						]}>
 						{children}
 					</Text>
@@ -36,13 +36,13 @@ export const WalletText = ({
 					<Text
 						style={[
 							styles.whiteDark,
-							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
 								: { fontFamily: 'ub-medium' },
+							style,
 						]}>
 						{children}
 					</Text>
@@ -54,13 +54,13 @@ export const WalletText = ({
 					<Text
 						style={[
 							styles.gold,
-							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
 								: { fontFamily: 'ub-medium' },
+							style,
 						]}>
 						{children}
 					</Text>
@@ -72,13 +72,13 @@ export const WalletText = ({
 					<Text
 						style={[
 							styles.brown,
-							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
 								: { fontFamily: 'ub-medium' },
+							style,
 						]}>
 						{children}
 					</Text>
@@ -90,13 +90,13 @@ export const WalletText = ({
 					<Text
 						style={[
 							styles.greenLigth,
-							style,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
 								: { fontFamily: 'ub-medium' },
+							style,
 						]}>
 						{children}
 					</Text>
