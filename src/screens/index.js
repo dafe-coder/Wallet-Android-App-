@@ -30,3 +30,6 @@ export * from './ConfirmTransactionScreen'
 
 //  ---\\\///--- Swap Screens ---\\\///---
 export * from './SwapScreen'
+
+//  ---\\\///--- Receive Screens ---\\\///---
+export * from './ReceiveScreen'

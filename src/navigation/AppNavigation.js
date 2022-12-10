@@ -16,10 +16,19 @@ import {
 	SentScreen,
 	ConfirmTransactionScreen,
 	SwapScreen,
+	ReceiveScreen,
 } from '../screens'
 const Stack = createStackNavigator()
 
 const screens = [
+	{
+		name: 'Receive',
+		options: {
+			headerShown: true,
+			title: 'You Wallet Address',
+		},
+		component: ReceiveScreen,
+	},
 	{
 		name: 'Swap',
 		options: {
@@ -144,7 +153,7 @@ const screens = [
 export function MyStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='Swap'
+			initialRouteName='Receive'
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
