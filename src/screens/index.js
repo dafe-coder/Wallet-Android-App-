@@ -33,3 +33,6 @@ export * from './SwapScreen'
 
 //  ---\\\///--- Receive Screens ---\\\///---
 export * from './ReceiveScreen'
+
+//  ---\\\///--- Wallet Screens ---\\\///---
+export * from './WalletScreen'
