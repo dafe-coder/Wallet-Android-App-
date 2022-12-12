@@ -102,6 +102,24 @@ export const WalletText = ({
 					</Text>
 				</View>
 			)
+		case 'red':
+			return (
+				<View>
+					<Text
+						style={[
+							styles.red,
+							size == 'sm' ? styles.sm : styles.m,
+							upperCase && styles.upperCase,
+							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'ub-medium' },
+							style,
+						]}>
+						{children}
+					</Text>
+				</View>
+			)
 	}
 }
 
@@ -127,6 +145,9 @@ const styles = StyleSheet.create({
 	},
 	gold: {
 		color: THEME.GOLD_DARK,
+	},
+	red: {
+		color: THEME.RED,
 	},
 	brown: {
 		color: THEME.BROWN_TEXT,

@@ -202,6 +202,7 @@ export const PortfolioList = ({ style }) => {
 		<View style={[style]}>
 			{coins.map((c) => (
 				<PortfolioItem
+					key={c.key}
 					img={c.img}
 					title={c.title}
 					currentPrice={c.currentPrice}

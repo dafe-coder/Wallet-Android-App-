@@ -7,6 +7,7 @@ export const WalletNav = ({ navigation }) => {
 	return (
 		<View style={styles.wrap}>
 			<TouchableOpacity
+				activeOpacity={0.7}
 				onPress={() => navigation.navigate('Sent')}
 				style={styles.item}>
 				<View style={styles.circle}>
@@ -15,6 +16,7 @@ export const WalletNav = ({ navigation }) => {
 				<WalletText>Send</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
+				activeOpacity={0.7}
 				onPress={() => navigation.navigate('Buy')}
 				style={styles.item}>
 				<View style={styles.circle}>
@@ -23,6 +25,7 @@ export const WalletNav = ({ navigation }) => {
 				<WalletText>Buy</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
+				activeOpacity={0.7}
 				onPress={() => navigation.navigate('Receive')}
 				style={styles.item}>
 				<View style={styles.circle}>
