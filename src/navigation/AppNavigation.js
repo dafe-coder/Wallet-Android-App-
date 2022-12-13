@@ -18,6 +18,7 @@ import {
 	SwapScreen,
 	ReceiveScreen,
 	WalletScreen,
+	PortfolioOpenScreen,
 } from '../screens'
 const Stack = createStackNavigator()
 
@@ -29,6 +30,14 @@ const screens = [
 			title: 'Ethereum',
 		},
 		component: WalletScreen,
+	},
+	{
+		name: 'PortfolioOpen',
+		options: {
+			headerShown: true,
+			title: 'Ethereum',
+		},
+		component: PortfolioOpenScreen,
 	},
 	{
 		name: 'Receive',

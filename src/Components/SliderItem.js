@@ -6,15 +6,19 @@ import { PieChar } from './PieChar'
 export const SliderItem = ({ index }) => {
 	return (
 		<View style={styles.item}>
-			<Image
-				style={styles.imageLogo}
-				source={require('../../assets/logoWalletMain.png')}
-			/>
+			{index == 0 ? (
+				<Image
+					style={styles.imageLogo}
+					source={require('../../assets/logoWalletMain.png')}
+				/>
+			) : (
+				<></>
+			)}
 			<ImageBackground
 				style={styles.image}
 				source={require('../../assets/card.png')}>
-				{/* {index == 0 ? <InfoPriseSlide /> : <PieChar />} */}
-				<PieChar />
+				{index == 0 ? <InfoPriseSlide /> : <PieChar />}
+				{/* <PieChar /> */}
 			</ImageBackground>
 		</View>
 	)
