@@ -5,7 +5,7 @@ import { THEME } from '../../Theme'
 
 export const InfoPriseSlide = () => {
 	return (
-		<View>
+		<View style={styles.wrap}>
 			<WalletText size='sm' style={THEME.WHITE_DARK_TEXT}>
 				Your balance is equivalent
 			</WalletText>
@@ -25,6 +25,10 @@ export const InfoPriseSlide = () => {
 }
 
 const styles = StyleSheet.create({
+	wrap: {
+		flex: 1,
+		alignItems: 'center',
+	},
 	imageUp: {
 		marginRight: 4,
 		marginLeft: 10,

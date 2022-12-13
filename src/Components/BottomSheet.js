@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: THEME.BROWN_DARK,
 		paddingTop: 40,
+		position: 'absolute',
+		top: 0,
+		width: '100%',
 	},
 	sheetContainer: {
 		backgroundColor: THEME.BROWN_DARK,

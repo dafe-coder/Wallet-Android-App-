@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from 'redux'
 
-import { postReducer } from './reducers/postReducer'
+import { walletReducer } from './reducers/walletReducer'
 
-const rootReducer = combineReducers({ post: postReducer })
+const rootReducer = combineReducers({ wallet: walletReducer })
 
 export default createStore(rootReducer)

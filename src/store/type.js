@@ -1,1 +1,1 @@
-export const LOAD_POSTS = 'LOAD_POSTS'
+export const SET_NAVIGATION = 'SET_NAVIGATION'

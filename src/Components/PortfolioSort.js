@@ -3,10 +3,13 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
 
-export const PortfolioSort = ({ style }) => {
+export const PortfolioSort = ({ style, onPress }) => {
 	return (
 		<View style={style}>
-			<TouchableOpacity activeOpacity={0.7} style={styles.button}>
+			<TouchableOpacity
+				activeOpacity={0.7}
+				style={styles.button}
+				onPress={onPress}>
 				<WalletText>Portfolio Value</WalletText>
 				<Image source={require('../../assets/right.png')} />
 			</TouchableOpacity>
