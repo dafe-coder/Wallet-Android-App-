@@ -13,10 +13,10 @@ export const PortfolioItem = ({
 	return (
 		<View style={styles.item}>
 			<View style={{ flexDirection: 'row' }}>
-				<Image source={img} />
+				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>
 					<WalletText>{title}</WalletText>
-					<WalletText style={{ color: THEME.GREY }}>{currentPrice}</WalletText>
+					<WalletText style={{ color: THEME.GREY }}>${currentPrice}</WalletText>
 				</View>
 			</View>
 			<View style={{ alignItems: 'flex-end' }}>
@@ -33,6 +33,10 @@ export const PortfolioItem = ({
 }
 
 const styles = StyleSheet.create({
+	logo: {
+		height: 36,
+		width: 36,
+	},
 	item: {
 		backgroundColor: THEME.BROWN,
 		borderRadius: 5,

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { View, ScrollView } from 'react-native'
 import {
 	WalletNav,
@@ -8,11 +8,17 @@ import {
 } from './../Components/'
 import { WalletBottomSheet } from '../Components/'
 import { Filters } from './../Components/modal'
-import { WalletBottomNav } from '../navigation/WalletBottomNav'
-import { setNavigation } from '../store/actions/wallet'
-import { useDispatch } from 'react-redux'
+import { setNavigation } from '../store/actions/walletActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { rebuildObjPortfolio } from './../../services/WalletService'
 
 export const WalletScreen = ({ navigation }) => {
+	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
+	const { portfolioCoins } = useSelector((state) => state.wallet)
+	useEffect(() => {
+		setPortfolioCoinsInit(rebuildObjPortfolio(portfolioCoins))
+	}, [portfolioCoins])
+
 	const dispatch = useDispatch()
 	const filterRef = useRef(null)
 
@@ -31,10 +37,12 @@ export const WalletScreen = ({ navigation }) => {
 				<View style={{ paddingHorizontal: 16 }}>
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
-					<PortfolioList style={{ marginTop: 32, marginBottom: 50 }} />
+					<PortfolioList
+						coins={portfolioCoinsInit}
+						style={{ marginTop: 32, marginBottom: 50 }}
+					/>
 				</View>
 			</ScrollView>
-			{/* <WalletBottomNav navigation={navigation} /> */}
 			<WalletBottomSheet ref={filterRef} snapPoints={['55%']}>
 				<Filters />
 			</WalletBottomSheet>
