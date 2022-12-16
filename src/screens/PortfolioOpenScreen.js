@@ -3,8 +3,9 @@ import { View, ImageBackground, StyleSheet, Image } from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI/'
 import { WalletNav, TransactionsList } from '../Components/'
 import { THEME } from '../Theme'
-
+import { useSelector } from 'react-redux'
 export const PortfolioOpenScreen = () => {
+	const { portfolioCoins } = useSelector((state) => state.wallet)
 	return (
 		<View
 			style={{
@@ -41,7 +42,7 @@ export const PortfolioOpenScreen = () => {
 					/>
 					<WalletText color='brown'>No transactoins history yet</WalletText>
 				</View>
-				<TransactionsList />
+				<TransactionsList data={portfolioCoins} />
 			</View>
 		</View>
 	)

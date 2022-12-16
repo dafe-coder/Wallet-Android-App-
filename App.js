@@ -10,7 +10,18 @@ import { THEME } from './src/Theme'
 import { View } from 'react-native'
 import useWalletService from './services/WalletService'
 import { useDispatch } from 'react-redux'
-import { setPortfolioCoins } from './src/store/actions/walletActions'
+import {
+	setPortfolioCoins,
+	setAllCoins,
+} from './src/store/actions/walletActions'
+import { LogBox } from 'react-native'
+import { PortalProvider } from '@gorhom/portal'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
+LogBox.ignoreLogs([
+	"The provided value 'ms-stream' is not a valid 'responseType'",
+	"The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'",
+])
 
 export default function App() {
 	const isAppLoading = useCachedResources()
@@ -18,17 +29,21 @@ export default function App() {
 		return null
 	} else {
 		return (
-			<View style={{ flex: 1, backgroundColor: THEME.PRIMARY }}>
+			<GestureHandlerRootView
+				style={{ flex: 1, backgroundColor: THEME.PRIMARY }}>
 				<Provider store={store}>
 					<AppWrap>
-						<NavigationContainer
-							theme={{ colors: { background: THEME.PRIMARY } }}>
-							<MyStack />
-						</NavigationContainer>
-						<WalletBottomNav />
+						<PortalProvider>
+							<NavigationContainer
+								style={{ flex: 1 }}
+								theme={{ colors: { background: THEME.PRIMARY } }}>
+								<MyStack />
+							</NavigationContainer>
+							<WalletBottomNav />
+						</PortalProvider>
 					</AppWrap>
 				</Provider>
-			</View>
+			</GestureHandlerRootView>
 		)
 	}
 }
@@ -38,16 +53,15 @@ const AppWrap = ({ children }) => {
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
 	useEffect(() => {
-		// getAllTokens().then((data) => console.log(data))
-		postData(
-			'display stand cruise coil kidney vacant cream street flavor iron sound apple',
-			false
-		)
-			.then((response) => {
-				dispatch(setPortfolioCoins(response.positions.positions))
-			})
-			.catch((error) => console.log('error', error))
-		// setOtherCoins()
+		getAllTokens().then((data) => dispatch(setAllCoins(data)))
+		// postData(
+		// 	'toss quick drop way bleak tube boost panda whisper old dinner degree',
+		// 	false
+		// )
+		// 	.then((response) => {
+		// 		dispatch(setPortfolioCoins(response.positions.positions))
+		// 	})
+		// 	.catch((error) => console.log('error', error))
 	}, [])
 	return children
 }

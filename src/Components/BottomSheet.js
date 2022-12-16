@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { View, StyleSheet } from 'react-native'
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import { THEME } from './../Theme'
-
+import { Portal, PortalHost } from '@gorhom/portal'
 export const WalletBottomSheet = React.forwardRef(
 	({ index = -1, snapPoints, children }, ref) => {
 		const handleSheetChanges = (index) => {
@@ -22,19 +22,25 @@ export const WalletBottomSheet = React.forwardRef(
 			[]
 		)
 		return (
-			<BottomSheet
-				ref={ref}
-				index={index}
-				snapPoints={snapPoints}
-				handleStyle={styles.line}
-				handleIndicatorStyle={{ width: 64, height: 4 }}
-				backgroundStyle={styles.sheetContainer}
-				detached={true}
-				enablePanDownToClose={true}
-				onChange={handleSheetChanges}
-				backdropComponent={renderBackdrop}>
-				<View style={styles.contentContainer}>{children}</View>
-			</BottomSheet>
+			<>
+				<Portal>
+					<BottomSheet
+						ref={ref}
+						index={index}
+						snapPoints={snapPoints}
+						handleStyle={styles.line}
+						handleIndicatorStyle={{ width: 64, height: 4 }}
+						backgroundStyle={styles.sheetContainer}
+						detached={false}
+						enablePanDownToClose={true}
+						onChange={handleSheetChanges}
+						stackBehavior='push'
+						backdropComponent={renderBackdrop}>
+						<View style={styles.contentContainer}>{children}</View>
+					</BottomSheet>
+				</Portal>
+				<PortalHost name='custom_host' />
+			</>
 		)
 	}
 )
@@ -42,15 +48,12 @@ export const WalletBottomSheet = React.forwardRef(
 const styles = StyleSheet.create({
 	contentContainer: {
 		flex: 1,
-		alignItems: 'center',
 		backgroundColor: THEME.BROWN_DARK,
 		paddingTop: 40,
-		position: 'absolute',
-		width: '100%',
+		paddingHorizontal: 16,
 	},
 	sheetContainer: {
 		backgroundColor: THEME.BROWN_DARK,
-		borderRadius: 0,
 		borderTopEndRadius: 10,
 		borderTopLeftRadius: 10,
 	},

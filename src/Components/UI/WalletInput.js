@@ -9,13 +9,19 @@ import {
 import { THEME } from '../../Theme'
 import { WalletText } from './WalletText'
 
-export const WalletInput = ({ style, placeholder, text = '', password }) => {
+export const WalletInput = ({
+	style,
+	styleInput,
+	placeholder,
+	text = '',
+	password,
+}) => {
 	const [showPass, setShowPass] = useState(false)
 	return (
 		<View style={{ ...styles.body, ...style }}>
 			<TextInput
 				secureTextEntry={!showPass}
-				style={{ ...styles.input }}
+				style={[styles.input, styleInput]}
 				placeholder={placeholder}
 				placeholderTextColor={THEME.BROWN_TEXT}
 			/>
@@ -60,7 +66,6 @@ const styles = StyleSheet.create({
 		fontFamily: 'ub-regular',
 	},
 	body: {
-		marginHorizontal: 16,
 		position: 'relative',
 	},
 	btnEye: {

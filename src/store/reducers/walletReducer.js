@@ -1,4 +1,4 @@
-import { SET_NAVIGATION, SET_PORTFOLIO_COINS } from '../type'
+import { SET_ALL_COINS, SET_NAVIGATION, SET_PORTFOLIO_COINS } from '../type'
 const initialState = {
 	navigation: null,
 	portfolioCoins: [],
@@ -16,6 +16,11 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioCoins: action.payload,
+			}
+		case SET_ALL_COINS:
+			return {
+				...state,
+				allCoins: action.payload,
 			}
 		default:
 			return state

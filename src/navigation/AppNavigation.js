@@ -1,7 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { THEME } from './../Theme'
-import { View, Button } from 'react-native'
 import {
 	LoginScreen,
 	CreateScreen,
@@ -23,7 +21,6 @@ import {
 	WalletScreen,
 	PortfolioOpenScreen,
 } from '../screens'
-import { WalletBottomNav } from './WalletBottomNav'
 
 const Stack = createStackNavigator()
 
@@ -172,44 +169,6 @@ const screens = [
 		},
 	},
 ]
-
-const Tab = createBottomTabNavigator()
-
-export function MyTabs() {
-	return (
-		// <Tab.Navigator>
-		// 	<Tab.Screen name='Wallet' component={WalletScreen} />
-		// 	<Tab.Screen name='Settings' component={SettingsScreen} />
-		// </Tab.Navigator>
-		<Tab.Navigator
-			initialRouteName='Wallet'
-			screenOptions={{
-				headerStyle: {
-					backgroundColor: THEME.PRIMARY,
-				},
-				headerTitleAlign: 'center',
-				headerTitleStyle: {
-					fontFamily: 'gt-medium',
-					color: THEME.GOLD_DARK,
-					textTransform: 'uppercase',
-					fontSize: 14,
-				},
-				cardStyle: {
-					backgroundColor: THEME.PRIMARY,
-				},
-			}}
-			tabBar={(props) => <WalletBottomNav {...props} />}>
-			{screens.map((s) => (
-				<Stack.Screen
-					key={s.name}
-					name={s.name}
-					options={s.options}
-					component={s.component}
-				/>
-			))}
-		</Tab.Navigator>
-	)
-}
 
 export function MyStack() {
 	return (

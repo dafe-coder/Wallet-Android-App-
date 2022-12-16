@@ -25,11 +25,11 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 			<View style={{ paddingHorizontal: 16 }}>
 				<View style={{ marginBottom: 24 }}>
 					<WalletText color='brown' style={{ marginBottom: 7 }}>
-						Recipient Adress
+						Recipient Address
 					</WalletText>
 					<View style={styles.item}>
 						<WalletText size='m' color='white'>
-							Public adress (0x...) or ENS
+							Public Address (0x...) or ENS
 						</WalletText>
 					</View>
 				</View>

@@ -5,7 +5,7 @@ import { WalletButton } from './../UI/WalletButton'
 
 export const AddAccount = ({ onPress }) => {
 	return (
-		<View style={{ paddingHorizontal: 16 }}>
+		<View style={{ paddingBottom: 40, paddingHorizontal: 16 }}>
 			<WalletTitle style={{ marginBottom: 16 }}>
 				Add Another Account
 			</WalletTitle>

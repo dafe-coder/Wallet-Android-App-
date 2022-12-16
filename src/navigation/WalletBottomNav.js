@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
 		width: 58,
 	},
 	wrap: {
+		// position: 'absolute',
+		position: 'relative',
+		// bottom: 0,
+		// zIndex: 0,
 		width: '100.1%',
 		borderTopEndRadius: 10,
 		borderTopLeftRadius: 10,
@@ -92,7 +96,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		bottom: -1,
 		left: -1,
-		position: 'relative',
 	},
 	mainBtn: {
 		width: 56,

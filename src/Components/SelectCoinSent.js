@@ -10,7 +10,7 @@ import {
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
 
-export const SelectCoinSent = ({ style }) => {
+export const SelectCoinSent = ({ onChooseCoin, style }) => {
 	return (
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 27 }}>
@@ -20,13 +20,16 @@ export const SelectCoinSent = ({ style }) => {
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
-						<View style={styles.chooseCoin}>
+						<TouchableOpacity
+							activeOpacity={0.7}
+							style={styles.chooseCoin}
+							onPress={onChooseCoin}>
 							<Image source={require('../../assets/network/eth.png')} />
 							<Image
 								style={{ marginLeft: 7 }}
 								source={require('../../assets/check-dark.png')}
 							/>
-						</View>
+						</TouchableOpacity>
 						<View>
 							<WalletText color='white' size='m'>
 								≈ $1.69 <Text style={styles.textGreen}> (0.1%)</Text>

@@ -4,7 +4,6 @@ import { PortfolioItem } from './PortfolioItem'
 import fixNum from './../../services/funcWallet/fixNum'
 
 export const PortfolioList = ({ coins, style }) => {
-	console.log(coins)
 	return (
 		<View style={[style]}>
 			{coins.map((c) => (
@@ -13,7 +12,7 @@ export const PortfolioList = ({ coins, style }) => {
 					img={c.image.thumb}
 					title={c.name}
 					currentPrice={fixNum(c.market_data.current_price)}
-					balance={c.market_data.balance}
+					balance={fixNum(c.market_data.balance)}
 					changePercent={fixNum(c.market_data.relativeChange)}
 				/>
 			))}
