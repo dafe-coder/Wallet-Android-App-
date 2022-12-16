@@ -6,7 +6,7 @@ export * from './passwordScreens/CreatePasswordScreen'
 export * from './AllSetScreen'
 
 //  ---\\\///--- Nft Screens ---\\\///---
-export * from './nftScreens/NftScreen'
+export * from './NftScreen'
 
 //  ---\\\///--- Contacts Screens ---\\\///---
 export * from './ContactsScreen'

@@ -4,12 +4,10 @@ import useCachedResources from './hooks/useCachedResources'
 import { MyStack } from './src/navigation/AppNavigation'
 import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
-import store from './src/store/index'
 import { WalletBottomNav } from './src/navigation/WalletBottomNav'
 import { THEME } from './src/Theme'
-import { View } from 'react-native'
 import useWalletService from './services/WalletService'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
 	setPortfolioCoins,
 	setAllCoins,
@@ -17,6 +15,8 @@ import {
 import { LogBox } from 'react-native'
 import { PortalProvider } from '@gorhom/portal'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './src/store/index'
 
 LogBox.ignoreLogs([
 	"The provided value 'ms-stream' is not a valid 'responseType'",
@@ -25,6 +25,7 @@ LogBox.ignoreLogs([
 
 export default function App() {
 	const isAppLoading = useCachedResources()
+
 	if (!isAppLoading) {
 		return null
 	} else {
@@ -39,7 +40,6 @@ export default function App() {
 								theme={{ colors: { background: THEME.PRIMARY } }}>
 								<MyStack />
 							</NavigationContainer>
-							<WalletBottomNav />
 						</PortalProvider>
 					</AppWrap>
 				</Provider>
@@ -52,6 +52,19 @@ const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
+	const { navigation } = useSelector((state) => state.wallet)
+	// useEffect(() => {
+	// 	console.log(navigation.getState('routes').routes[0].name)
+	// }, [navigation])
+	// const initNav = () => {
+	// 	switch (navigation.getState('routes').routes[0].name) {
+	// 		case 'Wallet':
+	// 			return <WalletBottomNav />
+	// 		default:
+	// 			return <></>
+	// 	}
+	// }
+
 	useEffect(() => {
 		getAllTokens().then((data) => dispatch(setAllCoins(data)))
 		// postData(
@@ -63,5 +76,12 @@ const AppWrap = ({ children }) => {
 		// 	})
 		// 	.catch((error) => console.log('error', error))
 	}, [])
-	return children
+
+	return (
+		<PersistGate loading={null} persistor={persistor}>
+			{children}
+			{/* {initNav()} */}
+			{navigation == null ? <></> : <WalletBottomNav />}
+		</PersistGate>
+	)
 }

@@ -1,37 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText } from './../Components/UI/WalletText'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
+import { SvgIconNav } from './../Components/svg/svgNav'
 
 export const WalletBottomNav = () => {
 	const { navigation } = useSelector((state) => state.wallet)
+	const [activeNav, setActiveNav] = useState('Wallet')
+
+	const onPressNav = (screen) => {
+		setActiveNav(screen)
+		navigation.navigate(screen)
+	}
+
 	return (
 		<View style={styles.wrap}>
 			<TouchableOpacity
 				activeOpacity={1}
 				style={[styles.item]}
-				onPress={() => navigation.navigate('Wallet')}>
-				<Image
-					style={{ marginBottom: 5 }}
-					source={require('../../assets/icons/wallet.png')}
+				onPress={() => onPressNav('Wallet')}>
+				<SvgIconNav
+					type='wallet'
+					fill={activeNav == 'Wallet' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color='brown'>Coins</WalletText>
+				<WalletText color={activeNav == 'Wallet' ? 'gold' : 'brown'}>
+					Coins
+				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={1}
 				style={styles.item}
-				onPress={() => navigation.navigate('Nft')}>
-				<Image
-					style={{ marginBottom: 5 }}
-					source={require('../../assets/icons/nfts.png')}
+				onPress={() => onPressNav('Nft')}>
+				<SvgIconNav
+					type='bar'
+					fill={activeNav == 'Nft' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color='brown'>NFTs</WalletText>
+				<WalletText color={activeNav == 'Nft' ? 'gold' : 'brown'}>
+					NFTs
+				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={1}
 				style={[styles.item]}
-				onPress={() => navigation.navigate('Swap')}>
+				onPress={() => onPressNav('Swap')}>
 				<View style={[styles.mainBtn, { position: 'absolute', top: -43 }]}>
 					<Image
 						style={{
@@ -44,29 +56,35 @@ export const WalletBottomNav = () => {
 						source={require('../../assets/icons/swap-dark.png')}
 					/>
 				</View>
-				<WalletText style={{ marginTop: 20 }} color='brown'>
+				<WalletText
+					style={{ marginTop: 20 }}
+					color={activeNav == 'Swap' ? 'gold' : 'brown'}>
 					Swap
 				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={1}
 				style={[styles.item]}
-				onPress={() => navigation.navigate('Activity')}>
-				<Image
-					style={{ marginBottom: 5 }}
-					source={require('../../assets/icons/activity.png')}
+				onPress={() => onPressNav('Activity')}>
+				<SvgIconNav
+					type='activity'
+					fill={activeNav == 'Activity' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color='brown'>Activity</WalletText>
+				<WalletText color={activeNav == 'Activity' ? 'gold' : 'brown'}>
+					Activity
+				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={1}
 				style={styles.item}
-				onPress={() => navigation.navigate('Account')}>
-				<Image
-					style={{ marginBottom: 5 }}
-					source={require('../../assets/icons/account.png')}
+				onPress={() => onPressNav('Account')}>
+				<SvgIconNav
+					type='man'
+					fill={activeNav == 'Account' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color='brown'>Account</WalletText>
+				<WalletText color={activeNav == 'Account' ? 'gold' : 'brown'}>
+					Account
+				</WalletText>
 			</TouchableOpacity>
 		</View>
 	)
@@ -79,10 +97,7 @@ const styles = StyleSheet.create({
 		width: 58,
 	},
 	wrap: {
-		// position: 'absolute',
 		position: 'relative',
-		// bottom: 0,
-		// zIndex: 0,
 		width: '100.1%',
 		borderTopEndRadius: 10,
 		borderTopLeftRadius: 10,

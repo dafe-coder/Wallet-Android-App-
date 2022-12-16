@@ -1,6 +1,6 @@
 import Svg, { G, Path } from 'react-native-svg'
 
-export const SvgIcon = ({ type, ...props }) => {
+export const SvgIcon = ({ type, fill = '', ...props }) => {
 	switch (type) {
 		case 'search':
 			return (

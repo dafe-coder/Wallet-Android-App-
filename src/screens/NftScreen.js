@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Image } from 'react-native'
-import { THEME } from '../../Theme'
-import { WalletTitle, WalletText } from '../../Components/UI'
-import { NftList } from '../../Components'
+import { View, StyleSheet, Image, ScrollView } from 'react-native'
+import { THEME } from '../Theme'
+import { WalletTitle, WalletText } from '../Components/UI'
+import { NftList } from '../Components'
 
 export const NftScreen = ({ navigation }) => {
 	const [data, setData] = useState([1, 2, 3])
 	return (
-		<View style={styles.body}>
+		<ScrollView style={styles.body}>
 			{data.length ? (
 				<View style={{ paddingTop: 56 }}>
 					<WalletTitle style={{ marginBottom: 36 }}>Your NFTs</WalletTitle>
@@ -15,7 +15,7 @@ export const NftScreen = ({ navigation }) => {
 				</View>
 			) : (
 				<View style={{ ...styles.wrapTop, paddingTop: 117 }}>
-					<Image source={require('../../../assets/nft.png')} />
+					<Image source={require('../../assets/nft.png')} />
 					<WalletTitle style={{ marginTop: 30, marginBottom: 16 }}>
 						Your NFTs
 					</WalletTitle>
@@ -27,7 +27,7 @@ export const NftScreen = ({ navigation }) => {
 					</WalletText>
 				</View>
 			)}
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingHorizontal: 16,
-		justifyContent: 'space-between',
 		paddingBottom: 40,
 	},
 	title: {

@@ -15,9 +15,9 @@ import { rebuildObjPortfolio } from './../../services/WalletService'
 export const WalletScreen = ({ navigation }) => {
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
 	const { portfolioCoins } = useSelector((state) => state.wallet)
-	useEffect(() => {
-		setPortfolioCoinsInit(rebuildObjPortfolio(portfolioCoins))
-	}, [portfolioCoins])
+	// useEffect(() => {
+	// 	setPortfolioCoinsInit(rebuildObjPortfolio(portfolioCoins))
+	// }, [portfolioCoins])
 
 	const dispatch = useDispatch()
 	const filterRef = useRef(null)
