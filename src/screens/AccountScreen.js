@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { AccountCard } from '../../Components'
-import { AccountListMenu } from './../../Components'
-import { WalletBottomSheet } from '../../Components/'
-import { AddAccount, ImportAccount } from './../../Components/modal'
+import { AccountCard } from '../Components'
+import { AccountListMenu } from '../Components'
+import { WalletBottomSheet } from '../Components'
+import { AddAccount, ImportAccount } from '../Components/modal'
 
 export const AccountScreen = ({ navigation }) => {
 	// ref
@@ -14,6 +14,8 @@ export const AccountScreen = ({ navigation }) => {
 	function handlePresentPress(title) {
 		if (title == 'Import Account') {
 			importAccountRef.current.expand()
+		} else if (title == 'Settings') {
+			navigation.navigate('Settings')
 		} else {
 			addAccountRef.current.expand()
 		}

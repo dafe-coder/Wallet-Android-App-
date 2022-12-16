@@ -33,15 +33,15 @@ export default function App() {
 			<GestureHandlerRootView
 				style={{ flex: 1, backgroundColor: THEME.PRIMARY }}>
 				<Provider store={store}>
-					<AppWrap>
-						<PortalProvider>
+					<PortalProvider>
+						<AppWrap>
 							<NavigationContainer
 								style={{ flex: 1 }}
 								theme={{ colors: { background: THEME.PRIMARY } }}>
 								<MyStack />
 							</NavigationContainer>
-						</PortalProvider>
-					</AppWrap>
+						</AppWrap>
+					</PortalProvider>
 				</Provider>
 			</GestureHandlerRootView>
 		)

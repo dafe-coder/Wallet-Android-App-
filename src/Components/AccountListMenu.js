@@ -31,6 +31,7 @@ export const AccountListMenu = ({ onPress }) => {
 			image: require('../../assets/menuIcon/settings.png'),
 			title: 'Settings',
 			topLine: false,
+			onPress: onPress,
 		},
 		{
 			image: require('../../assets/menuIcon/help.png'),

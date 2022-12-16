@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { WalletTitle } from '../../Components/UI'
-import { THEME } from '../../Theme'
-import { WalletText, WalletInput } from './../../Components/UI'
-import { WalletButton } from './../../Components/UI/WalletButton'
+import { WalletTitle } from '../Components/UI'
+import { THEME } from '../Theme'
+import { WalletText, WalletInput } from '../Components/UI'
+import { WalletButton } from '../Components/UI/WalletButton'
 
 export const CreatePasswordScreen = () => {
 	return (

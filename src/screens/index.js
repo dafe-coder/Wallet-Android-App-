@@ -1,8 +1,8 @@
 export * from './LoginScreen'
-export * from './createScreens/CreateScreen'
+export * from './CreateScreen'
 export * from './recoverScreens/SubscribeScreen'
 export * from './recoverScreens/PhraseScreen'
-export * from './passwordScreens/CreatePasswordScreen'
+export * from './CreatePasswordScreen'
 export * from './AllSetScreen'
 
 //  ---\\\///--- Nft Screens ---\\\///---
@@ -15,10 +15,10 @@ export * from './ContactsScreen'
 export * from './ActivityScreen'
 
 //  ---\\\///--- Accounts Screens ---\\\///---
-export * from './accountScreen/AccountScreen'
+export * from './AccountScreen'
 
 //  ---\\\///--- Settings Screens ---\\\///---
-export * from './settingsScreen/SettingsScreen'
+export * from './SettingsScreen'
 
 //  ---\\\///--- Export Account Screens ---\\\///---
 export * from './ExportPrivateKeyScreen'

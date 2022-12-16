@@ -19,7 +19,7 @@ export const ChangeCurrentNetwork = () => {
 		},
 	]
 	return (
-		<View style={{ width: '100%', paddingHorizontal: 16 }}>
+		<View style={{ width: '100%' }}>
 			<WalletTitle style={{ marginBottom: 30 }}>
 				Change Current Network
 			</WalletTitle>

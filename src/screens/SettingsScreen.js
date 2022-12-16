@@ -1,9 +1,8 @@
 import React, { useRef } from 'react'
-import { View } from 'react-native'
-import { SettingsListMenu } from '../../Components'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { ConnectsApp, ChangeCurrentNetwork } from '../../Components/modal'
-import { AccountCard, WalletBottomSheet } from './../../Components'
+import { View, ScrollView } from 'react-native'
+import { SettingsListMenu } from '../Components'
+import { ConnectsApp, ChangeCurrentNetwork } from '../Components/modal'
+import { AccountCard, WalletBottomSheet } from '../Components'
 
 export const SettingsScreen = () => {
 	// ref
@@ -19,18 +18,20 @@ export const SettingsScreen = () => {
 	}
 
 	return (
-		<GestureHandlerRootView style={{ flex: 1, paddingTop: 29 }}>
+		<ScrollView style={{ flex: 1, paddingTop: 29 }}>
 			<View style={{ paddingHorizontal: 16 }}>
 				<AccountCard />
 			</View>
-			<SettingsListMenu openCurrentNetwork={handlePresentPress} />
-			<WalletBottomSheet index={0} ref={networkRef} snapPoints={['55%']}>
+			<View style={{ paddingBottom: 80 }}>
+				<SettingsListMenu openCurrentNetwork={handlePresentPress} />
+			</View>
+			<WalletBottomSheet ref={networkRef} snapPoints={['55%']}>
 				<ChangeCurrentNetwork />
 			</WalletBottomSheet>
 
 			<WalletBottomSheet ref={connectedAppsRef} snapPoints={['55%']}>
 				<ConnectsApp />
 			</WalletBottomSheet>
-		</GestureHandlerRootView>
+		</ScrollView>
 	)
 }

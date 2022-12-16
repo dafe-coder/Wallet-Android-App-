@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingHorizontal: 16,
-		paddingBottom: 40,
 	},
 	title: {
 		marginBottom: 13,
