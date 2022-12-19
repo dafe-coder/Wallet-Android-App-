@@ -2,7 +2,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
 import {
 	LoginScreen,
-	CreateScreen,
+	CreatePhraseScreen,
+	SubscribeCreateScreen,
 	SubscribeScreen,
 	PhraseScreen,
 	CreatePasswordScreen,
@@ -32,6 +33,14 @@ const screens = [
 			title: 'Ethereum',
 		},
 		component: WalletScreen,
+	},
+	{
+		name: 'CreatePhrase',
+		options: {
+			headerShown: true,
+			title: '',
+		},
+		component: CreatePhraseScreen,
 	},
 	{
 		name: 'PortfolioOpen',
@@ -168,6 +177,14 @@ const screens = [
 			title: 'Export Account - Private Key',
 		},
 	},
+	{
+		name: 'SubscribeCreate',
+		component: SubscribeCreateScreen,
+		options: {
+			headerShown: true,
+			title: 'Before We Begin',
+		},
+	},
 ]
 
 export function MyStack() {
@@ -175,7 +192,7 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName='Wallet'
+			initialRouteName='CreatePhrase'
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

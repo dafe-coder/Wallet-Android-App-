@@ -1,8 +1,10 @@
 export * from './LoginScreen'
-export * from './CreateScreen'
+export * from './CreatePhraseScreen'
 export * from './recoverScreens/SubscribeScreen'
+export * from './recoverScreens/SubscribeScreenCreate'
 export * from './recoverScreens/PhraseScreen'
 export * from './CreatePasswordScreen'
+export * from './CreatePhraseScreen'
 export * from './AllSetScreen'
 
 //  ---\\\///--- Nft Screens ---\\\///---

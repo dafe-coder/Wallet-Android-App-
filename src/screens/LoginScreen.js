@@ -22,7 +22,9 @@ export const LoginScreen = ({ navigation }) => {
 					{'\n'}Wallet
 				</Text>
 			</View>
-			<WalletButton style={{ marginBottom: 10 }}>
+			<WalletButton
+				onPress={() => navigation.navigate('SubscribeCreate')}
+				style={{ marginBottom: 10 }}>
 				Create new wallet
 			</WalletButton>
 			<WalletButton

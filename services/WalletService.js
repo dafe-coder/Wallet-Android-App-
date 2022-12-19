@@ -151,12 +151,18 @@ export function rebuildObjPortfolio(list) {
 			symbol: obj.asset.symbol,
 			contract_address: obj.asset.asset_code,
 			market_data: {
-				current_price: obj.asset.price.value,
+				current_price: {
+					usd: obj.asset.price.value,
+				},
 				balance: Number(
 					Web3.utils.fromWei(String(obj.quantity), 'ether')
 				).toFixed(10),
-				balance_crypto: obj.value,
-				high_24h: obj.quote_rate_24h,
+				balance_crypto: {
+					usd: obj.value,
+				},
+				high_24h: {
+					usd: obj.quote_rate_24h,
+				},
 				relativeChange: obj.asset.price.relative_change_24h,
 			},
 			image: {

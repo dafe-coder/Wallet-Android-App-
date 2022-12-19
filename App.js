@@ -17,7 +17,7 @@ import { PortalProvider } from '@gorhom/portal'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/store/index'
-
+import { rebuildObjPortfolio } from './services/WalletService'
 LogBox.ignoreLogs([
 	"The provided value 'ms-stream' is not a valid 'responseType'",
 	"The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'",
@@ -67,14 +67,19 @@ const AppWrap = ({ children }) => {
 
 	useEffect(() => {
 		getAllTokens().then((data) => dispatch(setAllCoins(data)))
-		// postData(
-		// 	'toss quick drop way bleak tube boost panda whisper old dinner degree',
-		// 	false
-		// )
-		// 	.then((response) => {
-		// 		dispatch(setPortfolioCoins(response.positions.positions))
-		// 	})
-		// 	.catch((error) => console.log('error', error))
+		postData(
+			// 'toss quick drop way bleak tube boosts panda whisper old dinner degree',
+			'budget impact steak penalty flat minor priority prevent like click ankle mean',
+			// '22be3d4e11ca8ab183495321656b2ab2708a5244cdaaf8efe884b563421ed214',
+			false
+		)
+			.then((response) => {
+				console.log(response.positions.positions)
+				dispatch(
+					setPortfolioCoins(rebuildObjPortfolio(response.positions.positions))
+				)
+			})
+			.catch((error) => console.log('error', error))
 	}, [])
 
 	return (

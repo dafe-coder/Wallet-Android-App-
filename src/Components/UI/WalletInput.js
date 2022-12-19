@@ -15,8 +15,11 @@ export const WalletInput = ({
 	placeholder,
 	text = '',
 	password,
+	value,
+	setPassword,
 }) => {
 	const [showPass, setShowPass] = useState(false)
+
 	return (
 		<View style={{ ...styles.body, ...style }}>
 			<TextInput
@@ -24,6 +27,8 @@ export const WalletInput = ({
 				style={[styles.input, styleInput]}
 				placeholder={placeholder}
 				placeholderTextColor={THEME.BROWN_TEXT}
+				value={value}
+				onChangeText={(text) => setPassword(text)}
 			/>
 			{text != '' ? (
 				<WalletText color='brown' style={{ marginTop: 5 }}>

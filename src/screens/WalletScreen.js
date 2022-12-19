@@ -10,14 +10,13 @@ import { WalletBottomSheet } from '../Components/'
 import { Filters } from './../Components/modal'
 import { setNavigation } from '../store/actions/walletActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { rebuildObjPortfolio } from './../../services/WalletService'
 
 export const WalletScreen = ({ navigation }) => {
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
 	const { portfolioCoins } = useSelector((state) => state.wallet)
-	// useEffect(() => {
-	// 	setPortfolioCoinsInit(rebuildObjPortfolio(portfolioCoins))
-	// }, [portfolioCoins])
+	useEffect(() => {
+		setPortfolioCoinsInit(portfolioCoins)
+	}, [portfolioCoins])
 
 	const dispatch = useDispatch()
 	const filterRef = useRef(null)
@@ -37,10 +36,10 @@ export const WalletScreen = ({ navigation }) => {
 				<View style={{ paddingHorizontal: 16 }}>
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
-					<PortfolioList
+					{/* <PortfolioList
 						coins={portfolioCoinsInit}
 						style={{ marginTop: 32, marginBottom: 50 }}
-					/>
+					/> */}
 				</View>
 			</ScrollView>
 			<WalletBottomSheet ref={filterRef} snapPoints={['55%']}>

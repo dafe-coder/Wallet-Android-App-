@@ -8,7 +8,7 @@ export const registerReducer = (state = initialState, action) => {
 		case CREATE_PASSWORD:
 			return {
 				...state,
-				password: payload,
+				password: action.payload,
 			}
 		default:
 			return state
