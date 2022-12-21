@@ -16,6 +16,8 @@ export const AccountScreen = ({ navigation }) => {
 			importAccountRef.current.expand()
 		} else if (title == 'Settings') {
 			navigation.navigate('Settings')
+		} else if (title == 'Contacts') {
+			navigation.navigate('Contacts')
 		} else {
 			addAccountRef.current.expand()
 		}
@@ -33,7 +35,7 @@ export const AccountScreen = ({ navigation }) => {
 			<WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
 				<AddAccount onPress={() => navigation.navigate('Contacts')} />
 			</WalletBottomSheet>
-			<WalletBottomSheet ref={importAccountRef} snapPoints={['76%']}>
+			<WalletBottomSheet ref={importAccountRef} snapPoints={['80%']}>
 				<ImportAccount />
 			</WalletBottomSheet>
 		</View>

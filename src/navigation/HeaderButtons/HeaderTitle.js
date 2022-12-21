@@ -1,0 +1,33 @@
+import React, { useRef } from 'react'
+import { View, TouchableOpacity } from 'react-native'
+import { WalletText } from './../../Components/UI/WalletText'
+import { SvgIcon } from './../../Components/svg/svg'
+import { WalletBottomSheet } from '../../Components'
+import { ChangeCurrentNetwork } from '../../Components/modal'
+import { THEME } from './../../Theme'
+
+export const HeaderTitle = () => {
+	const chooseNetwork = useRef(null)
+
+	const openModalSelectAccount = () => {
+		chooseNetwork.current.expand()
+	}
+	return (
+		<>
+			<TouchableOpacity activeOpacity={0.7} onPress={openModalSelectAccount}>
+				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+					<WalletText
+						color='gold'
+						style={{ marginRight: 5, fontFamily: 'gt-medium' }}
+						upperCase>
+						Ethereum
+					</WalletText>
+					<SvgIcon type='check' fill={THEME.GOLD_DARK} />
+				</View>
+			</TouchableOpacity>
+			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
+				<ChangeCurrentNetwork />
+			</WalletBottomSheet>
+		</>
+	)
+}

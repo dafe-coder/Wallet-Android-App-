@@ -64,7 +64,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				</WalletButton>
 				<WalletButton style={styles.btn}>Confirm</WalletButton>
 			</View>
-			<WalletBottomSheet ref={infoRef} snapPoints={['55%']} index={0}>
+			<WalletBottomSheet ref={infoRef} snapPoints={['55%']}>
 				<TransactionFee onPress={closeInfo} />
 			</WalletBottomSheet>
 		</View>

@@ -6,7 +6,6 @@ export const ImportAccount = () => {
 	return (
 		<View
 			style={{
-				paddingHorizontal: 16,
 				flex: 1,
 				paddingBottom: 39,
 			}}>

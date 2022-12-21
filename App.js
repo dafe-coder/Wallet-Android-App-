@@ -53,28 +53,14 @@ const AppWrap = ({ children }) => {
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
 	const { navigation } = useSelector((state) => state.wallet)
-	// useEffect(() => {
-	// 	console.log(navigation.getState('routes').routes[0].name)
-	// }, [navigation])
-	// const initNav = () => {
-	// 	switch (navigation.getState('routes').routes[0].name) {
-	// 		case 'Wallet':
-	// 			return <WalletBottomNav />
-	// 		default:
-	// 			return <></>
-	// 	}
-	// }
 
 	useEffect(() => {
 		getAllTokens().then((data) => dispatch(setAllCoins(data)))
 		postData(
-			// 'toss quick drop way bleak tube boosts panda whisper old dinner degree',
 			'budget impact steak penalty flat minor priority prevent like click ankle mean',
-			// '22be3d4e11ca8ab183495321656b2ab2708a5244cdaaf8efe884b563421ed214',
 			false
 		)
 			.then((response) => {
-				console.log(response.positions.positions)
 				dispatch(
 					setPortfolioCoins(rebuildObjPortfolio(response.positions.positions))
 				)
@@ -86,7 +72,7 @@ const AppWrap = ({ children }) => {
 		<PersistGate loading={null} persistor={persistor}>
 			{children}
 			{/* {initNav()} */}
-			{navigation == null ? <></> : <WalletBottomNav />}
+			{navigation === null ? <></> : <WalletBottomNav />}
 		</PersistGate>
 	)
 }

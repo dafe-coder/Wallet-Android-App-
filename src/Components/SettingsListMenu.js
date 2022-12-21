@@ -2,24 +2,25 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { SettingsItemMenu } from './SettingsItemMenu'
 
-export const SettingsListMenu = ({ openCurrentNetwork }) => {
+export const SettingsListMenu = ({ onPress }) => {
 	const menuData = [
 		{
 			title: 'Current  Network',
 			subTitle: 'Ethereum Mainnet',
 			topLine: true,
-			onPress: openCurrentNetwork,
+			onPress: onPress,
 		},
 		{
 			title: 'Change Password',
 			subTitle: 'Change your lock-screen password',
 			topLine: true,
+			onPress,
 		},
 		{
 			title: 'Connected Apps',
 			subTitle: 'Manage apps connected to your wallet',
 			topLine: true,
-			onPress: openCurrentNetwork,
+			onPress: onPress,
 		},
 		{
 			title: 'Add Custom Token',
@@ -30,11 +31,13 @@ export const SettingsListMenu = ({ openCurrentNetwork }) => {
 			title: 'Export Account – Secret Phrase',
 			subTitle: 'Export all accounts in your wallet',
 			topLine: false,
+			onPress: onPress,
 		},
 		{
 			title: 'Export Account – Private Key',
 			subTitle: 'Export single account',
 			topLine: false,
+			onPress: onPress,
 		},
 		{
 			title: 'Share Ananlytics',

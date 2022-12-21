@@ -3,6 +3,7 @@ const initialState = {
 	navigation: null,
 	portfolioCoins: [],
 	allCoins: [],
+	password: '111111',
 }
 
 export const walletReducer = (state = initialState, action) => {

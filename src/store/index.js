@@ -1,13 +1,13 @@
 import { combineReducers, createStore } from 'redux'
 import { walletReducer } from './reducers/walletReducer'
-import { registerReducer } from './reducers/registerReducer'
+import { storageReducer } from './reducers/storageReducer'
 import { restoreReducer } from './reducers/restoreReducer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
 const rootReducer = combineReducers({
 	wallet: walletReducer,
-	register: registerReducer,
+	register: storageReducer,
 	restore: restoreReducer,
 })
 

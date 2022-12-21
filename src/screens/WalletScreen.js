@@ -36,10 +36,10 @@ export const WalletScreen = ({ navigation }) => {
 				<View style={{ paddingHorizontal: 16 }}>
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
-					{/* <PortfolioList
+					<PortfolioList
 						coins={portfolioCoinsInit}
 						style={{ marginTop: 32, marginBottom: 50 }}
-					/> */}
+					/>
 				</View>
 			</ScrollView>
 			<WalletBottomSheet ref={filterRef} snapPoints={['55%']}>

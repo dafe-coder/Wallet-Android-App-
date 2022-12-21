@@ -7,23 +7,20 @@ export const PortfolioList = ({ coins, style }) => {
 	return (
 		<View style={[style]}>
 			{coins.map((c) => {
-				console.log(c.image)
 				return (
 					<PortfolioItem
 						key={c.id}
 						img={c.image.thumb}
 						title={c.symbol}
-						currentPrice={fixNum(item.market_data.current_price.usd)}
-						balance={
-							+item.market_data.balance > 0 ? +item.market_data.balance : 0
-						}
+						currentPrice={fixNum(c.market_data.current_price.usd)}
+						balance={+c.market_data.balance > 0 ? +c.market_data.balance : 0}
 						changePercent={
 							c.market_data.relativeChange
-								? item.market_data.relativeChange.toFixed(2)
-								: item.market_data.current_price
+								? c.market_data.relativeChange.toFixed(2)
+								: c.market_data.current_price
 								? (
-										(item.market_data.current_price.usd /
-											item.market_data.high_24h.usd) *
+										(c.market_data.current_price.usd /
+											c.market_data.high_24h.usd) *
 											100 -
 										100
 								  ).toFixed(3)

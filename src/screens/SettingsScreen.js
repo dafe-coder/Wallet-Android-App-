@@ -4,7 +4,7 @@ import { SettingsListMenu } from '../Components'
 import { ConnectsApp, ChangeCurrentNetwork } from '../Components/modal'
 import { AccountCard, WalletBottomSheet } from '../Components'
 
-export const SettingsScreen = () => {
+export const SettingsScreen = ({ navigation }) => {
 	// ref
 	const networkRef = useRef(null)
 	const connectedAppsRef = useRef(null)
@@ -12,6 +12,14 @@ export const SettingsScreen = () => {
 	function handlePresentPress(title) {
 		if (title == 'Current  Network') {
 			networkRef.current.expand()
+		} else if (title == 'Connected Apps') {
+			connectedAppsRef.current.expand()
+		} else if (title == 'Change Password') {
+			navigation.navigate('CreatePassword')
+		} else if (title == 'Export Account – Secret Phrase') {
+			navigation.navigate('ExportPhrase')
+		} else if (title == 'Export Account – Private Key') {
+			navigation.navigate('ExportPrivateKey')
 		} else {
 			connectedAppsRef.current.expand()
 		}
@@ -23,7 +31,7 @@ export const SettingsScreen = () => {
 				<AccountCard />
 			</View>
 			<View style={{ paddingBottom: 80 }}>
-				<SettingsListMenu openCurrentNetwork={handlePresentPress} />
+				<SettingsListMenu onPress={handlePresentPress} />
 			</View>
 			<WalletBottomSheet ref={networkRef} snapPoints={['55%']}>
 				<ChangeCurrentNetwork />

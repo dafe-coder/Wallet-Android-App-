@@ -19,10 +19,8 @@ export const SelectAccount = () => {
 		},
 	]
 	return (
-		<View style={{ width: '100%', paddingHorizontal: 16 }}>
-			<WalletTitle style={{ marginBottom: 30 }}>
-				Change Current Network
-			</WalletTitle>
+		<View>
+			<WalletTitle style={{ marginBottom: 30 }}>Select an Account</WalletTitle>
 			<View>
 				{networks.map((n) => {
 					return (
@@ -31,7 +29,7 @@ export const SelectAccount = () => {
 							style={styles.item}
 							key={n.id}>
 							<View style={styles.info}>
-								<Image source={n.img} />
+								<Image style={styles.image} source={n.img} />
 								<WalletText style={{ marginLeft: 12 }} size='m'>
 									{n.title}
 								</WalletText>
@@ -61,5 +59,11 @@ const styles = StyleSheet.create({
 	info: {
 		flexDirection: 'row',
 		alignItems: 'center',
+	},
+	image: {
+		width: 35,
+		height: 35,
+		overflow: 'hidden',
+		borderRadius: 50,
 	},
 })

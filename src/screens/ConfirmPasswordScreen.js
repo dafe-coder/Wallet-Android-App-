@@ -3,14 +3,16 @@ import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI'
 import { setPassword } from '../store/actions/storageAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
 
-export const CreatePasswordScreen = ({ navigation }) => {
+export const ConfirmPasswordScreen = ({ navigation }) => {
 	const [pin, setPin] = useState('')
-	const [pinPrev, setPinPrev] = useState('')
-	const [nextStep, setNextStep] = useState(false)
 	const dispatch = useDispatch()
+	const { password } = useSelector((state) => state.register)
+	const confirmPassword = () => {
+		dispatch(setPassword('111111'))
+	}
 
 	const pincodeInput = useRef(null)
 
@@ -20,22 +22,12 @@ export const CreatePasswordScreen = ({ navigation }) => {
 
 	const handleOnTextChange = (pin) => {
 		setPin(pin)
-		if (!nextStep && pin.length == 6) {
-			setNextStep(true)
-			setPinPrev(pin)
+		if (pin.length === 6 && pin === password) {
+			navigation.navigate('Wallet')
 			setPin('')
-		} else if (nextStep && pin.length == 6) {
-			setNextStep(false)
-			if (pin === pinPrev) {
-				dispatch(setPassword(pinPrev))
-				setPinPrev('')
-				setPin('')
-				navigation.navigate('ConfirmPassword')
-			} else if (pin !== pinPrev) {
-				setPinPrev('')
-				setPin('')
-				shakePincode()
-			}
+		} else if (pin.length === 6 && pin !== password) {
+			setPin('')
+			shakePincode()
 		}
 	}
 
@@ -44,15 +36,9 @@ export const CreatePasswordScreen = ({ navigation }) => {
 			<View style={styles.image}>
 				<Image source={require('../../assets/logoWallet.png')} />
 			</View>
-			{!nextStep ? (
-				<WalletText center size='m'>
-					Create a PIN code to secure your wallet
-				</WalletText>
-			) : (
-				<WalletText center size='m'>
-					Enter your pin again
-				</WalletText>
-			)}
+			<WalletText center size='m'>
+				Enter your PIN code
+			</WalletText>
 			<PincodeInput
 				ref={pincodeInput}
 				length={6}

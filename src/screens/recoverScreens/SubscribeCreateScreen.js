@@ -4,9 +4,8 @@ import { THEME } from '../../Theme'
 import { SubscribeBlock } from '../../Components/UI'
 import { WalletText } from '../../Components/UI/WalletText'
 import { WalletButton } from '../../Components/UI/WalletButton'
-import { asyncRandomBytes } from 'react-native-secure-randombytes'
+// import bip39 from 'bip39'
 
-window.randomBytes = asyncRandomBytes
 export const SubscribeCreateScreen = ({ navigation }) => {
 	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [chk1, setChk1] = useState(false)
@@ -21,14 +20,12 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 		}
 	}, [chk1, chk2, chk3])
 
-	useEffect(() => {}, [])
-
 	useEffect(() => {
-		var Mnemonic = require('bitcore-mnemonic-react-native')
-		var code = new Mnemonic(Mnemonic.Words.SPANISH)
-		code.toString() // natal hada sutil año sólido papel jamón combate aula flota ver esfera...
-		var xpriv = code.toHDPrivateKey()
-		console.log(code)
+		// let bip39 = require('bip39')
+		// const mnemonic = bip39.generateMnemonic()
+		// console.log(mnemonic)
+		// console.log(bip39)
+		// console.log(1)
 	}, [])
 
 	return (

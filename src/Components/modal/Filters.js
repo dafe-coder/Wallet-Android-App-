@@ -7,8 +7,6 @@ export const Filters = ({ choose = 'value' }) => {
 	return (
 		<View
 			style={{
-				paddingHorizontal: 16,
-				flex: 1,
 				width: '100%',
 			}}>
 			<TouchableOpacity activeOpacity={0.7} style={styles.item}>
@@ -47,7 +45,6 @@ export const Filters = ({ choose = 'value' }) => {
 
 const styles = StyleSheet.create({
 	item: {
-		flexGrow: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',

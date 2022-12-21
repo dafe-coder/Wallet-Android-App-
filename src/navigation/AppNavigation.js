@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import { Image } from 'react-native-elements'
 import { THEME } from './../Theme'
 import {
 	LoginScreen,
@@ -21,18 +22,23 @@ import {
 	ReceiveScreen,
 	WalletScreen,
 	PortfolioOpenScreen,
+	ConfirmPasswordScreen,
+	TransactionHistoryScreen,
 } from '../screens'
-
+import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn } from './'
 const Stack = createStackNavigator()
 
 const screens = [
 	{
 		name: 'Wallet',
-		options: {
+		component: WalletScreen,
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Ethereum',
-		},
-		component: WalletScreen,
+			headerLeft: () => <HistoryBtn navigation={navigation} />,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
+		}),
 	},
 	{
 		name: 'CreatePhrase',
@@ -41,6 +47,17 @@ const screens = [
 			title: '',
 		},
 		component: CreatePhraseScreen,
+	},
+	{
+		name: 'TransactionHistory',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
+		}),
+		component: TransactionHistoryScreen,
 	},
 	{
 		name: 'PortfolioOpen',
@@ -52,34 +69,44 @@ const screens = [
 	},
 	{
 		name: 'Receive',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'You Wallet Address',
-		},
+			title: 'You Wallet Adress',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <AccountBtn />,
+		}),
 		component: ReceiveScreen,
 	},
 	{
 		name: 'Swap',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'ETHEREUM',
-		},
+			title: 'Ethereum',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
+		}),
 		component: SwapScreen,
 	},
 	{
 		name: 'ConfirmTransaction',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Confirm Transaction',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <AccountBtn />,
+		}),
 		component: ConfirmTransactionScreen,
 	},
 	{
 		name: 'Sent',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Ethereum',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
+		}),
 		component: SentScreen,
 	},
 	{
@@ -134,16 +161,20 @@ const screens = [
 		component: NftScreen,
 		options: {
 			headerShown: true,
-			title: 'By Bit Wallet',
+			headerLeft: () => <></>,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
 		},
 	},
 	{
 		name: 'Contacts',
 		component: ContactsScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Contacts',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <AccountBtn />,
+		}),
 	},
 	{
 		name: 'Activity',
@@ -157,17 +188,21 @@ const screens = [
 		name: 'Account',
 		component: AccountScreen,
 		options: {
+			title: 'Account',
 			headerShown: true,
-			title: 'Ethereum',
+			headerLeft: () => <></>,
+			headerRight: () => <AccountBtn />,
 		},
 	},
 	{
 		name: 'Settings',
 		component: SettingsScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Settings',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <AccountBtn />,
+		}),
 	},
 	{
 		name: 'ExportPrivateKey',
@@ -185,6 +220,14 @@ const screens = [
 			title: 'Before We Begin',
 		},
 	},
+	{
+		name: 'ConfirmPassword',
+		component: ConfirmPasswordScreen,
+		options: {
+			headerShown: true,
+			title: 'enter pin code',
+		},
+	},
 ]
 
 export function MyStack() {
@@ -192,13 +235,15 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName='CreatePhrase'
+			initialRouteName='Wallet'
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
+					borderBottomColor: '#302F2C',
+					borderBottomWidth: 0.6,
 				},
 				headerTitleAlign: 'center',
 				headerTitleStyle: {

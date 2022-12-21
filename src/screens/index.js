@@ -1,11 +1,12 @@
 export * from './LoginScreen'
 export * from './CreatePhraseScreen'
 export * from './recoverScreens/SubscribeScreen'
-export * from './recoverScreens/SubscribeScreenCreate'
+export * from './recoverScreens/SubscribeCreateScreen'
 export * from './recoverScreens/PhraseScreen'
 export * from './CreatePasswordScreen'
-export * from './CreatePhraseScreen'
+export * from './ConfirmPasswordScreen'
 export * from './AllSetScreen'
+export * from './TransactionHistoryScreen'
 
 //  ---\\\///--- Nft Screens ---\\\///---
 export * from './NftScreen'

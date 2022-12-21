@@ -30,9 +30,26 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					{...props}>
 					<Path
 						d='M12.022 1.157l-4.95 4.95a1 1 0 01-1.414 0l-4.95-4.95'
-						stroke='#F9B446'
+						stroke={fill ? fill : '#F9B446'}
 						strokeWidth={1.5}
 						strokeLinejoin='round'
+					/>
+				</Svg>
+			)
+		case 'check-left':
+			return (
+				<Svg
+					width={10}
+					height={18}
+					viewBox='0 0 10 18'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						fillRule='evenodd'
+						clipRule='evenodd'
+						d='M9.81.188a.653.653 0 00-.917 0L0 9l8.893 8.812a.653.653 0 00.917 0 .639.639 0 000-.91L1.835 9 9.81 1.097a.639.639 0 000-.909z'
+						fill={fill ? fill : '#8B6917'}
 					/>
 				</Svg>
 			)
@@ -56,6 +73,31 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 						clipRule='evenodd'
 						d='M22 4.615C22 2.066 20.21 0 18 0h-5c-2.21 0-4 2.066-4 4.615v.24c0 .638.448 1.155 1 1.155s1-.517 1-1.154v-.24c0-1.275.895-2.308 2-2.308h5c1.105 0 2 1.033 2 2.307v5.77c0 1.274-.895 2.307-2 2.307h-.208c-.553 0-1 .517-1 1.154 0 .637.447 1.154 1 1.154H18c2.21 0 4-2.066 4-4.615v-5.77z'
 						fill={fill != '' ? fill : '#6A6351'}
+					/>
+				</Svg>
+			)
+		case 'history':
+			return (
+				<Svg
+					width={28}
+					height={28}
+					viewBox='0 0 28 28'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M21.551 19.486a9.333 9.333 0 111.764-4.9m0 0l1.75-1.75m-1.75 1.75l-1.75-1.75'
+						stroke={fill}
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+					<Path
+						d='M14 9.333V14l3.5 3.5'
+						stroke={fill}
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
 					/>
 				</Svg>
 			)
