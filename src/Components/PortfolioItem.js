@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
 
@@ -9,9 +9,13 @@ export const PortfolioItem = ({
 	currentPrice,
 	balance,
 	changePercent,
+	navigation,
 }) => {
 	return (
-		<View style={styles.item}>
+		<TouchableOpacity
+			style={styles.item}
+			activeOpacity={0.7}
+			onPress={() => navigation.navigate('PortfolioOpen')}>
 			<View style={{ flexDirection: 'row' }}>
 				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>
@@ -28,7 +32,7 @@ export const PortfolioItem = ({
 					{changePercent}%
 				</WalletText>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

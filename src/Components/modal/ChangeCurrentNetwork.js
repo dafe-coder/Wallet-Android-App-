@@ -2,22 +2,30 @@ import React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletTitle, WalletText } from './../UI'
 import { THEME } from './../../Theme'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentNetwork } from '../../store/actions/storageAction'
 
-export const ChangeCurrentNetwork = () => {
+export const ChangeCurrentNetwork = ({ onPress }) => {
+	const { currentNetwork } = useSelector((state) => state.storage)
+	const dispatch = useDispatch()
 	const networks = [
 		{
 			id: Math.random().toString(),
 			title: 'Ethereum',
 			img: require('../../../assets/network/eth.png'),
-			choose: true,
+			choose: currentNetwork == 'Ethereum',
 		},
 		{
 			id: Math.random().toString(),
 			title: 'Loopring',
 			img: require('../../../assets/network/loo.png'),
-			choose: false,
+			choose: currentNetwork == 'Loopring',
 		},
 	]
+	const onChooseNetwork = (item) => {
+		dispatch(setCurrentNetwork(item.title))
+		onPress()
+	}
 	return (
 		<View style={{ width: '100%' }}>
 			<WalletTitle style={{ marginBottom: 30 }}>
@@ -27,6 +35,7 @@ export const ChangeCurrentNetwork = () => {
 				{networks.map((n) => {
 					return (
 						<TouchableOpacity
+							onPress={() => onChooseNetwork(n)}
 							activeOpacity={0.7}
 							style={styles.item}
 							key={n.id}>

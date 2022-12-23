@@ -9,7 +9,7 @@ import PincodeInput from 'react-native-pincode-input'
 export const ConfirmPasswordScreen = ({ navigation }) => {
 	const [pin, setPin] = useState('')
 	const dispatch = useDispatch()
-	const { password } = useSelector((state) => state.register)
+	const { password } = useSelector((state) => state.storage)
 	const confirmPassword = () => {
 		dispatch(setPassword('111111'))
 	}

@@ -1,24 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { WalletText, WalletTitle } from '../UI/'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../../Theme'
-
+import { useSelector } from 'react-redux'
+import fixNum from './../../../services/funcWallet/fixNum'
+import { SvgIcon } from './../svg/svg'
 export const InfoPriseSlide = () => {
+	const { portfolioBalance } = useSelector((state) => state.wallet)
 	return (
 		<View style={styles.wrap}>
 			<WalletText size='sm' style={THEME.WHITE_DARK_TEXT}>
 				Your balance is equivalent
 			</WalletText>
 			<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 7 }}>
-				$143,421.20
+				$
+				{portfolioBalance.absolute_change_24h &&
+					fixNum(portfolioBalance.assets_value)}
 			</WalletTitle>
 			<View style={styles.priceBlock}>
-				<WalletText>~ 16,2334.56</WalletText>
-				<Image
-					style={styles.imageUp}
-					source={require('../../../assets/up.png')}
+				<WalletText style={{ marginRight: 15 }}>
+					~
+					{portfolioBalance.absolute_change_24h &&
+						fixNum(portfolioBalance.absolute_change_24h)}
+				</WalletText>
+				<SvgIcon
+					type={portfolioBalance.relative_change_24h > 0 ? 'up' : 'down'}
 				/>
-				<WalletText color={true ? 'green-light' : 'red'}>+6.54%</WalletText>
+				<WalletText
+					style={{ marginLeft: 7 }}
+					color={
+						portfolioBalance.relative_change_24h > 0 ? 'green-light' : 'red'
+					}>
+					{portfolioBalance.relative_change_24h > 0
+						? '+ ' + portfolioBalance.absolute_change_24h &&
+						  fixNum(portfolioBalance.relative_change_24h)
+						: '- ' + portfolioBalance.absolute_change_24h &&
+						  fixNum(portfolioBalance.relative_change_24h)}
+					%
+				</WalletText>
 			</View>
 		</View>
 	)

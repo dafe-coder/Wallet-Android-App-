@@ -7,7 +7,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 
 const rootReducer = combineReducers({
 	wallet: walletReducer,
-	register: storageReducer,
+	storage: storageReducer,
 	restore: restoreReducer,
 })
 

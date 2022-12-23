@@ -1,13 +1,19 @@
 import React from 'react'
-import { View, ImageBackground, StyleSheet, Image } from 'react-native'
+import {
+	View,
+	ImageBackground,
+	StyleSheet,
+	Image,
+	ScrollView,
+} from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI/'
 import { WalletNav, TransactionsList } from '../Components/'
 import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
 export const PortfolioOpenScreen = () => {
-	const { portfolioCoins } = useSelector((state) => state.wallet)
+	const { transactions } = useSelector((state) => state.wallet)
 	return (
-		<View
+		<ScrollView
 			style={{
 				paddingHorizontal: 16,
 				marginTop: 29,
@@ -28,23 +34,26 @@ export const PortfolioOpenScreen = () => {
 			<View style={{ marginTop: 30 }}>
 				<WalletNav />
 			</View>
-			<View>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'center',
-						alignItems: 'center',
-						marginTop: 24,
-					}}>
-					<Image
-						style={{ marginRight: 10 }}
-						source={require('../../assets/icons/bar-chart.png')}
-					/>
-					<WalletText color='brown'>No transactoins history yet</WalletText>
-				</View>
-				<TransactionsList data={portfolioCoins} />
+			<View style={{ marginBottom: 40 }}>
+				{transactions.length < 1 ? (
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							marginTop: 24,
+						}}>
+						<Image
+							style={{ marginRight: 10 }}
+							source={require('../../assets/icons/bar-chart.png')}
+						/>
+						<WalletText color='brown'>No transactoins history yet</WalletText>
+					</View>
+				) : (
+					<TransactionsList data={transactions} />
+				)}
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 

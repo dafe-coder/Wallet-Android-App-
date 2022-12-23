@@ -101,6 +101,36 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'up':
+			return (
+				<Svg
+					width={10}
+					height={6}
+					viewBox='0 0 10 6'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M4.489.314c.126-.16.37-.16.496 0L9.07 5.489A.316.316 0 018.822 6H.652a.316.316 0 01-.248-.511L4.489.314z'
+						fill='#27AE60'
+					/>
+				</Svg>
+			)
+		case 'down':
+			return (
+				<Svg
+					width={10}
+					height={6}
+					viewBox='0 0 10 6'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M4.985 5.686a.316.316 0 01-.496 0L.404.511A.316.316 0 01.652 0h8.17c.264 0 .411.304.248.511L4.985 5.686z'
+						fill='#B61E1E'
+					/>
+				</Svg>
+			)
 		default:
 			return <></>
 	}

@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
 	setPortfolioCoins,
 	setAllCoins,
+	setPortfolioTransactions,
+	setPortfolioBalance,
 } from './src/store/actions/walletActions'
 import { LogBox } from 'react-native'
 import { PortalProvider } from '@gorhom/portal'
@@ -61,6 +63,8 @@ const AppWrap = ({ children }) => {
 			false
 		)
 			.then((response) => {
+				dispatch(setPortfolioBalance(response.portfolio))
+				dispatch(setPortfolioTransactions(response.transactions))
 				dispatch(
 					setPortfolioCoins(rebuildObjPortfolio(response.positions.positions))
 				)

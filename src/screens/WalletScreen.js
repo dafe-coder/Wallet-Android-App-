@@ -37,6 +37,7 @@ export const WalletScreen = ({ navigation }) => {
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
 					<PortfolioList
+						navigation={navigation}
 						coins={portfolioCoinsInit}
 						style={{ marginTop: 32, marginBottom: 50 }}
 					/>

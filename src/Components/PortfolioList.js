@@ -3,13 +3,14 @@ import { View } from 'react-native'
 import { PortfolioItem } from './PortfolioItem'
 import fixNum from './../../services/funcWallet/fixNum'
 
-export const PortfolioList = ({ coins, style }) => {
+export const PortfolioList = ({ coins, style, navigation }) => {
 	return (
 		<View style={[style]}>
 			{coins.map((c) => {
 				return (
 					<PortfolioItem
 						key={c.id}
+						navigation={navigation}
 						img={c.image.thumb}
 						title={c.symbol}
 						currentPrice={fixNum(c.market_data.current_price.usd)}

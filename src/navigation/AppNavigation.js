@@ -61,10 +61,13 @@ const screens = [
 	},
 	{
 		name: 'PortfolioOpen',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Ethereum',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn />,
+		}),
 		component: PortfolioOpenScreen,
 	},
 	{

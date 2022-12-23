@@ -5,12 +5,17 @@ import { SvgIcon } from './../../Components/svg/svg'
 import { WalletBottomSheet } from '../../Components'
 import { ChangeCurrentNetwork } from '../../Components/modal'
 import { THEME } from './../../Theme'
+import { useSelector } from 'react-redux'
 
 export const HeaderTitle = () => {
+	const { currentNetwork } = useSelector((state) => state.storage)
 	const chooseNetwork = useRef(null)
 
 	const openModalSelectAccount = () => {
-		chooseNetwork.current.expand()
+		chooseNetwork.current?.expand()
+	}
+	const closeModalSelectAccount = () => {
+		chooseNetwork.current?.close()
 	}
 	return (
 		<>
@@ -20,13 +25,13 @@ export const HeaderTitle = () => {
 						color='gold'
 						style={{ marginRight: 5, fontFamily: 'gt-medium' }}
 						upperCase>
-						Ethereum
+						{currentNetwork}
 					</WalletText>
 					<SvgIcon type='check' fill={THEME.GOLD_DARK} />
 				</View>
 			</TouchableOpacity>
 			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork />
+				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
 			</WalletBottomSheet>
 		</>
 	)
