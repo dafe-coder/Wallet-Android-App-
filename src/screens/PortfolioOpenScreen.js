@@ -10,13 +10,13 @@ import { WalletTitle, WalletText } from './../Components/UI/'
 import { WalletNav, TransactionsList } from '../Components/'
 import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
+import fixNum from './../../services/funcWallet/fixNum'
 
 export const PortfolioOpenScreen = () => {
 	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
 
 	useEffect(() => {
-		console.log(portfolioOpen)
 		let filtered = transactions.filter((item) => item.status !== 'failed')
 		let filteredToken = filtered.filter(
 			(item) =>
@@ -56,10 +56,12 @@ export const PortfolioOpenScreen = () => {
 					style={styles.bgImage}
 					source={require('../../assets/card.png')}>
 					<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 40 }}>
-						6.458980 ETH
+						{fixNum(portfolioOpen.market_data.balance)} ETH
 					</WalletTitle>
 					<View style={styles.priceBlock}>
-						<WalletText>~ $6,2334.56</WalletText>
+						<WalletText>
+							~ ${fixNum(portfolioOpen.market_data.balance_crypto.usd)}
+						</WalletText>
 					</View>
 				</ImageBackground>
 			</View>

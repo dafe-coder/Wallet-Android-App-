@@ -18,7 +18,6 @@ export const PhraseScreen = ({ navigation }) => {
 	const [btnDisabled, setBtnDisabled] = useState(false)
 
 	const submitRestore = () => {
-		// dispatch(setDataUser())
 		postData(phrase, false)
 			.then((response) => {
 				const newAccount = {
@@ -37,10 +36,6 @@ export const PhraseScreen = ({ navigation }) => {
 			})
 			.catch((error) => console.log('error', error))
 	}
-
-	useEffect(() => {
-		console.log(dataUser)
-	}, [dataUser])
 
 	return (
 		<View style={styles.body}>
