@@ -154,11 +154,13 @@ export function rebuildObjPortfolio(list) {
 				current_price: {
 					usd: obj.asset.price.value,
 				},
-				balance: Number(
-					Web3.utils.fromWei(String(obj.quantity), 'ether')
-				).toFixed(10),
+				balance: obj.quantity
+					? Number(Web3.utils.fromWei(String(obj.quantity), 'ether')).toFixed(
+							10
+					  )
+					: 0,
 				balance_crypto: {
-					usd: obj.value,
+					usd: obj.value || 0,
 				},
 				high_24h: {
 					usd: obj.quote_rate_24h,
@@ -168,7 +170,33 @@ export function rebuildObjPortfolio(list) {
 			image: {
 				thumb: obj.asset.icon_url,
 			},
-			data: obj.date,
+		}
+	})
+	return newList
+}
+export function rebuildObjPortfolioDefaultCoins(list) {
+	const newList = list.map((obj) => {
+		return {
+			id: obj.id,
+			name: obj.name,
+			symbol: obj.symbol,
+			contract_address: '',
+			market_data: {
+				current_price: {
+					usd: obj.current_price,
+				},
+				balance: 0,
+				balance_crypto: {
+					usd: 0,
+				},
+				high_24h: {
+					usd: obj.high_24h,
+				},
+				relativeChange: obj.price_change_percentage_24h,
+			},
+			image: {
+				thumb: obj.image,
+			},
 		}
 	})
 	return newList

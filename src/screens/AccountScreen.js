@@ -18,6 +18,8 @@ export const AccountScreen = ({ navigation }) => {
 			navigation.navigate('Settings')
 		} else if (title == 'Contacts') {
 			navigation.navigate('Contacts')
+		} else if (title == 'Logout') {
+			navigation.navigate('RecoverPhrase')
 		} else {
 			addAccountRef.current.expand()
 		}

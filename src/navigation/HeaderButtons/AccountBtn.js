@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import { WalletBottomSheet } from '../../Components'
 import { SelectAccount } from '../../Components/modal'
-export const AccountBtn = () => {
+export const AccountBtn = ({ navigation }) => {
 	const selectAccountRef = useRef(null)
 
 	const openModalSelectAccount = () => {
@@ -24,7 +24,7 @@ export const AccountBtn = () => {
 			</TouchableOpacity>
 
 			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-				<SelectAccount />
+				<SelectAccount navigation={navigation} />
 			</WalletBottomSheet>
 		</View>
 	)

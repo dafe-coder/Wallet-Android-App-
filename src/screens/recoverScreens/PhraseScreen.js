@@ -1,13 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { THEME } from '../../Theme'
-import { SubscribeBlock } from '../../Components/UI'
-import { WalletText } from '../../Components/UI/WalletText'
-import { WalletButton } from '../../Components/UI/WalletButton'
+import { WalletText, WalletButton } from '../../Components/UI/'
 import { PhraseBox } from './../../Components/PhraseBox'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	setDataUser,
+	setCurrentAccount,
+} from '../../store/actions/storageAction'
+import useWalletService from '../../../services/WalletService'
 
 export const PhraseScreen = ({ navigation }) => {
-	const [btnDisabled, setBtnDisabled] = useState(true)
+	const dispatch = useDispatch()
+	const { postData } = useWalletService()
+	const { dataUser } = useSelector((state) => state.storage)
+	const { phrase } = useSelector((state) => state.wallet)
+	const [btnDisabled, setBtnDisabled] = useState(false)
+
+	const submitRestore = () => {
+		// dispatch(setDataUser())
+		postData(phrase, false)
+			.then((response) => {
+				const newAccount = {
+					name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+					phrase: phrase,
+					privateKey: '',
+					address: response.address,
+				}
+				dispatch(
+					setCurrentAccount(
+						`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+					)
+				)
+				dispatch(setDataUser(newAccount))
+				navigation.navigate('CreatePassword')
+			})
+			.catch((error) => console.log('error', error))
+	}
+
+	useEffect(() => {
+		console.log(dataUser)
+	}, [dataUser])
 
 	return (
 		<View style={styles.body}>
@@ -15,16 +48,13 @@ export const PhraseScreen = ({ navigation }) => {
 				<WalletText style={{ marginBottom: 40 }} color='white' center size='m'>
 					Recover a wallet using your Secret {'\n'} Recovery Phrase.
 				</WalletText>
-				<PhraseBox />
+				<PhraseBox setBtnDisabled={setBtnDisabled} />
 			</View>
 			<View
 				style={{
 					paddingHorizontal: 16,
 				}}>
-				<WalletButton
-					checked
-					disabled={btnDisabled}
-					onPress={() => navigation.navigate('Login')}>
+				<WalletButton checked disabled={btnDisabled} onPress={submitRestore}>
 					Import Wallet
 				</WalletButton>
 			</View>

@@ -13,9 +13,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const WalletScreen = ({ navigation }) => {
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
-	const { portfolioCoins } = useSelector((state) => state.wallet)
+	const { portfolioCoins, allCoins, coinsAccountZero } = useSelector(
+		(state) => state.wallet
+	)
 	useEffect(() => {
-		setPortfolioCoinsInit(portfolioCoins)
+		if (portfolioCoins.length > 0) {
+			setPortfolioCoinsInit(portfolioCoins)
+		} else {
+			setPortfolioCoinsInit(
+				allCoins.filter((c) => coinsAccountZero.indexOf(c.symbol) != -1)
+			)
+		}
 	}, [portfolioCoins])
 
 	const dispatch = useDispatch()
@@ -39,7 +47,7 @@ export const WalletScreen = ({ navigation }) => {
 					<PortfolioList
 						navigation={navigation}
 						coins={portfolioCoinsInit}
-						style={{ marginTop: 32, marginBottom: 50 }}
+						style={{ marginTop: 32, marginBottom: 70 }}
 					/>
 				</View>
 			</ScrollView>

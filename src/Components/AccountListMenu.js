@@ -42,6 +42,7 @@ export const AccountListMenu = ({ onPress }) => {
 			image: require('../../assets/menuIcon/out.png'),
 			title: 'Logout',
 			topLine: true,
+			onPress: onPress,
 		},
 	]
 	return (

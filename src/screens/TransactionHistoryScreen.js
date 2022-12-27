@@ -1,12 +1,19 @@
-import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { WalletTitle } from './../Components/UI/'
+import React, { useEffect, useState } from 'react'
+import { View, ScrollView, Image } from 'react-native'
+import { WalletTitle, WalletText } from './../Components/UI/'
 import { THEME } from './../Theme'
 import { TransactionsList } from './../Components/'
 import { useSelector } from 'react-redux'
 export const TransactionHistoryScreen = () => {
 	const { transactions } = useSelector((state) => state.wallet)
+	const [transactionList, setTransactionList] = useState([])
 
+	useEffect(() => {
+		if (transactions.length) {
+			let filtered = transactions.filter((item) => item.status !== 'failed')
+			setTransactionList(filtered)
+		}
+	}, [transactions])
 	return (
 		<ScrollView style={{ paddingTop: 29 }}>
 			<View
@@ -22,7 +29,24 @@ export const TransactionHistoryScreen = () => {
 				</WalletTitle>
 			</View>
 			<View style={{ paddingHorizontal: 16, paddingBottom: 70 }}>
-				<TransactionsList data={transactions} />
+				{transactionList.length < 1 ? (
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							marginTop: 24,
+							height: 450,
+						}}>
+						<Image
+							style={{ marginRight: 10 }}
+							source={require('../../assets/icons/bar-chart.png')}
+						/>
+						<WalletText color='brown'>No transactoins history yet</WalletText>
+					</View>
+				) : (
+					<TransactionsList data={transactions} />
+				)}
 			</View>
 		</ScrollView>
 	)

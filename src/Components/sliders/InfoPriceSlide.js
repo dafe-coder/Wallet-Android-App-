@@ -31,11 +31,11 @@ export const InfoPriseSlide = () => {
 					color={
 						portfolioBalance.relative_change_24h > 0 ? 'green-light' : 'red'
 					}>
-					{portfolioBalance.relative_change_24h > 0
-						? '+ ' + portfolioBalance.absolute_change_24h &&
-						  fixNum(portfolioBalance.relative_change_24h)
-						: '- ' + portfolioBalance.absolute_change_24h &&
-						  fixNum(portfolioBalance.relative_change_24h)}
+					{portfolioBalance.absolute_change_24h
+						? portfolioBalance.relative_change_24h > 0
+							? '+ ' + fixNum(portfolioBalance.relative_change_24h)
+							: fixNum(portfolioBalance.relative_change_24h)
+						: '0'}
 					%
 				</WalletText>
 			</View>

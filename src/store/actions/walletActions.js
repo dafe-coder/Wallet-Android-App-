@@ -1,10 +1,14 @@
 import {
+	SET_CHOOSE_COIN,
 	SET_NAVIGATION,
 	SET_ALL_COINS,
 	SET_PORTFOLIO_COINS,
 	SET_PORTFOLIO_TRANSACTIONS,
 	SET_DATE_TRANSACTION,
 	SET_PORTFOLIO_BALANCE,
+	SET_PHRASE,
+	SET_PRIVATE_KEY,
+	SET_PORTFOLIO_OPEN,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -42,9 +46,33 @@ export const setDateTransaction = (date) => {
 	}
 }
 
-export const setPortfolioBalance = (date) => {
+export const setPortfolioBalance = (balance) => {
 	return {
 		type: SET_PORTFOLIO_BALANCE,
-		payload: date,
+		payload: balance,
+	}
+}
+export const setPhrase = (phrase) => {
+	return {
+		type: SET_PHRASE,
+		payload: phrase,
+	}
+}
+export const setPrivateKey = (key) => {
+	return {
+		type: SET_PRIVATE_KEY,
+		payload: key,
+	}
+}
+export const setChooseCoin = (coin) => {
+	return {
+		type: SET_CHOOSE_COIN,
+		payload: coin,
+	}
+}
+export const setPortfolioOpen = (coin) => {
+	return {
+		type: SET_PORTFOLIO_OPEN,
+		payload: coin,
 	}
 }

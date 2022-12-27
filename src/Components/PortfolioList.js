@@ -9,6 +9,7 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 			{coins.map((c) => {
 				return (
 					<PortfolioItem
+						coin={c}
 						key={c.id}
 						navigation={navigation}
 						img={c.image.thumb}

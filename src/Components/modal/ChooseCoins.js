@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { WalletTitle, WalletInput } from './../UI/'
 import { SvgIcon } from '../svg/svg'
 import { THEME } from './../../Theme'
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
-import { useSelector } from 'react-redux'
 import { AllCoinsItem } from '../'
 
-export const ChooseCoins = () => {
-	const { allCoins } = useSelector((state) => state.wallet)
+export const ChooseCoins = ({ onCoinPress, allCoins }) => {
+	const [value, setValue] = useState('')
+	const [filteredCoins, setFilteredCoins] = useState([])
+
+	useEffect(() => {
+		if (value != '') {
+			const filtered = allCoins.filter(
+				(c) =>
+					c.symbol.toLowerCase().includes(value.toLowerCase()) ||
+					c.name.toLowerCase().includes(value.toLowerCase())
+			)
+			setFilteredCoins(filtered)
+		} else {
+			setFilteredCoins(allCoins)
+		}
+	}, [value, allCoins])
+
 	return (
 		<View style={{ flex: 1 }}>
 			<WalletTitle style={{ marginBottom: 24 }}>choose tokens</WalletTitle>
@@ -17,6 +31,8 @@ export const ChooseCoins = () => {
 					<SvgIcon type='search' style={{ width: 20, height: 20 }} />
 				</View>
 				<WalletInput
+					value={value}
+					setValue={setValue}
 					styleInput={{
 						paddingVertical: 8,
 						paddingLeft: 55,
@@ -33,8 +49,8 @@ export const ChooseCoins = () => {
 				style={{
 					marginTop: 20,
 				}}>
-				{allCoins.map((c) => (
-					<AllCoinsItem coin={c} key={c.id} />
+				{filteredCoins.map((c) => (
+					<AllCoinsItem onPress={onCoinPress} coin={c} key={c.id} />
 				))}
 			</BottomSheetScrollView>
 		</View>

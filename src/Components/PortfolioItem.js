@@ -2,7 +2,8 @@ import React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
-
+import { useDispatch } from 'react-redux'
+import { setPortfolioOpen } from '../store/actions/walletActions'
 export const PortfolioItem = ({
 	img,
 	title,
@@ -10,12 +11,19 @@ export const PortfolioItem = ({
 	balance,
 	changePercent,
 	navigation,
+	coin,
 }) => {
+	const dispatch = useDispatch()
+
+	const onOpenPortfolioCoin = (coin) => {
+		dispatch(setPortfolioOpen(coin))
+		navigation.navigate('PortfolioOpen')
+	}
 	return (
 		<TouchableOpacity
 			style={styles.item}
 			activeOpacity={0.7}
-			onPress={() => navigation.navigate('PortfolioOpen')}>
+			onPress={() => onOpenPortfolioCoin(coin)}>
 			<View style={{ flexDirection: 'row' }}>
 				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>

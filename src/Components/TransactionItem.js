@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, Image, StyleSheet } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
@@ -7,42 +7,17 @@ import Web3 from 'web3'
 
 export const TransactionItem = ({
 	prevDate,
-	setDate,
+	getDateTransaction,
 	type = 'send',
 	itemData,
 	index,
 }) => {
-	useEffect(() => {
-		if (index !== 0) {
-			setDate((state) => {
-				return [
-					...state,
-					getDateTransaction(+itemData.mined_at)
-						.map((item) => (item.length == 2 ? item + '.' : item))
-						.join(''),
-				]
-			})
-		}
-	}, [itemData])
-
 	let path =
 		type == 'receive'
 			? require('../../assets/icons/receive.png')
 			: type == 'send'
 			? require('../../assets/icons/send.png')
 			: require('../../assets/icons/swap.png')
-
-	function getDateTransaction(time) {
-		let dmy = [],
-			date = new Date(+time * 1000)
-
-		dmy = [
-			('0' + date.getDate()).slice(-2),
-			('0' + (date.getMonth() + 1)).slice(-2),
-			date.getFullYear(),
-		]
-		return dmy
-	}
 
 	Number.prototype.noExponents = function () {
 		var data = String(this).split(/[eE]/)
@@ -110,21 +85,34 @@ export const TransactionItem = ({
 									  '...' +
 									  itemData.address_to.slice(-4)
 									: itemData.address_to
-								: ''}
+								: itemData.changes[0].asset.symbol +
+								  ' / ' +
+								  (itemData.changes[1] ? itemData.changes[1].asset.symbol : '')}
 						</WalletText>
 					</View>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
 					<WalletText color='white'>
-						{fixNum(
-							Number(
-								Web3.utils.fromWei(
-									itemData.changes[0].value.noExponents(),
-									'ether'
-								)
-							)
-						)}{' '}
-						{itemData.changes[0].asset.symbol}
+						{itemData.changes[1]
+							? fixNum(
+									Number(
+										Web3.utils.fromWei(
+											itemData.changes[1].value.noExponents(),
+											'ether'
+										)
+									)
+							  )
+							: fixNum(
+									Number(
+										Web3.utils.fromWei(
+											itemData.changes[0].value.noExponents(),
+											'ether'
+										)
+									)
+							  )}{' '}
+						{type == 'trade' && itemData.changes[1]
+							? itemData.changes[1].asset.symbol
+							: itemData.changes[0].asset.symbol}
 					</WalletText>
 					<WalletText color='brown'>
 						$

@@ -9,14 +9,19 @@ import {
 } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
+import fixNum from './../../services/funcWallet/fixNum'
+import { useSelector } from 'react-redux'
 
-export const SelectCoinSent = ({ onChooseCoin, style }) => {
+export const SelectCoinSent = ({ style, onChooseCoin }) => {
+	const { chooseCoin } = useSelector((state) => state.wallet)
 	return (
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 27 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
 					<WalletText color='brown'>Select Token</WalletText>
-					<WalletText color='brown'>Balance: {0}</WalletText>
+					<WalletText color='brown'>
+						Balance: {fixNum(chooseCoin.market_data.balance)}
+					</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
@@ -24,7 +29,10 @@ export const SelectCoinSent = ({ onChooseCoin, style }) => {
 							activeOpacity={0.7}
 							style={styles.chooseCoin}
 							onPress={onChooseCoin}>
-							<Image source={require('../../assets/network/eth.png')} />
+							<Image
+								style={styles.logo}
+								source={{ uri: chooseCoin.image.thumb }}
+							/>
 							<Image
 								style={{ marginLeft: 7 }}
 								source={require('../../assets/check-dark.png')}
@@ -106,5 +114,11 @@ const styles = StyleSheet.create({
 		color: THEME.BROWN_TEXT,
 		fontSize: 16,
 		fontFamily: 'ub-regular',
+	},
+	logo: {
+		width: 35,
+		height: 35,
+		borderRadius: 50,
+		backgroundColor: THEME.WHITE,
 	},
 })

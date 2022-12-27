@@ -6,20 +6,24 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
 import { WalletBottomNav } from './src/navigation/WalletBottomNav'
 import { THEME } from './src/Theme'
-import useWalletService from './services/WalletService'
+import useWalletService, {
+	rebuildObjPortfolioDefaultCoins,
+	rebuildObjPortfolio,
+} from './services/WalletService'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	setPortfolioCoins,
 	setAllCoins,
 	setPortfolioTransactions,
 	setPortfolioBalance,
+	setChooseCoin,
 } from './src/store/actions/walletActions'
 import { LogBox } from 'react-native'
 import { PortalProvider } from '@gorhom/portal'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/store/index'
-import { rebuildObjPortfolio } from './services/WalletService'
+
 LogBox.ignoreLogs([
 	"The provided value 'ms-stream' is not a valid 'responseType'",
 	"The provided value 'moz-chunked-arraybuffer' is not a valid 'responseType'",
@@ -52,30 +56,85 @@ export default function App() {
 
 const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
+	const [loadingOtherCoins, setLoadingOtherCoins] = useState(true)
+	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
-	const { navigation } = useSelector((state) => state.wallet)
+	const {
+		navigation,
+		portfolioCoins,
+		portfolioBalance,
+		coinsAccountZero,
+		allCoins,
+	} = useSelector((state) => state.wallet)
+	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	useEffect(() => {
-		getAllTokens().then((data) => dispatch(setAllCoins(data)))
-		postData(
-			'budget impact steak penalty flat minor priority prevent like click ankle mean',
-			false
-		)
-			.then((response) => {
-				dispatch(setPortfolioBalance(response.portfolio))
-				dispatch(setPortfolioTransactions(response.transactions))
-				dispatch(
-					setPortfolioCoins(rebuildObjPortfolio(response.positions.positions))
-				)
+		if (allCoins.length) {
+			allCoins.forEach((c) => {
+				if (c.symbol.toLowerCase() == 'eth') {
+					dispatch(setChooseCoin(c))
+				}
 			})
-			.catch((error) => console.log('error', error))
-	}, [])
+		}
+	}, [allCoins])
+
+	useEffect(() => {
+		if (dataUser.length)
+			dataUser.forEach((item) => {
+				if (item.name == currentAccount) {
+					setLoadingBalanceCoins(true)
+					getAllTokens(setLoadingOtherCoins).then((data) => {
+						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+					})
+					postData(item.phrase, false)
+						.then((response) => {
+							setLoadingBalanceCoins(false)
+							dispatch(
+								setPortfolioCoins(
+									rebuildObjPortfolio(response.positions.positions)
+								)
+							)
+							dispatch(setPortfolioTransactions(response.transactions))
+							dispatch(setPortfolioBalance(response.portfolio))
+						})
+						.catch((error) => console.log('error', error))
+				}
+			})
+	}, [dataUser, currentAccount])
+
+	useEffect(() => {
+		if (
+			!loadingBalanceCoins &&
+			!loadingOtherCoins &&
+			portfolioBalance.assets_value > 0 &&
+			otherCoins.length
+		) {
+			console.log('with balance account')
+			const balanceArr = portfolioCoins.map((item) => item.symbol.toLowerCase())
+			console.log(balanceArr)
+			let filtered = otherCoins.filter(
+				(coin) => balanceArr.indexOf(coin.symbol.toLowerCase()) === -1
+			)
+			dispatch(setAllCoins([...portfolioCoins, ...filtered]))
+		} else if (
+			!loadingBalanceCoins &&
+			!loadingOtherCoins &&
+			portfolioBalance.assets_value == 0 &&
+			otherCoins.length
+		) {
+			console.log('zero account')
+			let filtered = otherCoins.filter(
+				(coin) => coinsAccountZero.indexOf(coin.symbol.toLowerCase()) !== -1
+			)
+			dispatch(setPortfolioCoins(filtered))
+			dispatch(setAllCoins(otherCoins))
+		}
+	}, [loadingBalanceCoins, loadingOtherCoins, portfolioBalance])
 
 	return (
 		<PersistGate loading={null} persistor={persistor}>
 			{children}
-			{/* {initNav()} */}
 			{navigation === null ? <></> : <WalletBottomNav />}
 		</PersistGate>
 	)

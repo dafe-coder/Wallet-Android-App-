@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	View,
 	ImageBackground,
@@ -10,8 +10,40 @@ import { WalletTitle, WalletText } from './../Components/UI/'
 import { WalletNav, TransactionsList } from '../Components/'
 import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
+
 export const PortfolioOpenScreen = () => {
-	const { transactions } = useSelector((state) => state.wallet)
+	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
+	const [transactionList, setTransactionList] = useState([])
+
+	useEffect(() => {
+		console.log(portfolioOpen)
+		let filtered = transactions.filter((item) => item.status !== 'failed')
+		let filteredToken = filtered.filter(
+			(item) =>
+				item.changes[0].asset.symbol.toLowerCase() ==
+				portfolioOpen.symbol.toLowerCase()
+		)
+		let filteredTokenSwap = filtered.filter((item) =>
+			item.changes[1]
+				? item.changes[1].asset.symbol.toLowerCase() ==
+				  portfolioOpen.symbol.toLowerCase()
+				: false
+		)
+		let arrFinal = [...filteredToken, ...filteredTokenSwap]
+
+		let arrSorted = arrFinal.sort(function (a, b) {
+			if (a.mined_at > b.mined_at) {
+				return -1
+			}
+			if (a.mined_at < b.mined_at) {
+				return 1
+			}
+			return 0
+		})
+
+		setTransactionList(arrSorted)
+	}, [portfolioOpen, transactions])
+
 	return (
 		<ScrollView
 			style={{
@@ -35,7 +67,7 @@ export const PortfolioOpenScreen = () => {
 				<WalletNav />
 			</View>
 			<View style={{ marginBottom: 40 }}>
-				{transactions.length < 1 ? (
+				{transactionList.length < 1 ? (
 					<View
 						style={{
 							flexDirection: 'row',
@@ -50,7 +82,7 @@ export const PortfolioOpenScreen = () => {
 						<WalletText color='brown'>No transactoins history yet</WalletText>
 					</View>
 				) : (
-					<TransactionsList data={transactions} />
+					<TransactionsList data={transactionList} />
 				)}
 			</View>
 		</ScrollView>

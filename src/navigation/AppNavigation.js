@@ -37,7 +37,7 @@ const screens = [
 			title: 'Ethereum',
 			headerLeft: () => <HistoryBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 	},
 	{
@@ -55,7 +55,7 @@ const screens = [
 			title: '',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: TransactionHistoryScreen,
 	},
@@ -66,7 +66,7 @@ const screens = [
 			title: 'Ethereum',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: PortfolioOpenScreen,
 	},
@@ -76,7 +76,7 @@ const screens = [
 			headerShown: true,
 			title: 'You Wallet Adress',
 			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: ReceiveScreen,
 	},
@@ -87,7 +87,7 @@ const screens = [
 			title: 'Ethereum',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: SwapScreen,
 	},
@@ -97,7 +97,7 @@ const screens = [
 			headerShown: true,
 			title: 'Confirm Transaction',
 			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: ConfirmTransactionScreen,
 	},
@@ -108,7 +108,7 @@ const screens = [
 			title: 'Ethereum',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: SentScreen,
 	},
@@ -162,12 +162,12 @@ const screens = [
 	{
 		name: 'Nft',
 		component: NftScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			headerLeft: () => <></>,
 			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn />,
-		},
+			headerRight: () => <AccountBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'Contacts',
@@ -176,7 +176,7 @@ const screens = [
 			headerShown: true,
 			title: 'Contacts',
 			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 	},
 	{
@@ -190,12 +190,12 @@ const screens = [
 	{
 		name: 'Account',
 		component: AccountScreen,
-		options: {
+		options: ({ navigation }) => ({
 			title: 'Account',
 			headerShown: true,
 			headerLeft: () => <></>,
-			headerRight: () => <AccountBtn />,
-		},
+			headerRight: () => <AccountBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'Settings',
@@ -204,7 +204,7 @@ const screens = [
 			headerShown: true,
 			title: 'Settings',
 			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 	},
 	{

@@ -1,16 +1,20 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { WalletInput, WalletText } from './../Components/UI/'
 import { SelectCoinSent } from '../Components'
 import { WalletButton } from './../Components/UI/WalletButton'
 import { WalletBottomSheet } from '../Components'
 import { ChooseCoins } from '../Components/modal'
-
+import { useSelector } from 'react-redux'
 export const SentScreen = ({ navigation }) => {
+	const { allCoins, chooseCoin } = useSelector((state) => state.wallet)
 	const coinsRef = useRef(null)
 
 	const onChooseCoin = () => {
 		coinsRef.current.expand()
+	}
+	const onCoinPress = () => {
+		coinsRef.current.close()
 	}
 
 	return (
@@ -30,13 +34,21 @@ export const SentScreen = ({ navigation }) => {
 					flex: 1,
 					justifyContent: 'space-between',
 				}}>
-				<SelectCoinSent onChooseCoin={onChooseCoin} />
+				{chooseCoin != null ? (
+					<SelectCoinSent onChooseCoin={onChooseCoin} />
+				) : (
+					<></>
+				)}
 				<WalletButton onPress={() => navigation.navigate('ConfirmTransaction')}>
 					Send
 				</WalletButton>
 			</View>
 			<WalletBottomSheet ref={coinsRef} snapPoints={['55%']}>
-				<ChooseCoins />
+				{allCoins.length ? (
+					<ChooseCoins allCoins={allCoins} onCoinPress={onCoinPress} />
+				) : (
+					<></>
+				)}
 			</WalletBottomSheet>
 		</View>
 	)

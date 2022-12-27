@@ -5,6 +5,10 @@ import {
 	SET_PORTFOLIO_TRANSACTIONS,
 	SET_DATE_TRANSACTION,
 	SET_PORTFOLIO_BALANCE,
+	SET_PHRASE,
+	SET_PRIVATE_KEY,
+	SET_CHOOSE_COIN,
+	SET_PORTFOLIO_OPEN,
 } from '../type'
 
 const initialState = {
@@ -15,6 +19,11 @@ const initialState = {
 	password: '111111',
 	dateTransaction: [],
 	portfolioBalance: {},
+	phrase: '',
+	privateKey: '',
+	chooseCoin: null,
+	portfolioOpen: null,
+	coinsAccountZero: ['bnb', 'eth', 'matic'],
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -48,6 +57,26 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioBalance: action.payload,
+			}
+		case SET_PHRASE:
+			return {
+				...state,
+				phrase: action.payload,
+			}
+		case SET_PRIVATE_KEY:
+			return {
+				...state,
+				privateKey: action.payload,
+			}
+		case SET_CHOOSE_COIN:
+			return {
+				...state,
+				chooseCoin: action.payload,
+			}
+		case SET_PORTFOLIO_OPEN:
+			return {
+				...state,
+				portfolioOpen: action.payload,
 			}
 		default:
 			return state

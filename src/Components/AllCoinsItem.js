@@ -3,12 +3,23 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI/'
 import { THEME } from './../Theme'
 import { SvgIcon } from './svg/svg'
+import { useSelector, useDispatch } from 'react-redux'
+import { setChooseCoin } from '../store/actions/walletActions'
 
-export const AllCoinsItem = ({ coin, checked }) => {
+export const AllCoinsItem = ({ onPress, coin }) => {
+	const dispatch = useDispatch()
+	const { chooseCoin } = useSelector((state) => state.wallet)
+	const onPressCoin = (coin) => {
+		dispatch(setChooseCoin(coin))
+		onPress()
+	}
 	return (
-		<TouchableOpacity style={styles.wrap} activeOpacity={0.7}>
+		<TouchableOpacity
+			style={styles.wrap}
+			activeOpacity={0.7}
+			onPress={() => onPressCoin(coin)}>
 			<View style={styles.itemInfo}>
-				<Image style={styles.image} source={{ uri: coin.image }} />
+				<Image style={styles.image} source={{ uri: coin.image.thumb }} />
 				<WalletText size='m' color='white'>
 					{coin.name + ' '}
 					<Text style={{ color: THEME.BROWN_TEXT }}>
@@ -16,7 +27,12 @@ export const AllCoinsItem = ({ coin, checked }) => {
 					</Text>
 				</WalletText>
 			</View>
-			{true ? <SvgIcon type='check' /> : <></>}
+			{chooseCoin.symbol &&
+			chooseCoin.symbol.toLowerCase() == coin.symbol.toLowerCase() ? (
+				<SvgIcon type='check' />
+			) : (
+				<></>
+			)}
 		</TouchableOpacity>
 	)
 }

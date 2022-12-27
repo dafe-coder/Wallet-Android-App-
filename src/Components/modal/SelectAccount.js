@@ -2,39 +2,38 @@ import React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletTitle, WalletText } from '../UI'
 import { THEME } from '../../Theme'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentAccount } from '../../store/actions/storageAction'
+export const SelectAccount = ({ navigation }) => {
+	const dispatch = useDispatch()
+	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
-export const SelectAccount = () => {
-	const networks = [
-		{
-			id: Math.random().toString(),
-			title: 'Ethereum',
-			img: require('../../../assets/avatar.png'),
-			choose: true,
-		},
-		{
-			id: Math.random().toString(),
-			title: 'Loopring',
-			img: require('../../../assets/avatar2.png'),
-			choose: false,
-		},
-	]
+	const onSelectAccount = (item) => {
+		dispatch(setCurrentAccount(item.name))
+		navigation.navigate('Wallet')
+	}
+
 	return (
 		<View>
 			<WalletTitle style={{ marginBottom: 30 }}>Select an Account</WalletTitle>
 			<View>
-				{networks.map((n) => {
+				{dataUser.map((n) => {
 					return (
 						<TouchableOpacity
 							activeOpacity={0.7}
 							style={styles.item}
-							key={n.id}>
+							key={Math.random().toString()}
+							onPress={() => onSelectAccount(n)}>
 							<View style={styles.info}>
-								<Image style={styles.image} source={n.img} />
+								<Image
+									style={styles.image}
+									source={require('../../../assets/avatar.png')}
+								/>
 								<WalletText style={{ marginLeft: 12 }} size='m'>
-									{n.title}
+									{n.name}
 								</WalletText>
 							</View>
-							{n.choose ? (
+							{currentAccount == n.name ? (
 								<Image source={require('../../../assets/check.png')} />
 							) : (
 								<></>
