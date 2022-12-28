@@ -238,7 +238,7 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName='Wallet'
+			initialRouteName='RecoverPhrase'
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

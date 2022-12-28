@@ -9,6 +9,7 @@ import {
 	SET_PHRASE,
 	SET_PRIVATE_KEY,
 	SET_PORTFOLIO_OPEN,
+	SET_PORTFOLIO_SORT,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -74,5 +75,11 @@ export const setPortfolioOpen = (coin) => {
 	return {
 		type: SET_PORTFOLIO_OPEN,
 		payload: coin,
+	}
+}
+export const setPortfolioSort = (type) => {
+	return {
+		type: SET_PORTFOLIO_SORT,
+		payload: type,
 	}
 }

@@ -9,6 +9,7 @@ import {
 	SET_PRIVATE_KEY,
 	SET_CHOOSE_COIN,
 	SET_PORTFOLIO_OPEN,
+	SET_PORTFOLIO_SORT,
 } from '../type'
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
 	chooseCoin: null,
 	portfolioOpen: null,
 	coinsAccountZero: ['bnb', 'eth', 'matic'],
+	portfolioSort: 'value',
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -77,6 +79,11 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioOpen: action.payload,
+			}
+		case SET_PORTFOLIO_SORT:
+			return {
+				...state,
+				portfolioSort: action.payload,
 			}
 		default:
 			return state

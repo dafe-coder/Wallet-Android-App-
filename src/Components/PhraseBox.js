@@ -10,6 +10,7 @@ import { THEME } from './../Theme'
 import { WalletText, ButtonCopy } from './UI/'
 import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
+import { Keyboard } from 'react-native'
 
 export const PhraseBox = ({ style, setBtnDisabled }) => {
 	const dispatch = useDispatch()
@@ -35,6 +36,7 @@ export const PhraseBox = ({ style, setBtnDisabled }) => {
 			setSuccess('success')
 			setBtnDisabled(false)
 			dispatch(setPhrase(text))
+			Keyboard.dismiss()
 		} else {
 			setBtnDisabled(true)
 			setSuccess('error')
@@ -46,6 +48,7 @@ export const PhraseBox = ({ style, setBtnDisabled }) => {
 		if (textArr.length == 1 && text.length > 40) {
 			setSuccess('success')
 			setBtnDisabled(false)
+			Keyboard.dismiss()
 		} else {
 			setBtnDisabled(true)
 			setSuccess('error')
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
 		lineHeight: 20,
 		color: THEME.WHITE_DARK_TEXT,
 		textAlignVertical: 'top',
+		minHeight: 142,
 		maxHeight: 200,
 	},
 	wrap: {
