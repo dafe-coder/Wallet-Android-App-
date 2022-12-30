@@ -31,7 +31,7 @@ export const AccountScreen = ({ navigation }) => {
 				style={{
 					paddingHorizontal: 16,
 				}}>
-				<AccountCard />
+				<AccountCard navigation={navigation} />
 			</View>
 			<AccountListMenu onPress={handlePresentPress} />
 			<WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>

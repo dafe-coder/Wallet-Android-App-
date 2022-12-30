@@ -19,6 +19,7 @@ export * from './ActivityScreen'
 
 //  ---\\\///--- Accounts Screens ---\\\///---
 export * from './AccountScreen'
+export * from './EditProfileScreen'
 
 //  ---\\\///--- Settings Screens ---\\\///---
 export * from './SettingsScreen'

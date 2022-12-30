@@ -23,6 +23,7 @@ import { PortalProvider } from '@gorhom/portal'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/store/index'
+import { setDataUser } from './src/store/actions/storageAction'
 
 LogBox.ignoreLogs([
 	"The provided value 'ms-stream' is not a valid 'responseType'",
@@ -68,7 +69,6 @@ const AppWrap = ({ children }) => {
 		allCoins,
 	} = useSelector((state) => state.wallet)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
-
 	useEffect(() => {
 		if (allCoins.length) {
 			allCoins.forEach((c) => {
@@ -80,7 +80,8 @@ const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
-		if (dataUser.length)
+		console.log(dataUser)
+		if (dataUser.length >= 1) {
 			dataUser.forEach((item) => {
 				if (item.name == currentAccount) {
 					setLoadingBalanceCoins(true)
@@ -89,6 +90,7 @@ const AppWrap = ({ children }) => {
 					})
 					postData(item.phrase, false)
 						.then((response) => {
+							// console.log(response)
 							setLoadingBalanceCoins(false)
 							dispatch(
 								setPortfolioCoins(
@@ -101,6 +103,7 @@ const AppWrap = ({ children }) => {
 						.catch((error) => console.log('error', error))
 				}
 			})
+		}
 	}, [dataUser, currentAccount])
 
 	useEffect(() => {
@@ -124,10 +127,6 @@ const AppWrap = ({ children }) => {
 			otherCoins.length
 		) {
 			console.log('zero account')
-			let filtered = otherCoins.filter(
-				(coin) => coinsAccountZero.indexOf(coin.symbol.toLowerCase()) !== -1
-			)
-			dispatch(setPortfolioCoins(filtered))
 			dispatch(setAllCoins(otherCoins))
 		}
 	}, [loadingBalanceCoins, loadingOtherCoins, portfolioBalance])

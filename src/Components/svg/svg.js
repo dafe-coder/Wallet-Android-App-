@@ -131,6 +131,49 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'pen':
+			return (
+				<Svg
+					width={18}
+					height={18}
+					viewBox='0 0 18 18'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M14.379 6.45l-9.415 9.415a2 2 0 01-1.022.547L1 17l.589-2.942a2 2 0 01.547-1.022l9.415-9.415m2.828 2.829l1.414-1.414a1 1 0 000-1.415L14.38 2.207a1 1 0 00-1.414 0L11.55 3.621m2.828 2.829L11.551 3.62'
+						stroke='#8B6917'
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+				</Svg>
+			)
+		case 'alert':
+			return (
+				<Svg
+					width={26}
+					height={26}
+					viewBox='0 0 26 26'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M13.009 24.05c6.282 0 11.375-5.093 11.375-11.375S19.29 1.3 13.009 1.3 1.634 6.393 1.634 12.675 6.727 24.05 13.009 24.05z'
+						stroke='#B61E1E'
+						strokeWidth={1.5}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+					<Path
+						d='M13.24 18.2V13M13.24 7.8h.013'
+						stroke='#B61E1E'
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+				</Svg>
+			)
 		default:
 			return <></>
 	}

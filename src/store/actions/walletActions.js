@@ -10,6 +10,7 @@ import {
 	SET_PRIVATE_KEY,
 	SET_PORTFOLIO_OPEN,
 	SET_PORTFOLIO_SORT,
+	SET_ACCOUNT_NAME,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -81,5 +82,11 @@ export const setPortfolioSort = (type) => {
 	return {
 		type: SET_PORTFOLIO_SORT,
 		payload: type,
+	}
+}
+export const setAccountName = (name) => {
+	return {
+		type: SET_ACCOUNT_NAME,
+		payload: name,
 	}
 }

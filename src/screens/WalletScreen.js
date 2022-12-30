@@ -32,7 +32,7 @@ export const WalletScreen = ({ navigation }) => {
 				allCoins.filter((c) => coinsAccountZero.indexOf(c.symbol) != -1)
 			)
 		}
-	}, [portfolioCoins])
+	}, [portfolioCoins, allCoins])
 
 	const dispatch = useDispatch()
 	const filterRef = useRef(null)

@@ -3,6 +3,8 @@ import {
 	SET_CURRENT_NETWORK,
 	SET_DATA_USER,
 	SET_CURRENT_ACCOUNT,
+	SET_NEW_ACCOUNT_NAME,
+	SET_DELETE_ACCOUNT,
 } from '../type'
 
 export const setPassword = (password) => {
@@ -26,6 +28,18 @@ export const setDataUser = (obj) => {
 export const setCurrentAccount = (account) => {
 	return {
 		type: SET_CURRENT_ACCOUNT,
+		payload: account,
+	}
+}
+export const setNewAccountName = (name) => {
+	return {
+		type: SET_NEW_ACCOUNT_NAME,
+		payload: name,
+	}
+}
+export const setDeleteAccount = (account) => {
+	return {
+		type: SET_DELETE_ACCOUNT,
 		payload: account,
 	}
 }

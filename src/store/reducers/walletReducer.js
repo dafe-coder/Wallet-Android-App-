@@ -10,6 +10,7 @@ import {
 	SET_CHOOSE_COIN,
 	SET_PORTFOLIO_OPEN,
 	SET_PORTFOLIO_SORT,
+	SET_ACCOUNT_NAME,
 } from '../type'
 
 const initialState = {
@@ -84,6 +85,11 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioSort: action.payload,
+			}
+		case SET_ACCOUNT_NAME:
+			return {
+				...state,
+				accountName: action.payload,
 			}
 		default:
 			return state

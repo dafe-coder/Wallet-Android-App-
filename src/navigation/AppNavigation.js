@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { Image } from 'react-native-elements'
 import { THEME } from './../Theme'
 import {
 	LoginScreen,
@@ -24,8 +23,10 @@ import {
 	PortfolioOpenScreen,
 	ConfirmPasswordScreen,
 	TransactionHistoryScreen,
+	EditProfileScreen,
 } from '../screens'
-import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn } from './'
+import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
+
 const Stack = createStackNavigator()
 
 const screens = [
@@ -58,6 +59,24 @@ const screens = [
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: TransactionHistoryScreen,
+	},
+	{
+		name: 'EditProfile',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'Settings',
+			headerLeft: () => (
+				<TextBtn position='left' onPress={() => navigation.goBack()}>
+					Cancel
+				</TextBtn>
+			),
+			headerRight: () => (
+				<TextBtn position='right' navigation={navigation} type='ready'>
+					Ready
+				</TextBtn>
+			),
+		}),
+		component: EditProfileScreen,
 	},
 	{
 		name: 'PortfolioOpen',
