@@ -43,10 +43,11 @@ const screens = [
 	},
 	{
 		name: 'CreatePhrase',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: '',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 		component: CreatePhraseScreen,
 	},
 	{
@@ -165,10 +166,11 @@ const screens = [
 	{
 		name: 'CreatePassword',
 		component: CreatePasswordScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'By Bit Wallet',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'AllSet',
@@ -237,10 +239,11 @@ const screens = [
 	{
 		name: 'SubscribeCreate',
 		component: SubscribeCreateScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'ConfirmPassword',
@@ -257,7 +260,7 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName='RecoverPhrase'
+			initialRouteName='SubscribeCreate'
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

@@ -9,6 +9,9 @@ import {
 	setCurrentAccount,
 } from '../../store/actions/storageAction'
 import useWalletService from '../../../services/WalletService'
+import 'react-native-get-random-values'
+// import generateAddressesFromSeed from '../../../services/funcWallet/generateAddress'
+import { entropyToMnemonic } from 'bip39'
 
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -18,23 +21,24 @@ export const PhraseScreen = ({ navigation }) => {
 	const [btnDisabled, setBtnDisabled] = useState(false)
 
 	const submitRestore = () => {
-		postData(phrase, false)
-			.then((response) => {
-				const newAccount = {
-					name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
-					phrase: phrase,
-					privateKey: '',
-					address: response.address,
-				}
-				dispatch(
-					setCurrentAccount(
-						`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
-					)
-				)
-				dispatch(setDataUser(newAccount))
-				navigation.navigate('CreatePassword')
-			})
-			.catch((error) => console.log('error', error))
+		// generateAddressesFromSeed(phrase, phrase.split(' ').length)
+		// postData(phrase, false)
+		// 	.then((response) => {
+		// 		const newAccount = {
+		// 			name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+		// 			phrase: phrase,
+		// 			privateKey: '',
+		// 			address: response.address,
+		// 		}
+		// 		dispatch(
+		// 			setCurrentAccount(
+		// 				`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+		// 			)
+		// 		)
+		// 		dispatch(setDataUser(newAccount))
+		// 		navigation.navigate('CreatePassword')
+		// 	})
+		// 	.catch((error) => console.log('error', error))
 	}
 
 	return (

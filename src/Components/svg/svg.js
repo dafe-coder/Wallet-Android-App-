@@ -174,6 +174,31 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'swap':
+			return (
+				<Svg
+					width={22}
+					height={21}
+					viewBox='0 0 22 21'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M6.188 16.055V3.805m0 0L1.375 8.569m4.813-4.764L11 8.569'
+						stroke='#6A6351'
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+					<Path
+						d='M15.813 3.805v13.067m0 0l4.812-5.082m-4.813 5.082L11 11.79'
+						stroke='#F9B446'
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+				</Svg>
+			)
 		default:
 			return <></>
 	}

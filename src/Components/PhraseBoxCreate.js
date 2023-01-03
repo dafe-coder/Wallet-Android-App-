@@ -3,52 +3,43 @@ import { View, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI'
 import { ButtonCopy } from './UI/ButtonCopy'
-export const PhraseBoxCreate = () => {
+export const PhraseBoxCreate = ({ phrase, phraseText }) => {
 	return (
 		<View style={styles.box}>
 			<View style={styles.item}>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					2.pave
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					3.heropave
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
+				{phrase.map((item, i) =>
+					i + 1 <= 4 ? (
+						<WalletText key={i} style={styles.itemText} size='m' color='white'>
+							{i + 1 + '.' + item}
+						</WalletText>
+					) : (
+						<></>
+					)
+				)}
 			</View>
 			<View style={styles.item}>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
+				{phrase.map((item, i) =>
+					i + 1 >= 5 && i + 1 <= 8 ? (
+						<WalletText key={i} style={styles.itemText} size='m' color='white'>
+							{i + 1 + '.' + item}
+						</WalletText>
+					) : (
+						<></>
+					)
+				)}
 			</View>
 			<View style={styles.item}>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					1.hero
-				</WalletText>
-				<WalletText style={styles.itemText} size='m' color='white'>
-					12.feature
-				</WalletText>
+				{phrase.map((item, i) =>
+					i + 1 >= 9 ? (
+						<WalletText key={i} style={styles.itemText} size='m' color='white'>
+							{i + 1 + '.' + item}
+						</WalletText>
+					) : (
+						<></>
+					)
+				)}
 			</View>
-			<ButtonCopy style={{ bottom: 10 }} onPress={() => {}} />
+			<ButtonCopy style={{ bottom: 10 }} text={phraseText} />
 		</View>
 	)
 }

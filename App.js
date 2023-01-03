@@ -1,3 +1,5 @@
+import 'node-libs-react-native/globals.js'
+import 'react-native-get-random-values'
 import React, { useEffect, useState } from 'react'
 import './global'
 import useCachedResources from './hooks/useCachedResources'
@@ -79,32 +81,32 @@ const AppWrap = ({ children }) => {
 		}
 	}, [allCoins])
 
-	useEffect(() => {
-		console.log(dataUser)
-		if (dataUser.length >= 1) {
-			dataUser.forEach((item) => {
-				if (item.name == currentAccount) {
-					setLoadingBalanceCoins(true)
-					getAllTokens(setLoadingOtherCoins).then((data) => {
-						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
-					})
-					postData(item.phrase, false)
-						.then((response) => {
-							// console.log(response)
-							setLoadingBalanceCoins(false)
-							dispatch(
-								setPortfolioCoins(
-									rebuildObjPortfolio(response.positions.positions)
-								)
-							)
-							dispatch(setPortfolioTransactions(response.transactions))
-							dispatch(setPortfolioBalance(response.portfolio))
-						})
-						.catch((error) => console.log('error', error))
-				}
-			})
-		}
-	}, [dataUser, currentAccount])
+	// useEffect(() => {
+	// 	// console.log(dataUser)
+	// 	if (dataUser.length >= 1) {
+	// 		dataUser.forEach((item) => {
+	// 			if (item.name == currentAccount) {
+	// 				setLoadingBalanceCoins(true)
+	// 				getAllTokens(setLoadingOtherCoins).then((data) => {
+	// 					setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+	// 				})
+	// 				postData(item.phrase, false)
+	// 					.then((response) => {
+	// 						// console.log(response)
+	// 						setLoadingBalanceCoins(false)
+	// 						dispatch(
+	// 							setPortfolioCoins(
+	// 								rebuildObjPortfolio(response.positions.positions)
+	// 							)
+	// 						)
+	// 						dispatch(setPortfolioTransactions(response.transactions))
+	// 						dispatch(setPortfolioBalance(response.portfolio))
+	// 					})
+	// 					.catch((error) => console.log('error', error))
+	// 			}
+	// 		})
+	// 	}
+	// }, [dataUser, currentAccount])
 
 	useEffect(() => {
 		if (

@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { SvgIcon } from '../svg/svg'
 import { THEME } from './../../Theme'
+import * as Clipboard from 'expo-clipboard'
 
-export const ButtonCopy = ({ style, onPress }) => {
+export const ButtonCopy = ({ style, text }) => {
 	const [color, setColor] = useState(false)
 	const onPressBtn = () => {
-		onPress()
+		onCopy()
 		setColor(true)
 		setTimeout(() => {
 			setColor(false)
 		}, 400)
+	}
+
+	const onCopy = async () => {
+		await Clipboard.setStringAsync(text)
 	}
 	return (
 		<TouchableOpacity

@@ -13,3 +13,9 @@ if (typeof atob === 'undefined') {
 		return decode(b64Encoded)
 	}
 }
+
+if (typeof BigInt === 'undefined') {
+	global.BigInt = require('big-integer')
+}
+
+global.Buffer = global.Buffer || require('buffer').Buffer

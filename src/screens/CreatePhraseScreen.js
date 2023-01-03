@@ -1,9 +1,38 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { WalletText } from '../Components/UI'
 import { WalletButton } from './../Components/UI/WalletButton'
 import { PhraseBoxCreate } from './../Components'
-export const CreatePhraseScreen = () => {
+import { useSelector, useDispatch } from 'react-redux'
+import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
+
+export const CreatePhraseScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
+	const { phrase } = useSelector((state) => state.wallet)
+	const { dataUser } = useSelector((state) => state.storage)
+
+	const onCreateAccount = () => {
+		if (phrase != '') {
+			postData(phrase, true)
+				.then((response) => {
+					const newAccount = {
+						name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+						phrase: phrase,
+						privateKey: '',
+						address: response.address,
+					}
+					dispatch(
+						setCurrentAccount(
+							`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+						)
+					)
+					dispatch(setDataUser(newAccount))
+					navigation.navigate('CreatePassword')
+				})
+				.catch((error) => console.log('error', error))
+		}
+	}
+
 	return (
 		<View style={styles.wrap}>
 			<View style={{ paddingHorizontal: 35, marginBottom: 18 }}>
@@ -25,10 +54,16 @@ export const CreatePhraseScreen = () => {
 				</WalletText>
 			</View>
 			<View style={{ paddingHorizontal: 16 }}>
-				<PhraseBoxCreate />
+				{phrase.split(' ').length > 1 ? (
+					<PhraseBoxCreate phraseText={phrase} phrase={phrase.split(' ')} />
+				) : (
+					<></>
+				)}
 			</View>
 			<View style={{ paddingHorizontal: 16, marginTop: 'auto' }}>
-				<WalletButton>I saved my Secret Recovery Phrase</WalletButton>
+				<WalletButton onPress={onCreateAccount}>
+					I saved my Secret Recovery Phrase
+				</WalletButton>
 			</View>
 		</View>
 	)
@@ -38,5 +73,6 @@ const styles = StyleSheet.create({
 	wrap: {
 		flex: 1,
 		paddingBottom: 40,
+		paddingTop: 52,
 	},
 })

@@ -4,9 +4,14 @@ import { THEME } from '../../Theme'
 import { SubscribeBlock } from '../../Components/UI'
 import { WalletText } from '../../Components/UI/WalletText'
 import { WalletButton } from '../../Components/UI/WalletButton'
-// import bip39 from 'bip39'
+import 'react-native-get-random-values'
+import { entropyToMnemonic, mnemonicToSeedSync, mnemonicToSeed } from 'bip39'
+import { useDispatch } from 'react-redux'
+import { setPhrase } from '../../store/actions/walletActions'
+import generateAddressesFromSeed from './../../../services/funcWallet/generateAddress'
 
 export const SubscribeCreateScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
 	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [chk1, setChk1] = useState(false)
 	const [chk2, setChk2] = useState(false)
@@ -20,13 +25,20 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 		}
 	}, [chk1, chk2, chk3])
 
-	useEffect(() => {
-		// let bip39 = require('bip39')
-		// const mnemonic = bip39.generateMnemonic()
-		// console.log(mnemonic)
-		// console.log(bip39)
-		// console.log(1)
-	}, [])
+	const createPhrase = () => {
+		const a = generateAddressesFromSeed(
+			'budget impact steak penalty flat minor priority prevent like click ankle mean',
+			12
+		)
+		console.log(a)
+		async function generateWords() {
+			const entropy = await crypto.getRandomValues(new Uint8Array(16))
+
+			dispatch(setPhrase(entropyToMnemonic(entropy)))
+		}
+		generateWords()
+		navigation.navigate('CreatePhrase')
+	}
 
 	return (
 		<View style={styles.body}>
@@ -50,11 +62,8 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 				style={{
 					paddingHorizontal: 16,
 				}}>
-				<WalletButton
-					checked
-					disabled={btnDisabled}
-					onPress={() => navigation.navigate('ExportPhrase')}>
-					Recover My wallet
+				<WalletButton checked disabled={btnDisabled} onPress={createPhrase}>
+					Next
 				</WalletButton>
 			</View>
 		</View>
