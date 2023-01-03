@@ -5,10 +5,10 @@ import { SubscribeBlock } from '../../Components/UI'
 import { WalletText } from '../../Components/UI/WalletText'
 import { WalletButton } from '../../Components/UI/WalletButton'
 import 'react-native-get-random-values'
-import { entropyToMnemonic, mnemonicToSeedSync, mnemonicToSeed } from 'bip39'
+import { entropyToMnemonic } from 'bip39'
 import { useDispatch } from 'react-redux'
-import { setPhrase } from '../../store/actions/walletActions'
-import generateAddressesFromSeed from './../../../services/funcWallet/generateAddress'
+import { setPhrase, setPrivateKey } from '../../store/actions/walletActions'
+import generateWallet from './../../../services/funcWallet/generateAddress'
 
 export const SubscribeCreateScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -26,18 +26,14 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 	}, [chk1, chk2, chk3])
 
 	const createPhrase = () => {
-		const a = generateAddressesFromSeed(
-			'budget impact steak penalty flat minor priority prevent like click ankle mean',
-			12
-		)
-		console.log(a)
 		async function generateWords() {
 			const entropy = await crypto.getRandomValues(new Uint8Array(16))
-
+			const privateKey = await generateWallet(entropyToMnemonic(entropy))
+			dispatch(setPrivateKey(privateKey))
 			dispatch(setPhrase(entropyToMnemonic(entropy)))
+			navigation.navigate('CreatePhrase')
 		}
 		generateWords()
-		navigation.navigate('CreatePhrase')
 	}
 
 	return (

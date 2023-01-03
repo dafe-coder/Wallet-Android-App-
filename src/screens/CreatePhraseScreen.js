@@ -5,20 +5,23 @@ import { WalletButton } from './../Components/UI/WalletButton'
 import { PhraseBoxCreate } from './../Components'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
+import useWalletService from './../../services/WalletService'
 
 export const CreatePhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { phrase } = useSelector((state) => state.wallet)
+	const { postData } = useWalletService()
+	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const { dataUser } = useSelector((state) => state.storage)
 
 	const onCreateAccount = () => {
 		if (phrase != '') {
+			console.log(phrase)
 			postData(phrase, true)
 				.then((response) => {
 					const newAccount = {
 						name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
 						phrase: phrase,
-						privateKey: '',
+						privateKey: privateKey,
 						address: response.address,
 					}
 					dispatch(
