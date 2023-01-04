@@ -7,7 +7,7 @@ import {
 	SET_DELETE_ACCOUNT,
 } from '../type'
 const initialState = {
-	password: '222111',
+	password: '',
 	currentNetwork: 'Ethereum',
 	dataUser: [],
 	currentAccount: '',

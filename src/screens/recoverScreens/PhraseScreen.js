@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import {
+	View,
+	StyleSheet,
+	TouchableWithoutFeedback,
+	Keyboard,
+} from 'react-native'
 import { THEME } from '../../Theme'
 import { WalletText, WalletButton } from '../../Components/UI/'
 import { PhraseBox } from './../../Components/PhraseBox'
@@ -10,54 +15,64 @@ import {
 } from '../../store/actions/storageAction'
 import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
-// import generateAddressesFromSeed from '../../../services/funcWallet/generateAddress'
-import { entropyToMnemonic } from 'bip39'
+import generateWallet from './../../../services/funcWallet/generateAddress'
 
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
-	const { dataUser } = useSelector((state) => state.storage)
-	const { phrase } = useSelector((state) => state.wallet)
+	const { dataUser, password } = useSelector((state) => state.storage)
+	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(false)
 
 	const submitRestore = () => {
-		// generateAddressesFromSeed(phrase, phrase.split(' ').length)
-		// postData(phrase, false)
-		// 	.then((response) => {
-		// 		const newAccount = {
-		// 			name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
-		// 			phrase: phrase,
-		// 			privateKey: '',
-		// 			address: response.address,
-		// 		}
-		// 		dispatch(
-		// 			setCurrentAccount(
-		// 				`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
-		// 			)
-		// 		)
-		// 		dispatch(setDataUser(newAccount))
-		// 		navigation.navigate('CreatePassword')
-		// 	})
-		// 	.catch((error) => console.log('error', error))
+		let privateKeyString =
+			phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
+		postData(phrase != '' ? phrase : privateKey, false)
+			.then((response) => {
+				const newAccount = {
+					name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+					phrase: phrase,
+					privateKey: privateKey != '' ? privateKey : privateKeyString,
+					address: response.address,
+				}
+				dispatch(
+					setCurrentAccount(
+						`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+					)
+				)
+				dispatch(setDataUser(newAccount))
+				password != ''
+					? navigation.navigate('ConfirmPassword')
+					: navigation.navigate('CreatePassword')
+			})
+			.catch((error) => console.log('error', error))
 	}
 
 	return (
-		<View style={styles.body}>
-			<View>
-				<WalletText style={{ marginBottom: 40 }} color='white' center size='m'>
-					Recover a wallet using your Secret {'\n'} Recovery Phrase.
-				</WalletText>
-				<PhraseBox setBtnDisabled={setBtnDisabled} />
+		<TouchableWithoutFeedback
+			onPress={() => Keyboard.dismiss()}
+			accessible={false}>
+			<View style={styles.body}>
+				<View>
+					<WalletText
+						style={{ marginBottom: 40 }}
+						color='white'
+						center
+						size='m'>
+						Recover a wallet using your Secret {'\n'} Recovery Phrase.
+					</WalletText>
+					<PhraseBox setBtnDisabled={setBtnDisabled} />
+				</View>
+				<View
+					style={{
+						paddingHorizontal: 16,
+					}}>
+					<WalletButton checked disabled={btnDisabled} onPress={submitRestore}>
+						Import Wallet
+					</WalletButton>
+				</View>
 			</View>
-			<View
-				style={{
-					paddingHorizontal: 16,
-				}}>
-				<WalletButton checked disabled={btnDisabled} onPress={submitRestore}>
-					Import Wallet
-				</WalletButton>
-			</View>
-		</View>
+		</TouchableWithoutFeedback>
 	)
 }
 

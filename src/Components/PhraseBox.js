@@ -10,7 +10,6 @@ import { THEME } from './../Theme'
 import { WalletText, ButtonCopy } from './UI/'
 import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
-import { Keyboard } from 'react-native'
 
 export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 	const dispatch = useDispatch()
@@ -36,7 +35,6 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 			setSuccess('success')
 			setBtnDisabled(false)
 			dispatch(setPhrase(text))
-			Keyboard.dismiss()
 		} else {
 			setBtnDisabled(true)
 			setSuccess('error')
@@ -48,7 +46,7 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 		if (textArr.length == 1 && text.length > 40) {
 			setSuccess('success')
 			setBtnDisabled(false)
-			Keyboard.dismiss()
+			dispatch(setPrivateKey(text))
 		} else {
 			setBtnDisabled(true)
 			setSuccess('error')
@@ -90,6 +88,7 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 							: {},
 						edit ? styles.editInput : {},
 					]}
+					value={text}
 					multiline={true}
 					numberOfLines={7}
 					onChangeText={setText}
@@ -99,7 +98,7 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 				/>
 			</View>
 			<ButtonCopy
-				text={phrase != '' ? phrase : ''}
+				text={phrase != '' ? phrase : text}
 				style={{ right: 35, bottom: 20 }}
 			/>
 			{success == 'error' && active ? (

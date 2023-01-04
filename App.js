@@ -90,7 +90,7 @@ const AppWrap = ({ children }) => {
 					getAllTokens(setLoadingOtherCoins).then((data) => {
 						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
 					})
-					postData(item.phrase, false)
+					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
 							// console.log(response)
 							setLoadingBalanceCoins(false)

@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
+import { useSelector } from 'react-redux'
 import {
 	LoginScreen,
 	CreatePhraseScreen,
@@ -171,18 +172,20 @@ const screens = [
 	{
 		name: 'RecoverPhrase',
 		component: PhraseScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'Subscribe',
 		component: SubscribeScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'CreatePassword',
@@ -278,11 +281,12 @@ const screens = [
 ]
 
 export function MyStack() {
+	const { dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName='Wallet'
+			initialRouteName={dataUser.length ? 'Wallet' : 'Login'}
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}
