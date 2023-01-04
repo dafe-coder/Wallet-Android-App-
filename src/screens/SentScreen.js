@@ -5,6 +5,7 @@ import {
 	Image,
 	StyleSheet,
 	ScrollView,
+	Keyboard,
 } from 'react-native'
 import { WalletInput, WalletText } from './../Components/UI/'
 import { SelectCoinSent } from '../Components'
@@ -13,6 +14,7 @@ import { WalletBottomSheet } from '../Components'
 import { ChooseCoins } from '../Components/modal'
 import { useSelector } from 'react-redux'
 export const SentScreen = ({ navigation }) => {
+	const [openKeyboard, setOpenKeyboard] = useState(false)
 	const { allCoins, chooseCoin } = useSelector((state) => state.wallet)
 	const coinsRef = useRef(null)
 
@@ -22,6 +24,20 @@ export const SentScreen = ({ navigation }) => {
 	const onCoinPress = () => {
 		coinsRef.current.close()
 	}
+
+	useEffect(() => {
+		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+			setOpenKeyboard(true)
+		})
+		const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+			setOpenKeyboard(false)
+		})
+
+		return () => {
+			showSubscription.remove()
+			hideSubscription.remove()
+		}
+	}, [])
 
 	return (
 		<ScrollView
@@ -66,7 +82,9 @@ export const SentScreen = ({ navigation }) => {
 					</WalletButton>
 				</View>
 			</View>
-			<WalletBottomSheet ref={coinsRef} snapPoints={['55%']}>
+			<WalletBottomSheet
+				ref={coinsRef}
+				snapPoints={[openKeyboard ? '70%' : '55%']}>
 				{allCoins.length ? (
 					<ChooseCoins allCoins={allCoins} onCoinPress={onCoinPress} />
 				) : (

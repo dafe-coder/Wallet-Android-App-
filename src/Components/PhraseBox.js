@@ -12,7 +12,7 @@ import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
 import { Keyboard } from 'react-native'
 
-export const PhraseBox = ({ style, setBtnDisabled }) => {
+export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 	const dispatch = useDispatch()
 	const [active, setActive] = useState(true)
 	const [success, setSuccess] = useState('default')
@@ -56,40 +56,52 @@ export const PhraseBox = ({ style, setBtnDisabled }) => {
 	}
 
 	return (
-		<View style={{ ...styles.wrap, style }}>
-			<View style={{ flexDirection: 'row' }}>
-				<TouchableOpacity activeOpacity={0.7} onPress={() => setActive(true)}>
-					<WalletText
-						color={active ? 'white-dark' : 'brown'}
-						style={{ marginBottom: 7 }}>
-						Recovery Phrase
-					</WalletText>
-				</TouchableOpacity>
-				<TouchableOpacity activeOpacity={0.7} onPress={() => setActive(false)}>
-					<WalletText
-						color={!active ? 'white-dark' : 'brown'}
-						style={{ marginLeft: 15 }}>
-						Private Key
-					</WalletText>
-				</TouchableOpacity>
+		<View style={[styles.wrap, style, edit ? { marginBottom: 0 } : {}]}>
+			{!edit ? (
+				<View style={{ flexDirection: 'row' }}>
+					<TouchableOpacity activeOpacity={0.7} onPress={() => setActive(true)}>
+						<WalletText
+							color={active ? 'white-dark' : 'brown'}
+							style={{ marginBottom: 7 }}>
+							Recovery Phrase
+						</WalletText>
+					</TouchableOpacity>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => setActive(false)}>
+						<WalletText
+							color={!active ? 'white-dark' : 'brown'}
+							style={{ marginLeft: 15 }}>
+							Private Key
+						</WalletText>
+					</TouchableOpacity>
+				</View>
+			) : (
+				<></>
+			)}
+			<View pointerEvents={edit ? 'none' : 'auto'}>
+				<TextInput
+					style={[
+						styles.textarea,
+						success == 'error'
+							? { borderColor: THEME.RED }
+							: success == 'success'
+							? { borderColor: THEME.BROWN_TEXT }
+							: {},
+						edit ? styles.editInput : {},
+					]}
+					multiline={true}
+					numberOfLines={7}
+					onChangeText={setText}
+					placeholder={phrase != '' ? phrase : 'Enter Secret Recovery Phrase'}
+					placeholderTextColor={edit ? THEME.WHITE_DARK_TEXT : THEME.BROWN_TEXT}
+					underlineColorAndroid='transparent'
+				/>
 			</View>
-			<TextInput
-				style={[
-					styles.textarea,
-					success == 'error'
-						? { borderColor: THEME.RED }
-						: success == 'success'
-						? { borderColor: THEME.BROWN_TEXT }
-						: {},
-				]}
-				multiline={true}
-				numberOfLines={7}
-				onChangeText={setText}
-				placeholder='Enter Secret Recovery Phrase'
-				placeholderTextColor={THEME.BROWN_TEXT}
-				underlineColorAndroid='transparent'
+			<ButtonCopy
+				text={phrase != '' ? phrase : ''}
+				style={{ right: 35, bottom: 20 }}
 			/>
-			<ButtonCopy onPress={() => {}} style={{ right: 35, bottom: 20 }} />
 			{success == 'error' && active ? (
 				<Text style={styles.errorText}>Invalid Secret Recovery Phrase!</Text>
 			) : success == 'error' && !active ? (
@@ -125,5 +137,10 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		bottom: -23,
 		left: 35,
+	},
+	editInput: {
+		borderWidth: 1,
+		borderColor: THEME.BROWN_TEXT,
+		paddingRight: 80,
 	},
 })

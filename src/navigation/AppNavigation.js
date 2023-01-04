@@ -24,6 +24,8 @@ import {
 	ConfirmPasswordScreen,
 	TransactionHistoryScreen,
 	EditProfileScreen,
+	ExportPhraseCopyScreen,
+	ExportPrivateKeyCopyScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -49,6 +51,24 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: CreatePhraseScreen,
+	},
+	{
+		name: 'ExportPhraseCopy',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'Seed Phrase',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
+		component: ExportPhraseCopyScreen,
+	},
+	{
+		name: 'ExportPrivateKeyCopy',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'Private Key',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
+		component: ExportPrivateKeyCopyScreen,
 	},
 	{
 		name: 'TransactionHistory',
@@ -134,10 +154,11 @@ const screens = [
 	},
 	{
 		name: 'ExportPhrase',
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Export Account - Secret Phrase',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 		component: ExportPhraseScreen,
 	},
 	{
@@ -231,10 +252,11 @@ const screens = [
 	{
 		name: 'ExportPrivateKey',
 		component: ExportPrivateKeyScreen,
-		options: {
+		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Export Account - Private Key',
-		},
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
 	},
 	{
 		name: 'SubscribeCreate',

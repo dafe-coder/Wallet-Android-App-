@@ -1,9 +1,31 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import { WalletTextWithIcon } from '../Components'
 import { WalletInput, WalletText } from '../Components/UI'
-import { WalletButton } from '../Components/UI/WalletButton'
-export const ExportPrivateKeyScreen = () => {
+import { THEME } from '../Theme'
+import PincodeInput from 'react-native-pincode-input'
+import { useSelector } from 'react-redux'
+
+export const ExportPrivateKeyScreen = ({ navigation }) => {
+	const [pin, setPin] = useState('')
+	const { password } = useSelector((state) => state.storage)
+
+	const pincodeInput = useRef(null)
+
+	const shakePincode = () => {
+		pincodeInput.current?.shake()
+	}
+
+	const handleOnTextChange = (pin) => {
+		setPin(pin)
+		if (pin.length === 6 && pin === password) {
+			navigation.navigate('ExportPrivateKeyCopy')
+			setPin('')
+		} else if (pin.length === 6 && pin !== password) {
+			setPin('')
+			shakePincode()
+		}
+	}
 	return (
 		<View style={{ paddingTop: 30, paddingBottom: 50, flex: 1 }}>
 			<View style={{ flex: 1 }}>
@@ -28,18 +50,51 @@ export const ExportPrivateKeyScreen = () => {
 						Phrase. Do not share it with anyone.
 					</WalletTextWithIcon>
 				</View>
-				<View>
-					<WalletText
-						style={{ paddingHorizontal: 16, marginBottom: 7 }}
-						color='brown'>
-						Enter your password
+
+				<View style={styles.bodyPin}>
+					<WalletText center size='m'>
+						Enter your PIN code
 					</WalletText>
-					<WalletInput placeholder='Password' />
+					<PincodeInput
+						ref={pincodeInput}
+						length={6}
+						containerStyle={{
+							display: 'flex',
+							width: '100%',
+							height: 47,
+							justifyContent: 'center',
+						}}
+						circleContainerStyle={{
+							paddingHorizontal: 140,
+						}}
+						circleEmptyStyle={{
+							width: 9,
+							height: 9,
+							borderWidth: 1,
+							borderColor: THEME.BROWN_TEXT,
+							backgroundColor: THEME.BROWN_TEXT,
+							borderRadius: 50,
+						}}
+						circleFilledStyle={{
+							backgroundColor: THEME.GOLD,
+							width: 9,
+							height: 9,
+						}}
+						pin={pin}
+						onTextChange={handleOnTextChange}
+					/>
 				</View>
-			</View>
-			<View style={{ paddingHorizontal: 16 }}>
-				<WalletButton>Reveal Private Key</WalletButton>
 			</View>
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	bodyPin: {
+		backgroundColor: THEME.BROWN_DARK,
+		borderRadius: 10,
+		marginHorizontal: 16,
+		paddingTop: 20,
+		paddingBottom: 5,
+	},
+})

@@ -25,6 +25,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0C0B07"
       },
+      "softwareKeyboardLayoutMode":"pan",
       "package": "com.daffek.WalletApk"
     },
     "web": {

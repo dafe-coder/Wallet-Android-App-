@@ -27,6 +27,8 @@ export * from './SettingsScreen'
 //  ---\\\///--- Export Account Screens ---\\\///---
 export * from './ExportPrivateKeyScreen'
 export * from './ExportPhraseScreen'
+export * from './ExportPhraseCopyScreen'
+export * from './ExportPrivateKeyCopyScreen.js'
 
 //  ---\\\///--- Sent Screens ---\\\///---
 export * from './SentScreen'
