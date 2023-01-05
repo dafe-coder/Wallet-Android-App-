@@ -224,6 +224,30 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'share':
+			return (
+				<Svg
+					width={24}
+					height={24}
+					viewBox='0 0 24 24'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M16 7l-4-4-4 4M12 3v12'
+						stroke={fill ? fill : '#8B6917'}
+						strokeWidth={1.5}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+					<Path
+						d='M19 13v5a3 3 0 01-3 3H8a3 3 0 01-3-3v-5'
+						stroke={fill ? fill : '#8B6917'}
+						strokeWidth={1.5}
+						strokeLinecap='round'
+					/>
+				</Svg>
+			)
 		default:
 			return <></>
 	}

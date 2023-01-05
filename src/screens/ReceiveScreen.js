@@ -1,46 +1,73 @@
-import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, TouchableOpacity, Image, Share } from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI'
 import { QrCode } from './../Components/'
-// import { CameraRoll, ToastAndroid } from 'react-native'
-// import RNFS from 'react-native-fs'
+import { CameraRoll, ToastAndroid } from 'react-native'
 import { THEME } from './../Theme'
+import { useSelector } from 'react-redux'
+import * as Clipboard from 'expo-clipboard'
+import { SvgIcon } from './../Components/svg/svg'
 
 export const ReceiveScreen = () => {
-	// const saveQrToDisk = () => {
-	// 	this.svg.toDataURL((data) => {
-	// 		RNFS.writeFile(
-	// 			RNFS.CachesDirectoryPath + '/some-name.png',
-	// 			data,
-	// 			'base64'
-	// 		)
-	// 			.then((success) => {
-	// 				return CameraRoll.saveToCameraRoll(
-	// 					RNFS.CachesDirectoryPath + '/some-name.png',
-	// 					'photo'
-	// 				)
-	// 			})
-	// 			.then(() => {
-	// 				this.setState({ busy: false, imageSaved: true })
-	// 				ToastAndroid.show('Saved to gallery !!', ToastAndroid.SHORT)
-	// 			})
-	// 	})
-	// }
+	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const [busy, setBusy] = useState(true)
+	const [imageSaved, setImageSaved] = useState(false)
+	const [qrRef, setRef] = useState()
+	const [address, setAddress] = useState('')
+
+	useEffect(() => {
+		setAddress(dataUser.filter((d) => d.name == currentAccount)[0].address)
+	}, [dataUser, currentAccount])
+
+	const saveQrToDisk = () => {
+		// var RNFS = require('react-native-fs')
+		qrRef.toDataURL((data) => {
+			RNFS.writeFile(
+				RNFS.CachesDirectoryPath + '/some-name.png',
+				data,
+				'base64'
+			)
+				.then((success) => {
+					return CameraRoll.saveToCameraRoll(
+						RNFS.CachesDirectoryPath + '/some-name.png',
+						'photo'
+					)
+				})
+				.then(() => {
+					setBusy(false)
+					setImageSaved(true)
+					ToastAndroid.show('Saved to gallery !!', ToastAndroid.SHORT)
+				})
+		})
+	}
+	const shareQR = () => {
+		Share.share({
+			message: address,
+		})
+	}
+	const onCopy = async () => {
+		await Clipboard.setStringAsync(address)
+	}
 	return (
-		<View style={{ paddingTop: 29, paddingHorizontal: 16 }}>
-			<View style={{ alignItems: 'flex-end', marginBottom: 58 }}>
-				<TouchableOpacity style={styles.btnSave} activeOpacity={0.7}>
+		<View style={{ paddingTop: 116, paddingHorizontal: 16 }}>
+			{/* <View style={{ alignItems: 'flex-end', marginBottom: 58 }}>
+				<TouchableOpacity
+					style={styles.btnSave}
+					activeOpacity={0.7}
+					onPress={saveQrToDisk}>
 					<WalletText style={{ color: THEME.GOLD, fontSize: 12 }}>
 						Save QR code
 					</WalletText>
 				</TouchableOpacity>
-			</View>
+			</View> */}
 			<WalletTitle style={{ marginBottom: 34 }}>
 				Scan QR Code and Pay
 			</WalletTitle>
-			<QrCode value='0x017468fb896cf88c29eb5bd9a82a819f5d598160' />
+			{address != '' ? <QrCode setRef={setRef} value={address} /> : <></>}
 			<View style={styles.address}>
-				<WalletText color='white'>0x0A0B110107...4664a558D0</WalletText>
+				<WalletText color='white'>
+					{address.slice(0, 13) + '...' + address.slice(-10)}
+				</WalletText>
 			</View>
 			<View
 				style={{
@@ -49,19 +76,35 @@ export const ReceiveScreen = () => {
 					justifyContent: 'space-between',
 					marginTop: 48,
 				}}>
-				<TouchableOpacity activeOpacity={0.7} style={styles.link}>
-					<Image
-						style={styles.icon}
-						source={require('../../assets/icons/share.png')}
+				<TouchableOpacity
+					activeOpacity={0.7}
+					style={styles.link}
+					onPress={shareQR}>
+					<SvgIcon
+						style={{ marginTop: 1 }}
+						width='24'
+						height='24'
+						type='share'
+						fill={THEME.GOLD_DARK}
 					/>
-					<WalletText color='gold'>Share address</WalletText>
+					<WalletText style={{ marginLeft: 8 }} color='gold'>
+						Share address
+					</WalletText>
 				</TouchableOpacity>
-				<TouchableOpacity activeOpacity={0.7} style={styles.link}>
-					<Image
-						style={styles.icon}
-						source={require('../../assets/icons/copy.png')}
+				<TouchableOpacity
+					activeOpacity={0.7}
+					style={styles.link}
+					onPress={onCopy}>
+					<SvgIcon
+						style={{ marginTop: 4 }}
+						width='24'
+						height='24'
+						type='copy'
+						fill={THEME.GOLD_DARK}
 					/>
-					<WalletText color='gold'>Copy address</WalletText>
+					<WalletText style={{ marginLeft: 8 }} color='gold'>
+						Copy address
+					</WalletText>
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -72,11 +115,6 @@ const styles = StyleSheet.create({
 	link: {
 		flexDirection: 'row',
 		alignItems: 'center',
-	},
-	icon: {
-		marginRight: 8,
-		width: 24,
-		height: 24,
 	},
 	address: {
 		backgroundColor: THEME.BROWN_DARK,
