@@ -11,6 +11,8 @@ import {
 	SET_PORTFOLIO_OPEN,
 	SET_PORTFOLIO_SORT,
 	SET_ACCOUNT_NAME,
+	SET_ADDRESS_TO,
+	SET_AMOUNT_SEND,
 } from '../type'
 
 const initialState = {
@@ -27,6 +29,8 @@ const initialState = {
 	portfolioOpen: null,
 	coinsAccountZero: ['bnb', 'eth', 'matic'],
 	portfolioSort: 'value',
+	addressTo: '',
+	amountSend: '',
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -90,6 +94,16 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				accountName: action.payload,
+			}
+		case SET_ADDRESS_TO:
+			return {
+				...state,
+				addressTo: action.payload,
+			}
+		case SET_AMOUNT_SEND:
+			return {
+				...state,
+				amountSend: action.payload,
 			}
 		default:
 			return state

@@ -11,6 +11,8 @@ import {
 	SET_PORTFOLIO_OPEN,
 	SET_PORTFOLIO_SORT,
 	SET_ACCOUNT_NAME,
+	SET_ADDRESS_TO,
+	SET_AMOUNT_SEND,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -88,5 +90,17 @@ export const setAccountName = (name) => {
 	return {
 		type: SET_ACCOUNT_NAME,
 		payload: name,
+	}
+}
+export const setAddressTo = (address) => {
+	return {
+		type: SET_ADDRESS_TO,
+		payload: address,
+	}
+}
+export const setAmountSend = (amount) => {
+	return {
+		type: SET_AMOUNT_SEND,
+		payload: amount,
 	}
 }

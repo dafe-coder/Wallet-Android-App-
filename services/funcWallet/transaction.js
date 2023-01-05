@@ -1,7 +1,6 @@
-//check versions in package.json
+import 'react-native-get-random-values'
 import Web3 from 'web3' // npm install web3
-// import tx from '@ethereumjs/tx' // npm install ethereumjs-tx
-// import CryptoJS from 'crypto-js'
+import { Transaction } from '@ethereumjs/tx' // npm install ethereumjs-tx
 
 /**
  * CONFIG
@@ -15,20 +14,6 @@ let INFRA_PROJECT_ID = 'df6302883a974978853fb350122bbc6d'
 const web3 = new Web3('wss://mainnet.infura.io/ws/v3/' + INFRA_PROJECT_ID)
 let PRIVATE_KEY =
 	'c4be287b3e840df39e4d9f364e4bb57e9bb8e6e1b53099f9609508ef4e74dc10'
-// chrome.storage.local.get(['userData'], function (result) {
-// 	if (result.userData) {
-// 		result.userData.forEach((item) => {
-// 			chrome.storage.local.get(['WalletChoose'], function (res) {
-// 				if (res.WalletChoose == item.name) {
-// 					const kitkat = 'Qsx@ah&OR82WX9T6gCt'
-// 					PRIVATE_KEY = CryptoJS.AES.decrypt(item.privateKey, kitkat).toString(
-// 						CryptoJS.enc.Utf8
-// 					)
-// 				}
-// 			})
-// 		})
-// 	}
-// })
 
 const MIN_ABI = [
 	{
@@ -90,7 +75,7 @@ async function signAndSendTx(
 		var nonce = web3.utils.toHex(await web3.eth.getTransactionCount(from))
 		var gasPrice = web3.utils.toHex(await getGasPrice())
 		var gasLimit = web3.utils.toHex(await getGasLimit())
-
+		console.log(gasPrice)
 		var rawTransaction = {
 			nonce: nonce,
 			to: to,
@@ -100,7 +85,7 @@ async function signAndSendTx(
 			data: data,
 			value: value,
 		}
-		var transaction = new tx.Transaction(rawTransaction)
+		var transaction = new Transaction(rawTransaction)
 		console.log(transaction)
 
 		//singing our tx with private key

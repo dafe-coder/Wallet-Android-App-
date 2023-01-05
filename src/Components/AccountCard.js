@@ -84,7 +84,10 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 							.filter((d) => d.name == currentAccount)[0]
 							.address.slice(-6)}
 				</WalletText>
-				<ButtonCopy onPress={() => {}} style={{ right: 0, bottom: 0 }} />
+				<ButtonCopy
+					text={dataUser.filter((d) => d.name == currentAccount)[0].address}
+					style={{ right: 0, bottom: 0 }}
+				/>
 			</View>
 		</View>
 	)

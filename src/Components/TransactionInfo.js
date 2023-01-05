@@ -2,8 +2,10 @@ import React from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI'
+import fixNum from '../../services/funcWallet/fixNum'
+import { SvgIcon } from './svg/svg'
 
-export const TransactionInfo = ({ style, onPress }) => {
+export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 	return (
 		<View style={[styles.item, style]}>
 			<View style={styles.itemTop}>
@@ -13,13 +15,13 @@ export const TransactionInfo = ({ style, onPress }) => {
 						activeOpacity={0.7}
 						style={{ marginLeft: 7 }}
 						onPress={onPress}>
-						<Image source={require('../../assets/icons/info.png')} />
+						<SvgIcon type='info' width={16} height={16} />
 					</TouchableOpacity>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
 					<WalletText color='white'>0.0031 ETH≈ 8.1%</WalletText>
 					<WalletText color='brown' style={{ fontSize: 12, marginTop: 3 }}>
-						≈ 1.574.88$
+						≈ {amountSend}$
 					</WalletText>
 				</View>
 			</View>
@@ -28,7 +30,11 @@ export const TransactionInfo = ({ style, onPress }) => {
 					Total
 				</WalletText>
 				<WalletText color='white' size='m' style={{ fontFamily: 'ub-medium' }}>
-					≈2.574.88 ETH
+					≈
+					{fixNum(
+						Number(amountSend) / chooseCoin.market_data.current_price.usd
+					)}{' '}
+					ETH
 				</WalletText>
 			</View>
 		</View>

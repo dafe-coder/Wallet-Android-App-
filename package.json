@@ -10,7 +10,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@ethereumjs/tx": "^4.0.2",
+    "@ethereumjs/tx": "^3.5.2",
     "@expo/vector-icons": "^13.0.0",
     "@gorhom/bottom-sheet": "^4.4.5",
     "@gorhom/portal": "^1.0.14",
@@ -24,7 +24,6 @@
     "big-integer": "^1.6.51",
     "bip39": "^3.0.4",
     "buffer": "^6.0.3",
-    "ethereumjs-wallet": "^1.0.2",
     "ethers": "^5.7.2",
     "expo": "~47.0.8",
     "expo-clipboard": "^4.0.1",
@@ -43,7 +42,6 @@
     "react-native-gifted-charts": "^1.2.42",
     "react-native-hyperlink": "^0.0.22",
     "react-native-linear-gradient": "^2.6.2",
-    "react-native-pie-chart": "^2.1.0",
     "react-native-pincode-input": "^1.0.2",
     "react-native-qrcode-svg": "^6.1.2",
     "react-native-reanimated": "~2.12.0",

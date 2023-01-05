@@ -63,13 +63,8 @@ const AppWrap = ({ children }) => {
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
-	const {
-		navigation,
-		portfolioCoins,
-		portfolioBalance,
-		coinsAccountZero,
-		allCoins,
-	} = useSelector((state) => state.wallet)
+	const { navigation, portfolioCoins, portfolioBalance, allCoins } =
+		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	useEffect(() => {
 		if (allCoins.length) {
@@ -117,7 +112,6 @@ const AppWrap = ({ children }) => {
 		) {
 			console.log('with balance account')
 			const balanceArr = portfolioCoins.map((item) => item.symbol.toLowerCase())
-			console.log(balanceArr)
 			let filtered = otherCoins.filter(
 				(coin) => balanceArr.indexOf(coin.symbol.toLowerCase()) === -1
 			)

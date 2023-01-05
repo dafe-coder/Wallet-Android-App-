@@ -9,11 +9,12 @@ import {
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
 import fixNum from './../../services/funcWallet/fixNum'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { SvgIcon } from './svg/svg'
-import transactionsSend from '../../services/funcWallet/transaction'
+import { setAmountSend } from '../store/actions/walletActions'
 
 export const SelectCoinSent = ({ style, onChooseCoin }) => {
+	const dispatch = useDispatch()
 	const [value, setValue] = useState('')
 	const [topValue, setTopValue] = useState('')
 	const [swap, setSwap] = useState(false)
@@ -24,10 +25,14 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 	}
 	useEffect(() => {
 		if (!swap) {
+			dispatch(setAmountSend(value))
 			setTopValue(
 				fixNum(Number(value) / chooseCoin.market_data.current_price.usd)
 			)
 		} else {
+			dispatch(
+				setAmountSend(chooseCoin.market_data.current_price.usd * Number(value))
+			)
 			setTopValue(
 				fixNum(chooseCoin.market_data.current_price.usd * Number(value))
 			)

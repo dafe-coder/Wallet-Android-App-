@@ -199,6 +199,31 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'info':
+			return (
+				<Svg
+					width={25}
+					height={24}
+					viewBox='0 0 25 24'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Path
+						d='M12.508 22.2c5.799 0 10.5-4.701 10.5-10.5s-4.701-10.5-10.5-10.5c-5.8 0-10.5 4.701-10.5 10.5s4.7 10.5 10.5 10.5z'
+						stroke='#8B6917'
+						strokeWidth={1.5}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+					<Path
+						d='M12.723 16.8V12M12.723 7.2h.012'
+						stroke='#8B6917'
+						strokeWidth={2}
+						strokeLinecap='round'
+						strokeLinejoin='round'
+					/>
+				</Svg>
+			)
 		default:
 			return <></>
 	}

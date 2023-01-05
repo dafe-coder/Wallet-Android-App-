@@ -12,11 +12,17 @@ import { SelectCoinSent } from '../Components'
 import { WalletButton } from './../Components/UI/WalletButton'
 import { WalletBottomSheet } from '../Components'
 import { ChooseCoins } from '../Components/modal'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAddressTo } from './../store/actions/walletActions'
+
 export const SentScreen = ({ navigation }) => {
-	const [openKeyboard, setOpenKeyboard] = useState(false)
-	const { allCoins, chooseCoin } = useSelector((state) => state.wallet)
+	const dispatch = useDispatch()
+	const { allCoins, chooseCoin, addressFrom } = useSelector(
+		(state) => state.wallet
+	)
 	const coinsRef = useRef(null)
+	const [fromAddress, setFromAddress] = useState(addressFrom)
+	const [openKeyboard, setOpenKeyboard] = useState(false)
 
 	const onChooseCoin = () => {
 		coinsRef.current.expand()
@@ -39,6 +45,11 @@ export const SentScreen = ({ navigation }) => {
 		}
 	}, [])
 
+	const onSubmitSent = () => {
+		dispatch(setAddressTo(fromAddress))
+		navigation.navigate('ConfirmTransaction')
+	}
+
 	return (
 		<ScrollView
 			contentContainerStyle={{
@@ -60,7 +71,13 @@ export const SentScreen = ({ navigation }) => {
 					<TouchableOpacity style={styles.qrButton}>
 						<Image source={require('../../assets/camera-qr.png')} />
 					</TouchableOpacity>
-					<WalletInput placeholder='Public Address (0x...) or ENS' />
+					<WalletInput
+						styleInput={{ paddingRight: 50 }}
+						autoCapitalize='none'
+						setValue={setFromAddress}
+						value={fromAddress}
+						placeholder='Public Address (0x...) or ENS'
+					/>
 				</View>
 				<View
 					style={{
@@ -77,7 +94,7 @@ export const SentScreen = ({ navigation }) => {
 						style={{
 							marginTop: 60,
 						}}
-						onPress={() => navigation.navigate('ConfirmTransaction')}>
+						onPress={onSubmitSent}>
 						Send
 					</WalletButton>
 				</View>
