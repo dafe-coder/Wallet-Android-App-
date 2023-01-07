@@ -77,37 +77,38 @@ const AppWrap = ({ children }) => {
 		}
 	}, [allCoins])
 
-	// useEffect(() => {
-	// 	console.log(dataUser)
-	// 	if (dataUser.length >= 1) {
-	// 		dataUser.forEach((item) => {
-	// 			if (item.name == currentAccount) {
-	// 				setLoadingBalanceCoins(true)
-	// 				getAllTokens(setLoadingOtherCoins).then((data) => {
-	// 					setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
-	// 				})
-	// 				postData(item.phrase != '' ? item.phrase : item.privateKey, false)
-	// 					.then((response) => {
-	// 						// console.log(response)
-	// 						setLoadingBalanceCoins(false)
-	// 						dispatch(
-	// 							setPortfolioCoins(
-	// 								rebuildObjPortfolio(response.positions.positions)
-	// 							)
-	// 						)
-	// 						dispatch(setPortfolioTransactions(response.transactions))
-	// 						dispatch(setPortfolioBalance(response.portfolio))
-	// 					})
-	// 					.catch((error) => console.log('error', error))
-	// 			}
-	// 		})
-	// 	}
-	// }, [dataUser, currentAccount])
+	useEffect(() => {
+		console.log(dataUser)
+		if (dataUser.length >= 1) {
+			dataUser.forEach((item) => {
+				if (item.name == currentAccount) {
+					setLoadingBalanceCoins(true)
+					getAllTokens(setLoadingOtherCoins).then((data) => {
+						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+					})
+					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
+						.then((response) => {
+							// console.log(response)
+							setLoadingBalanceCoins(false)
+							dispatch(
+								setPortfolioCoins(
+									rebuildObjPortfolio(response.positions.positions)
+								)
+							)
+							dispatch(setPortfolioTransactions(response.transactions))
+							dispatch(setPortfolioBalance(response.portfolio))
+						})
+						.catch((error) => console.log('error', error))
+				}
+			})
+		}
+	}, [dataUser, currentAccount])
 
 	useEffect(() => {
 		if (
 			!loadingBalanceCoins &&
 			!loadingOtherCoins &&
+			portfolioBalance != null &&
 			portfolioBalance.assets_value > 0 &&
 			otherCoins.length
 		) {
@@ -120,6 +121,7 @@ const AppWrap = ({ children }) => {
 		} else if (
 			!loadingBalanceCoins &&
 			!loadingOtherCoins &&
+			portfolioBalance != null &&
 			portfolioBalance.assets_value == 0 &&
 			otherCoins.length
 		) {

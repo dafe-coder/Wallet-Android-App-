@@ -4,6 +4,7 @@ import { WalletTitle, WalletText } from '../UI'
 import { THEME } from '../../Theme'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAccount } from '../../store/actions/storageAction'
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 export const SelectAccount = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
@@ -14,9 +15,9 @@ export const SelectAccount = ({ navigation }) => {
 	}
 
 	return (
-		<View>
+		<View style={{ flex: 1 }}>
 			<WalletTitle style={{ marginBottom: 30 }}>Select an Account</WalletTitle>
-			<View>
+			<BottomSheetScrollView>
 				{dataUser.map((n) => {
 					return (
 						<TouchableOpacity
@@ -41,7 +42,7 @@ export const SelectAccount = ({ navigation }) => {
 						</TouchableOpacity>
 					)
 				})}
-			</View>
+			</BottomSheetScrollView>
 		</View>
 	)
 }

@@ -6,6 +6,7 @@ import { AccountCard } from './../Components/AccountCard'
 import { WalletBottomSheet } from './../Components/BottomSheet'
 import { DeleteWallet } from '../Components/modal'
 import { useDispatch, useSelector } from 'react-redux'
+import { setLoader } from '../store/actions/walletActions'
 import {
 	setDeleteAccount,
 	setCurrentAccount,
@@ -16,6 +17,7 @@ export const EditProfileScreen = ({ navigation }) => {
 	const deleteRef = useRef(null)
 	const [isKeyboardVisible, setKeyboardVisible] = useState(false)
 	const [timeoutId, setTimeoutId] = useState()
+	const [timeoutId2, setTimeoutId2] = useState()
 
 	useEffect(() => {
 		const keyboardDidShowListener = Keyboard.addListener(
@@ -35,6 +37,7 @@ export const EditProfileScreen = ({ navigation }) => {
 			keyboardDidHideListener.remove()
 			keyboardDidShowListener.remove()
 			clearTimeout(timeoutId)
+			clearTimeout(timeoutId2)
 		}
 	}, [])
 	const onOpenDeleteModal = () => {
@@ -55,15 +58,22 @@ export const EditProfileScreen = ({ navigation }) => {
 	}
 
 	const onDelete = () => {
+		dispatch(setLoader(true))
 		deleteRef.current?.close()
-		if (dataUser.length >= 1) {
-			dispatch(setDeleteAccount(currentAccount))
-			dispatch(setCurrentAccount(dataUser[0].name))
-		} else {
-			dispatch(setDeleteAccount(currentAccount))
-			dispatch(setCurrentAccount(''))
-			navigation.navigate('Unlock')
-		}
+		setTimeoutId2(
+			setTimeout(() => {
+				dispatch(setLoader(false))
+
+				if (dataUser.length >= 2) {
+					dispatch(setDeleteAccount(currentAccount))
+					dispatch(setCurrentAccount(dataUser[0].name))
+				} else {
+					navigation.navigate('Login')
+					dispatch(setDeleteAccount(currentAccount))
+					dispatch(setCurrentAccount(''))
+				}
+			}, 2000)
+		)
 	}
 
 	return (

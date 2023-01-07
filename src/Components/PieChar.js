@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Svg, Path } from 'react-native-svg'
 import {
 	VictoryPie,
 	VictoryLegend,
-	VictoryTooltip,
 	VictoryContainer,
 	VictoryLabel,
 	VictoryTheme,
@@ -12,35 +11,66 @@ import {
 	VictoryAxis,
 } from 'victory-native'
 import { THEME } from './../Theme'
-// ...
-// const data = [{ value: 50 }, { value: 80 }, { value: 90 }, { value: 70 }]
-const graphicData = [
-		{ y: 10, x: '5%' },
-		{ y: 90, x: '90%' },
-		{ y: 50, x: '50%' },
-		{ y: 20, x: '20%' },
-		{ y: 20, x: '50%' },
-		{ y: 10, x: '5%' },
-		{ y: 30, x: '40%' },
-		{ y: 50, x: '50%' },
-		{ y: 40, x: '50%' },
-		{ y: 50, x: '40%' },
-	],
-	graphicColor = [
-		'#0096A6',
-		'#45BA62',
-		'#4766F9',
-		'#7B61FF',
-		'#7BDC50',
-		'#ADE5E0',
-		'#C3B4FF',
-		'#CE93D8',
-		'#EB513C',
-		'#F39898',
-		'#F3F574',
-		'#FFBF50',
-	]
-export const PieChar = () => {
+import { useSelector } from 'react-redux'
+import fixNum from './../../services/funcWallet/fixNum'
+const graphicColor = [
+	'#0096A6',
+	'#45BA62',
+	'#4766F9',
+	'#7B61FF',
+	'#7BDC50',
+	'#ADE5E0',
+	'#C3B4FF',
+	'#CE93D8',
+	'#EB513C',
+	'#F39898',
+	'#F3F574',
+	'#FFBF50',
+]
+export const PieChar = ({ portfolioCoinsInit }) => {
+	const { portfolioBalance, portfolioCoins } = useSelector(
+		(state) => state.wallet
+	)
+	const [textLabel, setTextLabel] = useState(['$0.00'])
+	const [indexActive, setIndexActive] = useState('')
+	const [graphicData, setGraphicData] = useState([])
+	const [legendsArr, setLegendsArr] = useState([])
+	useEffect(() => {
+		setGraphicData(
+			portfolioCoinsInit.map((c) => ({
+				y:
+					c.market_data.balance_crypto.usd > 0
+						? c.market_data.balance_crypto.usd
+						: 0.000000001,
+				x: [
+					c.name.toUpperCase(),
+					fixNum(c.market_data.balance) + ' ' + c.symbol.toUpperCase(),
+					'$' + fixNum(c.market_data.balance_crypto.usd),
+				],
+			}))
+		)
+		if (portfolioBalance != null) {
+			setLegendsArr(
+				portfolioCoinsInit.map((c) => ({
+					name:
+						c.symbol.toUpperCase() +
+						` ${(
+							(c.market_data.balance_crypto.usd > 0
+								? c.market_data.balance_crypto.usd
+								: 0.1 * 100) /
+							(portfolioBalance.total_value > 0
+								? portfolioBalance.total_value
+								: 0.3)
+						).toFixed(0)}%`,
+				}))
+			)
+		}
+	}, [portfolioBalance, portfolioCoinsInit])
+	useEffect(() => {
+		if (portfolioBalance != null) {
+			setTextLabel([`$${fixNum(portfolioBalance.total_value)}`])
+		}
+	}, [portfolioBalance])
 	return (
 		<View style={styles.body}>
 			<View style={styles.circle}>
@@ -74,18 +104,40 @@ export const PieChar = () => {
 							/>
 						}
 						labelComponent={
-							<VictoryTooltip
-								events={[
-									{
-										target: 'data',
-										eventHandlers: {
-											onFocus: () => ({
-												target: 'labels',
-												mutation: () => ({ active: true }),
-											}),
-										},
-									},
-								]}
+							<VictoryLabel
+								textAnchor='middle'
+								verticalAnchor='middle'
+								lineHeight={[2, 1]}
+								x={129}
+								y={127}
+								style={
+									textLabel.length == 1
+										? [
+												{
+													fontSize: 16,
+													fill: THEME.WHITE,
+													// fontFamily: 'gt-bold',
+												},
+										  ]
+										: [
+												{
+													fontSize: 12,
+													fill: THEME.GOLD,
+													// fontFamily: 'gt-bold',
+												},
+												{
+													fontSize: 14,
+													fill: THEME.WHITE,
+													// fontFamily: 'ub-regular',
+												},
+												{
+													fontSize: 12,
+													fill: THEME.BROWN_TEXT,
+													// fontFamily: 'ub-regular',
+												},
+										  ]
+								}
+								text={textLabel}
 							/>
 						}
 						data={graphicData}
@@ -96,6 +148,10 @@ export const PieChar = () => {
 						padAngle={5}
 						cornerRadius={50}
 						style={{
+							data: {
+								stroke: null,
+								strokeWidth: 0,
+							},
 							labels: {
 								fill: 'white',
 								fontSize: 15,
@@ -105,23 +161,43 @@ export const PieChar = () => {
 						}}
 						events={[
 							{
+								childName: 'all',
 								target: 'data',
 								eventHandlers: {
-									onPress: () => {
-										console.log(1)
+									onPressIn: () => {
 										return [
 											{
 												target: 'data',
-												mutation: ({ style }) => {
-													return style.fill === '#c43a31'
-														? null
-														: { style: { fill: '#c43a31' } }
+												eventKey: 'all',
+												mutation: () => {
+													return null
+												},
+											},
+											{
+												target: 'data',
+												mutation: (props) => {
+													if (props.index === Number(indexActive)) {
+														setIndexActive(-1)
+														return null
+													} else {
+														setIndexActive(props.index)
+														return {
+															style: {
+																fill: THEME.GOLD,
+															},
+														}
+													}
 												},
 											},
 											{
 												target: 'labels',
 												mutation: ({ text }) => {
-													return text === 'clicked' ? null : { text: 'clicked' }
+													return text.split(',').join(' ') ===
+														textLabel.join(' ')
+														? setTextLabel([
+																`$${fixNum(portfolioBalance.total_value)}`,
+														  ])
+														: setTextLabel(text.split(','))
 												},
 											},
 										]
@@ -130,18 +206,6 @@ export const PieChar = () => {
 							},
 						]}
 					/>
-					<VictoryLabel
-						textAnchor='middle'
-						verticalAnchor='middle'
-						x={125}
-						y={125}
-						style={[
-							{ fontSize: 16, fill: THEME.WHITE },
-							{ fill: 'green', fontFamily: 'monospace' },
-						]}
-						text={['Label', '8220.34']}
-					/>
-
 					<VictoryAxis
 						style={{
 							axis: { stroke: 'none' },
@@ -163,52 +227,9 @@ export const PieChar = () => {
 						labels: {
 							fill: THEME.WHITE,
 							fontSize: 13,
-							textTransform: 'uppercase',
 						},
 					}}
-					events={[
-						{
-							target: 'data',
-							eventHandlers: {
-								onPress: () => {
-									console.log(2)
-									return [
-										{
-											target: 'data',
-											mutation: (props) => {
-												const fill = props.style && props.style.fill
-												return fill === '#c43a31'
-													? null
-													: { style: { fill: '#c43a31' } }
-											},
-										},
-										{
-											target: 'labels',
-											mutation: (props) => {
-												return props.text === 'clicked'
-													? null
-													: { text: 'clicked' }
-											},
-										},
-									]
-								},
-							},
-						},
-					]}
-					data={[
-						{ name: 'BTC 26%' },
-						{ name: 'GALA 32%' },
-						{ name: 'USDC 2%' },
-						{ name: 'BTC 26%' },
-						{ name: 'GALA 32%' },
-						{ name: 'USDC 2%' },
-						{ name: 'BTC 26%' },
-						{ name: 'GALA 32%' },
-						{ name: 'USDC 2%' },
-						{ name: 'BTC 26%' },
-						{ name: 'GALA 32%' },
-						{ name: 'USDC 2%' },
-					]}
+					data={legendsArr}
 				/>
 			</View>
 		</View>

@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
-
+import { setLoader } from '../store/actions/walletActions'
 export const ConfirmPasswordScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
 	const { password } = useSelector((state) => state.storage)
 
@@ -18,7 +19,11 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 	const handleOnTextChange = (pin) => {
 		setPin(pin)
 		if (pin.length === 6 && pin === password) {
-			navigation.navigate('Wallet')
+			dispatch(setLoader(true))
+			setTimeout(() => {
+				dispatch(setLoader(false))
+				navigation.navigate('Wallet')
+			}, 3000)
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {
 			setPin('')

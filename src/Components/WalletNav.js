@@ -1,9 +1,18 @@
-import React from 'react'
-import { View, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import {
+	View,
+	Image,
+	TouchableOpacity,
+	StyleSheet,
+	WebView,
+	Linking,
+} from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
 
 export const WalletNav = ({ navigation }) => {
+	const [webview, setWebView] = useState(null)
+	const url = 'https://www.moonpay.com/buy'
 	return (
 		<View style={styles.wrap}>
 			<TouchableOpacity
@@ -17,7 +26,11 @@ export const WalletNav = ({ navigation }) => {
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.7}
-				onPress={() => navigation.navigate('Buy')}
+				onPress={() =>
+					Linking.openURL(url).catch((err) =>
+						console.error('An error occurred', err)
+					)
+				}
 				style={styles.item}>
 				<View style={styles.circle}>
 					<Image source={require('../../assets/icons/plus.png')} />

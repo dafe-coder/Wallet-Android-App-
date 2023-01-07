@@ -7,7 +7,11 @@ import { WalletButton } from '../../Components/UI/WalletButton'
 import 'react-native-get-random-values'
 import { entropyToMnemonic } from 'bip39'
 import { useDispatch } from 'react-redux'
-import { setPhrase, setPrivateKey } from '../../store/actions/walletActions'
+import {
+	setLoader,
+	setPhrase,
+	setPrivateKey,
+} from '../../store/actions/walletActions'
 import generateWallet from './../../../services/funcWallet/generateAddress'
 
 export const SubscribeCreateScreen = ({ navigation }) => {
@@ -26,12 +30,14 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 	}, [chk1, chk2, chk3])
 
 	const createPhrase = () => {
+		dispatch(setLoader(true))
 		async function generateWords() {
 			const entropy = await crypto.getRandomValues(new Uint8Array(16))
 			const privateKey = await generateWallet(entropyToMnemonic(entropy))
 			dispatch(setPrivateKey(privateKey))
 			dispatch(setPhrase(entropyToMnemonic(entropy)))
 			navigation.navigate('CreatePhrase')
+			dispatch(setLoader(false))
 		}
 		generateWords()
 	}

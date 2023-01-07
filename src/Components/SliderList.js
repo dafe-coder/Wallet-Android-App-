@@ -4,7 +4,7 @@ import Carousel from 'react-native-reanimated-carousel'
 import { SliderItem } from './SliderItem'
 import { THEME } from './../Theme'
 
-export const Slider = () => {
+export const Slider = ({ portfolioCoinsInit }) => {
 	const [indexSlider, setIndexSlider] = useState(0)
 	const width = Dimensions.get('window').width
 	return (
@@ -23,7 +23,9 @@ export const Slider = () => {
 				height={205}
 				data={[...new Array(2).keys()]}
 				onSnapToItem={(index) => setIndexSlider(index)}
-				renderItem={({ index }) => <SliderItem index={index} />}
+				renderItem={({ index }) => (
+					<SliderItem index={index} portfolioCoinsInit={portfolioCoinsInit} />
+				)}
 			/>
 			<View style={styles.bar}>
 				<View

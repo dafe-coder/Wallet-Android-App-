@@ -16,36 +16,43 @@ import {
 import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
-
+import { setLoader } from '../../store/actions/walletActions'
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
 	const { dataUser, password } = useSelector((state) => state.storage)
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(false)
+	const [onClick, setOnClick] = useState(false)
 
 	const submitRestore = () => {
-		let privateKeyString =
-			phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
-		postData(phrase != '' ? phrase : privateKey, false)
-			.then((response) => {
-				const newAccount = {
-					name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
-					phrase: phrase,
-					privateKey: privateKey != '' ? privateKey : privateKeyString,
-					address: response.address,
-				}
-				dispatch(
-					setCurrentAccount(
-						`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+		if (!onClick) {
+			setOnClick(true)
+			dispatch(setLoader(true))
+			let privateKeyString =
+				phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
+			postData(phrase != '' ? phrase : privateKey, false)
+				.then((response) => {
+					const newAccount = {
+						name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+						phrase: phrase,
+						privateKey: privateKey != '' ? privateKey : privateKeyString,
+						address: response.address,
+					}
+					dispatch(
+						setCurrentAccount(
+							`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
+						)
 					)
-				)
-				dispatch(setDataUser(newAccount))
-				password != ''
-					? navigation.navigate('ConfirmPassword')
-					: navigation.navigate('CreatePassword')
-			})
-			.catch((error) => console.log('error', error))
+					dispatch(setDataUser(newAccount))
+					password != ''
+						? navigation.navigate('ConfirmPassword')
+						: navigation.navigate('CreatePassword')
+					dispatch(setLoader(false))
+					setOnClick(false)
+				})
+				.catch((error) => console.log('error', error))
+		}
 	}
 
 	return (

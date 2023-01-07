@@ -5,6 +5,7 @@ import {
 	SET_NEW_ACCOUNT_NAME,
 	SET_CURRENT_ACCOUNT,
 	SET_DELETE_ACCOUNT,
+	SET_CLEAR_DATAUSER,
 } from '../type'
 const initialState = {
 	password: '',
@@ -34,6 +35,11 @@ export const storageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				currentAccount: action.payload,
+			}
+		case SET_CLEAR_DATAUSER:
+			return {
+				...state,
+				dataUser: [],
 			}
 		case SET_DELETE_ACCOUNT:
 			const newArrDelete = state.dataUser.filter(

@@ -50,7 +50,7 @@ export const WalletScreen = ({ navigation }) => {
 	return (
 		<>
 			<ScrollView style={{ flex: 1, paddingTop: 20 }}>
-				<Slider />
+				<Slider portfolioCoinsInit={portfolioCoinsInit} />
 				<View style={{ paddingHorizontal: 16 }}>
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />

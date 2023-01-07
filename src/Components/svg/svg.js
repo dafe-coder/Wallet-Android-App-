@@ -1,4 +1,4 @@
-import Svg, { G, Path, ClipPath, Defs } from 'react-native-svg'
+import Svg, { G, Path, ClipPath, Defs, Rect } from 'react-native-svg'
 
 export const SvgIcon = ({ type, fill = '', ...props }) => {
 	switch (type) {
@@ -288,6 +288,50 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'check-box':
+			return (
+				<Svg
+					width={20}
+					height={20}
+					viewBox='0 0 20 20'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Rect
+						x={0.5}
+						y={0.5}
+						width={19}
+						height={19}
+						rx={4.5}
+						stroke='#D3D0C9'
+					/>
+				</Svg>
+			)
+
+		case 'check-box-checked':
+			return (
+				<Svg
+					width={20}
+					height={20}
+					viewBox='0 0 20 20'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<Rect
+						x={0.5}
+						y={0.5}
+						width={19}
+						height={19}
+						rx={4.5}
+						stroke='#D3D0C9'
+					/>
+					<Path
+						d='M14.92 7.804a1.349 1.349 0 01-.259.442l-4.703 5.333A1.223 1.223 0 019.1 14a1.21 1.21 0 01-.89-.335l-2.82-2.667a1.372 1.372 0 01-.39-.91c-.014-.346.1-.684.316-.943.216-.258.518-.418.842-.444.325-.026.646.083.896.305l1.91 1.804 3.865-4.387c.113-.128.248-.23.398-.303a1.192 1.192 0 011.375.242c.12.12.217.263.285.423a1.402 1.402 0 01.031 1.02z'
+						fill='#F9B446'
+					/>
+				</Svg>
+			)
+
 		default:
 			return <></>
 	}

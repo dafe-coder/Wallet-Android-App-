@@ -4,7 +4,7 @@ import { InfoPriseSlide } from './sliders/InfoPriceSlide'
 import { PieChar } from './PieChar'
 import { THEME } from './../Theme'
 
-export const SliderItem = ({ index }) => {
+export const SliderItem = ({ index, portfolioCoinsInit }) => {
 	return (
 		<View style={styles.item}>
 			{/* {index == 0 ? (
@@ -19,7 +19,11 @@ export const SliderItem = ({ index }) => {
 				resizeMode='cover'
 				style={styles.image}
 				source={require('../../assets/card.png')}>
-				{index == 0 ? <InfoPriseSlide /> : <PieChar />}
+				{index == 0 ? (
+					<InfoPriseSlide />
+				) : (
+					<PieChar portfolioCoinsInit={portfolioCoinsInit} />
+				)}
 				{/* <PieChar /> */}
 			</ImageBackground>
 		</View>

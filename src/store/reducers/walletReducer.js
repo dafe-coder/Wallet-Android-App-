@@ -24,7 +24,7 @@ const initialState = {
 	transactions: [],
 	password: '111111',
 	dateTransaction: [],
-	portfolioBalance: {},
+	portfolioBalance: null,
 	phrase: '',
 	privateKey: '',
 	chooseCoin: null,

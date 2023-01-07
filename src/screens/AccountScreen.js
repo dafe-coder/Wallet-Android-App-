@@ -19,7 +19,7 @@ export const AccountScreen = ({ navigation }) => {
 		} else if (title == 'Contacts') {
 			navigation.navigate('Contacts')
 		} else if (title == 'Logout') {
-			navigation.navigate('RecoverPhrase')
+			navigation.navigate('RiskAlert')
 		} else if (title == 'Lock Wallet') {
 			navigation.navigate('Unlock')
 		} else {
