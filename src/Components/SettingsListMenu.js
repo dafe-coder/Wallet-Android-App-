@@ -41,7 +41,7 @@ export const SettingsListMenu = ({ onPress }) => {
 		},
 		{
 			title: 'Share Ananlytics',
-			subTitle: 'Share analytics with Game Stop',
+			subTitle: 'Share analytics with Web3 Wallet',
 			switchButton: true,
 			topLine: true,
 		},

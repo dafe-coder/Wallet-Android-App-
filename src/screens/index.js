@@ -43,3 +43,5 @@ export * from './ReceiveScreen'
 //  ---\\\///--- Wallet Screens ---\\\///---
 export * from './WalletScreen'
 export * from './PortfolioOpenScreen'
+export * from './UnlockScreen'
+export * from './RiskAlertScreen'

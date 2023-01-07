@@ -1,47 +1,107 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletButton, WalletText } from '../Components/UI'
-import { Rules } from './../Components'
+import { SvgIcon } from './../Components/svg/svg'
+import PincodeInput from 'react-native-pincode-input'
+import { useSelector } from 'react-redux'
 
-export const LoginScreen = () => {
+export const UnlockScreen = ({ navigation }) => {
+	const [pin, setPin] = useState('')
+	const { password } = useSelector((state) => state.storage)
+
+	const pincodeInput = useRef(null)
+
+	const shakePincode = () => {
+		pincodeInput.current?.shake()
+	}
+
+	const handleOnTextChange = (pin) => {
+		setPin(pin)
+		if (pin.length === 6 && pin === password) {
+			navigation.navigate('Wallet')
+			setPin('')
+		} else if (pin.length === 6 && pin !== password) {
+			setPin('')
+			shakePincode()
+		}
+	}
 	return (
 		<View style={styles.body}>
-			<View>
-				<Text>
-					Byb<Text>i</Text>t
-				</Text>
+			<View style={styles.top}>
+				<SvgIcon height='64' width='64' type='logo' />
+				<View style={styles.bodyPin}>
+					<WalletText center size='m' style={{ marginBottom: 10 }}>
+						Enter your PIN to unlock
+					</WalletText>
+					<PincodeInput
+						ref={pincodeInput}
+						length={6}
+						autoFocus={false}
+						containerStyle={{
+							display: 'flex',
+							width: '100%',
+							height: 47,
+							justifyContent: 'center',
+						}}
+						circleContainerStyle={{
+							paddingHorizontal: 140,
+						}}
+						circleEmptyStyle={{
+							width: 9,
+							height: 9,
+							borderWidth: 1,
+							borderColor: THEME.BROWN_TEXT,
+							backgroundColor: THEME.BROWN_TEXT,
+							borderRadius: 50,
+						}}
+						circleFilledStyle={{
+							backgroundColor: THEME.GOLD,
+							width: 9,
+							height: 9,
+						}}
+						pin={pin}
+						onTextChange={handleOnTextChange}
+					/>
+				</View>
+			</View>
+			<View
+				style={{
+					paddingHorizontal: 16,
+				}}>
 				<WalletText
-					color='white'
 					size='m'
-					upperCase
-					center
-					style={styles.title}>
-					VO.6.9 Release Notes
+					style={{ paddingHorizontal: '2%', marginBottom: 25, marginTop: 10 }}
+					center>
+					Wallet won’t unlock? You can ERASE your current wallet and setup a new
+					one
 				</WalletText>
-				<WalletText color='gold' center upperCase>
-					ImmutableX Layer 2 Support
-				</WalletText>
-				<WalletText size='m' style={{ marginTop: 40 }}>
-					Select ImmutableX Layer 2 to active, view balances, transfer tokens
-					and NFTs. and more.
-				</WalletText>
-				<WalletButton style={{ marginBottom: 10 }}>
-					Create new wallet
+				<WalletButton
+					type='border'
+					onPress={() => navigation.navigate('RiskAlert')}>
+					Recover Wallet
 				</WalletButton>
-				<WalletButton type='border'>Recover Wallet</WalletButton>
-				<Rules style={{ marginTop: 10 }} />
 			</View>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
+	top: {
+		alignItems: 'center',
+	},
 	body: {
 		flex: 1,
-		paddingHorizontal: 16,
+		justifyContent: 'space-between',
+		paddingBottom: 40,
+		paddingTop: 29,
 	},
 	title: {
 		marginBottom: 20,
+	},
+	bodyPin: {
+		marginTop: 133,
+		borderRadius: 10,
+		paddingBottom: 5,
 	},
 })

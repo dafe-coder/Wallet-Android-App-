@@ -6,7 +6,7 @@ import { THEME } from './../../Theme'
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 import { AllCoinsItem } from '../'
 
-export const ChooseCoins = ({ onCoinPress, allCoins }) => {
+export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 	const [value, setValue] = useState('')
 	const [filteredCoins, setFilteredCoins] = useState([])
 
@@ -50,7 +50,12 @@ export const ChooseCoins = ({ onCoinPress, allCoins }) => {
 					marginTop: 20,
 				}}>
 				{filteredCoins.map((c) => (
-					<AllCoinsItem onPress={onCoinPress} coin={c} key={c.id} />
+					<AllCoinsItem
+						chooseCoin={chooseCoin}
+						onPress={onCoinPress}
+						coin={c}
+						key={c.id}
+					/>
 				))}
 			</BottomSheetScrollView>
 		</View>

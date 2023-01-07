@@ -19,13 +19,13 @@ export const AllSetScreen = ({ navigation }) => {
 				<WalletText>Your wallet is now ready.</WalletText>
 				<View style={styles.textWrap}>
 					<WalletText style={{ width: 200 }}>
-						Make GameStop the default wallet estension
+						Make Web3 Wallet the default wallet estension
 					</WalletText>
 					<SwitchButton enabled={true} />
 				</View>
 				<WalletText color='brown'>
-					If enabled, all websites will default to opening the Game Stop Wallet
-					to interact with dApps. You can change this in the settings menu.
+					If enabled, all websites will default to opening the Web3 Wallet to
+					interact with dApps. You can change this in the settings menu.
 				</WalletText>
 			</View>
 			<WalletButton style={{ marginBottom: 10 }}>Next</WalletButton>

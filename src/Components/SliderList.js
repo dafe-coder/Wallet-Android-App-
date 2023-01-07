@@ -13,13 +13,14 @@ export const Slider = () => {
 				flex: 1,
 				position: 'relative',
 				left: -15,
+				marginBottom: 20,
 			}}>
 			<Carousel
 				loop={false}
 				width={width + 30}
 				mode='parallax'
 				pagingEnabled={true}
-				height={230}
+				height={205}
 				data={[...new Array(2).keys()]}
 				onSnapToItem={(index) => setIndexSlider(index)}
 				renderItem={({ index }) => <SliderItem index={index} />}
@@ -42,7 +43,7 @@ export const Slider = () => {
 const styles = StyleSheet.create({
 	bar: {
 		position: 'relative',
-		bottom: 30,
+		bottom: 5,
 		width: '100%',
 		flexDirection: 'row',
 		justifyContent: 'center',

@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
 	wrap: {
 		flex: 1,
 		alignItems: 'center',
+		justifyContent: 'flex-start',
+		paddingTop: 32,
 	},
 	imageUp: {
 		marginRight: 4,

@@ -13,6 +13,8 @@ import {
 	SET_ACCOUNT_NAME,
 	SET_ADDRESS_TO,
 	SET_AMOUNT_SEND,
+	SET_CHOOSE_COIN_SWAP_SECOND,
+	SET_LOADER,
 } from '../type'
 
 const initialState = {
@@ -26,11 +28,13 @@ const initialState = {
 	phrase: '',
 	privateKey: '',
 	chooseCoin: null,
+	chooseCoinSwapSecond: null,
 	portfolioOpen: null,
 	coinsAccountZero: ['bnb', 'eth', 'matic'],
 	portfolioSort: 'value',
 	addressTo: '',
 	amountSend: '',
+	loader: false,
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -104,6 +108,16 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				amountSend: action.payload,
+			}
+		case SET_CHOOSE_COIN_SWAP_SECOND:
+			return {
+				...state,
+				chooseCoinSwapSecond: action.payload,
+			}
+		case SET_LOADER:
+			return {
+				...state,
+				loader: action.payload,
 			}
 		default:
 			return state

@@ -3,15 +3,10 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI/'
 import { THEME } from './../Theme'
 import { SvgIcon } from './svg/svg'
-import { useSelector, useDispatch } from 'react-redux'
-import { setChooseCoin } from '../store/actions/walletActions'
 
-export const AllCoinsItem = ({ onPress, coin }) => {
-	const dispatch = useDispatch()
-	const { chooseCoin } = useSelector((state) => state.wallet)
+export const AllCoinsItem = ({ onPress, coin, chooseCoin }) => {
 	const onPressCoin = (coin) => {
-		dispatch(setChooseCoin(coin))
-		onPress()
+		if (onPress) onPress(coin)
 	}
 	return (
 		<TouchableOpacity

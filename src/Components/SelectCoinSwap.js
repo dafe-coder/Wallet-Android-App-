@@ -1,49 +1,66 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	View,
 	Image,
-	Text,
 	StyleSheet,
 	TextInput,
 	TouchableOpacity,
 } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from '../Theme'
+import fixNum from '../../services/funcWallet/fixNum'
+import { PercentButtons } from './PercentButtons'
 
-export const SelectCoinSwap = ({ style }) => {
+export const SelectCoinSwap = ({
+	onSwapCoins,
+	onOpenFirstSwap,
+	onOpenSecondSwap,
+	chooseCoinSwapFirst,
+	chooseCoinSwapSecond,
+	style,
+}) => {
+	const [firstAmount, setFirstAmount] = useState('0')
 	return (
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 10 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
 					<WalletText color='brown'>Asset</WalletText>
-					<WalletText color='brown'>Balance: {0}</WalletText>
+					<WalletText color='brown'>
+						Balance: {fixNum(chooseCoinSwapFirst.market_data.balance)}
+					</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
 						<View>
 							<TextInput
+								value={firstAmount}
+								onChangeText={setFirstAmount}
 								placeholderTextColor={THEME.BROWN_TEXT}
 								style={styles.input}
 								placeholder='0.00'
+								keyboardType='numeric'
 							/>
 							<WalletText colro='white' size='m'>
 								Enter an amount
 							</WalletText>
 						</View>
 						<View>
-							<View style={styles.chooseCoin}>
+							<TouchableOpacity
+								activeOpacity={0.7}
+								onPress={onOpenFirstSwap}
+								style={styles.chooseCoin}>
 								<Image
 									style={styles.image}
-									source={require('../../assets/network/eth.png')}
+									source={{ uri: chooseCoinSwapFirst.image.thumb }}
 								/>
 								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
-									ETH
+									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
 								<Image
 									style={{ marginLeft: 7 }}
 									source={require('../../assets/check-dark.png')}
 								/>
-							</View>
+							</TouchableOpacity>
 						</View>
 					</View>
 
@@ -51,6 +68,7 @@ export const SelectCoinSwap = ({ style }) => {
 				</View>
 			</View>
 			<TouchableOpacity
+				onPress={onSwapCoins}
 				activeOpacity={0.7}
 				style={{ margin: 0, marginRight: 'auto', marginLeft: 'auto' }}>
 				<View style={styles.btn}>
@@ -65,6 +83,7 @@ export const SelectCoinSwap = ({ style }) => {
 					<View style={styles.itemTop}>
 						<View>
 							<TextInput
+								keyboardType='numeric'
 								placeholderTextColor={THEME.BROWN_TEXT}
 								style={styles.input}
 								placeholder='0.00'
@@ -74,61 +93,35 @@ export const SelectCoinSwap = ({ style }) => {
 							</WalletText>
 						</View>
 						<View>
-							<View style={styles.chooseCoin}>
+							<TouchableOpacity
+								onPress={onOpenSecondSwap}
+								activeOpacity={0.7}
+								style={styles.chooseCoin}>
 								<Image
 									style={styles.image}
-									source={require('../../assets/network/dai.png')}
+									source={{ uri: chooseCoinSwapSecond.image.thumb }}
 								/>
 								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
-									DAI
+									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
 								<Image
 									style={{ marginLeft: 7 }}
 									source={require('../../assets/check-dark.png')}
 								/>
-							</View>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
-				<View style={styles.listPercent}>
-					<TouchableOpacity activeOpacity={0.7} style={styles.itemPercent}>
-						<Text style={styles.percentText}>25%</Text>
-					</TouchableOpacity>
-					<TouchableOpacity activeOpacity={0.7} style={styles.itemPercent}>
-						<Text style={styles.percentText}>50%</Text>
-					</TouchableOpacity>
-					<TouchableOpacity activeOpacity={0.7} style={styles.itemPercent}>
-						<Text style={styles.percentText}>75%</Text>
-					</TouchableOpacity>
-					<TouchableOpacity activeOpacity={0.7} style={styles.itemPercent}>
-						<Text style={styles.percentText}>100%</Text>
-					</TouchableOpacity>
-				</View>
+				<PercentButtons
+					setValue={setFirstAmount}
+					chooseCoin={chooseCoinSwapFirst}
+				/>
 			</View>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	listPercent: {
-		marginTop: 16,
-		marginBottom: 24,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	},
-	itemPercent: {
-		borderColor: THEME.BROWN_TEXT,
-		borderWidth: 1,
-		borderRadius: 25,
-		width: '23%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		paddingVertical: 6,
-		backgroundColor: THEME.BROWN_DARK,
-	},
-	percentText: {
-		color: THEME.GOLD,
-	},
 	image: {
 		width: 25,
 		height: 25,

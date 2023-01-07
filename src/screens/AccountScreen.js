@@ -20,6 +20,8 @@ export const AccountScreen = ({ navigation }) => {
 			navigation.navigate('Contacts')
 		} else if (title == 'Logout') {
 			navigation.navigate('RecoverPhrase')
+		} else if (title == 'Lock Wallet') {
+			navigation.navigate('Unlock')
 		} else {
 			addAccountRef.current.expand()
 		}

@@ -27,6 +27,8 @@ import {
 	EditProfileScreen,
 	ExportPhraseCopyScreen,
 	ExportPrivateKeyCopyScreen,
+	UnlockScreen,
+	RiskAlertScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -52,6 +54,23 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: CreatePhraseScreen,
+	},
+	{
+		name: 'Unlock',
+		options: {
+			headerShown: true,
+			title: '',
+		},
+		component: UnlockScreen,
+	},
+	{
+		name: 'RiskAlert',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
+		component: RiskAlertScreen,
 	},
 	{
 		name: 'ExportPhraseCopy',
@@ -286,7 +305,7 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={dataUser.length ? 'Receive' : 'Login'}
+			initialRouteName={dataUser.length ? 'Wallet' : 'Wallet'}
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

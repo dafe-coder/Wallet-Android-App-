@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, ImageBackground, Image } from 'react-native'
 import { InfoPriseSlide } from './sliders/InfoPriceSlide'
 import { PieChar } from './PieChar'
+import { THEME } from './../Theme'
 
 export const SliderItem = ({ index }) => {
 	return (
@@ -15,6 +16,7 @@ export const SliderItem = ({ index }) => {
 				<></>
 			)} */}
 			<ImageBackground
+				resizeMode='cover'
 				style={styles.image}
 				source={require('../../assets/card.png')}>
 				{index == 0 ? <InfoPriseSlide /> : <PieChar />}
@@ -35,17 +37,15 @@ const styles = StyleSheet.create({
 		height: 55,
 	},
 	item: {
-		flex: 1,
-		height: 167,
-	},
-	image: {
 		borderRadius: 15,
 		overflow: 'hidden',
-		width: '100%',
-		height: '100%',
 		flex: 1,
-		justifyContent: 'flex-start',
-		alignItems: 'center',
-		paddingTop: 32,
+		borderWidth: 1,
+		borderColor: '#342E20',
+	},
+	image: {
+		width: null,
+		height: null,
+		flex: 1,
 	},
 })

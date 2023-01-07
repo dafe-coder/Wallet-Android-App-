@@ -13,6 +13,8 @@ import {
 	SET_ACCOUNT_NAME,
 	SET_ADDRESS_TO,
 	SET_AMOUNT_SEND,
+	SET_CHOOSE_COIN_SWAP_SECOND,
+	SET_LOADER,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -102,5 +104,17 @@ export const setAmountSend = (amount) => {
 	return {
 		type: SET_AMOUNT_SEND,
 		payload: amount,
+	}
+}
+export const setChooseCoinSwapSecond = (coin) => {
+	return {
+		type: SET_CHOOSE_COIN_SWAP_SECOND,
+		payload: coin,
+	}
+}
+export const setLoader = (loader) => {
+	return {
+		type: SET_LOADER,
+		payload: loader,
 	}
 }

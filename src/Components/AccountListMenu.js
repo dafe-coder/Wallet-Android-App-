@@ -20,6 +20,7 @@ export const AccountListMenu = ({ onPress }) => {
 			image: require('../../assets/menuIcon/lock.png'),
 			title: 'Lock Wallet',
 			topLine: true,
+			onPress: onPress,
 		},
 		{
 			image: require('../../assets/menuIcon/phone.png'),

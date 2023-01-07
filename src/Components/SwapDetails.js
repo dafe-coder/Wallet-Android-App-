@@ -2,7 +2,11 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from '../Theme'
-export const SwapDetails = () => {
+export const SwapDetails = ({ chooseCoinSwapFirst, chooseCoinSwapSecond }) => {
+	const priceTokenEnd =
+		chooseCoinSwapFirst.marketData.balance *
+		chooseCoinSwapFirst.marketData.crypto_price.usd
+	console.log(priceTokenEnd)
 	return (
 		<View style={{ marginBottom: 26 }}>
 			<View
@@ -20,7 +24,10 @@ export const SwapDetails = () => {
 			<View style={styles.wrap}>
 				<View style={styles.item}>
 					<WalletText color='brown'>Rate</WalletText>
-					<WalletText color='white'>1 ETH ~ 2443 DAI</WalletText>
+					<WalletText color='white'>
+						1 {chooseCoinSwapFirst.symbol.toUpperCase()} ~ {priceTokenEnd}{' '}
+						{chooseCoinSwapSecond.symbol.toUpperCase()}
+					</WalletText>
 				</View>
 				<View style={styles.item}>
 					<WalletText color='brown'>Fee</WalletText>

@@ -1,0 +1,52 @@
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { SvgIcon } from './../Components/svg/svg'
+import { WalletText, WalletTitle } from './../Components/UI/'
+import { WalletButton } from './../Components/UI/WalletButton'
+
+export const RiskAlertScreen = ({ navigation }) => {
+	return (
+		<View style={styles.body}>
+			<View style={styles.top}>
+				<SvgIcon type='logo' />
+				<WalletTitle
+					style={{
+						fontSize: 16,
+						fontFamily: 'ub-medium',
+						marginBottom: 24,
+						marginTop: 44,
+					}}>
+					RISK alert
+				</WalletTitle>
+				<WalletText size='m' center style={{ marginBottom: 10 }}>
+					All your existing wallets will be removed and replaced with the new
+					one.
+				</WalletText>
+				<WalletText center style={{ paddingHorizontal: '4%' }}>
+					Please make sure you havee backed up yoyr mnemonic phrases or private
+					keys, otherwise you will not be able to recover the assets in your
+					wallets.
+				</WalletText>
+			</View>
+			<View style={{ paddingHorizontal: 16 }}>
+				<WalletButton style={{ marginBottom: 10 }}>confirm</WalletButton>
+				<WalletButton onPress={() => navigation.goBack()} type='border'>
+					cancel
+				</WalletButton>
+			</View>
+		</View>
+	)
+}
+
+const styles = StyleSheet.create({
+	body: {
+		paddingTop: 29,
+		justifyContent: 'space-between',
+		flex: 1,
+		marginBottom: 40,
+	},
+	top: {
+		alignItems: 'center',
+		paddingHorizontal: 16,
+	},
+})
