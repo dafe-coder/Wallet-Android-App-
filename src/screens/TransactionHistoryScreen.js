@@ -4,6 +4,7 @@ import { WalletTitle, WalletText } from './../Components/UI/'
 import { THEME } from './../Theme'
 import { TransactionsList } from './../Components/'
 import { useSelector } from 'react-redux'
+import { SvgIcon } from './../Components/svg/svg'
 export const TransactionHistoryScreen = () => {
 	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
@@ -38,11 +39,10 @@ export const TransactionHistoryScreen = () => {
 							marginTop: 24,
 							height: 450,
 						}}>
-						<Image
-							style={{ marginRight: 10 }}
-							source={require('../../assets/icons/bar-chart.png')}
-						/>
-						<WalletText color='brown'>No transactoins history yet</WalletText>
+						<SvgIcon type='bar' />
+						<WalletText style={{ marginLeft: 7 }} color='brown'>
+							No transactoins history yet
+						</WalletText>
 					</View>
 				) : (
 					<TransactionsList data={transactions} />

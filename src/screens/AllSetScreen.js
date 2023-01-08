@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from './../Theme'
+import { SvgIcon } from './../Components/svg/svg'
 import {
 	WalletButton,
 	WalletTitle,
@@ -12,7 +13,7 @@ export const AllSetScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={{ ...styles.wrapTop, paddingTop: 110 }}>
-				<Image source={require('../../assets/wallet.png')} />
+				<SvgIcon type='wallet' />
 				<WalletTitle style={{ marginTop: 30, marginBottom: 16 }}>
 					All Set
 				</WalletTitle>

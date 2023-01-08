@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useRef } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { AccountCard } from '../Components'
 import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
@@ -28,7 +28,7 @@ export const AccountScreen = ({ navigation }) => {
 	}
 
 	return (
-		<View style={styles.wrap}>
+		<ScrollView style={styles.wrap}>
 			<View
 				style={{
 					paddingHorizontal: 16,
@@ -42,7 +42,7 @@ export const AccountScreen = ({ navigation }) => {
 			<WalletBottomSheet ref={importAccountRef} snapPoints={['80%']}>
 				<ImportAccount />
 			</WalletBottomSheet>
-		</View>
+		</ScrollView>
 	)
 }
 

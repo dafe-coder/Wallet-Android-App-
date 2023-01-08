@@ -4,6 +4,7 @@ import { WalletText } from './../UI'
 import { THEME } from './../../Theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPortfolioSort } from '../../store/actions/walletActions'
+import { SvgIcon } from './../svg/svg'
 
 export const Filters = ({ onClose }) => {
 	const dispatch = useDispatch()
@@ -24,11 +25,7 @@ export const Filters = ({ onClose }) => {
 				<WalletText size='m' color='white'>
 					Portfolio Value
 				</WalletText>
-				{portfolioSort == 'value' ? (
-					<Image source={require('../../../assets/check.png')} />
-				) : (
-					<></>
-				)}
+				{portfolioSort == 'value' ? <SvgIcon type='check' /> : <></>}
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.7}
@@ -37,11 +34,7 @@ export const Filters = ({ onClose }) => {
 				<WalletText size='m' color='white'>
 					Name
 				</WalletText>
-				{portfolioSort == 'name' ? (
-					<Image source={require('../../../assets/check.png')} />
-				) : (
-					<></>
-				)}
+				{portfolioSort == 'name' ? <SvgIcon type='check' /> : <></>}
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.7}
@@ -50,11 +43,7 @@ export const Filters = ({ onClose }) => {
 				<WalletText size='m' color='white'>
 					Daily change
 				</WalletText>
-				{portfolioSort == 'change' ? (
-					<Image source={require('../../../assets/check.png')} />
-				) : (
-					<></>
-				)}
+				{portfolioSort == 'change' ? <SvgIcon type='check' /> : <></>}
 			</TouchableOpacity>
 		</View>
 	)

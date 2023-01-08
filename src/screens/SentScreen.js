@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react'
 import {
 	View,
 	TouchableOpacity,
-	Image,
 	StyleSheet,
 	ScrollView,
 	Keyboard,
@@ -14,6 +13,7 @@ import { WalletBottomSheet } from '../Components'
 import { ChooseCoins } from '../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAddressTo } from './../store/actions/walletActions'
+import { SvgIcon } from './../Components/svg/svg'
 
 export const SentScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -49,7 +49,6 @@ export const SentScreen = ({ navigation }) => {
 		dispatch(setAddressTo(fromAddress))
 		navigation.navigate('ConfirmTransaction')
 	}
-
 	return (
 		<ScrollView
 			contentContainerStyle={{
@@ -68,8 +67,8 @@ export const SentScreen = ({ navigation }) => {
 						style={{ paddingLeft: 19, marginBottom: 7 }}>
 						Recipient Address
 					</WalletText>
-					<TouchableOpacity style={styles.qrButton}>
-						<Image source={require('../../assets/camera-qr.png')} />
+					<TouchableOpacity style={styles.qrButton} activeOpacity={0.7}>
+						<SvgIcon type='qr-camera' />
 					</TouchableOpacity>
 					<WalletInput
 						styleInput={{ paddingRight: 50 }}
@@ -103,7 +102,11 @@ export const SentScreen = ({ navigation }) => {
 				ref={coinsRef}
 				snapPoints={[openKeyboard ? '70%' : '55%']}>
 				{allCoins.length ? (
-					<ChooseCoins allCoins={allCoins} onCoinPress={onCoinPress} />
+					<ChooseCoins
+						chooseCoin={chooseCoin}
+						allCoins={allCoins}
+						onCoinPress={onCoinPress}
+					/>
 				) : (
 					<></>
 				)}

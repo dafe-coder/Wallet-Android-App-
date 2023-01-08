@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { WalletTitle } from '../Components/UI/WalletTitle'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI/WalletText'
@@ -13,7 +13,7 @@ export const ExportPrivateKeyCopyScreen = () => {
 	return (
 		<View style={{ paddingTop: 32 }}>
 			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Image source={require('../../assets/logoWallet.png')} />
+				<SvgIcon type='logo' />
 				<WalletTitle style={{ marginTop: 50 }}>You Private Key</WalletTitle>
 			</View>
 			{dataUser.map((d) => {

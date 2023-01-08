@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
+import { SvgIconNav } from './svg/svgNav'
 
 export const PortfolioSort = ({ style, onPress }) => {
 	const { portfolioSort } = useSelector((state) => state.wallet)
@@ -16,7 +17,7 @@ export const PortfolioSort = ({ style, onPress }) => {
 				<WalletText>
 					Portfolio {portfolioSort[0].toUpperCase() + portfolioSort.slice(1)}
 				</WalletText>
-				<Image source={require('../../assets/right.png')} />
+				<SvgIconNav type='triangle' />
 			</TouchableOpacity>
 		</View>
 	)

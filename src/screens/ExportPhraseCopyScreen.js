@@ -1,19 +1,18 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { WalletTitle } from './../Components/UI/WalletTitle'
 import { THEME } from './../Theme'
 import { WalletText } from './../Components/UI/WalletText'
 import { SvgIcon } from './../Components/svg/svg'
 import { PhraseBox } from './../Components/PhraseBox'
 import { useSelector } from 'react-redux'
-
 export const ExportPhraseCopyScreen = () => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
 		<View style={{ paddingTop: 32 }}>
 			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Image source={require('../../assets/logoWallet.png')} />
+				<SvgIcon type='logo' />
 				<WalletTitle style={{ marginTop: 50 }}>You seed Phrase</WalletTitle>
 			</View>
 			{dataUser.map((d) => {

@@ -4,7 +4,7 @@ import { WalletTitle, WalletText } from './../UI'
 import { THEME } from './../../Theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentNetwork } from '../../store/actions/storageAction'
-
+import { SvgIcon } from '../svg/svg'
 export const ChangeCurrentNetwork = ({ onPress }) => {
 	const { currentNetwork } = useSelector((state) => state.storage)
 	const dispatch = useDispatch()
@@ -45,11 +45,7 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 									{n.title}
 								</WalletText>
 							</View>
-							{n.choose ? (
-								<Image source={require('../../../assets/check.png')} />
-							) : (
-								<></>
-							)}
+							{n.choose ? <SvgIcon type='check' /> : <></>}
 						</TouchableOpacity>
 					)
 				})}

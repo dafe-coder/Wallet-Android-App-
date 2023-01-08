@@ -11,6 +11,7 @@ import { WalletNav, TransactionsList } from '../Components/'
 import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
+import { SvgIcon } from './../Components/svg/svg'
 
 export const PortfolioOpenScreen = () => {
 	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
@@ -55,8 +56,9 @@ export const PortfolioOpenScreen = () => {
 					resizeMode='cover'
 					style={styles.bgImage}
 					source={require('../../assets/card.png')}>
-					<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 40 }}>
-						{fixNum(portfolioOpen.market_data.balance)} ETH
+					<WalletTitle style={{ fontSize: 30, lineHeight: 40, marginTop: 40 }}>
+						{fixNum(portfolioOpen.market_data.balance)}{' '}
+						{portfolioOpen.symbol.toUpperCase()}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
 						<WalletText>
@@ -77,11 +79,10 @@ export const PortfolioOpenScreen = () => {
 							alignItems: 'center',
 							marginTop: 24,
 						}}>
-						<Image
-							style={{ marginRight: 10 }}
-							source={require('../../assets/icons/bar-chart.png')}
-						/>
-						<WalletText color='brown'>No transactoins history yet</WalletText>
+						<SvgIcon type='bar' />
+						<WalletText style={{ marginLeft: 7 }} color='brown'>
+							No transactoins history yet
+						</WalletText>
 					</View>
 				) : (
 					<TransactionsList data={transactionList} />

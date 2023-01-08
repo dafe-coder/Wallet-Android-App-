@@ -5,42 +5,42 @@ import { AccountItemMenu } from './AccountItemMenu'
 export const AccountListMenu = ({ onPress }) => {
 	const menuData = [
 		{
-			image: require('../../assets/menuIcon/plus.png'),
+			image: 'plus',
 			title: 'Add Account',
 			topLine: true,
 			onPress: onPress,
 		},
 		{
-			image: require('../../assets/menuIcon/download.png'),
+			image: 'import',
 			title: 'Import Account',
 			topLine: true,
 			onPress: onPress,
 		},
 		{
-			image: require('../../assets/menuIcon/lock.png'),
+			image: 'lock',
 			title: 'Lock Wallet',
 			topLine: true,
 			onPress: onPress,
 		},
+		// {
+		// 	image: 'settings',
+		// 	title: 'Contacts',
+		// 	topLine: true,
+		// 	onPress: onPress,
+		// },
 		{
-			image: require('../../assets/menuIcon/phone.png'),
-			title: 'Contacts',
+			image: 'settings',
+			title: 'Settings',
 			topLine: true,
 			onPress: onPress,
 		},
 		{
-			image: require('../../assets/menuIcon/settings.png'),
-			title: 'Settings',
-			topLine: false,
-			onPress: onPress,
-		},
-		{
-			image: require('../../assets/menuIcon/help.png'),
+			image: 'help',
 			title: 'Help',
 			topLine: false,
 		},
 		{
-			image: require('../../assets/menuIcon/out.png'),
+			image: 'logout',
 			title: 'Logout',
 			topLine: true,
 			onPress: onPress,
@@ -64,5 +64,6 @@ export const AccountListMenu = ({ onPress }) => {
 const styles = StyleSheet.create({
 	list: {
 		marginTop: 30,
+		marginBottom: 70,
 	},
 })

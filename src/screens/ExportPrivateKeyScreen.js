@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { WalletTextWithIcon } from '../Components'
-import { WalletInput, WalletText } from '../Components/UI'
+import { WalletText } from '../Components/UI'
 import { THEME } from '../Theme'
 import PincodeInput from 'react-native-pincode-input'
 import { useSelector } from 'react-redux'
@@ -27,27 +27,25 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 		}
 	}
 	return (
-		<View style={{ paddingTop: 30, paddingBottom: 50, flex: 1 }}>
+		<ScrollView style={{ paddingTop: 30, paddingBottom: 50, flex: 1 }}>
 			<View style={{ flex: 1 }}>
 				<View style={{ paddingHorizontal: 30, marginBottom: 25 }}>
-					<WalletTextWithIcon img={require('../../assets/icons/lock.png')}>
-						Please write down your Secret Recovery Phrase on paper and store it
+					<WalletTextWithIcon img={'lock'}>
+						Please write down your Secret Private Key on paper and store it
 						somewhere safe. Make sure the mnemonic you see is the one you have
 						written down.
 					</WalletTextWithIcon>
-					<WalletTextWithIcon
-						img={require('../../assets/icons/icon-line-eye.png')}>
+					<WalletTextWithIcon img={'eye-slash'}>
 						Anyone who has access to it will have complete access to your
 						wallet.
 					</WalletTextWithIcon>
-					<WalletTextWithIcon
-						img={require('../../assets/icons/password-key.png')}>
+					<WalletTextWithIcon img={'password'}>
 						If you forget your wallet password you can use this to recover your
 						wallet.
 					</WalletTextWithIcon>
-					<WalletTextWithIcon img={require('../../assets/icons/warning.png')}>
-						BYBIT WEB3 WALLET employees will NEVER ask for your Secret Recovery
-						Phrase. Do not share it with anyone.
+					<WalletTextWithIcon img={'warning'}>
+						BYBIT WEB3 WALLET employees will NEVER ask for your Secret Private
+						Key. Do not share it with anyone.
 					</WalletTextWithIcon>
 				</View>
 
@@ -85,7 +83,7 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 					/>
 				</View>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -96,5 +94,6 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		paddingTop: 20,
 		paddingBottom: 5,
+		marginBottom: 100,
 	},
 })

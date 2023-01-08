@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI/WalletText'
 import { SwitchButton } from './UI'
+import { SvgIconNav } from './svg/svgNav'
 export const SettingsItemMenu = ({
 	title,
 	subTitle,
@@ -19,7 +20,7 @@ export const SettingsItemMenu = ({
 				{switchButton ? (
 					<SwitchButton enabled={true} />
 				) : (
-					<Image source={require('../../assets/polygon.png')} />
+					<SvgIconNav type='triangle' />
 				)}
 			</View>
 		</TouchableOpacity>

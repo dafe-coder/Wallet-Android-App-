@@ -60,13 +60,13 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 								style={styles.logo}
 								source={{ uri: chooseCoin.image.thumb }}
 							/>
-							<WalletText color='white' size='m' style={{ marginLeft: 10 }}>
+							<WalletText
+								color='white'
+								size='m'
+								style={{ marginLeft: 10, marginRight: 7 }}>
 								{chooseCoin.symbol}
 							</WalletText>
-							<Image
-								style={{ marginLeft: 7 }}
-								source={require('../../assets/check-dark.png')}
-							/>
+							<SvgIcon type='check' fill={THEME.GOLD_DARK} />
 						</TouchableOpacity>
 					</View>
 

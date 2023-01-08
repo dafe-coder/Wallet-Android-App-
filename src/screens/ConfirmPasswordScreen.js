@@ -5,6 +5,7 @@ import { WalletText } from '../Components/UI'
 import { useDispatch, useSelector } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
 import { setLoader } from '../store/actions/walletActions'
+import { SvgIcon } from '../Components/svg/svg'
 export const ConfirmPasswordScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
@@ -34,7 +35,7 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.image}>
-				<Image source={require('../../assets/logoWallet.png')} />
+				<SvgIcon type='logo' />
 			</View>
 			<WalletText center size='m'>
 				Enter your PIN code

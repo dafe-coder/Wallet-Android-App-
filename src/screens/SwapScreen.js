@@ -56,7 +56,7 @@ export const SwapScreen = ({ navigation }) => {
 				paddingBottom: 30,
 			}}>
 			<WalletTitle style={{ marginBottom: 25 }}>Exchange</WalletTitle>
-			{chooseCoin != null ? (
+			{chooseCoin != null && chooseCoinSwapSecond != null ? (
 				<SelectCoinSwap
 					onSwapCoins={onSwapCoins}
 					chooseCoinSwapFirst={chooseCoin}
@@ -67,7 +67,7 @@ export const SwapScreen = ({ navigation }) => {
 			) : (
 				<></>
 			)}
-			{chooseCoin != null ? (
+			{chooseCoin != null && chooseCoinSwapSecond != null ? (
 				<SwapDetails
 					chooseCoinSwapFirst={chooseCoin}
 					chooseCoinSwapSecond={chooseCoinSwapSecond}

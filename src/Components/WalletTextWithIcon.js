@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { WalletText } from './UI/WalletText'
+import { SvgIcon } from './svg/svg'
 
 export const WalletTextWithIcon = ({ children, img }) => {
 	return (
 		<View style={styles.wrap}>
 			<View style={styles.icon}>
-				<Image style={styles.iconImg} source={img} />
+				<SvgIcon type={img} />
 			</View>
 			<View style={styles.text}>
 				<WalletText>{children}</WalletText>

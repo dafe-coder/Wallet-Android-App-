@@ -45,16 +45,7 @@ export const WalletBottomNav = () => {
 				style={[styles.item]}
 				onPress={() => onPressNav('Swap')}>
 				<View style={[styles.mainBtn, { position: 'absolute', top: -43 }]}>
-					<Image
-						style={{
-							marginBottom: 5,
-							width: 22,
-							height: 24,
-							position: 'relative',
-							top: 2,
-						}}
-						source={require('../../assets/icons/swap-dark.png')}
-					/>
+					<SvgIconNav type='swap' width={22} height={24} />
 				</View>
 				<WalletText
 					style={{ marginTop: 20 }}

@@ -42,13 +42,13 @@ export const WalletInput = ({
 					activeOpacity={1}
 					style={styles.btnEye}
 					onPress={() => setShowPass(!showPass)}>
-					<Image
+					{/* <Image
 						source={
 							!showPass
 								? require('../../../assets/eye.png')
 								: require('../../../assets/eye-active.png')
 						}
-					/>
+					/> */}
 				</TouchableOpacity>
 			) : (
 				<></>

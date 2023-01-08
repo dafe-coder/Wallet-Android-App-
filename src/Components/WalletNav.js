@@ -1,14 +1,8 @@
 import React, { useState } from 'react'
-import {
-	View,
-	Image,
-	TouchableOpacity,
-	StyleSheet,
-	WebView,
-	Linking,
-} from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Linking } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
+import { SvgIconNav } from './svg/svgNav'
 
 export const WalletNav = ({ navigation }) => {
 	const [webview, setWebView] = useState(null)
@@ -20,7 +14,7 @@ export const WalletNav = ({ navigation }) => {
 				onPress={() => navigation.navigate('Sent')}
 				style={styles.item}>
 				<View style={styles.circle}>
-					<Image source={require('../../assets/icons/send.png')} />
+					<SvgIconNav type='send' />
 				</View>
 				<WalletText>Send</WalletText>
 			</TouchableOpacity>
@@ -33,7 +27,7 @@ export const WalletNav = ({ navigation }) => {
 				}
 				style={styles.item}>
 				<View style={styles.circle}>
-					<Image source={require('../../assets/icons/plus.png')} />
+					<SvgIconNav type='buy' />
 				</View>
 				<WalletText>Buy</WalletText>
 			</TouchableOpacity>
@@ -42,7 +36,7 @@ export const WalletNav = ({ navigation }) => {
 				onPress={() => navigation.navigate('Receive')}
 				style={styles.item}>
 				<View style={styles.circle}>
-					<Image source={require('../../assets/icons/receive.png')} />
+					<SvgIconNav type='receive' />
 				</View>
 				<WalletText>Receive</WalletText>
 			</TouchableOpacity>

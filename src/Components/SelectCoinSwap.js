@@ -10,6 +10,7 @@ import { WalletText } from './UI'
 import { THEME } from '../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
 import { PercentButtons } from './PercentButtons'
+import { SvgIcon } from './svg/svg'
 
 export const SelectCoinSwap = ({
 	onSwapCoins,
@@ -56,10 +57,8 @@ export const SelectCoinSwap = ({
 								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
 									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
-								<Image
-									style={{ marginLeft: 7 }}
-									source={require('../../assets/check-dark.png')}
-								/>
+
+								<SvgIcon type='check' fill={THEME.GOLD_DARK} />
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -72,7 +71,7 @@ export const SelectCoinSwap = ({
 				activeOpacity={0.7}
 				style={{ margin: 0, marginRight: 'auto', marginLeft: 'auto' }}>
 				<View style={styles.btn}>
-					<Image source={require('../../assets/icons/arrows.png')} />
+					<SvgIcon type='swap' />
 				</View>
 			</TouchableOpacity>
 			<View style={{ marginBottom: 10, marginTop: 12 }}>
@@ -104,10 +103,7 @@ export const SelectCoinSwap = ({
 								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
 									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
-								<Image
-									style={{ marginLeft: 7 }}
-									source={require('../../assets/check-dark.png')}
-								/>
+								<SvgIcon type='check' fill={THEME.GOLD_DARK} />
 							</TouchableOpacity>
 						</View>
 					</View>

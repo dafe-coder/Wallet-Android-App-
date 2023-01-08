@@ -5,6 +5,7 @@ import { THEME } from '../../Theme'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAccount } from '../../store/actions/storageAction'
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
+import { SvgIcon } from './../svg/svg'
 export const SelectAccount = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
@@ -34,11 +35,7 @@ export const SelectAccount = ({ navigation }) => {
 									{n.name}
 								</WalletText>
 							</View>
-							{currentAccount == n.name ? (
-								<Image source={require('../../../assets/check.png')} />
-							) : (
-								<></>
-							)}
+							{currentAccount == n.name ? <SvgIcon type='check' /> : <></>}
 						</TouchableOpacity>
 					)
 				})}

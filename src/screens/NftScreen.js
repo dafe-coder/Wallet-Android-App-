@@ -3,9 +3,10 @@ import { View, StyleSheet, Image, ScrollView } from 'react-native'
 import { THEME } from '../Theme'
 import { WalletTitle, WalletText } from '../Components/UI'
 import { NftList } from '../Components'
+import { SvgIcon } from './../Components/svg/svg'
 
 export const NftScreen = ({ navigation }) => {
-	const [data, setData] = useState([1, 2, 3])
+	const [data, setData] = useState([])
 	return (
 		<ScrollView style={styles.body}>
 			{data.length ? (
@@ -15,7 +16,7 @@ export const NftScreen = ({ navigation }) => {
 				</View>
 			) : (
 				<View style={{ ...styles.wrapTop, paddingTop: 117 }}>
-					<Image source={require('../../assets/nft.png')} />
+					<SvgIcon type='nft' />
 					<WalletTitle style={{ marginTop: 30, marginBottom: 16 }}>
 						Your NFTs
 					</WalletTitle>

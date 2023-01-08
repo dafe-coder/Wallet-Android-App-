@@ -6,7 +6,7 @@ export const ContactsScreen = () => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.center}>
-				<Image source={require('../../assets/add-user.png')} />
+				{/* <Image source={require('../../assets/add-user.png')} /> */}
 				<WalletText size='m' style={{ marginTop: 30 }}>
 					Your Contacts List is Empty.
 				</WalletText>

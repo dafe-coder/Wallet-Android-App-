@@ -5,6 +5,7 @@ import { WalletText } from '../Components/UI'
 import { setPassword } from '../store/actions/storageAction'
 import { useDispatch } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
+import { SvgIcon } from './../Components/svg/svg'
 
 export const CreatePasswordScreen = ({ navigation }) => {
 	const [pin, setPin] = useState('')
@@ -42,7 +43,7 @@ export const CreatePasswordScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.image}>
-				<Image source={require('../../assets/logoWallet.png')} />
+				<SvgIcon type='logo' />
 			</View>
 			{!nextStep ? (
 				<WalletText center size='m'>

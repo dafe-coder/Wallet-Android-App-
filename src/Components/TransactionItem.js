@@ -4,6 +4,7 @@ import { WalletText } from './UI'
 import { THEME } from './../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
 import Web3 from 'web3'
+import { SvgIconNav } from './svg/svgNav'
 
 export const TransactionItem = ({
 	prevDate,
@@ -12,12 +13,7 @@ export const TransactionItem = ({
 	itemData,
 	index,
 }) => {
-	let path =
-		type == 'receive'
-			? require('../../assets/icons/receive.png')
-			: type == 'send'
-			? require('../../assets/icons/send.png')
-			: require('../../assets/icons/swap.png')
+	let path = type == 'receive' ? 'receive' : type == 'send' ? 'send' : 'swap'
 
 	Number.prototype.noExponents = function () {
 		var data = String(this).split(/[eE]/)
@@ -65,7 +61,7 @@ export const TransactionItem = ({
 								? styles.iconRed
 								: styles.iconYellow,
 						]}>
-						<Image source={path} />
+						<SvgIconNav type={path} />
 					</View>
 					<View>
 						<WalletText color='white'>
