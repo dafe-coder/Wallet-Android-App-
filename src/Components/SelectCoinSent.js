@@ -13,23 +13,44 @@ import { useSelector, useDispatch } from 'react-redux'
 import { SvgIcon } from './svg/svg'
 import { setAmountSend } from '../store/actions/walletActions'
 
-export const SelectCoinSent = ({ style, onChooseCoin }) => {
+export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 	const dispatch = useDispatch()
 	const [value, setValue] = useState('')
 	const [topValue, setTopValue] = useState('')
 	const [swap, setSwap] = useState(false)
-	const { chooseCoin } = useSelector((state) => state.wallet)
+	const [maxAmount, setMaxAmount] = useState(false)
+	const { chooseCoin, addressTo } = useSelector((state) => state.wallet)
 
 	const onMax = () => {
-		setValue(fixNum(chooseCoin.market_data.balance_crypto.usd))
-	}
-	useEffect(() => {
 		if (!swap) {
+			setValue(fixNum(chooseCoin.market_data.balance_crypto.usd))
+		} else {
+			setValue(fixNum(chooseCoin.market_data.balance))
+		}
+	}
+
+	useEffect(() => {
+		setMaxAmount(
+			(!swap && value > chooseCoin.market_data.balance_crypto.usd) ||
+				(swap && value > chooseCoin.market_data.balance)
+		)
+	}, [swap, value, chooseCoin])
+
+	useEffect(() => {
+		if (value != '' && value > 0 && addressTo != '') {
+			setBtnDisabled(maxAmount)
+		} else {
+			setBtnDisabled(true)
+		}
+	}, [maxAmount, value, addressTo])
+
+	useEffect(() => {
+		if (!swap && value != '') {
 			dispatch(setAmountSend(value))
 			setTopValue(
 				fixNum(Number(value) / chooseCoin.market_data.current_price.usd)
 			)
-		} else {
+		} else if (swap && value != '') {
 			dispatch(
 				setAmountSend(chooseCoin.market_data.current_price.usd * Number(value))
 			)
@@ -40,8 +61,12 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 	}, [value])
 
 	useEffect(() => {
-		const top = topValue
-		setValue(fixNum(top))
+		if (value != '') {
+			const top = topValue
+			setValue(fixNum(top))
+		} else {
+			setValue('')
+		}
 	}, [swap])
 
 	return (
@@ -79,7 +104,7 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 						</View>
 						<TextInput
 							placeholderTextColor={THEME.BROWN_TEXT}
-							style={styles.input}
+							style={[styles.input, { height: null }]}
 							placeholder={
 								'≈ ' +
 								fixNum(chooseCoin.market_data.balance) +
@@ -93,7 +118,11 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 			<View style={[styles.header, { paddingHorizontal: 20 }]}>
 				<WalletText color='brown'>Amount</WalletText>
 			</View>
-			<View style={[styles.item]}>
+			<View
+				style={[
+					styles.item,
+					maxAmount ? { borderWidth: 1, borderColor: THEME.RED } : {},
+				]}>
 				<View style={{ marginRight: 10 }}>
 					<TouchableOpacity activeOpacity={0.7} onPress={() => setSwap(!swap)}>
 						<View style={styles.swapBtn}>
@@ -117,7 +146,7 @@ export const SelectCoinSent = ({ style, onChooseCoin }) => {
 							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 								<TextInput
 									placeholderTextColor={THEME.BROWN_TEXT}
-									style={styles.input}
+									style={[styles.input]}
 									value={value}
 									placeholder={
 										!swap
@@ -191,6 +220,7 @@ const styles = StyleSheet.create({
 		color: THEME.BROWN_TEXT,
 		fontSize: 16,
 		fontFamily: 'ub-regular',
+		height: 25,
 	},
 	logo: {
 		width: 35,

@@ -190,7 +190,6 @@ export default async function transactionsSend(
 	const TO = to // address to send to
 	const TOKEN = token // token address
 	const AMOUNT = amount != 0 ? amount : '0' // amount of token/eth, has to be a String value: "322", "2.88" etc.
-
 	if (ether) {
 		sendETH(FROM, TO, AMOUNT, setHash, setOpenModal, setOpenModalGas) // or sendETH(FROM, TO, "0.0025")
 			.then((message) => {

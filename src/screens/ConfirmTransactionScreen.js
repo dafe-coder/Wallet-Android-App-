@@ -15,7 +15,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		(state) => state.wallet
 	)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
-	const [checkEther, setCheckEther] = useState(false)
+	const [checkEther, setCheckEther] = useState(true)
 	const [hash, setHash] = useState('')
 	const [openModal, setOpenModal] = useState(false)
 	const [openModalGas, setOpenModalGas] = useState(false)
@@ -26,7 +26,9 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		infoRef.current.close()
 	}
 	const onSendTransaction = () => {
-		const addressFrom = dataUser.map((d) => d.name == currentAccount)[0].address
+		const addressFrom = dataUser.filter((d) => d.name == currentAccount)[0]
+			.address
+		console.log(dataUser)
 		const amount = fixNum(
 			Number(amountSend) / chooseCoin.market_data.current_price.usd
 		)

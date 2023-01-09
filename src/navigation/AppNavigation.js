@@ -29,6 +29,7 @@ import {
 	ExportPrivateKeyCopyScreen,
 	UnlockScreen,
 	RiskAlertScreen,
+	Scanner,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -295,6 +296,14 @@ const screens = [
 		options: {
 			headerShown: true,
 			title: 'enter pin code',
+		},
+	},
+	{
+		name: 'Scanner',
+		component: Scanner,
+		options: {
+			headerShown: true,
+			title: 'Scan Address',
 		},
 	},
 ]

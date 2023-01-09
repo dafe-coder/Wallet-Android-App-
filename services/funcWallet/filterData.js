@@ -1,4 +1,4 @@
-export const filterData = (type, list, setData) => {
+export const filterData = (type, list) => {
 	let sortedArr = []
 	if (type == 'name' || type == '姓名') {
 		sortedArr = list.sort(function (a, b) {
@@ -59,5 +59,5 @@ export const filterData = (type, list, setData) => {
 	} else {
 		sortedArr = list
 	}
-	setData(sortedArr)
+	return sortedArr
 }

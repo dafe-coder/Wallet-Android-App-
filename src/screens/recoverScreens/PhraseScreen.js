@@ -17,6 +17,8 @@ import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
 import { setLoader } from '../../store/actions/walletActions'
+import { faker } from '@faker-js/faker'
+
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
@@ -38,6 +40,7 @@ export const PhraseScreen = ({ navigation }) => {
 						phrase: phrase,
 						privateKey: privateKey != '' ? privateKey : privateKeyString,
 						address: response.address,
+						avatar: faker.image.abstract(48, 48),
 					}
 					dispatch(
 						setCurrentAccount(

@@ -6,7 +6,7 @@ import { PhraseBoxCreate } from './../Components'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
 import useWalletService from './../../services/WalletService'
-
+import { faker } from '@faker-js/faker'
 export const CreatePhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
@@ -23,6 +23,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 						phrase: phrase,
 						privateKey: privateKey,
 						address: response.address,
+						avatar: faker.image.abstract(48, 48),
 					}
 					dispatch(
 						setCurrentAccount(

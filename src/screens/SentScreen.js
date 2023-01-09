@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	ScrollView,
 	Keyboard,
+	Image,
 } from 'react-native'
 import { WalletInput, WalletText } from './../Components/UI/'
 import { SelectCoinSent } from '../Components'
@@ -12,22 +13,33 @@ import { WalletButton } from './../Components/UI/WalletButton'
 import { WalletBottomSheet } from '../Components'
 import { ChooseCoins } from '../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
-import { setAddressTo } from './../store/actions/walletActions'
+import { setAddressTo, setChooseCoin } from './../store/actions/walletActions'
 import { SvgIcon } from './../Components/svg/svg'
 
 export const SentScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { allCoins, chooseCoin, addressFrom } = useSelector(
+	const { allCoins, chooseCoin, addressTo } = useSelector(
 		(state) => state.wallet
 	)
 	const coinsRef = useRef(null)
-	const [fromAddress, setFromAddress] = useState(addressFrom)
+	const [fromAddress, setFromAddress] = useState('')
 	const [openKeyboard, setOpenKeyboard] = useState(false)
+	const [btnDisabled, setBtnDisabled] = useState(true)
+	const onAddAddress = (text) => {
+		setFromAddress(text)
+		dispatch(setAddressTo(text))
+	}
 
+	useEffect(() => {
+		if (addressTo != '') {
+			setFromAddress(addressTo)
+		}
+	}, [addressTo])
 	const onChooseCoin = () => {
 		coinsRef.current.expand()
 	}
-	const onCoinPress = () => {
+	const onCoinPress = (coin) => {
+		dispatch(setChooseCoin(coin))
 		coinsRef.current.close()
 	}
 
@@ -46,9 +58,12 @@ export const SentScreen = ({ navigation }) => {
 	}, [])
 
 	const onSubmitSent = () => {
-		dispatch(setAddressTo(fromAddress))
-		navigation.navigate('ConfirmTransaction')
+		if (!btnDisabled) {
+			dispatch(setAddressTo(fromAddress))
+			navigation.navigate('ConfirmTransaction')
+		}
 	}
+
 	return (
 		<ScrollView
 			contentContainerStyle={{
@@ -67,13 +82,16 @@ export const SentScreen = ({ navigation }) => {
 						style={{ paddingLeft: 19, marginBottom: 7 }}>
 						Recipient Address
 					</WalletText>
-					<TouchableOpacity style={styles.qrButton} activeOpacity={0.7}>
+					<TouchableOpacity
+						style={styles.qrButton}
+						activeOpacity={0.7}
+						onPress={() => navigation.navigate('Scanner')}>
 						<SvgIcon type='qr-camera' />
 					</TouchableOpacity>
 					<WalletInput
 						styleInput={{ paddingRight: 50 }}
 						autoCapitalize='none'
-						setValue={setFromAddress}
+						setValue={onAddAddress}
 						value={fromAddress}
 						placeholder='Public Address (0x...) or ENS'
 					/>
@@ -85,11 +103,15 @@ export const SentScreen = ({ navigation }) => {
 						justifyContent: 'space-between',
 					}}>
 					{chooseCoin != null ? (
-						<SelectCoinSent onChooseCoin={onChooseCoin} />
+						<SelectCoinSent
+							setBtnDisabled={setBtnDisabled}
+							onChooseCoin={onChooseCoin}
+						/>
 					) : (
 						<></>
 					)}
 					<WalletButton
+						disabled={btnDisabled}
 						style={{
 							marginTop: 60,
 						}}

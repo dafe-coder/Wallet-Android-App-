@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { PortfolioItem } from './PortfolioItem'
 import fixNum from './../../services/funcWallet/fixNum'
 
 export const PortfolioList = ({ coins, style, navigation }) => {
+	const [coinsInit, setCoinsInit] = useState([])
+	useEffect(() => {
+		setCoinsInit(coins)
+		console.log(coins)
+	}, [coins])
 	return (
 		<View style={[style]}>
-			{coins.map((c) => {
+			{coinsInit.map((c) => {
 				return (
 					<PortfolioItem
 						coin={c}

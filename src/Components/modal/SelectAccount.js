@@ -29,7 +29,11 @@ export const SelectAccount = ({ navigation }) => {
 							<View style={styles.info}>
 								<Image
 									style={styles.image}
-									source={require('../../../assets/avatar.png')}
+									source={
+										n.avatar
+											? { uri: n.avatar }
+											: require('../../../assets/avatar.png')
+									}
 								/>
 								<WalletText style={{ marginLeft: 12 }} size='m'>
 									{n.name}

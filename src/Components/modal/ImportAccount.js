@@ -14,6 +14,7 @@ import {
 	setDataUser,
 } from '../../store/actions/storageAction'
 import generateWallet from '../../../services/funcWallet/generateAddress'
+import { faker } from '@faker-js/faker'
 
 export const ImportAccount = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -43,6 +44,7 @@ export const ImportAccount = ({ navigation }) => {
 						phrase: phrase,
 						privateKey: privateKey != '' ? privateKey : privateKeyString,
 						address: response.address,
+						avatar: faker.image.abstract(48, 48),
 					}
 					dispatch(setDataUser(newAccount))
 					dispatch(

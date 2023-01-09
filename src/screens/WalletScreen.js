@@ -15,12 +15,19 @@ import { filterData } from '../../services/funcWallet/filterData'
 export const WalletScreen = ({ navigation }) => {
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
 	const [filterPortfolioCoins, setFilterPortfolioCoins] = useState([])
+	const [filterPortfolioCoinsLoader, setFilterPortfolioCoinsLoader] =
+		useState(false)
 	const { portfolioCoins, allCoins, coinsAccountZero, portfolioSort } =
 		useSelector((state) => state.wallet)
 
 	useEffect(() => {
 		if (portfolioCoinsInit.length) {
-			filterData(portfolioSort, portfolioCoinsInit, setFilterPortfolioCoins)
+			setFilterPortfolioCoinsLoader(false)
+			const data = filterData(portfolioSort, portfolioCoinsInit)
+			setFilterPortfolioCoins(data)
+			setTimeout(() => {
+				setFilterPortfolioCoinsLoader(true)
+			}, 1)
 		}
 	}, [portfolioCoinsInit, portfolioSort])
 
@@ -51,14 +58,18 @@ export const WalletScreen = ({ navigation }) => {
 		<>
 			<ScrollView style={{ flex: 1, paddingTop: 20 }}>
 				<Slider portfolioCoinsInit={portfolioCoinsInit} />
-				<View style={{ paddingHorizontal: 16 }}>
+				<View style={{ paddingHorizontal: 16, flex: 1 }}>
 					<WalletNav navigation={navigation} />
 					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
-					<PortfolioList
-						navigation={navigation}
-						coins={filterPortfolioCoins}
-						style={{ marginTop: 32, marginBottom: 70 }}
-					/>
+					{filterPortfolioCoinsLoader ? (
+						<PortfolioList
+							navigation={navigation}
+							coins={filterPortfolioCoins}
+							style={{ marginTop: 32, marginBottom: 70 }}
+						/>
+					) : (
+						<></>
+					)}
 				</View>
 			</ScrollView>
 			<WalletBottomSheet ref={filterRef} snapPoints={['55%']}>

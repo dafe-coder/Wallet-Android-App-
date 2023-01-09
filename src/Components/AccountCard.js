@@ -37,16 +37,25 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 				edit ? { borderWidth: 1, borderColor: THEME.BROWN_TEXT } : {},
 			]}>
 			<View style={styles.logo}>
-				<Image
-					style={{
-						borderRadius: 50,
-						width: 50,
-						height: 50,
-						overflow: 'hidden',
-					}}
-					resizeMode='cover'
-					source={require('../../assets/avatar.png')}
-				/>
+				{dataUser.map((n) =>
+					n.name == currentAccount ? (
+						<Image
+							key={Math.random().toString()}
+							style={{
+								borderRadius: 50,
+								width: 50,
+								height: 50,
+								overflow: 'hidden',
+							}}
+							resizeMode='cover'
+							source={
+								n.avatar
+									? { uri: n.avatar }
+									: require('../../assets/avatar.png')
+							}
+						/>
+					) : null
+				)}
 			</View>
 			<View style={styles.info}>
 				<View style={{ flexDirection: 'row', marginBottom: 4 }}>
