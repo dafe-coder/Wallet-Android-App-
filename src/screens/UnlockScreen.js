@@ -4,9 +4,10 @@ import { THEME } from './../Theme'
 import { WalletButton, WalletText } from '../Components/UI'
 import { SvgIcon } from './../Components/svg/svg'
 import PincodeInput from 'react-native-pincode-input'
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { setNavigation } from '../store/actions/walletActions'
 export const UnlockScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
 	const { password } = useSelector((state) => state.storage)
 
@@ -20,6 +21,8 @@ export const UnlockScreen = ({ navigation }) => {
 		setPin(pin)
 		if (pin.length === 6 && pin === password) {
 			navigation.navigate('Wallet')
+			dispatch(setNavigation(navigation))
+
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {
 			setPin('')
