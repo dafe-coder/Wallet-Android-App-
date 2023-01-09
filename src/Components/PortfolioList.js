@@ -7,7 +7,6 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 	const [coinsInit, setCoinsInit] = useState([])
 	useEffect(() => {
 		setCoinsInit(coins)
-		console.log(coins)
 	}, [coins])
 	return (
 		<View style={[style]}>

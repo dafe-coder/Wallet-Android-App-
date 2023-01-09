@@ -20,6 +20,7 @@ import {
 	setPortfolioTransactions,
 	setPortfolioBalance,
 	setChooseCoin,
+	setLoaderSkeleton,
 } from './src/store/actions/walletActions'
 import { LogBox } from 'react-native'
 import { PortalProvider } from '@gorhom/portal'
@@ -83,6 +84,7 @@ const AppWrap = ({ children }) => {
 			dataUser.forEach((item) => {
 				if (item.name == currentAccount) {
 					setLoadingBalanceCoins(true)
+					dispatch(setLoaderSkeleton(false))
 					getAllTokens(setLoadingOtherCoins).then((data) => {
 						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
 					})
@@ -97,6 +99,7 @@ const AppWrap = ({ children }) => {
 							)
 							dispatch(setPortfolioTransactions(response.transactions))
 							dispatch(setPortfolioBalance(response.portfolio))
+							dispatch(setLoaderSkeleton(true))
 						})
 						.catch((error) => console.log('error', error))
 				}

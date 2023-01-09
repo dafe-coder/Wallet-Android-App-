@@ -116,24 +116,20 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 												{
 													fontSize: 16,
 													fill: THEME.WHITE,
-													// fontFamily: 'gt-bold',
 												},
 										  ]
 										: [
 												{
 													fontSize: 12,
 													fill: THEME.GOLD,
-													// fontFamily: 'gt-bold',
 												},
 												{
 													fontSize: 14,
 													fill: THEME.WHITE,
-													// fontFamily: 'ub-regular',
 												},
 												{
 													fontSize: 12,
 													fill: THEME.BROWN_TEXT,
-													// fontFamily: 'ub-regular',
 												},
 										  ]
 								}

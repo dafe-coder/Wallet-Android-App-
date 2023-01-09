@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, ImageBackground, Image } from 'react-native'
 import { InfoPriseSlide } from './sliders/InfoPriceSlide'
 import { PieChar } from './PieChar'
-import { THEME } from './../Theme'
-
+import { LoaderSlider } from './Loader'
+import { useSelector } from 'react-redux'
 export const SliderItem = ({ index, portfolioCoinsInit }) => {
+	const { portfolioBalance, loaderSkeleton } = useSelector(
+		(state) => state.wallet
+	)
+	const { currentAccount } = useSelector((state) => state.storage)
+	const [loaderSlide, setLoaderSlide] = useState(false)
+	useEffect(() => {
+		setLoaderSlide(false)
+		if (portfolioBalance != null) {
+			setLoaderSlide(true)
+		}
+	}, [portfolioBalance, currentAccount])
 	return (
 		<View style={styles.item}>
 			{/* {index == 0 ? (
@@ -15,17 +26,20 @@ export const SliderItem = ({ index, portfolioCoinsInit }) => {
 			) : (
 				<></>
 			)} */}
-			<ImageBackground
-				resizeMode='cover'
-				style={styles.image}
-				source={require('../../assets/card.png')}>
-				{index == 0 ? (
-					<InfoPriseSlide />
-				) : (
-					<PieChar portfolioCoinsInit={portfolioCoinsInit} />
-				)}
-				{/* <PieChar /> */}
-			</ImageBackground>
+			{loaderSlide && loaderSkeleton ? (
+				<ImageBackground
+					resizeMode='cover'
+					style={styles.image}
+					source={require('../../assets/card.png')}>
+					{index == 0 ? (
+						<InfoPriseSlide />
+					) : (
+						<PieChar portfolioCoinsInit={portfolioCoinsInit} />
+					)}
+				</ImageBackground>
+			) : (
+				<LoaderSlider />
+			)}
 		</View>
 	)
 }

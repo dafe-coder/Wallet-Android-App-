@@ -11,6 +11,10 @@ export const AccountBtn = ({ navigation }) => {
 		selectAccountRef.current.expand()
 	}
 
+	const onCloseModal = () => {
+		selectAccountRef.current.close()
+	}
+
 	return (
 		<View>
 			<TouchableOpacity
@@ -35,7 +39,7 @@ export const AccountBtn = ({ navigation }) => {
 			</TouchableOpacity>
 
 			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-				<SelectAccount navigation={navigation} />
+				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
 			</WalletBottomSheet>
 		</View>
 	)

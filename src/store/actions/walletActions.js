@@ -15,6 +15,7 @@ import {
 	SET_AMOUNT_SEND,
 	SET_CHOOSE_COIN_SWAP_SECOND,
 	SET_LOADER,
+	SET_LOADER_SKELETON,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -115,6 +116,12 @@ export const setChooseCoinSwapSecond = (coin) => {
 export const setLoader = (loader) => {
 	return {
 		type: SET_LOADER,
+		payload: loader,
+	}
+}
+export const setLoaderSkeleton = (loader) => {
+	return {
+		type: SET_LOADER_SKELETON,
 		payload: loader,
 	}
 }

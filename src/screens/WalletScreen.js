@@ -11,14 +11,20 @@ import { Filters } from './../Components/modal'
 import { setNavigation } from '../store/actions/walletActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterData } from '../../services/funcWallet/filterData'
+import { LoaderListItem } from '../Components/Loader/LoaderListItem'
 
 export const WalletScreen = ({ navigation }) => {
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
 	const [filterPortfolioCoins, setFilterPortfolioCoins] = useState([])
 	const [filterPortfolioCoinsLoader, setFilterPortfolioCoinsLoader] =
 		useState(false)
-	const { portfolioCoins, allCoins, coinsAccountZero, portfolioSort } =
-		useSelector((state) => state.wallet)
+	const {
+		portfolioCoins,
+		allCoins,
+		coinsAccountZero,
+		portfolioSort,
+		loaderSkeleton,
+	} = useSelector((state) => state.wallet)
 
 	useEffect(() => {
 		if (portfolioCoinsInit.length) {
@@ -60,15 +66,23 @@ export const WalletScreen = ({ navigation }) => {
 				<Slider portfolioCoinsInit={portfolioCoinsInit} />
 				<View style={{ paddingHorizontal: 16, flex: 1 }}>
 					<WalletNav navigation={navigation} />
-					<PortfolioSort style={{ marginTop: 24 }} onPress={openModalFilter} />
-					{filterPortfolioCoinsLoader ? (
+
+					<PortfolioSort
+						style={{ marginTop: 24, marginBottom: 32 }}
+						onPress={openModalFilter}
+					/>
+					{filterPortfolioCoinsLoader && loaderSkeleton ? (
 						<PortfolioList
 							navigation={navigation}
 							coins={filterPortfolioCoins}
-							style={{ marginTop: 32, marginBottom: 70 }}
+							style={{ marginBottom: 70 }}
 						/>
 					) : (
-						<></>
+						<View style={{ marginBottom: 70 }}>
+							<LoaderListItem style={{ marginBottom: 10 }} />
+							<LoaderListItem style={{ marginBottom: 10 }} />
+							<LoaderListItem style={{ marginBottom: 10 }} />
+						</View>
 					)}
 				</View>
 			</ScrollView>
