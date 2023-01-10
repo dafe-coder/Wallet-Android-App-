@@ -79,6 +79,7 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 			)}
 			<View pointerEvents={edit ? 'none' : 'auto'}>
 				<TextInput
+					autoCapitalize='none'
 					style={[
 						styles.textarea,
 						success == 'error'
