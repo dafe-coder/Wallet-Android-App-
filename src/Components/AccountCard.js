@@ -11,16 +11,19 @@ import { THEME } from '../Theme'
 import { SvgIcon } from './svg/svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAccountName } from '../store/actions/walletActions'
+import { LoaderCard } from './Loader/LoaderCard'
+
 export const AccountCard = ({ style, navigation, edit = false }) => {
 	const dispatch = useDispatch()
 	const [errorValue, setErrorValue] = useState(false)
 	const [value, setValue] = useState('')
+	const { loaderSkeleton } = useSelector((state) => state.wallet)
 	const { currentAccount, dataUser } = useSelector((state) => state.storage)
 
 	useEffect(() => {
 		if (value != '') {
 			const accountSameName = dataUser.filter((d) => d.name == value.trim())
-			if (accountSameName.length == 0) {
+			if (accountSameName.length == 0 && value.length <= 20) {
 				dispatch(setAccountName(value))
 				setErrorValue(false)
 			} else {
@@ -30,75 +33,87 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 		}
 	}, [value, dataUser])
 	return (
-		<View
-			style={[
-				styles.wrap,
-				style,
-				edit ? { borderWidth: 1, borderColor: THEME.BROWN_TEXT } : {},
-			]}>
-			<View style={styles.logo}>
-				{dataUser.map((n) =>
-					n.name == currentAccount ? (
-						<Image
-							key={Math.random().toString()}
-							style={{
-								borderRadius: 50,
-								width: 50,
-								height: 50,
-								overflow: 'hidden',
-							}}
-							resizeMode='cover'
-							source={
-								n.avatar
-									? { uri: n.avatar }
-									: require('../../assets/avatar.png')
-							}
-						/>
-					) : null
-				)}
-			</View>
-			<View style={styles.info}>
-				<View style={{ flexDirection: 'row', marginBottom: 4 }}>
-					{edit ? (
-						<TextInput
-							style={[styles.input, errorValue ? { color: THEME.RED } : {}]}
-							placeholderTextColor={THEME.BROWN_TEXT}
-							placeholder={currentAccount}
-							autoFocus
-							value={value}
-							onChangeText={(text) => setValue(text)}
-						/>
-					) : (
-						<WalletText
-							color='brown'
-							size='m'
-							style={{ fontFamily: 'ub-medium' }}>
-							{currentAccount}
-						</WalletText>
-					)}
+		<>
+			{loaderSkeleton && currentAccount != '' ? (
+				<View
+					style={[
+						styles.wrap,
+						style,
+						edit ? { borderWidth: 1, borderColor: THEME.BROWN_TEXT } : {},
+					]}>
+					<View style={styles.logo}>
+						{dataUser.map((n) =>
+							n.name == currentAccount ? (
+								<Image
+									key={Math.random().toString()}
+									style={{
+										borderRadius: 50,
+										width: 50,
+										height: 50,
+										overflow: 'hidden',
+									}}
+									resizeMode='cover'
+									source={
+										n.avatar != ''
+											? { uri: n.avatar }
+											: require('../../assets/avatar.png')
+									}
+								/>
+							) : null
+						)}
+					</View>
+					<View style={styles.info}>
+						<View style={{ flexDirection: 'row', marginBottom: 4 }}>
+							{edit ? (
+								<TextInput
+									style={[styles.input, errorValue ? { color: THEME.RED } : {}]}
+									placeholderTextColor={THEME.BROWN_TEXT}
+									placeholder={currentAccount}
+									autoFocus
+									value={value}
+									onChangeText={(text) => setValue(text)}
+								/>
+							) : (
+								<WalletText
+									color='brown'
+									size='m'
+									style={{ fontFamily: 'ub-medium' }}>
+									{currentAccount}
+								</WalletText>
+							)}
 
-					<TouchableOpacity
-						onPress={() => navigation.navigate('EditProfile')}
-						style={{ marginLeft: 35 }}
-						activeOpacity={0.7}>
-						<SvgIcon type='pen' />
-					</TouchableOpacity>
+							<TouchableOpacity
+								onPress={() => navigation.navigate('EditProfile')}
+								style={{ marginLeft: 35 }}
+								activeOpacity={0.7}>
+								<SvgIcon type='pen' />
+							</TouchableOpacity>
+						</View>
+						<WalletText size='m'>
+							{dataUser.length
+								? dataUser
+										.filter((d) => d.name == currentAccount)[0]
+										.address.slice(0, 12) +
+								  '...' +
+								  dataUser
+										.filter((d) => d.name == currentAccount)[0]
+										.address.slice(-6)
+								: ''}
+						</WalletText>
+						<ButtonCopy
+							text={
+								dataUser.length
+									? dataUser.filter((d) => d.name == currentAccount)[0].address
+									: ''
+							}
+							style={{ right: 0, bottom: 0 }}
+						/>
+					</View>
 				</View>
-				<WalletText size='m'>
-					{dataUser
-						.filter((d) => d.name == currentAccount)[0]
-						.address.slice(0, 12) +
-						'...' +
-						dataUser
-							.filter((d) => d.name == currentAccount)[0]
-							.address.slice(-6)}
-				</WalletText>
-				<ButtonCopy
-					text={dataUser.filter((d) => d.name == currentAccount)[0].address}
-					style={{ right: 0, bottom: 0 }}
-				/>
-			</View>
-		</View>
+			) : (
+				<LoaderCard />
+			)}
+		</>
 	)
 }
 

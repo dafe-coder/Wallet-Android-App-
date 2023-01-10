@@ -58,7 +58,6 @@ export default function App() {
 		)
 	}
 }
-
 const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
 	const [loadingOtherCoins, setLoadingOtherCoins] = useState(true)
@@ -79,12 +78,12 @@ const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
-		console.log(dataUser)
-		if (dataUser.length >= 1) {
+		// console.log(dataUser)
+		if (dataUser.length >= 1 && currentAccount != '') {
+			dispatch(setLoaderSkeleton(false))
 			dataUser.forEach((item) => {
 				if (item.name == currentAccount) {
 					setLoadingBalanceCoins(true)
-					dispatch(setLoaderSkeleton(false))
 					getAllTokens(setLoadingOtherCoins).then((data) => {
 						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
 					})

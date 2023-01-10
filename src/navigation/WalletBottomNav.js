@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText } from './../Components/UI/WalletText'
 import { THEME } from './../Theme'
-import { useSelector } from 'react-redux'
 import { SvgIconNav } from './../Components/svg/svgNav'
+import { useDispatch, useSelector } from 'react-redux'
+import { setNavScreen } from '../store/actions/walletActions'
 
 export const WalletBottomNav = () => {
-	const { navigation } = useSelector((state) => state.wallet)
-	const [activeNav, setActiveNav] = useState('Wallet')
+	const dispatch = useDispatch()
+	const { navigation, navScreen } = useSelector((state) => state.wallet)
 
 	const onPressNav = (screen) => {
-		setActiveNav(screen)
+		dispatch(setNavScreen(screen))
 		navigation.navigate(screen)
 	}
 
@@ -22,9 +23,9 @@ export const WalletBottomNav = () => {
 				onPress={() => onPressNav('Wallet')}>
 				<SvgIconNav
 					type='wallet'
-					fill={activeNav == 'Wallet' ? THEME.GOLD_DARK : ''}
+					fill={navScreen == 'Wallet' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={activeNav == 'Wallet' ? 'gold' : 'brown'}>
+				<WalletText color={navScreen == 'Wallet' ? 'gold' : 'brown'}>
 					Coins
 				</WalletText>
 			</TouchableOpacity>
@@ -34,9 +35,9 @@ export const WalletBottomNav = () => {
 				onPress={() => onPressNav('Nft')}>
 				<SvgIconNav
 					type='bar'
-					fill={activeNav == 'Nft' ? THEME.GOLD_DARK : ''}
+					fill={navScreen == 'Nft' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={activeNav == 'Nft' ? 'gold' : 'brown'}>
+				<WalletText color={navScreen == 'Nft' ? 'gold' : 'brown'}>
 					NFTs
 				</WalletText>
 			</TouchableOpacity>
@@ -49,7 +50,7 @@ export const WalletBottomNav = () => {
 				</View>
 				<WalletText
 					style={{ marginTop: 20 }}
-					color={activeNav == 'Swap' ? 'gold' : 'brown'}>
+					color={navScreen == 'Swap' ? 'gold' : 'brown'}>
 					Swap
 				</WalletText>
 			</TouchableOpacity>
@@ -59,9 +60,9 @@ export const WalletBottomNav = () => {
 				onPress={() => onPressNav('Activity')}>
 				<SvgIconNav
 					type='activity'
-					fill={activeNav == 'Activity' ? THEME.GOLD_DARK : ''}
+					fill={navScreen == 'Activity' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={activeNav == 'Activity' ? 'gold' : 'brown'}>
+				<WalletText color={navScreen == 'Activity' ? 'gold' : 'brown'}>
 					Activity
 				</WalletText>
 			</TouchableOpacity>
@@ -71,9 +72,9 @@ export const WalletBottomNav = () => {
 				onPress={() => onPressNav('Account')}>
 				<SvgIconNav
 					type='man'
-					fill={activeNav == 'Account' ? THEME.GOLD_DARK : ''}
+					fill={navScreen == 'Account' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={activeNav == 'Account' ? 'gold' : 'brown'}>
+				<WalletText color={navScreen == 'Account' ? 'gold' : 'brown'}>
 					Account
 				</WalletText>
 			</TouchableOpacity>

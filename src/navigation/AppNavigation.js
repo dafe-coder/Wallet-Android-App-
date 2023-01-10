@@ -1,6 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
-import { useSelector } from 'react-redux'
 import {
 	LoginScreen,
 	CreatePhraseScreen,
@@ -317,12 +316,11 @@ const screens = [
 ]
 
 export function MyStack() {
-	const { dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={dataUser.length ? 'Preloader' : 'Login'}
+			initialRouteName={'Preloader'}
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

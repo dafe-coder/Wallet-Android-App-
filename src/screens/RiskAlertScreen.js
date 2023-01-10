@@ -14,12 +14,12 @@ export const RiskAlertScreen = ({ navigation }) => {
 	const onRemoveAll = () => {
 		dispatch(setLoader(true))
 		setTimeout(() => {
-			navigation.navigate('Login')
-			dispatch(setNavigation(null))
 			dispatch(setPassword(''))
-			dispatch(setCurrentAccount(''))
-			dispatch(setClearDataUser())
+			dispatch(setNavigation(null))
 			dispatch(setLoader(false))
+			navigation.navigate('Login')
+			dispatch(setClearDataUser())
+			dispatch(setCurrentAccount(''))
 		}, 3000)
 	}
 	return (

@@ -29,6 +29,7 @@ export const UnlockScreen = ({ navigation }) => {
 			shakePincode()
 		}
 	}
+
 	return (
 		<View style={styles.body}>
 			<View style={styles.top}>

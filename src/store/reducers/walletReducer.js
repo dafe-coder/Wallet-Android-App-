@@ -16,6 +16,7 @@ import {
 	SET_CHOOSE_COIN_SWAP_SECOND,
 	SET_LOADER,
 	SET_LOADER_SKELETON,
+	SET_NAV_SCREEN,
 } from '../type'
 
 const initialState = {
@@ -37,6 +38,7 @@ const initialState = {
 	amountSend: '',
 	loader: false,
 	loaderSkeleton: false,
+	navScreen: 'Wallet',
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -119,12 +121,18 @@ export const walletReducer = (state = initialState, action) => {
 		case SET_LOADER:
 			return {
 				...state,
+				navScreen: 'Wallet',
 				loader: action.payload,
 			}
 		case SET_LOADER_SKELETON:
 			return {
 				...state,
 				loaderSkeleton: action.payload,
+			}
+		case SET_NAV_SCREEN:
+			return {
+				...state,
+				navScreen: action.payload,
 			}
 		default:
 			return state

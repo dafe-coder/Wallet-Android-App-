@@ -16,6 +16,7 @@ import {
 	SET_CHOOSE_COIN_SWAP_SECOND,
 	SET_LOADER,
 	SET_LOADER_SKELETON,
+	SET_NAV_SCREEN,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -123,5 +124,11 @@ export const setLoaderSkeleton = (loader) => {
 	return {
 		type: SET_LOADER_SKELETON,
 		payload: loader,
+	}
+}
+export const setNavScreen = (screen) => {
+	return {
+		type: SET_NAV_SCREEN,
+		payload: screen,
 	}
 }

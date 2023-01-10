@@ -6,6 +6,7 @@ import useWalletService from '../../../services/WalletService'
 import { THEME } from '../../Theme'
 import {
 	setLoader,
+	setNavScreen,
 	setPhrase,
 	setPrivateKey,
 } from '../../store/actions/walletActions'
@@ -16,7 +17,7 @@ import {
 import generateWallet from '../../../services/funcWallet/generateAddress'
 import { faker } from '@faker-js/faker'
 
-export const ImportAccount = ({ navigation }) => {
+export const ImportAccount = ({ navigation, onCloseImport }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
 	const { dataUser } = useSelector((state) => state.storage)
@@ -26,10 +27,12 @@ export const ImportAccount = ({ navigation }) => {
 	const [active, setActive] = useState(true)
 	const [success, setSuccess] = useState('default')
 	const [text, setText] = useState('')
+	const [nameValid, setNameValid] = useState(true)
 	const [name, setName] = useState('')
 
 	const submitRestore = () => {
 		if (!onClick && !btnDisabled) {
+			onCloseImport()
 			setOnClick(true)
 			dispatch(setLoader(true))
 			postData(phrase != '' ? phrase : privateKey, false)
@@ -44,7 +47,7 @@ export const ImportAccount = ({ navigation }) => {
 						phrase: phrase,
 						privateKey: privateKey != '' ? privateKey : privateKeyString,
 						address: response.address,
-						avatar: faker.image.abstract(48, 48),
+						avatar: faker.image.abstract(128, 128, true),
 					}
 					dispatch(setDataUser(newAccount))
 					dispatch(
@@ -55,6 +58,7 @@ export const ImportAccount = ({ navigation }) => {
 						)
 					)
 					dispatch(setLoader(false))
+					dispatch(setNavScreen('Wallet'))
 					setOnClick(false)
 					navigation.navigate('Wallet')
 				})
@@ -98,6 +102,16 @@ export const ImportAccount = ({ navigation }) => {
 		}
 	}
 
+	useEffect(() => {
+		if (name != '' && name.length <= 20) {
+			setNameValid(true)
+			setBtnDisabled(false)
+		} else if (name != '') {
+			setBtnDisabled(true)
+			setNameValid(false)
+		}
+	}, [name])
+
 	return (
 		<TouchableOpacity
 			activeOpacity={1}
@@ -140,6 +154,9 @@ export const ImportAccount = ({ navigation }) => {
 					setValue={setName}
 					placeholder='Account Name (Optional)'
 					style={{ marginHorizontal: 0, marginBottom: 12 }}
+					styleInput={
+						nameValid ? {} : { borderWidth: 1, borderColor: THEME.RED }
+					}
 				/>
 				<WalletInput
 					styleInput={[

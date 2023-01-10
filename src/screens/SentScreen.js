@@ -42,7 +42,6 @@ export const SentScreen = ({ navigation }) => {
 		dispatch(setChooseCoin(coin))
 		coinsRef.current.close()
 	}
-
 	useEffect(() => {
 		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
 			setOpenKeyboard(true)

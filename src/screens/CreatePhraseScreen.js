@@ -23,7 +23,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 						phrase: phrase,
 						privateKey: privateKey,
 						address: response.address,
-						avatar: faker.image.abstract(48, 48),
+						avatar: faker.image.abstract(128, 128, true),
 					}
 					dispatch(
 						setCurrentAccount(
