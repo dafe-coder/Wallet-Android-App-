@@ -6,6 +6,13 @@ import { setPassword } from '../store/actions/storageAction'
 import { useDispatch } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
 import { SvgIcon } from './../Components/svg/svg'
+//   values.map((toValue) =>
+// 			Animated.timing(shakeAnim, {
+// 				toValue,
+// 				duration,
+// 				useNativeDriver: false,
+// 			})
+// 		)
 
 export const CreatePasswordScreen = ({ navigation }) => {
 	const [pin, setPin] = useState('')
@@ -79,6 +86,7 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					width: 9,
 					height: 9,
 				}}
+				autoFocus={true}
 				pin={pin}
 				onTextChange={handleOnTextChange}
 			/>

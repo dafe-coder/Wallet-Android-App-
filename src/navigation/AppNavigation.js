@@ -320,7 +320,8 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={'Preloader'}
+			initialRouteName={'CreatePassword'}
+			// 'Preloader',
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}
