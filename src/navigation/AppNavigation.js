@@ -30,6 +30,7 @@ import {
 	UnlockScreen,
 	RiskAlertScreen,
 	Scanner,
+	PreloaderScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -306,6 +307,13 @@ const screens = [
 			title: 'Scan Address',
 		},
 	},
+	{
+		name: 'Preloader',
+		component: PreloaderScreen,
+		options: {
+			headerShown: false,
+		},
+	},
 ]
 
 export function MyStack() {
@@ -314,7 +322,7 @@ export function MyStack() {
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={dataUser.length ? 'Wallet' : 'Login'}
+			initialRouteName={dataUser.length ? 'Preloader' : 'Login'}
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

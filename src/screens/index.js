@@ -46,3 +46,5 @@ export * from './PortfolioOpenScreen'
 export * from './UnlockScreen'
 export * from './RiskAlertScreen'
 export * from './Scanner'
+
+export * from './PreloaderScreen'
