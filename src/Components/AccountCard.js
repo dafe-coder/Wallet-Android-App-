@@ -48,8 +48,8 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 									key={Math.random().toString()}
 									style={{
 										borderRadius: 50,
-										width: 50,
-										height: 50,
+										width: 60,
+										height: 60,
 										overflow: 'hidden',
 									}}
 									resizeMode='cover'
@@ -134,6 +134,12 @@ const styles = StyleSheet.create({
 	},
 	logo: {
 		marginRight: 10,
+		borderRadius: 50,
+		width: 50,
+		height: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+		overflow: 'hidden',
 	},
 	info: {
 		flexGrow: 1,

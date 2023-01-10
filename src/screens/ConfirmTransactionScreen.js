@@ -4,31 +4,45 @@ import { WalletText, WalletButton } from '../Components/UI'
 import { THEME } from '../Theme'
 import { TransactionInfo } from './../Components'
 import { WalletBottomSheet } from './../Components'
-import { TransactionFee } from './../Components/modal'
+import { TransactionFee, Success, Gas } from './../Components/modal'
 import transactionsSend from '../../services/funcWallet/transaction'
 import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 
 export const ConfirmTransactionScreen = ({ navigation }) => {
 	const infoRef = useRef(null)
+	const infoSuccess = useRef(null)
+	const gasRef = useRef(null)
 	const { addressTo, amountSend, chooseCoin } = useSelector(
 		(state) => state.wallet
 	)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	const [checkEther, setCheckEther] = useState(true)
 	const [hash, setHash] = useState('')
-	const [openModal, setOpenModal] = useState(false)
 	const [openModalGas, setOpenModalGas] = useState(false)
 	const openInfo = () => {
-		infoRef.current.expand()
+		infoRef.current?.expand()
 	}
 	const closeInfo = () => {
-		infoRef.current.close()
+		infoRef.current?.close()
+	}
+	const onOpenSuccess = () => {
+		infoRef.current?.expand()
+	}
+	const onCloseSuccess = () => {
+		infoSuccess.current?.close()
+	}
+	const onOpenGas = () => {
+		gasRef.current?.expand()
+	}
+	const onCloseGas = () => {
+		gasRef.current?.close()
 	}
 	const onSendTransaction = () => {
 		const addressFrom = dataUser.filter((d) => d.name == currentAccount)[0]
 			.address
-		console.log(dataUser)
+		const privateKey = dataUser.filter((d) => d.name == currentAccount)[0]
+			.privateKey
 		const amount = fixNum(
 			Number(amountSend) / chooseCoin.market_data.current_price.usd
 		)
@@ -39,8 +53,9 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 			amount,
 			checkEther,
 			setHash,
-			setOpenModal,
-			setOpenModalGas
+			onOpenSuccess,
+			onOpenGas,
+			privateKey
 		)
 		// navigation.navigate('Sent')
 	}
@@ -96,6 +111,12 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 			</View>
 			<WalletBottomSheet ref={infoRef} snapPoints={['55%']}>
 				<TransactionFee onPress={closeInfo} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={infoSuccess} snapPoints={['48%']}>
+				<Success onPress={onCloseSuccess} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={gasRef} snapPoints={['48%']}>
+				<Gas onPress={onCloseGas} />
 			</WalletBottomSheet>
 		</View>
 	)

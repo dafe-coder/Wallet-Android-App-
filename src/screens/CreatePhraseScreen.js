@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
 import useWalletService from './../../services/WalletService'
 import { faker } from '@faker-js/faker'
+import createName from '../../services/funcWallet/createName'
+import { setPhrase } from './../store/actions/walletActions'
+
 export const CreatePhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
@@ -19,18 +22,15 @@ export const CreatePhraseScreen = ({ navigation }) => {
 			postData(phrase, true)
 				.then((response) => {
 					const newAccount = {
-						name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+						name: createName(dataUser),
 						phrase: phrase,
 						privateKey: privateKey,
 						address: response.address,
 						avatar: faker.image.abstract(128, 128, true),
 					}
-					dispatch(
-						setCurrentAccount(
-							`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
-						)
-					)
+					dispatch(setCurrentAccount(createName(dataUser)))
 					dispatch(setDataUser(newAccount))
+					dispatch(setPhrase(''))
 					navigation.navigate('CreatePassword')
 				})
 				.catch((error) => console.log('error', error))

@@ -6,14 +6,19 @@ import { AccountCard } from './../Components/AccountCard'
 import { WalletBottomSheet } from './../Components/BottomSheet'
 import { DeleteWallet } from '../Components/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoader, setNavigation } from '../store/actions/walletActions'
+import {
+	setLoader,
+	setNavigation,
+	setLoaderSkeleton,
+} from '../store/actions/walletActions'
 import {
 	setDeleteAccount,
 	setCurrentAccount,
 	setClearDataUser,
 	setPassword,
 } from '../store/actions/storageAction'
-export const EditProfileScreen = ({ navigation, setLoaderCard }) => {
+
+export const EditProfileScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { currentAccount, dataUser } = useSelector((state) => state.storage)
 	const deleteRef = useRef(null)
@@ -65,6 +70,7 @@ export const EditProfileScreen = ({ navigation, setLoaderCard }) => {
 
 		dispatch(setLoader(true))
 		deleteRef.current?.close()
+		dispatch(setLoaderSkeleton(false))
 		setTimeoutId2(
 			setTimeout(() => {
 				if (dataUser.length >= 2) {

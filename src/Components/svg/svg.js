@@ -59,6 +59,33 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					</G>
 				</Svg>
 			)
+		case 'check-with-box':
+			return (
+				<Svg
+					xmlns='http://www.w3.org/2000/svg'
+					width={33}
+					height={32}
+					fill='none'
+					viewBox='0 0 33 32'
+					{...props}>
+					<Rect
+						width={30}
+						height={30}
+						x={1.5}
+						y={0.875}
+						stroke='#F9B446'
+						strokeWidth={1.5}
+						rx={5}
+					/>
+					<Path
+						stroke='#F9B446'
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={1.5}
+						d='M11.75 17.125l3.75 3.75 7.5-7.5'
+					/>
+				</Svg>
+			)
 		case 'qr-camera':
 			return (
 				<Svg

@@ -22,7 +22,7 @@ export const AccountBtn = ({ navigation }) => {
 				style={{ marginRight: 16 }}
 				activeOpacity={0.7}
 				onPress={openModalSelectAccount}>
-				<View style={[styles.image, { backgroundColor: THEME.BROWN_DARK }]}>
+				<View style={[styles.logoImage, { backgroundColor: THEME.BROWN_DARK }]}>
 					{dataUser.map((n) =>
 						n.name == currentAccount ? (
 							<Image
@@ -49,9 +49,17 @@ export const AccountBtn = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	image: {
+		width: 42,
+		height: 42,
+		borderRadius: 50,
+		overflow: 'hidden',
+	},
+	logoImage: {
 		width: 32,
 		height: 32,
 		borderRadius: 50,
 		overflow: 'hidden',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 })

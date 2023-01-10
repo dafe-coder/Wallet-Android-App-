@@ -16,6 +16,7 @@ import {
 } from '../../store/actions/storageAction'
 import generateWallet from '../../../services/funcWallet/generateAddress'
 import { faker } from '@faker-js/faker'
+import createName from '../../../services/funcWallet/createName'
 
 export const ImportAccount = ({ navigation, onCloseImport }) => {
 	const dispatch = useDispatch()
@@ -32,31 +33,21 @@ export const ImportAccount = ({ navigation, onCloseImport }) => {
 
 	const submitRestore = () => {
 		if (!onClick && !btnDisabled) {
-			onCloseImport()
-			setOnClick(true)
 			dispatch(setLoader(true))
+			setOnClick(true)
+			onCloseImport()
 			postData(phrase != '' ? phrase : privateKey, false)
 				.then((response) => {
-					let privateKeyString =
-						phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
+					let privateKeyString = phrase != '' ? generateWallet(phrase) : ''
 					const newAccount = {
-						name:
-							name != ''
-								? name
-								: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+						name: name != '' ? name : createName(dataUser),
 						phrase: phrase,
 						privateKey: privateKey != '' ? privateKey : privateKeyString,
 						address: response.address,
 						avatar: faker.image.abstract(128, 128, true),
 					}
 					dispatch(setDataUser(newAccount))
-					dispatch(
-						setCurrentAccount(
-							name != ''
-								? name
-								: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`
-						)
-					)
+					dispatch(setCurrentAccount(name != '' ? name : createName(dataUser)))
 					dispatch(setLoader(false))
 					dispatch(setNavScreen('Wallet'))
 					setOnClick(false)

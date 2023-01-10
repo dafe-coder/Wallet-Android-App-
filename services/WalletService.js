@@ -107,7 +107,6 @@ const useWalletService = () => {
 
 	async function postData(str, account) {
 		let requestBody = createBody(str, account)
-		// console.log(Object.fromEntries(requestBody))
 
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',

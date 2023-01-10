@@ -16,8 +16,9 @@ import {
 import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
-import { setLoader } from '../../store/actions/walletActions'
+import { setLoader, setPhrase } from '../../store/actions/walletActions'
 import { faker } from '@faker-js/faker'
+import createName from '../../../services/funcWallet/createName'
 
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -36,22 +37,19 @@ export const PhraseScreen = ({ navigation }) => {
 			postData(phrase != '' ? phrase : privateKey, false)
 				.then((response) => {
 					const newAccount = {
-						name: `Account ${dataUser.length ? dataUser.length + 1 : '1'}`,
+						name: createName(dataUser),
 						phrase: phrase,
 						privateKey: privateKey != '' ? privateKey : privateKeyString,
 						address: response.address,
 						avatar: faker.image.abstract(128, 128, true),
 					}
-					dispatch(
-						setCurrentAccount(
-							`Account ${dataUser.length ? dataUser.length + 1 : '1'}`
-						)
-					)
+					dispatch(setCurrentAccount(createName(dataUser)))
 					dispatch(setDataUser(newAccount))
 					password != ''
 						? navigation.navigate('ConfirmPassword')
 						: navigation.navigate('CreatePassword')
 					dispatch(setLoader(false))
+					dispatch(setPhrase(''))
 					setOnClick(false)
 				})
 				.catch((error) => console.log('error', error))

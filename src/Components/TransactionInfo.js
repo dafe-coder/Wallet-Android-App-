@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI'
 import fixNum from '../../services/funcWallet/fixNum'
 import { SvgIcon } from './svg/svg'
+import { useSelector } from 'react-redux'
 
 export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
+	const { allCoins } = useSelector((state) => state.wallet)
+	const [eth, setEth] = useState(null)
+
+	useEffect(() => {
+		setEth(allCoins.filter((c) => c.symbol.toUpperCase() == 'ETH')[0])
+	}, [allCoins])
+
 	return (
 		<View style={[styles.item, style]}>
 			<View style={styles.itemTop}>
@@ -19,9 +27,12 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 					</TouchableOpacity>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
-					<WalletText color='white'>0.0031 ETH≈ 8.1%</WalletText>
+					<WalletText color='white'>
+						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
+						ETH
+					</WalletText>
 					<WalletText color='brown' style={{ fontSize: 12, marginTop: 3 }}>
-						≈ {amountSend}$
+						≈ {fixNum(amountSend)}$
 					</WalletText>
 				</View>
 			</View>

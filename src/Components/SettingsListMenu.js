@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { SettingsItemMenu } from './SettingsItemMenu'
+import { useSelector } from 'react-redux'
 
 export const SettingsListMenu = ({ onPress }) => {
+	const [phrase, setPhrase] = useState(false)
+	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	useEffect(() => {
+		setPhrase(dataUser.filter((d) => d.name == currentAccount)[0].phrase !== '')
+	}, [dataUser, currentAccount])
 	const menuData = [
 		{
 			title: 'Current  Network',
@@ -48,16 +54,22 @@ export const SettingsListMenu = ({ onPress }) => {
 	]
 	return (
 		<View style={styles.list}>
-			{menuData.map((m) => (
-				<SettingsItemMenu
-					onPress={m.onPress}
-					key={m.title}
-					title={m.title}
-					subTitle={m.subTitle}
-					topLine={m.topLine}
-					switchButton={m.switchButton}
-				/>
-			))}
+			{menuData.map((m) => {
+				if (m.title == 'Export Account – Secret Phrase' && !phrase) {
+					return null
+				} else {
+					return (
+						<SettingsItemMenu
+							onPress={m.onPress}
+							key={m.title}
+							title={m.title}
+							subTitle={m.subTitle}
+							topLine={m.topLine}
+							switchButton={m.switchButton}
+						/>
+					)
+				}
+			})}
 		</View>
 	)
 }

@@ -30,15 +30,17 @@ export const SelectAccount = ({ navigation, onCloseModal }) => {
 							key={Math.random().toString()}
 							onPress={() => onSelectAccount(n)}>
 							<View style={styles.info}>
-								<Image
-									style={styles.image}
-									resizeMode='cover'
-									source={
-										n.avatar != ''
-											? { uri: n.avatar }
-											: require('../../../assets/avatar.png')
-									}
-								/>
+								<View style={styles.logoImage}>
+									<Image
+										style={styles.image}
+										resizeMode='cover'
+										source={
+											n.avatar != ''
+												? { uri: n.avatar }
+												: require('../../../assets/avatar.png')
+										}
+									/>
+								</View>
 								<WalletText style={{ marginLeft: 12 }} size='m'>
 									{n.name}
 								</WalletText>
@@ -65,9 +67,17 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
-	image: {
+	logoImage: {
 		width: 35,
 		height: 35,
+		overflow: 'hidden',
+		borderRadius: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	image: {
+		width: 42,
+		height: 42,
 		overflow: 'hidden',
 		borderRadius: 50,
 	},

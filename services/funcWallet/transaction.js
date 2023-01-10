@@ -5,15 +5,12 @@ import { Transaction } from '@ethereumjs/tx' // npm install ethereumjs-tx
 /**
  * CONFIG
  * @param YOUR_INFRA_PROJECT_ID - goto https://infura.io/register, create an account and get the endpoint;
- * @param PRIVATE_KEY - address to send from private key. if you only have the wallet mnemonic phrase use logic from getPrivKey.js;
  * @param MIN_ABI - application binary interface, sould look like this don't change;
  */
 
 let INFRA_PROJECT_ID = 'df6302883a974978853fb350122bbc6d'
 
 const web3 = new Web3('wss://mainnet.infura.io/ws/v3/' + INFRA_PROJECT_ID)
-let PRIVATE_KEY =
-	'c4be287b3e840df39e4d9f364e4bb57e9bb8e6e1b53099f9609508ef4e74dc10'
 
 const MIN_ABI = [
 	{
@@ -69,7 +66,8 @@ async function signAndSendTx(
 	value,
 	setHash,
 	setOpenModal,
-	setOpenModalGas
+	setOpenModalGas,
+	privateKey
 ) {
 	try {
 		var nonce = web3.utils.toHex(await web3.eth.getTransactionCount(from))
@@ -89,17 +87,17 @@ async function signAndSendTx(
 		console.log(transaction)
 
 		//singing our tx with private key
-		transaction.sign(Buffer.from(PRIVATE_KEY, 'hex'))
+		transaction.sign(Buffer.from(privateKey, 'hex'))
 
 		console.log('Sending transaction...')
 		web3.eth.sendSignedTransaction(
 			'0x' + transaction.serialize().toString('hex'),
 			(err, res) => {
 				if (err) {
-					setOpenModalGas(true)
+					setOpenModalGas()
 					console.log(err)
 				} else {
-					setOpenModal(true)
+					setOpenModal()
 					setHash(res)
 				}
 			}
@@ -122,7 +120,8 @@ async function transferErc20Token(
 	amount,
 	setHash,
 	setOpenModal,
-	setOpenModalGas
+	setOpenModalGas,
+	privateKey
 ) {
 	//format input
 	fromAddress = web3.utils.toChecksumAddress(fromAddress)
@@ -141,7 +140,8 @@ async function transferErc20Token(
 		null,
 		setHash,
 		setOpenModal,
-		setOpenModalGas
+		setOpenModalGas,
+		privateKey
 	)
 }
 
@@ -151,7 +151,8 @@ async function sendETH(
 	amount,
 	setHash,
 	setOpenModal,
-	setOpenModalGas
+	setOpenModalGas,
+	privateKey
 ) {
 	//format input
 	fromAddress = web3.utils.toChecksumAddress(fromAddress)
@@ -165,7 +166,8 @@ async function sendETH(
 		eth_amount,
 		setHash,
 		setOpenModal,
-		setOpenModalGas
+		setOpenModalGas,
+		privateKey
 	)
 }
 
@@ -183,7 +185,8 @@ export default async function transactionsSend(
 	ether = false,
 	setHash,
 	setOpenModal,
-	setOpenModalGas
+	setOpenModalGas,
+	privateKey
 ) {
 	// Set input data
 	const FROM = from // address to send from
@@ -191,7 +194,15 @@ export default async function transactionsSend(
 	const TOKEN = token // token address
 	const AMOUNT = amount != 0 ? amount : '0' // amount of token/eth, has to be a String value: "322", "2.88" etc.
 	if (ether) {
-		sendETH(FROM, TO, AMOUNT, setHash, setOpenModal, setOpenModalGas) // or sendETH(FROM, TO, "0.0025")
+		sendETH(
+			FROM,
+			TO,
+			AMOUNT,
+			setHash,
+			setOpenModal,
+			setOpenModalGas,
+			privateKey
+		) // or sendETH(FROM, TO, "0.0025")
 			.then((message) => {
 				console.log(message)
 			})
@@ -206,7 +217,8 @@ export default async function transactionsSend(
 			AMOUNT,
 			setHash,
 			setOpenModal,
-			setOpenModalGas
+			setOpenModalGas,
+			privateKey
 		) // or sendETH(FROM, TO, "0.0025")
 			.then((message) => {
 				console.log(message)

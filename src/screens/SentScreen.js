@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 	ScrollView,
 	Keyboard,
-	Image,
+	TouchableWithoutFeedback,
 } from 'react-native'
 import { WalletInput, WalletText } from './../Components/UI/'
 import { SelectCoinSent } from '../Components'
@@ -64,75 +64,79 @@ export const SentScreen = ({ navigation }) => {
 	}
 
 	return (
-		<ScrollView
-			contentContainerStyle={{
-				flexGrow: 1,
-				paddingBottom: 50,
-				paddingTop: 29,
-				justifyContent: 'space-between',
-			}}>
-			<View
-				style={{
-					flex: 1,
+		<TouchableWithoutFeedback
+			onPress={() => Keyboard.dismiss()}
+			accessible={false}>
+			<ScrollView
+				contentContainerStyle={{
+					flexGrow: 1,
+					paddingBottom: 50,
+					paddingTop: 29,
+					justifyContent: 'space-between',
 				}}>
-				<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
-					<WalletText
-						color='brown'
-						style={{ paddingLeft: 19, marginBottom: 7 }}>
-						Recipient Address
-					</WalletText>
-					<TouchableOpacity
-						style={styles.qrButton}
-						activeOpacity={0.7}
-						onPress={() => navigation.navigate('Scanner')}>
-						<SvgIcon type='qr-camera' />
-					</TouchableOpacity>
-					<WalletInput
-						styleInput={{ paddingRight: 50 }}
-						autoCapitalize='none'
-						setValue={onAddAddress}
-						value={fromAddress}
-						placeholder='Public Address (0x...) or ENS'
-					/>
-				</View>
 				<View
 					style={{
-						marginHorizontal: 16,
 						flex: 1,
-						justifyContent: 'space-between',
 					}}>
-					{chooseCoin != null ? (
-						<SelectCoinSent
-							setBtnDisabled={setBtnDisabled}
-							onChooseCoin={onChooseCoin}
+					<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
+						<WalletText
+							color='brown'
+							style={{ paddingLeft: 19, marginBottom: 7 }}>
+							Recipient Address
+						</WalletText>
+						<TouchableOpacity
+							style={styles.qrButton}
+							activeOpacity={0.7}
+							onPress={() => navigation.navigate('Scanner')}>
+							<SvgIcon type='qr-camera' />
+						</TouchableOpacity>
+						<WalletInput
+							styleInput={{ paddingRight: 50 }}
+							autoCapitalize='none'
+							setValue={onAddAddress}
+							value={fromAddress}
+							placeholder='Public Address (0x...) or ENS'
+						/>
+					</View>
+					<View
+						style={{
+							marginHorizontal: 16,
+							flex: 1,
+							justifyContent: 'space-between',
+						}}>
+						{chooseCoin != null ? (
+							<SelectCoinSent
+								setBtnDisabled={setBtnDisabled}
+								onChooseCoin={onChooseCoin}
+							/>
+						) : (
+							<></>
+						)}
+						<WalletButton
+							disabled={btnDisabled}
+							style={{
+								marginTop: 60,
+							}}
+							onPress={onSubmitSent}>
+							Send
+						</WalletButton>
+					</View>
+				</View>
+				<WalletBottomSheet
+					ref={coinsRef}
+					snapPoints={[openKeyboard ? '70%' : '55%']}>
+					{allCoins.length ? (
+						<ChooseCoins
+							chooseCoin={chooseCoin}
+							allCoins={allCoins}
+							onCoinPress={onCoinPress}
 						/>
 					) : (
 						<></>
 					)}
-					<WalletButton
-						disabled={btnDisabled}
-						style={{
-							marginTop: 60,
-						}}
-						onPress={onSubmitSent}>
-						Send
-					</WalletButton>
-				</View>
-			</View>
-			<WalletBottomSheet
-				ref={coinsRef}
-				snapPoints={[openKeyboard ? '70%' : '55%']}>
-				{allCoins.length ? (
-					<ChooseCoins
-						chooseCoin={chooseCoin}
-						allCoins={allCoins}
-						onCoinPress={onCoinPress}
-					/>
-				) : (
-					<></>
-				)}
-			</WalletBottomSheet>
-		</ScrollView>
+				</WalletBottomSheet>
+			</ScrollView>
+		</TouchableWithoutFeedback>
 	)
 }
 
