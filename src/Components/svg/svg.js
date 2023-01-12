@@ -86,6 +86,40 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'swap-horizontal':
+			return (
+				<Svg
+					xmlns='http://www.w3.org/2000/svg'
+					width={22}
+					height={23}
+					fill='none'
+					viewBox='0 0 22 23'
+					{...props}>
+					<G
+						clipPath='url(#a)'
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth={2}>
+						<Path
+							stroke='#8B6917'
+							d='M16.555 16.313H4.305m0 0l4.764 4.812m-4.764-4.813L9.069 11.5'
+						/>
+						<Path
+							stroke='#F9B446'
+							d='M4.304 6.688h13.067m0 0L12.29 1.875m5.081 4.813L12.29 11.5'
+						/>
+					</G>
+					<Defs>
+						<ClipPath id='a'>
+							<Path
+								fill='#fff'
+								d='M0 0h22v21H0z'
+								transform='rotate(-90 11.5 11)'
+							/>
+						</ClipPath>
+					</Defs>
+				</Svg>
+			)
 		case 'qr-camera':
 			return (
 				<Svg

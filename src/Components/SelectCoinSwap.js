@@ -11,6 +11,11 @@ import { THEME } from '../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
 import { PercentButtons } from './PercentButtons'
 import { SvgIcon } from './svg/svg'
+import { useDispatch } from 'react-redux'
+import {
+	setSwapAmountFirst,
+	setSwapAmountSecond,
+} from './../store/actions/walletActions'
 
 export const SelectCoinSwap = ({
 	onSwapCoins,
@@ -20,7 +25,27 @@ export const SelectCoinSwap = ({
 	chooseCoinSwapSecond,
 	style,
 }) => {
+	const dispatch = useDispatch()
 	const [firstAmount, setFirstAmount] = useState('0')
+	const [secondAmount, setSecondAmount] = useState('0')
+
+	useEffect(() => {
+		setSecondAmount(
+			fixNum(
+				(firstAmount * chooseCoinSwapFirst.market_data.current_price.usd) /
+					chooseCoinSwapSecond.market_data.current_price.usd
+			)
+		)
+		dispatch(
+			setSwapAmountSecond(
+				fixNum(
+					(firstAmount * chooseCoinSwapFirst.market_data.current_price.usd) /
+						chooseCoinSwapSecond.market_data.current_price.usd
+				)
+			)
+		)
+		dispatch(setSwapAmountFirst(firstAmount))
+	}, [firstAmount, chooseCoinSwapFirst, chooseCoinSwapSecond])
 	return (
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 10 }}>
@@ -54,7 +79,10 @@ export const SelectCoinSwap = ({
 									style={styles.image}
 									source={{ uri: chooseCoinSwapFirst.image.thumb }}
 								/>
-								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
+								<WalletText
+									size='m'
+									color='white'
+									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
 
@@ -80,11 +108,12 @@ export const SelectCoinSwap = ({
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
-						<View>
+						<View pointerEvents='none'>
 							<TextInput
 								keyboardType='numeric'
 								placeholderTextColor={THEME.BROWN_TEXT}
 								style={styles.input}
+								value={secondAmount}
 								placeholder='0.00'
 							/>
 							<WalletText colro='white' size='m'>
@@ -100,7 +129,10 @@ export const SelectCoinSwap = ({
 									style={styles.image}
 									source={{ uri: chooseCoinSwapSecond.image.thumb }}
 								/>
-								<WalletText size='m' color='white' style={{ marginLeft: 7 }}>
+								<WalletText
+									size='m'
+									color='white'
+									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
 								<SvgIcon type='check' fill={THEME.GOLD_DARK} />

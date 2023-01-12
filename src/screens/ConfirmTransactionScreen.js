@@ -19,7 +19,11 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	const [checkEther, setCheckEther] = useState(true)
 	const [hash, setHash] = useState('')
-	const [openModalGas, setOpenModalGas] = useState(false)
+
+	useEffect(() => {
+		setCheckEther(chooseCoin.symbol.toUpperCase().includes('ETH'))
+	}, [chooseCoin])
+
 	const openInfo = () => {
 		infoRef.current?.expand()
 	}

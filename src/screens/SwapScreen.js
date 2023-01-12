@@ -75,7 +75,11 @@ export const SwapScreen = ({ navigation }) => {
 			) : (
 				<></>
 			)}
-			<WalletButton style={{ marginBottom: 80 }}>Swap</WalletButton>
+			<WalletButton
+				style={{ marginBottom: 80 }}
+				onPress={() => navigation.navigate('ConfirmSwap')}>
+				Swap
+			</WalletButton>
 			<WalletBottomSheet ref={firstSwapRef} snapPoints={['65%']}>
 				<ChooseCoins
 					onCoinPress={onCloseFirstSwap}

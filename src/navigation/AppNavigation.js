@@ -30,6 +30,7 @@ import {
 	RiskAlertScreen,
 	Scanner,
 	PreloaderScreen,
+	ConfirmSwapScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -63,6 +64,17 @@ const screens = [
 			title: '',
 		},
 		component: UnlockScreen,
+	},
+	{
+		name: 'ConfirmSwap',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'Confirm Transaction',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+
+			headerRight: () => <AccountBtn navigation={navigation} />,
+		}),
+		component: ConfirmSwapScreen,
 	},
 	{
 		name: 'RiskAlert',
