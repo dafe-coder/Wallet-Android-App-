@@ -48,3 +48,4 @@ export * from './RiskAlertScreen'
 export * from './Scanner'
 
 export * from './PreloaderScreen'
+export * from './ConfirmSwapScreen'

@@ -17,6 +17,8 @@ import {
 	SET_LOADER,
 	SET_LOADER_SKELETON,
 	SET_NAV_SCREEN,
+	SET_SWAP_AMOUNT_FIRST,
+	SET_SWAP_AMOUNT_SECOND,
 } from '../type'
 
 export const setNavigation = (nav) => {
@@ -130,5 +132,17 @@ export const setNavScreen = (screen) => {
 	return {
 		type: SET_NAV_SCREEN,
 		payload: screen,
+	}
+}
+export const setSwapAmountFirst = (amount) => {
+	return {
+		type: SET_SWAP_AMOUNT_FIRST,
+		payload: amount,
+	}
+}
+export const setSwapAmountSecond = (amount) => {
+	return {
+		type: SET_SWAP_AMOUNT_SECOND,
+		payload: amount,
 	}
 }
