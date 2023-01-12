@@ -28,6 +28,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './src/store/index'
 import Spinner from 'react-native-loading-spinner-overlay'
+import { PreloaderScreen } from './src/screens/PreloaderScreen'
 
 LogBox.ignoreLogs([
 	"The provided value 'ms-stream' is not a valid 'responseType'",
@@ -63,11 +64,16 @@ const AppWrap = ({ children }) => {
 	const [loadingOtherCoins, setLoadingOtherCoins] = useState(true)
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
+	const [hidePreloader, setHidePreloader] = useState(true)
 	const { getAllTokens, postData } = useWalletService()
 	const { loader, navigation, portfolioCoins, portfolioBalance, allCoins } =
 		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
-
+	useEffect(() => {
+		setTimeout(() => {
+			setHidePreloader(false)
+		}, 5000)
+	}, [])
 	useEffect(() => {
 		if (allCoins.length) {
 			allCoins.forEach((c) => {
@@ -135,6 +141,7 @@ const AppWrap = ({ children }) => {
 
 	return (
 		<PersistGate loading={null} persistor={persistor}>
+			<PreloaderScreen load={hidePreloader} />
 			{children}
 			<Spinner
 				visible={loader}

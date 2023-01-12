@@ -58,8 +58,7 @@ const useWalletService = () => {
 		let strDecr
 		let lengthStr = str.split(' ').length
 		if (lengthStr < 2) {
-			// strDecr = CryptoJS.AES.decrypt(str, kitkat).toString(CryptoJS.enc.Utf8)
-			strDecr = str
+			strDecr = atob(str)
 		} else {
 			strDecr = str
 		}

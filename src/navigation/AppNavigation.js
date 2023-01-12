@@ -342,13 +342,14 @@ const screens = [
 ]
 
 export function MyStack() {
-	const { lockWallet } = useSelector((state) => state.storage)
+	const { lockWallet, dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={lockWallet ? 'Unlock' : 'Preloader'}
-			// 'Preloader',
+			initialRouteName={
+				dataUser.length ? (lockWallet ? 'Unlock' : 'Wallet') : 'Login'
+			}
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,
 			}}

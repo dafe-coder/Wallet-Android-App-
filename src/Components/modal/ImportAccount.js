@@ -42,16 +42,17 @@ export const ImportAccount = ({ navigation, onCloseImport }) => {
 		if (!onClick && !btnDisabled) {
 			dispatch(setLoader(true))
 			setOnClick(true)
-			onCloseImport()
 			setTimeoutId(
 				setTimeout(() => {
+					onCloseImport()
 					postData(phrase != '' ? phrase : privateKey, false)
 						.then((response) => {
 							let privateKeyString = phrase != '' ? generateWallet(phrase) : ''
 							const newAccount = {
 								name: name != '' ? name : createName(dataUser),
-								phrase: phrase,
-								privateKey: privateKey != '' ? privateKey : privateKeyString,
+								phrase: btoa(phrase),
+								privateKey:
+									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
 								avatar: faker.image.abstract(128, 128, true),
 							}

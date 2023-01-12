@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Preloader } from '../Components/Loader/Preloader'
 import { THEME } from './../Theme'
-import { useSelector, useDispatch } from 'react-redux'
 import Animated, {
 	useSharedValue,
 	useAnimatedStyle,
@@ -10,12 +9,8 @@ import Animated, {
 	interpolateColor,
 	Easing,
 } from 'react-native-reanimated'
-import { setNavigation } from '../store/actions/walletActions'
 
-export const PreloaderScreen = ({ navigation }) => {
-	const dispatch = useDispatch()
-	const [timeoutId, setTimeoutId] = useState(null)
-	const { dataUser } = useSelector((state) => state.storage)
+export const PreloaderScreen = ({ load }) => {
 	const offset = useSharedValue(0)
 	const offsetLogo = useSharedValue(-400)
 	const reanimatedBackgroundColor = useSharedValue(0)
@@ -74,27 +69,24 @@ export const PreloaderScreen = ({ navigation }) => {
 
 	useEffect(() => {
 		onInitAnim()
-		if (dataUser.length && dataUser.length >= 1) {
-			setTimeoutId(
-				setTimeout(() => {
-					navigation.navigate('Wallet')
-					dispatch(setNavigation(navigation))
-				}, 3100)
-			)
-		} else {
-			setTimeoutId(
-				setTimeout(() => {
-					navigation.navigate('Login')
-				}, 3100)
-			)
-		}
-		return () => {
-			clearTimeout(timeoutId)
-		}
-	}, [dataUser, navigation])
+	}, [])
 
 	return (
-		<Animated.View style={[{ flex: 1 }, animatedStyles]}>
+		<Animated.View
+			style={[
+				{
+					backgroundColor: THEME.GOLD,
+					display: load ? 'flex' : 'none',
+					position: 'absolute',
+					left: 0,
+					top: 0,
+					right: 0,
+					bottom: 0,
+					zIndex: 100,
+					flex: 1,
+				},
+				animatedStyles,
+			]}>
 			<Preloader
 				transformLogo={transformLogo}
 				transformTitle={transformTitle}

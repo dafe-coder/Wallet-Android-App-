@@ -23,15 +23,15 @@ import createName from '../../../services/funcWallet/createName'
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { postData } = useWalletService()
-	const { dataUser, password } = useSelector((state) => state.storage)
+	const { dataUser } = useSelector((state) => state.storage)
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(false)
 	const [onClick, setOnClick] = useState(false)
 	const [timeoutID, setTimeoutId] = useState(null)
 	const submitRestore = () => {
 		if (!onClick) {
-			setOnClick(true)
 			dispatch(setLoader(true))
+			setOnClick(true)
 			setTimeoutId(
 				setTimeout(() => {
 					let privateKeyString =
@@ -40,18 +40,17 @@ export const PhraseScreen = ({ navigation }) => {
 						.then((response) => {
 							const newAccount = {
 								name: createName(dataUser),
-								phrase: phrase,
-								privateKey: privateKey != '' ? privateKey : privateKeyString,
+								phrase: btoa(phrase),
+								privateKey:
+									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
 								avatar: faker.image.abstract(128, 128, true),
 							}
 							dispatch(setCurrentAccount(createName(dataUser)))
 							dispatch(setDataUser(newAccount))
-							password != ''
-								? navigation.navigate('ConfirmPassword')
-								: navigation.navigate('CreatePassword')
-							dispatch(setLoader(false))
 							dispatch(setPhrase(''))
+							navigation.navigate('CreatePassword')
+							dispatch(setLoader(false))
 							setOnClick(false)
 						})
 						.catch((error) => console.log('error', error))

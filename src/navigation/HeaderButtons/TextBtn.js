@@ -19,7 +19,7 @@ export const TextBtn = ({ onPress, children, position, navigation, type }) => {
 	const { accountName } = useSelector((state) => state.wallet)
 	useEffect(() => {
 		return () => clearTimeout(timeoutId)
-	}, [])
+	}, [navigation])
 	const onReadyAccountSettings = () => {
 		if (accountName != '') {
 			dispatch(setLoader(true))
@@ -27,11 +27,11 @@ export const TextBtn = ({ onPress, children, position, navigation, type }) => {
 			setTimeoutId(
 				setTimeout(() => {
 					dispatch(setNewAccountName(accountName))
-					navigation.navigate('Wallet')
 					dispatch(setCurrentAccount(accountName))
 					dispatch(setAccountName(''))
-					dispatch(setLoader(false))
+					navigation.navigate('Account')
 					dispatch(setLoaderSkeleton(true))
+					dispatch(setLoader(false))
 				}, 2000)
 			)
 		}

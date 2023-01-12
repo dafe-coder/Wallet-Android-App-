@@ -18,13 +18,12 @@ export const CreatePhraseScreen = ({ navigation }) => {
 
 	const onCreateAccount = () => {
 		if (phrase != '') {
-			console.log(phrase)
 			postData(phrase, true)
 				.then((response) => {
 					const newAccount = {
 						name: createName(dataUser),
-						phrase: phrase,
-						privateKey: privateKey,
+						phrase: btoa(phrase),
+						privateKey: btoa(privateKey),
 						address: response.address,
 						avatar: faker.image.abstract(128, 128, true),
 					}
