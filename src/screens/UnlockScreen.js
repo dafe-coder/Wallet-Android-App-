@@ -46,10 +46,11 @@ export const UnlockScreen = ({ navigation }) => {
 						length={6}
 						autoFocus={false}
 						containerStyle={{
-							display: 'flex',
 							width: '100%',
 							height: 47,
+							flexDirection: 'row',
 							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 						circleContainerStyle={{
 							justifyContent: 'center',
@@ -113,5 +114,7 @@ const styles = StyleSheet.create({
 		marginTop: 40,
 		borderRadius: 10,
 		paddingBottom: 5,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 })

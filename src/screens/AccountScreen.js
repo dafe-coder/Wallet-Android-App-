@@ -75,6 +75,7 @@ export const AccountScreen = ({ navigation }) => {
 					ref={importAccountRef}
 					snapPoints={[!openKeyboard ? '80%' : '100%']}>
 					<ImportAccount
+						style={openKeyboard ? { paddingBottom: 250 } : {}}
 						onCloseImport={onCloseImport}
 						navigation={navigation}
 					/>

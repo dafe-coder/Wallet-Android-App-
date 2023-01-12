@@ -345,6 +345,7 @@ export function MyStack() {
 	const { lockWallet, dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
+			shifting={false}
 			animationEnabled={false}
 			style={{ flex: 1 }}
 			initialRouteName={
