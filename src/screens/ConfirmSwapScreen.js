@@ -18,93 +18,85 @@ import {
 	setSwapAmountSecond,
 } from './../store/actions/walletActions'
 export const ConfirmSwapScreen = ({ navigation }) => {
-	const [swap, setSwap] = useState(false)
 	const dispatch = useDispatch()
 	const {
 		chooseCoin,
 		chooseCoinSwapSecond,
-		allCoins,
 		swapAmountFirst,
 		swapAmountSecond,
 	} = useSelector((state) => state.wallet)
 
-	useEffect(() => {
-		dispatch(
-			setChooseCoinSwapSecond(
-				allCoins.filter((d) => d.symbol.includes('btc'))[0]
-			)
-		)
-	}, [allCoins])
-
-	useEffect(() => {
-		const frst = swapAmountFirst
-		const scnd = swapAmountSecond
-		dispatch(setSwapAmountFirst(scnd))
-		dispatch(setSwapAmountSecond(frst))
-	}, [swap])
-
 	const onSwapCoins = () => {
-		setSwap((state) => !state)
 		const frst = chooseCoin
 		const scnd = chooseCoinSwapSecond
 		dispatch(setChooseCoin(scnd))
 		dispatch(setChooseCoinSwapSecond(frst))
+
+		const frstAmount = swapAmountFirst
+		const scndAmount = swapAmountSecond
+		dispatch(setSwapAmountFirst(scndAmount))
+		dispatch(setSwapAmountSecond(frstAmount))
 	}
 	return (
-		<ScrollView
-			style={{
-				flex: 1,
-				paddingTop: 62,
-				paddingBottom: 50,
-				paddingHorizontal: 16,
-			}}>
-			<View style={[styles.itemSwap, { alignItems: 'center' }]}>
-				<View style={{ alignItems: 'center' }}>
-					<Image
-						style={{
-							width: 26,
-							height: 26,
-							borderRadius: 50,
-							overflow: 'hidden',
-							marginBottom: 4,
-						}}
-						source={{ uri: chooseCoin.image.thumb }}
-					/>
-					<WalletText>
-						{swapAmountFirst + ' ' + chooseCoin.symbol.toUpperCase()}
-					</WalletText>
-				</View>
-				<TouchableOpacity activeOpacity={0.7} onPress={onSwapCoins}>
-					<View style={styles.swapBtn}>
-						<SvgIcon type='swap-horizontal' />
+		<ScrollView>
+			<View
+				style={{
+					flex: 1,
+					paddingTop: 62,
+					paddingHorizontal: 16,
+				}}>
+				<View style={[styles.itemSwap, { alignItems: 'center' }]}>
+					<View style={{ alignItems: 'center', flexBasis: '45%' }}>
+						<Image
+							style={{
+								width: 26,
+								height: 26,
+								borderRadius: 50,
+								overflow: 'hidden',
+								marginBottom: 4,
+							}}
+							source={{ uri: chooseCoin.image.thumb }}
+						/>
+						<WalletText>
+							{swapAmountFirst + ' ' + chooseCoin.symbol.toUpperCase()}
+						</WalletText>
 					</View>
-				</TouchableOpacity>
-				<View style={{ alignItems: 'center' }}>
-					<Image
-						style={{
-							width: 26,
-							height: 26,
-							borderRadius: 50,
-							overflow: 'hidden',
-							marginBottom: 4,
-						}}
-						source={{ uri: chooseCoinSwapSecond.image.thumb }}
-					/>
-					<WalletText>
-						{swapAmountSecond + ' ' + chooseCoinSwapSecond.symbol.toUpperCase()}
-					</WalletText>
+					<TouchableOpacity activeOpacity={0.7} onPress={onSwapCoins}>
+						<View style={styles.swapBtn}>
+							<SvgIcon type='swap-horizontal' />
+						</View>
+					</TouchableOpacity>
+					<View style={{ alignItems: 'center', flexBasis: '45%' }}>
+						<Image
+							style={{
+								width: 26,
+								height: 26,
+								borderRadius: 50,
+								overflow: 'hidden',
+								marginBottom: 4,
+							}}
+							source={{ uri: chooseCoinSwapSecond.image.thumb }}
+						/>
+						<WalletText>
+							{swapAmountSecond +
+								' ' +
+								chooseCoinSwapSecond.symbol.toUpperCase()}
+						</WalletText>
+					</View>
 				</View>
+				{chooseCoin != null && chooseCoinSwapSecond != null ? (
+					<SwapDetails
+						confirm
+						chooseCoinSwapFirst={chooseCoin}
+						chooseCoinSwapSecond={chooseCoinSwapSecond}
+					/>
+				) : (
+					<></>
+				)}
+				<WalletButton onPress={() => {}} style={{ marginBottom: 60 }}>
+					Swap
+				</WalletButton>
 			</View>
-			{chooseCoin != null && chooseCoinSwapSecond != null ? (
-				<SwapDetails
-					confirm
-					chooseCoinSwapFirst={chooseCoin}
-					chooseCoinSwapSecond={chooseCoinSwapSecond}
-				/>
-			) : (
-				<></>
-			)}
-			<WalletButton>Swap</WalletButton>
 		</ScrollView>
 	)
 }
@@ -126,6 +118,6 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginBottom: 48,
 		flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'space-between',
 	},
 })

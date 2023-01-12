@@ -25,16 +25,20 @@ export const SettingsScreen = ({ navigation }) => {
 		}
 	}
 
+	const onCloseNetwork = () => {
+		networkRef.current?.close()
+	}
+
 	return (
 		<ScrollView style={{ flex: 1, paddingTop: 29 }}>
 			<View style={{ paddingHorizontal: 16 }}>
-				<AccountCard />
+				<AccountCard navigation={navigation} />
 			</View>
 			<View style={{ paddingBottom: 80 }}>
 				<SettingsListMenu onPress={handlePresentPress} />
 			</View>
 			<WalletBottomSheet ref={networkRef} snapPoints={['55%']}>
-				<ChangeCurrentNetwork />
+				<ChangeCurrentNetwork onPress={onCloseNetwork} />
 			</WalletBottomSheet>
 
 			<WalletBottomSheet ref={connectedAppsRef} snapPoints={['55%']}>

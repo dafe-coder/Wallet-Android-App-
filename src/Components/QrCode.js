@@ -1,18 +1,18 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
-// import QRCode from 'react-native-qrcode-svg'
+import QRCode from 'react-native-qrcode-svg'
 
 export const QrCode = ({ value, setRef }) => {
 	return (
 		<View style={styles.block}>
-			{/* <QRCode
+			<QRCode
 				value={value}
 				color='black'
 				backgroundColor='white'
 				size={130}
 				getRef={(c) => setRef(c)}
-			/> */}
+			/>
 		</View>
 	)
 }

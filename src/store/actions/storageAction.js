@@ -6,6 +6,8 @@ import {
 	SET_NEW_ACCOUNT_NAME,
 	SET_DELETE_ACCOUNT,
 	SET_CLEAR_DATAUSER,
+	SET_LOCK_WALLET,
+	SET_SHARE_ANALYTICS,
 } from '../type'
 
 export const setPassword = (password) => {
@@ -47,5 +49,17 @@ export const setDeleteAccount = (account) => {
 export const setClearDataUser = () => {
 	return {
 		type: SET_CLEAR_DATAUSER,
+	}
+}
+export const setLockWallet = (lock) => {
+	return {
+		type: SET_LOCK_WALLET,
+		payload: lock,
+	}
+}
+export const setShareAnalytics = (boolean) => {
+	return {
+		type: SET_SHARE_ANALYTICS,
+		payload: boolean,
 	}
 }

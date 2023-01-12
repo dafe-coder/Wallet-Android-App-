@@ -20,6 +20,7 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 	const [chk1, setChk1] = useState(false)
 	const [chk2, setChk2] = useState(false)
 	const [chk3, setChk3] = useState(false)
+	const [timeoutID, setTimeoutId] = useState(null)
 
 	useEffect(() => {
 		if (chk1 && chk2 && chk3) {
@@ -29,17 +30,25 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 		}
 	}, [chk1, chk2, chk3])
 
+	useEffect(() => {
+		return () => clearTimeout(timeoutID)
+	}, [])
+
 	const createPhrase = () => {
 		dispatch(setLoader(true))
-		async function generateWords() {
-			const entropy = await crypto.getRandomValues(new Uint8Array(16))
-			const privateKey = await generateWallet(entropyToMnemonic(entropy))
-			dispatch(setPrivateKey(privateKey))
-			dispatch(setPhrase(entropyToMnemonic(entropy)))
-			navigation.navigate('CreatePhrase')
-			dispatch(setLoader(false))
-		}
-		generateWords()
+		setTimeoutId(
+			setTimeout(() => {
+				async function generateWords() {
+					const entropy = await crypto.getRandomValues(new Uint8Array(16))
+					const privateKey = await generateWallet(entropyToMnemonic(entropy))
+					dispatch(setPrivateKey(privateKey))
+					dispatch(setPhrase(entropyToMnemonic(entropy)))
+					navigation.navigate('CreatePhrase')
+					dispatch(setLoader(false))
+				}
+				generateWords()
+			}, 50)
+		)
 	}
 
 	return (

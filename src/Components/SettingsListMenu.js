@@ -28,11 +28,11 @@ export const SettingsListMenu = ({ onPress }) => {
 			topLine: true,
 			onPress: onPress,
 		},
-		{
-			title: 'Add Custom Token',
-			subTitle: 'Add a custom ERC-20 Token',
-			topLine: true,
-		},
+		// {
+		// 	title: 'Add Custom Token',
+		// 	subTitle: 'Add a custom ERC-20 Token',
+		// 	topLine: true,
+		// },
 		{
 			title: 'Export Account – Secret Phrase',
 			subTitle: 'Export all accounts in your wallet',

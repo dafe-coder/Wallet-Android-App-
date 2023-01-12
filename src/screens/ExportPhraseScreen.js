@@ -55,13 +55,14 @@ export const ExportPhraseScreen = ({ navigation }) => {
 						ref={pincodeInput}
 						length={6}
 						containerStyle={{
-							display: 'flex',
 							width: '100%',
 							height: 47,
 							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 						circleContainerStyle={{
-							paddingHorizontal: 140,
+							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 						circleEmptyStyle={{
 							width: 9,
@@ -70,10 +71,12 @@ export const ExportPhraseScreen = ({ navigation }) => {
 							borderColor: THEME.BROWN_TEXT,
 							backgroundColor: THEME.BROWN_TEXT,
 							borderRadius: 50,
+							marginHorizontal: 4,
 						}}
 						circleFilledStyle={{
 							backgroundColor: THEME.GOLD,
 							width: 9,
+							marginHorizontal: 4,
 							height: 9,
 						}}
 						pin={pin}

@@ -4,12 +4,14 @@ import { THEME } from './../Theme'
 import { WalletText } from './UI/WalletText'
 import { SwitchButton } from './UI'
 import { SvgIconNav } from './svg/svgNav'
+import { useSelector } from 'react-redux'
 export const SettingsItemMenu = ({
 	title,
 	subTitle,
 	switchButton,
 	onPress,
 }) => {
+	const { analytics } = useSelector((state) => state.storage)
 	return (
 		<TouchableOpacity activeOpacity={0.9} onPress={() => onPress(title)}>
 			<View style={styles.item}>
@@ -18,7 +20,7 @@ export const SettingsItemMenu = ({
 					<WalletText color='brown'>{subTitle}</WalletText>
 				</View>
 				{switchButton ? (
-					<SwitchButton enabled={true} />
+					<SwitchButton enabled={analytics} />
 				) : (
 					<SvgIconNav type='triangle' />
 				)}

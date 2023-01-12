@@ -63,9 +63,11 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 							justifyContent: 'center',
 						}}
 						circleContainerStyle={{
-							paddingHorizontal: 140,
+							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 						circleEmptyStyle={{
+							marginHorizontal: 4,
 							width: 9,
 							height: 9,
 							borderWidth: 1,
@@ -77,6 +79,7 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 							backgroundColor: THEME.GOLD,
 							width: 9,
 							height: 9,
+							marginHorizontal: 4,
 						}}
 						pin={pin}
 						onTextChange={handleOnTextChange}

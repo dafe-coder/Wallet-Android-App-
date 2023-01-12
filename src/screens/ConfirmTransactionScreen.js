@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { WalletText, WalletButton } from '../Components/UI'
 import { THEME } from '../Theme'
 import { TransactionInfo } from './../Components'
@@ -64,65 +64,67 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		// navigation.navigate('Sent')
 	}
 	return (
-		<View
-			style={{
-				flex: 1,
-				paddingTop: 29,
-				paddingBottom: 50,
-				justifyContent: 'space-between',
-			}}>
-			<View style={{ paddingHorizontal: 16 }}>
-				<View style={{ marginBottom: 24 }}>
-					<WalletText color='brown' style={{ marginBottom: 7 }}>
-						From
-					</WalletText>
-					<View style={styles.item}>
-						<WalletText size='m' color='white'>
-							{dataUser.map((d) => {
-								if (d.name === currentAccount) {
-									return d.address.slice(0, 13) + '...' + d.address.slice(-10)
-								}
-							})}
+		<ScrollView>
+			<View
+				style={{
+					flex: 1,
+					paddingTop: 29,
+					paddingBottom: 50,
+					justifyContent: 'space-between',
+				}}>
+				<View style={{ paddingHorizontal: 16 }}>
+					<View style={{ marginBottom: 24 }}>
+						<WalletText color='brown' style={{ marginBottom: 7 }}>
+							From
 						</WalletText>
+						<View style={styles.item}>
+							<WalletText size='m' color='white'>
+								{dataUser.map((d) => {
+									if (d.name === currentAccount) {
+										return d.address.slice(0, 13) + '...' + d.address.slice(-10)
+									}
+								})}
+							</WalletText>
+						</View>
 					</View>
-				</View>
-				<View style={{ marginBottom: 24 }}>
-					<WalletText color='brown' style={{ marginBottom: 7 }}>
-						To
-					</WalletText>
-					<View style={styles.item}>
-						<WalletText size='m' color='white'>
-							{addressTo.slice(0, 13) + '...' + addressTo.slice(-10)}
+					<View style={{ marginBottom: 24 }}>
+						<WalletText color='brown' style={{ marginBottom: 7 }}>
+							To
 						</WalletText>
+						<View style={styles.item}>
+							<WalletText size='m' color='white'>
+								{addressTo.slice(0, 13) + '...' + addressTo.slice(-10)}
+							</WalletText>
+						</View>
 					</View>
+					<TransactionInfo
+						chooseCoin={chooseCoin}
+						amountSend={amountSend}
+						onPress={openInfo}
+					/>
 				</View>
-				<TransactionInfo
-					chooseCoin={chooseCoin}
-					amountSend={amountSend}
-					onPress={openInfo}
-				/>
+				<View style={styles.btns}>
+					<WalletButton
+						type='border'
+						style={styles.btn}
+						onPress={() => navigation.navigate('Sent')}>
+						Reject
+					</WalletButton>
+					<WalletButton onPress={onSendTransaction} style={styles.btn}>
+						Confirm
+					</WalletButton>
+				</View>
+				<WalletBottomSheet ref={infoRef} snapPoints={['55%']}>
+					<TransactionFee onPress={closeInfo} />
+				</WalletBottomSheet>
+				<WalletBottomSheet ref={infoSuccess} snapPoints={['48%']}>
+					<Success onPress={onCloseSuccess} />
+				</WalletBottomSheet>
+				<WalletBottomSheet ref={gasRef} snapPoints={['48%']}>
+					<Gas onPress={onCloseGas} />
+				</WalletBottomSheet>
 			</View>
-			<View style={styles.btns}>
-				<WalletButton
-					type='border'
-					style={styles.btn}
-					onPress={() => navigation.navigate('Sent')}>
-					Reject
-				</WalletButton>
-				<WalletButton onPress={onSendTransaction} style={styles.btn}>
-					Confirm
-				</WalletButton>
-			</View>
-			<WalletBottomSheet ref={infoRef} snapPoints={['55%']}>
-				<TransactionFee onPress={closeInfo} />
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={infoSuccess} snapPoints={['48%']}>
-				<Success onPress={onCloseSuccess} />
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={gasRef} snapPoints={['48%']}>
-				<Gas onPress={onCloseGas} />
-			</WalletBottomSheet>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -140,5 +142,6 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		width: '48.5%',
+		marginTop: 50,
 	},
 })

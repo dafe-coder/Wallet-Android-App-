@@ -4,12 +4,12 @@ import { AccountItemMenu } from './AccountItemMenu'
 
 export const AccountListMenu = ({ onPress }) => {
 	const menuData = [
-		{
-			image: 'plus',
-			title: 'Add Account',
-			topLine: true,
-			onPress: onPress,
-		},
+		// {
+		// 	image: 'plus',
+		// 	title: 'Add Account',
+		// 	topLine: true,
+		// 	onPress: onPress,
+		// },
 		{
 			image: 'import',
 			title: 'Import Account',

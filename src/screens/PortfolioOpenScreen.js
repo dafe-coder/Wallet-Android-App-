@@ -13,16 +13,17 @@ import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
 
-export const PortfolioOpenScreen = () => {
+export const PortfolioOpenScreen = ({ navigation }) => {
 	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
 
 	useEffect(() => {
 		let filtered = transactions.filter((item) => item.status !== 'failed')
-		let filteredToken = filtered.filter(
-			(item) =>
-				item.changes[0].asset.symbol.toLowerCase() ==
-				portfolioOpen.symbol.toLowerCase()
+		let filteredToken = filtered.filter((item) =>
+			item.changes[0]
+				? item.changes[0].asset.symbol.toLowerCase() ==
+				  portfolioOpen.symbol.toLowerCase()
+				: false
 		)
 		let filteredTokenSwap = filtered.filter((item) =>
 			item.changes[1]
@@ -68,7 +69,7 @@ export const PortfolioOpenScreen = () => {
 				</ImageBackground>
 			</View>
 			<View style={{ marginTop: 30 }}>
-				<WalletNav />
+				<WalletNav navigation={navigation} />
 			</View>
 			<View style={{ marginBottom: 40 }}>
 				{transactionList.length < 1 ? (

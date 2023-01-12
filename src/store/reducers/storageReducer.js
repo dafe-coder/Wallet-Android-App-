@@ -6,12 +6,16 @@ import {
 	SET_CURRENT_ACCOUNT,
 	SET_DELETE_ACCOUNT,
 	SET_CLEAR_DATAUSER,
+	SET_LOCK_WALLET,
+	SET_SHARE_ANALYTICS,
 } from '../type'
 const initialState = {
 	password: '',
 	currentNetwork: 'Ethereum',
 	dataUser: [],
 	currentAccount: '',
+	lockWallet: false,
+	analytics: true,
 }
 
 export const storageReducer = (state = initialState, action) => {
@@ -35,6 +39,16 @@ export const storageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				currentAccount: action.payload,
+			}
+		case SET_SHARE_ANALYTICS:
+			return {
+				...state,
+				analytics: action.payload,
+			}
+		case SET_LOCK_WALLET:
+			return {
+				...state,
+				lockWallet: action.payload,
 			}
 		case SET_CLEAR_DATAUSER:
 			return {

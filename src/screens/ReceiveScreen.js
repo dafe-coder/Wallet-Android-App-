@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, TouchableOpacity, Image, Share } from 'react-native'
+import {
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	ScrollView,
+	Share,
+} from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI'
 import { QrCode } from './../Components/'
 import { CameraRoll, ToastAndroid } from 'react-native'
@@ -49,65 +55,68 @@ export const ReceiveScreen = () => {
 		await Clipboard.setStringAsync(address)
 	}
 	return (
-		<View style={{ paddingTop: 116, paddingHorizontal: 16 }}>
-			{/* <View style={{ alignItems: 'flex-end', marginBottom: 58 }}>
+		<ScrollView>
+			<View
+				style={{ paddingTop: 70, paddingHorizontal: 16, paddingBottom: 60 }}>
+				{/* <View style={{ alignItems: 'flex-end', marginBottom: 58 }}>
 				<TouchableOpacity
-					style={styles.btnSave}
-					activeOpacity={0.7}
-					onPress={saveQrToDisk}>
-					<WalletText style={{ color: THEME.GOLD, fontSize: 12 }}>
-						Save QR code
-					</WalletText>
+				style={styles.btnSave}
+				activeOpacity={0.7}
+				onPress={saveQrToDisk}>
+				<WalletText style={{ color: THEME.GOLD, fontSize: 12 }}>
+				Save QR code
+				</WalletText>
 				</TouchableOpacity>
 			</View> */}
-			<WalletTitle style={{ marginBottom: 34 }}>
-				Scan QR Code and Pay
-			</WalletTitle>
-			{address != '' ? <QrCode setRef={setRef} value={address} /> : <></>}
-			<View style={styles.address}>
-				<WalletText color='white'>
-					{address.slice(0, 13) + '...' + address.slice(-10)}
-				</WalletText>
-			</View>
-			<View
-				style={{
-					flexDirection: 'row',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					marginTop: 48,
-				}}>
-				<TouchableOpacity
-					activeOpacity={0.7}
-					style={styles.link}
-					onPress={shareQR}>
-					<SvgIcon
-						style={{ marginTop: 1 }}
-						width='24'
-						height='24'
-						type='share'
-						fill={THEME.GOLD_DARK}
-					/>
-					<WalletText style={{ marginLeft: 8 }} color='gold'>
-						Share address
+				<WalletTitle style={{ marginBottom: 34 }}>
+					Scan QR Code and Pay
+				</WalletTitle>
+				{address != '' ? <QrCode setRef={setRef} value={address} /> : <></>}
+				<View style={styles.address}>
+					<WalletText color='white'>
+						{address.slice(0, 13) + '...' + address.slice(-10)}
 					</WalletText>
-				</TouchableOpacity>
-				<TouchableOpacity
-					activeOpacity={0.7}
-					style={styles.link}
-					onPress={onCopy}>
-					<SvgIcon
-						style={{ marginTop: 4 }}
-						width='24'
-						height='24'
-						type='copy'
-						fill={THEME.GOLD_DARK}
-					/>
-					<WalletText style={{ marginLeft: 8 }} color='gold'>
-						Copy address
-					</WalletText>
-				</TouchableOpacity>
+				</View>
+				<View
+					style={{
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+						marginTop: 48,
+					}}>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						style={styles.link}
+						onPress={shareQR}>
+						<SvgIcon
+							style={{ marginTop: 1 }}
+							width='24'
+							height='24'
+							type='share'
+							fill={THEME.GOLD_DARK}
+						/>
+						<WalletText style={{ marginLeft: 8 }} color='gold'>
+							Share address
+						</WalletText>
+					</TouchableOpacity>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						style={styles.link}
+						onPress={onCopy}>
+						<SvgIcon
+							style={{ marginTop: 4 }}
+							width='24'
+							height='24'
+							type='copy'
+							fill={THEME.GOLD_DARK}
+						/>
+						<WalletText style={{ marginLeft: 8 }} color='gold'>
+							Copy address
+						</WalletText>
+					</TouchableOpacity>
+				</View>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 

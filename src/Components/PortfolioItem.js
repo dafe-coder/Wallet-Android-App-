@@ -4,6 +4,7 @@ import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
 import { useDispatch } from 'react-redux'
 import { setPortfolioOpen } from '../store/actions/walletActions'
+import fixNum from './../../services/funcWallet/fixNum'
 export const PortfolioItem = ({
 	img,
 	title,
@@ -27,12 +28,14 @@ export const PortfolioItem = ({
 			<View style={{ flexDirection: 'row' }}>
 				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>
-					<WalletText>{title}</WalletText>
-					<WalletText style={{ color: THEME.GREY }}>${currentPrice}</WalletText>
+					<WalletText>{title.toUpperCase()}</WalletText>
+					<WalletText style={{ color: THEME.GREY }}>
+						${fixNum(currentPrice)}
+					</WalletText>
 				</View>
 			</View>
 			<View style={{ alignItems: 'flex-end' }}>
-				<WalletText>{balance}</WalletText>
+				<WalletText>{fixNum(balance)}</WalletText>
 				<WalletText
 					style={
 						changePercent > 0 ? { color: THEME.SUCCESS } : { color: THEME.RED }

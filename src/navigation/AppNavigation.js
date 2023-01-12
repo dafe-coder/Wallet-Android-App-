@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
+import { useSelector } from 'react-redux'
 import {
 	LoginScreen,
 	CreatePhraseScreen,
@@ -31,6 +32,7 @@ import {
 	Scanner,
 	PreloaderScreen,
 	ConfirmSwapScreen,
+	TransactionHistoryPageScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
@@ -62,6 +64,7 @@ const screens = [
 		options: {
 			headerShown: true,
 			title: '',
+			headerLeft: () => <></>,
 		},
 		component: UnlockScreen,
 	},
@@ -113,6 +116,17 @@ const screens = [
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: TransactionHistoryScreen,
+	},
+	{
+		name: 'TransactionHistoryPage',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => <></>,
+			headerTitle: () => <HeaderTitle />,
+			headerRight: () => <AccountBtn navigation={navigation} />,
+		}),
+		component: TransactionHistoryPageScreen,
 	},
 	{
 		name: 'EditProfile',
@@ -328,11 +342,12 @@ const screens = [
 ]
 
 export function MyStack() {
+	const { lockWallet } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
 			animationEnabled={false}
 			style={{ flex: 1 }}
-			initialRouteName={'Preloader'}
+			initialRouteName={lockWallet ? 'Unlock' : 'Preloader'}
 			// 'Preloader',
 			backgroundStyle={{
 				backgroundColor: THEME.PRIMARY,

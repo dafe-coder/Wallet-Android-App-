@@ -67,6 +67,7 @@ const AppWrap = ({ children }) => {
 	const { loader, navigation, portfolioCoins, portfolioBalance, allCoins } =
 		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+
 	useEffect(() => {
 		if (allCoins.length) {
 			allCoins.forEach((c) => {

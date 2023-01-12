@@ -9,15 +9,15 @@ import {
 import { AccountCard } from '../Components'
 import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
-import { AddAccount, ImportAccount } from '../Components/modal'
-import { useDispatch, useSelector } from 'react-redux'
+import { ImportAccount } from '../Components/modal'
+import { useDispatch } from 'react-redux'
 import { setNavigation } from '../store/actions/walletActions'
+import { setLockWallet } from '../store/actions/storageAction'
 
 export const AccountScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { currentAccount, dataUser } = useSelector((state) => state.storage)
 	// ref
-	const addAccountRef = useRef(null)
+	// const addAccountRef = useRef(null)
 	const importAccountRef = useRef(null)
 	const [openKeyboard, setOpenKeyboard] = useState(false)
 
@@ -36,6 +36,7 @@ export const AccountScreen = ({ navigation }) => {
 	}, [])
 
 	const onCloseImport = () => {
+		Keyboard.dismiss()
 		importAccountRef.current?.close()
 	}
 	// callbacks
@@ -51,8 +52,7 @@ export const AccountScreen = ({ navigation }) => {
 		} else if (title == 'Lock Wallet') {
 			navigation.navigate('Unlock')
 			dispatch(setNavigation(null))
-		} else {
-			addAccountRef.current.expand()
+			dispatch(setLockWallet(true))
 		}
 	}
 
@@ -68,9 +68,9 @@ export const AccountScreen = ({ navigation }) => {
 					<AccountCard navigation={navigation} />
 				</View>
 				<AccountListMenu onPress={handlePresentPress} />
-				<WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
+				{/* <WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
 					<AddAccount onPress={() => navigation.navigate('Contacts')} />
-				</WalletBottomSheet>
+				</WalletBottomSheet> */}
 				<WalletBottomSheet
 					ref={importAccountRef}
 					snapPoints={[!openKeyboard ? '80%' : '100%']}>

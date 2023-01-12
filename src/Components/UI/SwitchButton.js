@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Switch } from 'react-native'
 import { THEME } from './../../Theme'
-
+import { setShareAnalytics } from './../../store/actions/storageAction'
+import { useDispatch } from 'react-redux'
 export const SwitchButton = ({ enabled }) => {
-	const [isEnabled, setIsEnabled] = useState(enabled)
-	const toggleSwitch = () => setIsEnabled((previousState) => !previousState)
-
+	const dispatch = useDispatch()
+	const toggleSwitch = () => {
+		dispatch(setShareAnalytics(!enabled))
+	}
+	useEffect(() => {
+		console.log(enabled)
+	}, [enabled])
 	return (
 		<View>
 			<Switch
@@ -13,7 +18,7 @@ export const SwitchButton = ({ enabled }) => {
 				thumbColor={THEME.GOLD}
 				ios_backgroundColor={THEME.BROWN}
 				onValueChange={toggleSwitch}
-				value={isEnabled}
+				value={enabled}
 			/>
 		</View>
 	)

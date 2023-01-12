@@ -22,6 +22,7 @@ export const WalletBottomNav = () => {
 				style={[styles.item]}
 				onPress={() => onPressNav('Wallet')}>
 				<SvgIconNav
+					height='20'
 					type='wallet'
 					fill={navScreen == 'Wallet' ? THEME.GOLD_DARK : ''}
 				/>
@@ -34,6 +35,7 @@ export const WalletBottomNav = () => {
 				style={styles.item}
 				onPress={() => onPressNav('Nft')}>
 				<SvgIconNav
+					height='20'
 					type='bar'
 					fill={navScreen == 'Nft' ? THEME.GOLD_DARK : ''}
 				/>
@@ -57,12 +59,14 @@ export const WalletBottomNav = () => {
 			<TouchableOpacity
 				activeOpacity={1}
 				style={[styles.item]}
-				onPress={() => onPressNav('Activity')}>
+				onPress={() => onPressNav('TransactionHistoryPage')}>
 				<SvgIconNav
+					height='20'
 					type='activity'
-					fill={navScreen == 'Activity' ? THEME.GOLD_DARK : ''}
+					fill={navScreen == 'TransactionHistoryPage' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={navScreen == 'Activity' ? 'gold' : 'brown'}>
+				<WalletText
+					color={navScreen == 'TransactionHistoryPage' ? 'gold' : 'brown'}>
 					Activity
 				</WalletText>
 			</TouchableOpacity>
@@ -71,6 +75,7 @@ export const WalletBottomNav = () => {
 				style={styles.item}
 				onPress={() => onPressNav('Account')}>
 				<SvgIconNav
+					height='20'
 					type='man'
 					fill={navScreen == 'Account' ? THEME.GOLD_DARK : ''}
 				/>
@@ -96,11 +101,10 @@ const styles = StyleSheet.create({
 		backgroundColor: THEME.BROWN,
 		paddingTop: 15,
 		paddingBottom: 24,
-		paddingHorizontal: 33,
 		borderColor: '#312F2A',
 		borderWidth: 1,
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'space-evenly',
 		bottom: -1,
 		left: -1,
 	},

@@ -124,7 +124,7 @@ export const SentScreen = ({ navigation }) => {
 				</View>
 				<WalletBottomSheet
 					ref={coinsRef}
-					snapPoints={[openKeyboard ? '70%' : '55%']}>
+					snapPoints={[openKeyboard ? '100%' : '65%']}>
 					{allCoins.length ? (
 						<ChooseCoins
 							chooseCoin={chooseCoin}

@@ -5,7 +5,9 @@ import { WalletButton, WalletText } from '../Components/UI'
 import { SvgIcon } from './../Components/svg/svg'
 import PincodeInput from 'react-native-pincode-input'
 import { useSelector, useDispatch } from 'react-redux'
-import { setNavigation } from '../store/actions/walletActions'
+import { setNavigation, setNavScreen } from '../store/actions/walletActions'
+import { setLockWallet } from '../store/actions/storageAction'
+
 export const UnlockScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
@@ -22,7 +24,8 @@ export const UnlockScreen = ({ navigation }) => {
 		if (pin.length === 6 && pin === password) {
 			navigation.navigate('Wallet')
 			dispatch(setNavigation(navigation))
-
+			dispatch(setNavScreen('Wallet'))
+			dispatch(setLockWallet(false))
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {
 			setPin('')
@@ -33,7 +36,7 @@ export const UnlockScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.top}>
-				<SvgIcon height='64' width='64' type='logo' />
+				<SvgIcon type='lockBig' />
 				<View style={styles.bodyPin}>
 					<WalletText center size='m' style={{ marginBottom: 10 }}>
 						Enter your PIN to unlock
@@ -49,9 +52,11 @@ export const UnlockScreen = ({ navigation }) => {
 							justifyContent: 'center',
 						}}
 						circleContainerStyle={{
-							paddingHorizontal: 140,
+							justifyContent: 'center',
+							alignItems: 'center',
 						}}
 						circleEmptyStyle={{
+							marginHorizontal: 4,
 							width: 9,
 							height: 9,
 							borderWidth: 1,
@@ -63,6 +68,7 @@ export const UnlockScreen = ({ navigation }) => {
 							backgroundColor: THEME.GOLD,
 							width: 9,
 							height: 9,
+							marginHorizontal: 4,
 						}}
 						pin={pin}
 						onTextChange={handleOnTextChange}
@@ -98,13 +104,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-between',
 		paddingBottom: 40,
-		paddingTop: 29,
+		paddingTop: 110,
 	},
 	title: {
 		marginBottom: 20,
 	},
 	bodyPin: {
-		marginTop: 133,
+		marginTop: 40,
 		borderRadius: 10,
 		paddingBottom: 5,
 	},

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { WalletText } from '../../Components/UI'
 import { THEME } from './../../Theme'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAccountName } from '../../store/actions/walletActions'
+import {
+	setAccountName,
+	setLoaderSkeleton,
+	setLoader,
+} from '../../store/actions/walletActions'
 import {
 	setNewAccountName,
 	setCurrentAccount,
@@ -11,16 +15,25 @@ import {
 
 export const TextBtn = ({ onPress, children, position, navigation, type }) => {
 	const dispatch = useDispatch()
+	const [timeoutId, setTimeoutId] = useState(null)
 	const { accountName } = useSelector((state) => state.wallet)
-	const { dataUser } = useSelector((state) => state.storage)
-
+	useEffect(() => {
+		return () => clearTimeout(timeoutId)
+	}, [])
 	const onReadyAccountSettings = () => {
 		if (accountName != '') {
-			dispatch(setNewAccountName(accountName))
-			dispatch(setCurrentAccount(accountName))
-			navigation.navigate('Account')
-
-			dispatch(setAccountName(''))
+			dispatch(setLoader(true))
+			dispatch(setLoaderSkeleton(false))
+			setTimeoutId(
+				setTimeout(() => {
+					dispatch(setNewAccountName(accountName))
+					navigation.navigate('Wallet')
+					dispatch(setCurrentAccount(accountName))
+					dispatch(setAccountName(''))
+					dispatch(setLoader(false))
+					dispatch(setLoaderSkeleton(true))
+				}, 2000)
+			)
 		}
 	}
 

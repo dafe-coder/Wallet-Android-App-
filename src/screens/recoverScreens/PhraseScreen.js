@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 	View,
 	StyleSheet,
@@ -27,34 +27,44 @@ export const PhraseScreen = ({ navigation }) => {
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(false)
 	const [onClick, setOnClick] = useState(false)
-
+	const [timeoutID, setTimeoutId] = useState(null)
 	const submitRestore = () => {
 		if (!onClick) {
 			setOnClick(true)
 			dispatch(setLoader(true))
-			let privateKeyString =
-				phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
-			postData(phrase != '' ? phrase : privateKey, false)
-				.then((response) => {
-					const newAccount = {
-						name: createName(dataUser),
-						phrase: phrase,
-						privateKey: privateKey != '' ? privateKey : privateKeyString,
-						address: response.address,
-						avatar: faker.image.abstract(128, 128, true),
-					}
-					dispatch(setCurrentAccount(createName(dataUser)))
-					dispatch(setDataUser(newAccount))
-					password != ''
-						? navigation.navigate('ConfirmPassword')
-						: navigation.navigate('CreatePassword')
-					dispatch(setLoader(false))
-					dispatch(setPhrase(''))
-					setOnClick(false)
-				})
-				.catch((error) => console.log('error', error))
+			setTimeoutId(
+				setTimeout(() => {
+					let privateKeyString =
+						phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
+					postData(phrase != '' ? phrase : privateKey, false)
+						.then((response) => {
+							const newAccount = {
+								name: createName(dataUser),
+								phrase: phrase,
+								privateKey: privateKey != '' ? privateKey : privateKeyString,
+								address: response.address,
+								avatar: faker.image.abstract(128, 128, true),
+							}
+							dispatch(setCurrentAccount(createName(dataUser)))
+							dispatch(setDataUser(newAccount))
+							password != ''
+								? navigation.navigate('ConfirmPassword')
+								: navigation.navigate('CreatePassword')
+							dispatch(setLoader(false))
+							dispatch(setPhrase(''))
+							setOnClick(false)
+						})
+						.catch((error) => console.log('error', error))
+				}, 50)
+			)
 		}
 	}
+
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutID)
+		}
+	}, [])
 
 	return (
 		<TouchableWithoutFeedback

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { WalletTitle, WalletButton } from '../Components/UI'
 import { SelectCoinSwap, SwapDetails, WalletBottomSheet } from '../Components'
@@ -14,18 +14,19 @@ export const SwapScreen = ({ navigation }) => {
 	const { allCoins } = useSelector((state) => state.wallet)
 	const firstSwapRef = useRef(null)
 	const secondSwapRef = useRef(null)
-	const [swapCoinFirst, setSwapTokenFirst] = useState(null)
 	const { chooseCoin, chooseCoinSwapSecond } = useSelector(
 		(state) => state.wallet
 	)
 
 	useEffect(() => {
-		dispatch(
-			setChooseCoinSwapSecond(
-				allCoins.filter((d) => d.symbol.includes('btc'))[0]
+		if (chooseCoinSwapSecond == null) {
+			dispatch(
+				setChooseCoinSwapSecond(
+					allCoins.filter((d) => d.symbol.includes('btc'))[0]
+				)
 			)
-		)
-	}, [allCoins])
+		}
+	}, [allCoins, chooseCoinSwapSecond])
 
 	const onOpenFirstSwap = () => {
 		firstSwapRef.current?.expand()
@@ -41,6 +42,7 @@ export const SwapScreen = ({ navigation }) => {
 		dispatch(setChooseCoinSwapSecond(coin))
 		secondSwapRef.current?.close()
 	}
+
 	const onSwapCoins = () => {
 		const frst = chooseCoin
 		const scnd = chooseCoinSwapSecond
@@ -80,20 +82,28 @@ export const SwapScreen = ({ navigation }) => {
 				onPress={() => navigation.navigate('ConfirmSwap')}>
 				Swap
 			</WalletButton>
-			<WalletBottomSheet ref={firstSwapRef} snapPoints={['65%']}>
-				<ChooseCoins
-					onCoinPress={onCloseFirstSwap}
-					chooseCoin={chooseCoin}
-					allCoins={allCoins}
-				/>
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={secondSwapRef} snapPoints={['65%']}>
-				<ChooseCoins
-					onCoinPress={onCloseSecondSwap}
-					chooseCoin={chooseCoinSwapSecond}
-					allCoins={allCoins}
-				/>
-			</WalletBottomSheet>
+			{chooseCoin != null ? (
+				<WalletBottomSheet ref={firstSwapRef} snapPoints={['65%']}>
+					<ChooseCoins
+						onCoinPress={onCloseFirstSwap}
+						chooseCoin={chooseCoin}
+						allCoins={allCoins}
+					/>
+				</WalletBottomSheet>
+			) : (
+				<></>
+			)}
+			{chooseCoin != null ? (
+				<WalletBottomSheet ref={secondSwapRef} snapPoints={['65%']}>
+					<ChooseCoins
+						onCoinPress={onCloseSecondSwap}
+						chooseCoin={chooseCoinSwapSecond}
+						allCoins={allCoins}
+					/>
+				</WalletBottomSheet>
+			) : (
+				<></>
+			)}
 		</ScrollView>
 	)
 }

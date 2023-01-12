@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { WalletTitle } from './../Components/UI/WalletTitle'
 import { THEME } from './../Theme'
 import { WalletText } from './../Components/UI/WalletText'
@@ -10,7 +10,7 @@ export const ExportPhraseCopyScreen = () => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
-		<View style={{ paddingTop: 32 }}>
+		<ScrollView style={{ paddingTop: 32 }}>
 			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
 				<SvgIcon type='logo' />
 				<WalletTitle style={{ marginTop: 50 }}>You seed Phrase</WalletTitle>
@@ -39,7 +39,7 @@ export const ExportPhraseCopyScreen = () => {
 					</WalletText>
 				</View>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -54,5 +54,6 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
+		marginBottom: 60,
 	},
 })

@@ -71,9 +71,11 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					justifyContent: 'center',
 				}}
 				circleContainerStyle={{
-					paddingHorizontal: 140,
+					justifyContent: 'center',
+					alignItems: 'center',
 				}}
 				circleEmptyStyle={{
+					marginHorizontal: 4,
 					width: 9,
 					height: 9,
 					borderWidth: 1,
@@ -84,6 +86,7 @@ export const CreatePasswordScreen = ({ navigation }) => {
 				circleFilledStyle={{
 					backgroundColor: THEME.GOLD,
 					width: 9,
+					marginHorizontal: 4,
 					height: 9,
 				}}
 				autoFocus={true}
