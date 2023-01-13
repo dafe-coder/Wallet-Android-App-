@@ -9,7 +9,8 @@ export default function useCachedResources() {
 	useEffect(() => {
 		async function loadResourcesAndDataAsync() {
 			try {
-				SplashScreen.preventAutoHideAsync()
+				// SplashScreen.preventAutoHideAsync()
+				SplashScreen.hideAsync()
 
 				// Load fonts
 				await Font.loadAsync({

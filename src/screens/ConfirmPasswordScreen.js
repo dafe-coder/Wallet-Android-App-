@@ -41,6 +41,7 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 				Enter your PIN code
 			</WalletText>
 			<PincodeInput
+				autoFocus={true}
 				ref={pincodeInput}
 				length={6}
 				containerStyle={{
