@@ -38,20 +38,22 @@ export const PhraseScreen = ({ navigation }) => {
 						phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
 					postData(phrase != '' ? phrase : btoa(privateKey), false)
 						.then((response) => {
+							dispatch(setLoader(false))
 							const newAccount = {
 								name: createName(dataUser),
 								phrase: btoa(phrase),
 								privateKey:
 									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
-								avatar: faker.image.abstract(64, 64, true),
+								avatar: faker.image.abstract(160, 160, true),
 							}
 							dispatch(setCurrentAccount(createName(dataUser)))
 							dispatch(setDataUser(newAccount))
 							dispatch(setPhrase(''))
-							navigation.navigate('CreatePassword')
-							dispatch(setLoader(false))
 							setOnClick(false)
+							setTimeout(() => {
+								navigation.navigate('CreatePassword')
+							}, 50)
 						})
 						.catch((error) => console.log('error', error))
 				}, 50)

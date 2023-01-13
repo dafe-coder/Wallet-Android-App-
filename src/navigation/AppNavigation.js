@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
 import {
@@ -37,7 +37,7 @@ import {
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
-const Stack = createNativeStackNavigator()
+const Stack = createStackNavigator()
 
 const screens = [
 	{
@@ -356,6 +356,7 @@ export function MyStack() {
 	const { lockWallet, dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
+			animationEnabled={false}
 			style={{ flex: 1 }}
 			initialRouteName={
 				dataUser.length ? (lockWallet ? 'Unlock' : 'Wallet') : 'Login'
@@ -365,6 +366,7 @@ export function MyStack() {
 			}}
 			screenOptions={{
 				headerStyle: {
+					backgroundColor: THEME.PRIMARY,
 					borderBottomColor: '#302F2C',
 					borderBottomWidth: 0.6,
 				},
@@ -372,13 +374,12 @@ export function MyStack() {
 				headerTitleStyle: {
 					fontFamily: 'gt-medium',
 					color: THEME.GOLD_DARK,
-					fontSize: 14,
 					textTransform: 'uppercase',
+					fontSize: 14,
 				},
-				headerStyle: {
+				cardStyle: {
 					backgroundColor: THEME.PRIMARY,
 				},
-				animation: 'none',
 			}}>
 			{screens.map((s) => (
 				<Stack.Screen

@@ -50,7 +50,10 @@ export const AccountScreen = ({ navigation }) => {
 		} else if (title == 'Logout') {
 			navigation.navigate('RiskAlertLogout')
 		} else if (title == 'Lock Wallet') {
-			navigation.navigate('Unlock')
+			navigation.reset({
+				index: 0,
+				routes: [{ name: 'Unlock' }],
+			})
 			dispatch(setNavigation(null))
 			dispatch(setLockWallet(true))
 		}

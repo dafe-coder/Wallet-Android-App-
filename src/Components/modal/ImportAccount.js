@@ -54,7 +54,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 								privateKey:
 									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
-								avatar: faker.image.abstract(160, 160, true),
+								avatar: faker.image.animals(),
 							}
 							dispatch(setDataUser(newAccount))
 							dispatch(

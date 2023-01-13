@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import { WalletBottomSheet } from '../../Components'
 import { SelectAccount } from '../../Components/modal'
@@ -15,7 +15,11 @@ export const AccountBtn = ({ navigation }) => {
 	const onCloseModal = () => {
 		selectAccountRef.current.close()
 	}
-
+	useEffect(() => {
+		fetch(dataUser[0].avatar)
+			.then((data) => data.toString())
+			.then((data) => console.log(data))
+	}, [dataUser])
 	return (
 		<View>
 			<TouchableOpacity
