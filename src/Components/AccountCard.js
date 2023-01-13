@@ -35,7 +35,12 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 			}
 		}
 	}, [value, dataUser])
-	if (loader && currentAccount != '') {
+	useEffect(() => {}, [dataUser])
+	if (
+		loader &&
+		currentAccount != '' &&
+		dataUser.filter((d) => d.name == currentAccount)[0].address !== undefined
+	) {
 		return (
 			<View
 				style={[

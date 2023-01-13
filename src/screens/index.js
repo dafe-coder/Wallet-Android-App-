@@ -8,6 +8,7 @@ export * from './ConfirmPasswordScreen'
 export * from './AllSetScreen'
 export * from './TransactionHistoryScreen'
 export * from './TransactionHistoryPageScreen'
+export * from './RiskAlertLogoutScreen'
 
 //  ---\\\///--- Nft Screens ---\\\///---
 export * from './NftScreen'

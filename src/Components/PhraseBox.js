@@ -11,7 +11,13 @@ import { WalletText, ButtonCopy } from './UI/'
 import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
 
-export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
+export const PhraseBox = ({
+	edit,
+	style,
+	setBtnDisabled,
+	phrase = '',
+	paste,
+}) => {
 	const dispatch = useDispatch()
 	const [active, setActive] = useState(true)
 	const [success, setSuccess] = useState('default')
@@ -99,6 +105,8 @@ export const PhraseBox = ({ edit, style, setBtnDisabled, phrase = '' }) => {
 				/>
 			</View>
 			<ButtonCopy
+				setText={setText}
+				paste={paste}
 				text={phrase != '' ? phrase : text}
 				style={{ right: 35, bottom: 20 }}
 			/>

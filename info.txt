@@ -1,0 +1,2 @@
+добавлять 
+autoFocus={true} pincodeInput

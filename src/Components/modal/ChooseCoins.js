@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { WalletTitle, WalletInput } from './../UI/'
 import { SvgIcon } from '../svg/svg'
 import { THEME } from './../../Theme'
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import { AllCoinsItem } from '../'
 
 export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
@@ -45,19 +45,23 @@ export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 					placeholder='Search token'
 				/>
 			</View>
-			<BottomSheetScrollView
-				style={{
-					marginTop: 20,
-				}}>
-				{filteredCoins.map((c) => (
-					<AllCoinsItem
-						chooseCoin={chooseCoin}
-						onPress={onCoinPress}
-						coin={c}
-						key={c.id}
-					/>
-				))}
-			</BottomSheetScrollView>
+
+			{filteredCoins.length >= 1 ? (
+				<BottomSheetFlatList
+					contentContainerStyle={{ marginTop: 20, paddingBottom: 20 }}
+					data={filteredCoins}
+					renderItem={(item) => (
+						<AllCoinsItem
+							chooseCoin={chooseCoin}
+							onPress={onCoinPress}
+							coin={item.item}
+						/>
+					)}
+					keyExtractor={(item) => item.id}
+				/>
+			) : (
+				<></>
+			)}
 		</View>
 	)
 }

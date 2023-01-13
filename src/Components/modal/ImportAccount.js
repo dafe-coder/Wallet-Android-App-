@@ -45,7 +45,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 			setTimeoutId(
 				setTimeout(() => {
 					onCloseImport()
-					postData(phrase != '' ? phrase : privateKey, false)
+					postData(phrase != '' ? phrase : btoa(privateKey), false)
 						.then((response) => {
 							let privateKeyString = phrase != '' ? generateWallet(phrase) : ''
 							const newAccount = {
@@ -54,7 +54,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 								privateKey:
 									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
-								avatar: faker.image.abstract(128, 128, true),
+								avatar: faker.image.abstract(160, 160, true),
 							}
 							dispatch(setDataUser(newAccount))
 							dispatch(
@@ -122,13 +122,12 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 	}, [name])
 
 	return (
-		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-			<BottomSheetScrollView>
+		<BottomSheetScrollView>
+			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 				<View
 					style={[
 						{
 							flex: 1,
-							paddingBottom: 39,
 							justifyContent: 'space-between',
 						},
 						style,
@@ -194,7 +193,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 						Import Account
 					</WalletButton>
 				</View>
-			</BottomSheetScrollView>
-		</TouchableWithoutFeedback>
+			</TouchableWithoutFeedback>
+		</BottomSheetScrollView>
 	)
 }

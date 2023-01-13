@@ -6,6 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
 import { setLoader } from '../store/actions/walletActions'
 import { SvgIcon } from '../Components/svg/svg'
+import {
+	setPassword,
+	setCurrentAccount,
+	setClearDataUser,
+} from '../store/actions/storageAction'
+import { setNavigation } from '../store/actions/walletActions'
+
 export const ConfirmPasswordScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
@@ -22,8 +29,15 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 		if (pin.length === 6 && pin === password) {
 			dispatch(setLoader(true))
 			setTimeout(() => {
+				dispatch(setPassword(''))
+				dispatch(setNavigation(null))
+				dispatch(setCurrentAccount(''))
+				dispatch(setClearDataUser())
+				navigation.reset({
+					index: 0,
+					routes: [{ name: 'Login' }],
+				})
 				dispatch(setLoader(false))
-				navigation.navigate('Wallet')
 			}, 3000)
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {
@@ -41,17 +55,17 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 				Enter your PIN code
 			</WalletText>
 			<PincodeInput
-				autoFocus={true}
 				ref={pincodeInput}
 				length={6}
 				containerStyle={{
-					display: 'flex',
 					width: '100%',
 					height: 60,
 					justifyContent: 'center',
+					alignItems: 'center',
 				}}
 				circleContainerStyle={{
-					paddingHorizontal: 140,
+					justifyContent: 'center',
+					alignItems: 'center',
 				}}
 				circleEmptyStyle={{
 					width: 9,
@@ -60,10 +74,12 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 					borderColor: THEME.BROWN_TEXT,
 					backgroundColor: THEME.BROWN_TEXT,
 					borderRadius: 50,
+					marginHorizontal: 4,
 				}}
 				circleFilledStyle={{
 					backgroundColor: THEME.GOLD,
 					width: 9,
+					marginHorizontal: 4,
 					height: 9,
 				}}
 				pin={pin}

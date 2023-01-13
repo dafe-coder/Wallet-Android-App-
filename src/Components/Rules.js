@@ -8,18 +8,18 @@ export const Rules = ({ style }) => {
 		<View style={style}>
 			<Hyperlink
 				onPress={(url, text) =>
-					url === 'https://terms' ? alert(url + ', ' + text) : alert(url)
+					url === 'https://termsofuse' ? alert(url + ', ' + text) : alert(url)
 				}
 				linkStyle={styles.link}
 				linkText={(url) =>
-					url === 'https://terms'
-						? 'Terms'
+					url === 'https://termsofuse'
+						? 'Terms of use'
 						: url === 'https://privacy'
 						? 'Privacy policy'
 						: url
 				}>
 				<Text style={styles.text}>
-					By processing, you agree to the https://terms of use and {'\n'}
+					By processing, you agree to the https://termsofuse and {'\n'}
 					https://privacy
 				</Text>
 			</Hyperlink>

@@ -76,13 +76,19 @@ export const EditProfileScreen = ({ navigation }) => {
 				if (dataUser.length >= 2) {
 					dispatch(setDeleteAccount(deleteCurrent))
 					dispatch(setCurrentAccount(filterData[0].name))
-					navigation.navigate('Wallet')
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Wallet' }],
+					})
 				} else {
 					dispatch(setPassword(''))
 					dispatch(setCurrentAccount(''))
 					dispatch(setNavigation(null))
 					dispatch(setClearDataUser())
-					navigation.navigate('Login')
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Login' }],
+					})
 				}
 				dispatch(setLoader(false))
 			}, 2000)

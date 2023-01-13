@@ -48,7 +48,7 @@ export const AccountScreen = ({ navigation }) => {
 		} else if (title == 'Contacts') {
 			navigation.navigate('Contacts')
 		} else if (title == 'Logout') {
-			navigation.navigate('RiskAlert')
+			navigation.navigate('RiskAlertLogout')
 		} else if (title == 'Lock Wallet') {
 			navigation.navigate('Unlock')
 			dispatch(setNavigation(null))
@@ -73,9 +73,11 @@ export const AccountScreen = ({ navigation }) => {
 				</WalletBottomSheet> */}
 				<WalletBottomSheet
 					ref={importAccountRef}
-					snapPoints={[!openKeyboard ? '80%' : '100%']}>
+					snapPoints={[!openKeyboard ? '75%' : '100%']}>
 					<ImportAccount
-						style={openKeyboard ? { paddingBottom: 250 } : {}}
+						style={
+							openKeyboard ? { paddingBottom: 250 } : { paddingBottom: 39 }
+						}
 						onCloseImport={onCloseImport}
 						navigation={navigation}
 					/>

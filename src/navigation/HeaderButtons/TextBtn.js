@@ -13,7 +13,7 @@ import {
 	setCurrentAccount,
 } from './../../store/actions/storageAction'
 
-export const TextBtn = ({ onPress, children, position, navigation, type }) => {
+export const TextBtn = ({ onPress, children, navigation, type }) => {
 	const dispatch = useDispatch()
 	const [timeoutId, setTimeoutId] = useState(null)
 	const { accountName } = useSelector((state) => state.wallet)
@@ -32,6 +32,10 @@ export const TextBtn = ({ onPress, children, position, navigation, type }) => {
 					navigation.navigate('Account')
 					dispatch(setLoaderSkeleton(true))
 					dispatch(setLoader(false))
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Account' }],
+					})
 				}, 2000)
 			)
 		}
@@ -49,20 +53,10 @@ export const TextBtn = ({ onPress, children, position, navigation, type }) => {
 	}
 
 	return (
-		<TouchableOpacity
-			activeOpacity={0.7}
-			onPress={onPressBtn}
-			style={[position == 'left' ? styles.btnLeft : styles.btnRight]}>
+		<TouchableOpacity activeOpacity={0.7} onPress={onPressBtn}>
 			<WalletText style={{ color: THEME.GOLD }}>{children}</WalletText>
 		</TouchableOpacity>
 	)
 }
 
-const styles = StyleSheet.create({
-	btnLeft: {
-		marginLeft: 16,
-	},
-	btnRight: {
-		marginRight: 16,
-	},
-})
+const styles = StyleSheet.create({})

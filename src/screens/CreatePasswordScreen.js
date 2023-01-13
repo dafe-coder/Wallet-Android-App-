@@ -13,7 +13,7 @@ import { SvgIcon } from './../Components/svg/svg'
 // 				useNativeDriver: false,
 // 			})
 // 		)
-
+import { setLoader } from '../store/actions/walletActions'
 export const CreatePasswordScreen = ({ navigation }) => {
 	const [pin, setPin] = useState('')
 	const [pinPrev, setPinPrev] = useState('')
@@ -36,9 +36,14 @@ export const CreatePasswordScreen = ({ navigation }) => {
 			setNextStep(false)
 			if (pin === pinPrev) {
 				dispatch(setPassword(pinPrev))
-				setPinPrev('')
-				setPin('')
-				navigation.navigate('ConfirmPassword')
+				dispatch(setLoader(true))
+				setTimeout(() => {
+					dispatch(setLoader(false))
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Wallet' }],
+					})
+				}, 3000)
 			} else if (pin !== pinPrev) {
 				setPinPrev('')
 				setPin('')
@@ -65,10 +70,10 @@ export const CreatePasswordScreen = ({ navigation }) => {
 				ref={pincodeInput}
 				length={6}
 				containerStyle={{
-					display: 'flex',
 					width: '100%',
 					height: 60,
 					justifyContent: 'center',
+					alignItems: 'center',
 				}}
 				circleContainerStyle={{
 					justifyContent: 'center',
@@ -89,7 +94,6 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					marginHorizontal: 4,
 					height: 9,
 				}}
-				autoFocus={true}
 				pin={pin}
 				onTextChange={handleOnTextChange}
 			/>

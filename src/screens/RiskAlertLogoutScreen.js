@@ -1,30 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import {
-	setPassword,
-	setCurrentAccount,
-	setClearDataUser,
-} from '../store/actions/storageAction'
-import { SvgIcon } from './../Components/svg/svg'
-import { WalletText, WalletTitle, WalletButton } from './../Components/UI/'
-import { setLoader, setNavigation } from '../store/actions/walletActions'
-import { useDispatch } from 'react-redux'
-export const RiskAlertScreen = ({ navigation }) => {
-	const dispatch = useDispatch()
-	const onRemoveAll = () => {
-		dispatch(setLoader(true))
-		setTimeout(() => {
-			dispatch(setPassword(''))
-			dispatch(setNavigation(null))
-			dispatch(setLoader(false))
-			dispatch(setClearDataUser())
-			dispatch(setCurrentAccount(''))
-			navigation.reset({
-				index: 0,
-				routes: [{ name: 'Login' }],
-			})
-		}, 3000)
-	}
+
+import { SvgIcon } from '../Components/svg/svg'
+import { WalletText, WalletTitle, WalletButton } from '../Components/UI'
+export const RiskAlertLogoutScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.top}>
@@ -49,7 +28,9 @@ export const RiskAlertScreen = ({ navigation }) => {
 				</WalletText>
 			</View>
 			<View style={{ paddingHorizontal: 16 }}>
-				<WalletButton onPress={onRemoveAll} style={{ marginBottom: 10 }}>
+				<WalletButton
+					onPress={() => navigation.navigate('ConfirmPassword')}
+					style={{ marginBottom: 10 }}>
 					confirm
 				</WalletButton>
 				<WalletButton onPress={() => navigation.goBack()} type='border'>

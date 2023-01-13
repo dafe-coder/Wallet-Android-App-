@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
 import {
@@ -29,6 +29,7 @@ import {
 	ExportPrivateKeyCopyScreen,
 	UnlockScreen,
 	RiskAlertScreen,
+	RiskAlertLogoutScreen,
 	Scanner,
 	PreloaderScreen,
 	ConfirmSwapScreen,
@@ -36,7 +37,7 @@ import {
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 const screens = [
 	{
@@ -74,7 +75,6 @@ const screens = [
 			headerShown: true,
 			title: 'Confirm Transaction',
 			headerLeft: () => <BackBtn navigation={navigation} />,
-
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
 		component: ConfirmSwapScreen,
@@ -87,6 +87,15 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: RiskAlertScreen,
+	},
+	{
+		name: 'RiskAlertLogout',
+		options: {
+			headerShown: true,
+			title: '',
+			headerLeft: () => <></>,
+		},
+		component: RiskAlertLogoutScreen,
 	},
 	{
 		name: 'ExportPhraseCopy',
@@ -193,6 +202,7 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Ethereum',
+			headerBackVisible: false,
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
@@ -236,11 +246,11 @@ const screens = [
 	{
 		name: 'CreatePassword',
 		component: CreatePasswordScreen,
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'By Bit Wallet',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <></>,
+		},
 	},
 	{
 		name: 'AllSet',
@@ -319,10 +329,11 @@ const screens = [
 	{
 		name: 'ConfirmPassword',
 		component: ConfirmPasswordScreen,
-		options: {
+		options: ({ navigation }) => ({
+			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerShown: true,
 			title: 'enter pin code',
-		},
+		}),
 	},
 	{
 		name: 'Scanner',
@@ -354,7 +365,6 @@ export function MyStack() {
 			}}
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: THEME.PRIMARY,
 					borderBottomColor: '#302F2C',
 					borderBottomWidth: 0.6,
 				},
@@ -362,13 +372,13 @@ export function MyStack() {
 				headerTitleStyle: {
 					fontFamily: 'gt-medium',
 					color: THEME.GOLD_DARK,
-					textTransform: 'uppercase',
 					fontSize: 14,
+					textTransform: 'uppercase',
 				},
-				cardStyle: {
+				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
 				},
-				animationEnabled: false,
+				animation: 'none',
 			}}>
 			{screens.map((s) => (
 				<Stack.Screen

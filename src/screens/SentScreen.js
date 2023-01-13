@@ -15,6 +15,7 @@ import { ChooseCoins } from '../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAddressTo, setChooseCoin } from './../store/actions/walletActions'
 import { SvgIcon } from './../Components/svg/svg'
+import LazyHOC from './../../LazyHOC'
 
 export const SentScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -64,79 +65,81 @@ export const SentScreen = ({ navigation }) => {
 	}
 
 	return (
-		<TouchableWithoutFeedback
-			onPress={() => Keyboard.dismiss()}
-			accessible={false}>
-			<ScrollView
-				contentContainerStyle={{
-					flexGrow: 1,
-					paddingBottom: 50,
-					paddingTop: 29,
-					justifyContent: 'space-between',
-				}}>
-				<View
-					style={{
-						flex: 1,
+		<LazyHOC>
+			<TouchableWithoutFeedback
+				onPress={() => Keyboard.dismiss()}
+				accessible={false}>
+				<ScrollView
+					contentContainerStyle={{
+						flexGrow: 1,
+						paddingBottom: 50,
+						paddingTop: 29,
+						justifyContent: 'space-between',
 					}}>
-					<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
-						<WalletText
-							color='brown'
-							style={{ paddingLeft: 19, marginBottom: 7 }}>
-							Recipient Address
-						</WalletText>
-						<TouchableOpacity
-							style={styles.qrButton}
-							activeOpacity={0.7}
-							onPress={() => navigation.navigate('Scanner')}>
-							<SvgIcon type='qr-camera' />
-						</TouchableOpacity>
-						<WalletInput
-							styleInput={{ paddingRight: 50 }}
-							autoCapitalize='none'
-							setValue={onAddAddress}
-							value={fromAddress}
-							placeholder='Public Address (0x...) or ENS'
-						/>
-					</View>
 					<View
 						style={{
-							marginHorizontal: 16,
 							flex: 1,
-							justifyContent: 'space-between',
 						}}>
-						{chooseCoin != null ? (
-							<SelectCoinSent
-								setBtnDisabled={setBtnDisabled}
-								onChooseCoin={onChooseCoin}
+						<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
+							<WalletText
+								color='brown'
+								style={{ paddingLeft: 19, marginBottom: 7 }}>
+								Recipient Address
+							</WalletText>
+							<TouchableOpacity
+								style={styles.qrButton}
+								activeOpacity={0.7}
+								onPress={() => navigation.navigate('Scanner')}>
+								<SvgIcon type='qr-camera' />
+							</TouchableOpacity>
+							<WalletInput
+								styleInput={{ paddingRight: 50 }}
+								autoCapitalize='none'
+								setValue={onAddAddress}
+								value={fromAddress}
+								placeholder='Public Address (0x...) or ENS'
+							/>
+						</View>
+						<View
+							style={{
+								marginHorizontal: 16,
+								flex: 1,
+								justifyContent: 'space-between',
+							}}>
+							{chooseCoin != null ? (
+								<SelectCoinSent
+									setBtnDisabled={setBtnDisabled}
+									onChooseCoin={onChooseCoin}
+								/>
+							) : (
+								<></>
+							)}
+							<WalletButton
+								disabled={btnDisabled}
+								style={{
+									marginTop: 60,
+								}}
+								onPress={onSubmitSent}>
+								Send
+							</WalletButton>
+						</View>
+					</View>
+					<WalletBottomSheet
+						ref={coinsRef}
+						snapPoints={[openKeyboard ? '100%' : '65%']}>
+						{allCoins.length ? (
+							<ChooseCoins
+								chooseCoin={chooseCoin}
+								allCoins={allCoins}
+								onCoinPress={onCoinPress}
 							/>
 						) : (
 							<></>
 						)}
-						<WalletButton
-							disabled={btnDisabled}
-							style={{
-								marginTop: 60,
-							}}
-							onPress={onSubmitSent}>
-							Send
-						</WalletButton>
-					</View>
-				</View>
-				<WalletBottomSheet
-					ref={coinsRef}
-					snapPoints={[openKeyboard ? '100%' : '65%']}>
-					{allCoins.length ? (
-						<ChooseCoins
-							chooseCoin={chooseCoin}
-							allCoins={allCoins}
-							onCoinPress={onCoinPress}
-						/>
-					) : (
-						<></>
-					)}
-				</WalletBottomSheet>
-			</ScrollView>
-		</TouchableWithoutFeedback>
+					</WalletBottomSheet>
+				</ScrollView>
+			</TouchableWithoutFeedback>
+		</LazyHOC>
 	)
 }
 

@@ -3,27 +3,36 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { SvgIcon } from '../svg/svg'
 import { THEME } from './../../Theme'
 import * as Clipboard from 'expo-clipboard'
-
-export const ButtonCopy = ({ style, text }) => {
+import { WalletText } from './WalletText'
+export const ButtonCopy = ({ style, text, paste, setText }) => {
 	const [color, setColor] = useState(false)
 	const onPressBtn = () => {
-		onCopy()
+		paste ? onPaste() : onCopy()
 		setColor(true)
 		setTimeout(() => {
 			setColor(false)
-		}, 400)
+		}, 700)
 	}
 
 	const onCopy = async () => {
-		await Clipboard.setStringAsync(text)
+		if (text !== '') await Clipboard.setStringAsync(text)
+	}
+	const onPaste = async () => {
+		const text = await Clipboard.getStringAsync()
+		setText(text)
 	}
 	return (
 		<TouchableOpacity
 			style={[styles.btn, style]}
 			activeOpacity={1}
 			onPress={onPressBtn}>
-			<View>
-				<SvgIcon type='copy' fill={color ? THEME.GOLD_DARK : ''} />
+			<View
+				style={{ alignItems: 'center', justifyContent: 'center', height: 25 }}>
+				{color && !paste ? (
+					<WalletText color='gold'>Copied!</WalletText>
+				) : (
+					<SvgIcon type='copy' fill={color ? THEME.GOLD_DARK : ''} />
+				)}
 			</View>
 		</TouchableOpacity>
 	)

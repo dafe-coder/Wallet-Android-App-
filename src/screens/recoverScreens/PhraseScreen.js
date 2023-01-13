@@ -36,7 +36,7 @@ export const PhraseScreen = ({ navigation }) => {
 				setTimeout(() => {
 					let privateKeyString =
 						phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
-					postData(phrase != '' ? phrase : privateKey, false)
+					postData(phrase != '' ? phrase : btoa(privateKey), false)
 						.then((response) => {
 							const newAccount = {
 								name: createName(dataUser),
@@ -44,7 +44,7 @@ export const PhraseScreen = ({ navigation }) => {
 								privateKey:
 									privateKey != '' ? btoa(privateKey) : privateKeyString,
 								address: response.address,
-								avatar: faker.image.abstract(128, 128, true),
+								avatar: faker.image.abstract(64, 64, true),
 							}
 							dispatch(setCurrentAccount(createName(dataUser)))
 							dispatch(setDataUser(newAccount))
@@ -78,7 +78,7 @@ export const PhraseScreen = ({ navigation }) => {
 						size='m'>
 						Recover a wallet using your Secret {'\n'} Recovery Phrase.
 					</WalletText>
-					<PhraseBox setBtnDisabled={setBtnDisabled} />
+					<PhraseBox setBtnDisabled={setBtnDisabled} paste />
 				</View>
 				<View
 					style={{

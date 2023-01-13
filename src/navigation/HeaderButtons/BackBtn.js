@@ -8,10 +8,7 @@ export const BackBtn = ({ navigation }) => {
 	}
 	return (
 		<View>
-			<TouchableOpacity
-				style={{ marginLeft: 16 }}
-				activeOpacity={0.7}
-				onPress={onPressButton}>
+			<TouchableOpacity activeOpacity={0.7} onPress={onPressButton}>
 				<View style={styles.btn}>
 					<SvgIcon type='check-left' />
 				</View>

@@ -40,7 +40,7 @@ export const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
-		// console.log(dataUser)
+		console.log(dataUser)
 		if (dataUser.length >= 1 && currentAccount != '') {
 			dispatch(setLoaderSkeleton(false))
 			dataUser.forEach((item) => {
@@ -99,14 +99,6 @@ export const AppWrap = ({ children }) => {
 			{children}
 			<Spinner
 				visible={loader}
-				textContent={'In progress'}
-				textStyle={{
-					color: THEME.WHITE,
-					textTransform: 'uppercase',
-					fontFamily: 'gt-bold',
-					position: 'relative',
-					top: -80,
-				}}
 				overlayColor='rgba(12, 11, 7, 0.9)'
 				size='large'
 				animation='fade'
