@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 
 import { SvgIcon } from '../Components/svg/svg'
 import { WalletText, WalletTitle, WalletButton } from '../Components/UI'
 export const RiskAlertLogoutScreen = ({ navigation }) => {
 	return (
-		<View style={styles.body}>
+		<ScrollView contentContainerStyle={styles.body}>
 			<View style={styles.top}>
 				<SvgIcon type='logo' />
 				<WalletTitle
@@ -27,7 +27,12 @@ export const RiskAlertLogoutScreen = ({ navigation }) => {
 					wallets.
 				</WalletText>
 			</View>
-			<View style={{ paddingHorizontal: 16 }}>
+			<View
+				style={{
+					paddingHorizontal: 16,
+					marginTop: 50,
+					marginBottom: 60,
+				}}>
 				<WalletButton
 					onPress={() => navigation.navigate('ConfirmPassword')}
 					style={{ marginBottom: 10 }}>
@@ -37,7 +42,7 @@ export const RiskAlertLogoutScreen = ({ navigation }) => {
 					cancel
 				</WalletButton>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -46,7 +51,6 @@ const styles = StyleSheet.create({
 		paddingTop: 29,
 		justifyContent: 'space-between',
 		flex: 1,
-		marginBottom: 40,
 	},
 	top: {
 		alignItems: 'center',

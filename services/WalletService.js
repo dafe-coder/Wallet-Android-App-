@@ -52,6 +52,8 @@ const useWalletService = () => {
 	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
 	let xxx = 'DOLLAR$USD|EX/G'
 	let xx = 'DOLLAR$USD|EX'
+	// let xxx = 'BY$W€B3B1T/G'
+	// let xx = 'BY$W€B3B1T'
 
 	function createBody(str, account) {
 		let strDecr
@@ -76,8 +78,6 @@ const useWalletService = () => {
 				})
 			)
 		)
-		// console.log(crypt)
-
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded
 	}

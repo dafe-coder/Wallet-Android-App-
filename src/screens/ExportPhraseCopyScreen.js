@@ -22,7 +22,7 @@ export const ExportPhraseCopyScreen = () => {
 							key={Math.random().toString()}
 							style={{ marginTop: 32 }}
 							edit
-							phrase={d.phrase}
+							phrase={atob(d.phrase)}
 						/>
 					)
 				}
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		marginBottom: 60,
+		marginBottom: 90,
 	},
 })

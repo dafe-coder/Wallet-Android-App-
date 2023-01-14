@@ -356,7 +356,6 @@ export function MyStack() {
 	const { lockWallet, dataUser } = useSelector((state) => state.storage)
 	return (
 		<Stack.Navigator
-			animationEnabled={false}
 			style={{ flex: 1 }}
 			initialRouteName={
 				dataUser.length ? (lockWallet ? 'Unlock' : 'Wallet') : 'Login'
@@ -380,6 +379,7 @@ export function MyStack() {
 				cardStyle: {
 					backgroundColor: THEME.PRIMARY,
 				},
+				animationEnabled: false,
 			}}>
 			{screens.map((s) => (
 				<Stack.Screen

@@ -40,7 +40,6 @@ export const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
-		console.log(dataUser)
 		if (dataUser.length >= 1 && currentAccount != '') {
 			dispatch(setLoaderSkeleton(false))
 			dataUser.forEach((item) => {
@@ -51,7 +50,6 @@ export const AppWrap = ({ children }) => {
 					})
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
-							// console.log(response)
 							setLoadingBalanceCoins(false)
 							dispatch(
 								setPortfolioCoins(
@@ -76,7 +74,6 @@ export const AppWrap = ({ children }) => {
 			portfolioBalance.assets_value > 0 &&
 			otherCoins.length
 		) {
-			console.log('with balance account')
 			const balanceArr = portfolioCoins.map((item) => item.symbol.toLowerCase())
 			let filtered = otherCoins.filter(
 				(coin) => balanceArr.indexOf(coin.symbol.toLowerCase()) === -1
@@ -89,7 +86,6 @@ export const AppWrap = ({ children }) => {
 			portfolioBalance.assets_value == 0 &&
 			otherCoins.length
 		) {
-			console.log('zero account')
 			dispatch(setAllCoins(otherCoins))
 		}
 	}, [loadingBalanceCoins, loadingOtherCoins, portfolioBalance])

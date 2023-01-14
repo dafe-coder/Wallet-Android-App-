@@ -30,17 +30,19 @@ export const WalletBottomNav = () => {
 					Coins
 				</WalletText>
 			</TouchableOpacity>
+
 			<TouchableOpacity
 				activeOpacity={1}
-				style={styles.item}
-				onPress={() => onPressNav('Nft')}>
+				style={[styles.item]}
+				onPress={() => onPressNav('TransactionHistoryPage')}>
 				<SvgIconNav
 					height='20'
-					type='bar'
-					fill={navScreen == 'Nft' ? THEME.GOLD_DARK : ''}
+					type='activity'
+					fill={navScreen == 'TransactionHistoryPage' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText color={navScreen == 'Nft' ? 'gold' : 'brown'}>
-					NFTs
+				<WalletText
+					color={navScreen == 'TransactionHistoryPage' ? 'gold' : 'brown'}>
+					Activity
 				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
@@ -58,16 +60,15 @@ export const WalletBottomNav = () => {
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={1}
-				style={[styles.item]}
-				onPress={() => onPressNav('TransactionHistoryPage')}>
+				style={styles.item}
+				onPress={() => onPressNav('Nft')}>
 				<SvgIconNav
 					height='20'
-					type='activity'
-					fill={navScreen == 'TransactionHistoryPage' ? THEME.GOLD_DARK : ''}
+					type='bar'
+					fill={navScreen == 'Nft' ? THEME.GOLD_DARK : ''}
 				/>
-				<WalletText
-					color={navScreen == 'TransactionHistoryPage' ? 'gold' : 'brown'}>
-					Activity
+				<WalletText color={navScreen == 'Nft' ? 'gold' : 'brown'}>
+					NFTs
 				</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import {
 	setPassword,
 	setCurrentAccount,
@@ -26,7 +26,7 @@ export const RiskAlertScreen = ({ navigation }) => {
 		}, 3000)
 	}
 	return (
-		<View style={styles.body}>
+		<ScrollView contentContainerStyle={styles.body}>
 			<View style={styles.top}>
 				<SvgIcon type='logo' />
 				<WalletTitle
@@ -48,7 +48,7 @@ export const RiskAlertScreen = ({ navigation }) => {
 					wallets.
 				</WalletText>
 			</View>
-			<View style={{ paddingHorizontal: 16 }}>
+			<View style={{ paddingHorizontal: 16, marginBottom: 40, marginTop: 50 }}>
 				<WalletButton onPress={onRemoveAll} style={{ marginBottom: 10 }}>
 					confirm
 				</WalletButton>
@@ -56,7 +56,7 @@ export const RiskAlertScreen = ({ navigation }) => {
 					cancel
 				</WalletButton>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
 		paddingTop: 29,
 		justifyContent: 'space-between',
 		flex: 1,
-		marginBottom: 40,
 	},
 	top: {
 		alignItems: 'center',

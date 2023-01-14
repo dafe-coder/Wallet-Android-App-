@@ -23,7 +23,7 @@ export const ExportPrivateKeyCopyScreen = () => {
 							key={Math.random().toString()}
 							style={{ marginTop: 32 }}
 							edit
-							phrase={d.privateKey}
+							phrase={atob(d.privateKey)}
 						/>
 					)
 				}
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		marginBottom: 60,
+		marginBottom: 90,
 	},
 })

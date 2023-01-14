@@ -25,7 +25,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 						phrase: btoa(phrase),
 						privateKey: btoa(privateKey),
 						address: response.address,
-						avatar: faker.image.abstract(128, 128, true),
+						avatar: faker.image.abstract(160, 160, true),
 					}
 					dispatch(setCurrentAccount(createName(dataUser)))
 					dispatch(setDataUser(newAccount))

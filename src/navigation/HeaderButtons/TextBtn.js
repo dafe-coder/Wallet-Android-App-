@@ -13,7 +13,7 @@ import {
 	setCurrentAccount,
 } from './../../store/actions/storageAction'
 
-export const TextBtn = ({ onPress, children, navigation, type, positions }) => {
+export const TextBtn = ({ onPress, children, navigation, type, position }) => {
 	const dispatch = useDispatch()
 	const [timeoutId, setTimeoutId] = useState(null)
 	const { accountName } = useSelector((state) => state.wallet)

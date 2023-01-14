@@ -8,9 +8,6 @@ export const SwitchButton = ({ enabled }) => {
 	const toggleSwitch = () => {
 		dispatch(setShareAnalytics(!enabled))
 	}
-	useEffect(() => {
-		console.log(enabled)
-	}, [enabled])
 	return (
 		<View>
 			<Switch
