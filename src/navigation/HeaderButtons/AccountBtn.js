@@ -17,10 +17,7 @@ export const AccountBtn = ({ navigation }) => {
 	}
 	return (
 		<View>
-			<TouchableOpacity
-				style={{ marginRight: 16 }}
-				activeOpacity={0.7}
-				onPress={openModalSelectAccount}>
+			<TouchableOpacity activeOpacity={0.7} onPress={openModalSelectAccount}>
 				<View style={[styles.logoImage, { backgroundColor: THEME.BROWN_DARK }]}>
 					{dataUser.map((n) =>
 						n.name == currentAccount ? (

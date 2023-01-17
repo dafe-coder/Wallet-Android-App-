@@ -22,7 +22,7 @@ export const UnlockScreen = ({ navigation }) => {
 	const handleOnTextChange = (pin) => {
 		setPin(pin)
 		if (pin.length === 6 && pin === password) {
-			navigation.navigate('Wallet')
+			navigation.reset({ index: 0, routes: [{ name: 'Wallet' }] })
 			dispatch(setNavigation(navigation))
 			dispatch(setNavScreen('Wallet'))
 			dispatch(setLockWallet(false))

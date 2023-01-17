@@ -13,7 +13,7 @@ import {
 	setCurrentAccount,
 } from './../../store/actions/storageAction'
 
-export const TextBtn = ({ onPress, children, navigation, type, position }) => {
+export const TextBtn = ({ onPress, children, navigation, type }) => {
 	const dispatch = useDispatch()
 	const [timeoutId, setTimeoutId] = useState(null)
 	const { accountName } = useSelector((state) => state.wallet)
@@ -53,19 +53,8 @@ export const TextBtn = ({ onPress, children, navigation, type, position }) => {
 	}
 
 	return (
-		<TouchableOpacity
-			activeOpacity={0.7}
-			onPress={onPressBtn}
-			style={[position == 'left' ? styles.btnLeft : styles.btnRight]}>
+		<TouchableOpacity activeOpacity={0.7} onPress={onPressBtn}>
 			<WalletText style={{ color: THEME.GOLD }}>{children}</WalletText>
 		</TouchableOpacity>
 	)
 }
-const styles = StyleSheet.create({
-	btnLeft: {
-		marginLeft: 16,
-	},
-	btnRight: {
-		marginRight: 16,
-	},
-})

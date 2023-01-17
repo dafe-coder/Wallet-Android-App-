@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
 import {
@@ -36,8 +36,9 @@ import {
 	TransactionHistoryPageScreen,
 } from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
-
-const Stack = createStackNavigator()
+import { Text } from 'react-native'
+import { SvgIcon } from '../Components/svg/svg'
+const Stack = createNativeStackNavigator()
 
 const screens = [
 	{
@@ -143,12 +144,10 @@ const screens = [
 			headerShown: true,
 			title: 'Settings',
 			headerLeft: () => (
-				<TextBtn position='left' onPress={() => navigation.goBack()}>
-					Cancel
-				</TextBtn>
+				<TextBtn onPress={() => navigation.goBack()}>Cancel</TextBtn>
 			),
 			headerRight: () => (
-				<TextBtn position='right' navigation={navigation} type='ready'>
+				<TextBtn navigation={navigation} type='ready'>
 					Ready
 				</TextBtn>
 			),
@@ -181,7 +180,7 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Ethereum',
-			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerLeft: () => <></>,
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
@@ -360,26 +359,32 @@ export function MyStack() {
 			initialRouteName={
 				dataUser.length ? (lockWallet ? 'Unlock' : 'Wallet') : 'Login'
 			}
-			backgroundStyle={{
-				backgroundColor: THEME.PRIMARY,
+			options={{
+				headerShadowVisible: false,
 			}}
 			screenOptions={{
-				headerStyle: {
-					backgroundColor: THEME.PRIMARY,
-					borderBottomColor: '#302F2C',
-					borderBottomWidth: 0.6,
+				headerTitleContainerStyle: { paddingVertical: 30 },
+				headerBackVisible: false,
+				contentStyle: {
+					borderTopColor: '#2f2d2b',
+					borderTopWidth: 0.6,
 				},
 				headerTitleAlign: 'center',
-				headerTitleStyle: {
-					fontFamily: 'gt-medium',
-					color: THEME.GOLD_DARK,
-					textTransform: 'uppercase',
-					fontSize: 14,
-				},
-				cardStyle: {
+				headerStyle: {
 					backgroundColor: THEME.PRIMARY,
 				},
-				animationEnabled: false,
+				animation: 'none',
+				headerTitle: (title) => (
+					<Text
+						style={{
+							fontFamily: 'gt-medium',
+							color: THEME.GOLD_DARK,
+							fontSize: 14,
+							textTransform: 'uppercase',
+						}}>
+						{title.children.toUpperCase()}
+					</Text>
+				),
 			}}>
 			{screens.map((s) => (
 				<Stack.Screen
