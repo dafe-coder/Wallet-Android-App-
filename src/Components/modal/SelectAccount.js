@@ -6,15 +6,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAccount } from '../../store/actions/storageAction'
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 import { SvgIcon } from './../svg/svg'
-import { setNavScreen } from '../../store/actions/walletActions'
 export const SelectAccount = ({ navigation, onCloseModal }) => {
 	const dispatch = useDispatch()
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	const onSelectAccount = (item) => {
 		dispatch(setCurrentAccount(item.name))
-		dispatch(setNavScreen('Wallet'))
-		navigation.navigate('Wallet')
+		navigation.navigate('Home')
 		onCloseModal()
 	}
 

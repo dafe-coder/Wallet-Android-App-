@@ -11,7 +11,6 @@ import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
 import { ImportAccount } from '../Components/modal'
 import { useDispatch } from 'react-redux'
-import { setNavigation } from '../store/actions/walletActions'
 import { setLockWallet } from '../store/actions/storageAction'
 
 export const AccountScreen = ({ navigation }) => {
@@ -54,7 +53,6 @@ export const AccountScreen = ({ navigation }) => {
 				index: 0,
 				routes: [{ name: 'Unlock' }],
 			})
-			dispatch(setNavigation(null))
 			dispatch(setLockWallet(true))
 		}
 	}

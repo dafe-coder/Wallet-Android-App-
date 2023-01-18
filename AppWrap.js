@@ -15,7 +15,6 @@ import {
 	setChooseCoin,
 	setLoaderSkeleton,
 } from './src/store/actions/walletActions'
-import { WalletBottomNav } from './src/navigation/WalletBottomNav'
 import { Image } from 'react-native'
 import { THEME } from './src/Theme'
 
@@ -25,8 +24,9 @@ export const AppWrap = ({ children }) => {
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData } = useWalletService()
-	const { loader, navigation, portfolioCoins, portfolioBalance, allCoins } =
-		useSelector((state) => state.wallet)
+	const { loader, portfolioCoins, portfolioBalance, allCoins } = useSelector(
+		(state) => state.wallet
+	)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	useEffect(() => {
@@ -106,7 +106,6 @@ export const AppWrap = ({ children }) => {
 					/>
 				}
 			/>
-			{navigation === null ? <></> : <WalletBottomNav />}
 		</PersistGate>
 	)
 }

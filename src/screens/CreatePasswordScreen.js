@@ -41,7 +41,7 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					dispatch(setLoader(false))
 					navigation.reset({
 						index: 0,
-						routes: [{ name: 'Wallet' }],
+						routes: [{ name: 'Home' }],
 					})
 				}, 3000)
 			} else if (pin !== pinPrev) {

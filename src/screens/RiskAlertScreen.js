@@ -7,7 +7,7 @@ import {
 } from '../store/actions/storageAction'
 import { SvgIcon } from './../Components/svg/svg'
 import { WalletText, WalletTitle, WalletButton } from './../Components/UI/'
-import { setLoader, setNavigation } from '../store/actions/walletActions'
+import { setLoader } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
 export const RiskAlertScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -15,7 +15,6 @@ export const RiskAlertScreen = ({ navigation }) => {
 		dispatch(setLoader(true))
 		setTimeout(() => {
 			dispatch(setPassword(''))
-			dispatch(setNavigation(null))
 			dispatch(setLoader(false))
 			dispatch(setClearDataUser())
 			dispatch(setCurrentAccount(''))

@@ -11,7 +11,6 @@ import useWalletService from '../../../services/WalletService'
 import { THEME } from '../../Theme'
 import {
 	setLoader,
-	setNavScreen,
 	setPhrase,
 	setPrivateKey,
 } from '../../store/actions/walletActions'
@@ -61,9 +60,8 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 								setCurrentAccount(name != '' ? name : createName(dataUser))
 							)
 							dispatch(setLoader(false))
-							dispatch(setNavScreen('Wallet'))
 							setOnClick(false)
-							navigation.navigate('Wallet')
+							navigation.navigate('Home')
 						})
 						.catch((error) => console.log('error', error))
 				}, 50)

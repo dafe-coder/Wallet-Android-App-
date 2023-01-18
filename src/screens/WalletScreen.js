@@ -8,8 +8,7 @@ import {
 } from './../Components/'
 import { WalletBottomSheet } from '../Components/'
 import { Filters } from './../Components/modal'
-import { setNavigation } from '../store/actions/walletActions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { filterData } from '../../services/funcWallet/filterData'
 import { LoaderListItem } from '../Components/Loader/LoaderListItem'
 
@@ -47,7 +46,6 @@ export const WalletScreen = ({ navigation }) => {
 		}
 	}, [portfolioCoins, allCoins])
 
-	const dispatch = useDispatch()
 	const filterRef = useRef(null)
 	const onCloseFilters = () => {
 		filterRef.current?.close()
@@ -55,10 +53,6 @@ export const WalletScreen = ({ navigation }) => {
 	const openModalFilter = () => {
 		filterRef.current?.expand()
 	}
-
-	useEffect(() => {
-		dispatch(setNavigation(navigation))
-	}, [navigation])
 
 	return (
 		<>

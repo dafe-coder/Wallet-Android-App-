@@ -11,7 +11,6 @@ import {
 	setCurrentAccount,
 	setClearDataUser,
 } from '../store/actions/storageAction'
-import { setNavigation } from '../store/actions/walletActions'
 
 export const ConfirmPasswordScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -30,7 +29,6 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 			dispatch(setLoader(true))
 			setTimeout(() => {
 				dispatch(setPassword(''))
-				dispatch(setNavigation(null))
 				dispatch(setCurrentAccount(''))
 				dispatch(setClearDataUser())
 				navigation.reset({

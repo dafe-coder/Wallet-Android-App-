@@ -1,51 +1,47 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
-import {
-	LoginScreen,
-	CreatePhraseScreen,
-	SubscribeCreateScreen,
-	SubscribeScreen,
-	PhraseScreen,
-	CreatePasswordScreen,
-	AllSetScreen,
-	NftScreen,
-	ContactsScreen,
-	ActivityScreen,
-	AccountScreen,
-	SettingsScreen,
-	ExportPhraseScreen,
-	ExportPrivateKeyScreen,
-	SentScreen,
-	ConfirmTransactionScreen,
-	SwapScreen,
-	ReceiveScreen,
-	WalletScreen,
-	PortfolioOpenScreen,
-	ConfirmPasswordScreen,
-	TransactionHistoryScreen,
-	EditProfileScreen,
-	ExportPhraseCopyScreen,
-	ExportPrivateKeyCopyScreen,
-	UnlockScreen,
-	RiskAlertScreen,
-	RiskAlertLogoutScreen,
-	Scanner,
-	PreloaderScreen,
-	ConfirmSwapScreen,
-	TransactionHistoryPageScreen,
-} from '../screens'
 import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
-import { SvgIcon } from '../Components/svg/svg'
+import BottomTabNavigator from './BottomTabNavigation'
+import {
+	SwapComponent,
+	SentComponent,
+	LoginComponent,
+	CreatePhraseComponent,
+	ScannerComponent,
+	RiskAlertLogoutComponent,
+	RiskAlertComponent,
+	UnlockComponent,
+	ExportPrivateKeyCopyComponent,
+	ExportPhraseCopyComponent,
+	EditProfileComponent,
+	TransactionHistoryComponent,
+	ConfirmPasswordComponent,
+	PortfolioOpenComponent,
+	ReceiveComponent,
+	ConfirmTransactionComponent,
+	ExportPrivateKeyComponent,
+	ExportPhraseComponent,
+	SettingsComponent,
+	ContactsComponent,
+	ActivityComponent,
+	SubscribeCreateComponent,
+	SubscribeComponent,
+	PhraseComponent,
+	CreatePasswordComponent,
+	AllSetComponent,
+} from './pages'
 const Stack = createNativeStackNavigator()
-
 const screens = [
 	{
-		name: 'Wallet',
-		component: WalletScreen,
+		name: 'Home',
+		component: BottomTabNavigator,
 		options: ({ navigation }) => ({
-			headerShown: true,
+			contentStyle: {
+				borderTopWidth: 0,
+			},
+			headerShown: false,
 			title: 'Ethereum',
 			headerLeft: () => <HistoryBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
@@ -59,7 +55,7 @@ const screens = [
 			title: '',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
-		component: CreatePhraseScreen,
+		component: CreatePhraseComponent,
 	},
 	{
 		name: 'Unlock',
@@ -68,17 +64,7 @@ const screens = [
 			title: '',
 			headerLeft: () => <></>,
 		},
-		component: UnlockScreen,
-	},
-	{
-		name: 'ConfirmSwap',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Confirm Transaction',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: ConfirmSwapScreen,
+		component: UnlockComponent,
 	},
 	{
 		name: 'RiskAlert',
@@ -87,7 +73,7 @@ const screens = [
 			title: '',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
-		component: RiskAlertScreen,
+		component: RiskAlertComponent,
 	},
 	{
 		name: 'RiskAlertLogout',
@@ -96,7 +82,7 @@ const screens = [
 			title: '',
 			headerLeft: () => <></>,
 		},
-		component: RiskAlertLogoutScreen,
+		component: RiskAlertLogoutComponent,
 	},
 	{
 		name: 'ExportPhraseCopy',
@@ -105,7 +91,7 @@ const screens = [
 			title: 'Seed Phrase',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
-		component: ExportPhraseCopyScreen,
+		component: ExportPhraseCopyComponent,
 	},
 	{
 		name: 'ExportPrivateKeyCopy',
@@ -114,7 +100,7 @@ const screens = [
 			title: 'Private Key',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
-		component: ExportPrivateKeyCopyScreen,
+		component: ExportPrivateKeyCopyComponent,
 	},
 	{
 		name: 'TransactionHistory',
@@ -125,18 +111,7 @@ const screens = [
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: TransactionHistoryScreen,
-	},
-	{
-		name: 'TransactionHistoryPage',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: '',
-			headerLeft: () => <></>,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: TransactionHistoryPageScreen,
+		component: TransactionHistoryComponent,
 	},
 	{
 		name: 'EditProfile',
@@ -152,7 +127,7 @@ const screens = [
 				</TextBtn>
 			),
 		}),
-		component: EditProfileScreen,
+		component: EditProfileComponent,
 	},
 	{
 		name: 'PortfolioOpen',
@@ -163,7 +138,7 @@ const screens = [
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: PortfolioOpenScreen,
+		component: PortfolioOpenComponent,
 	},
 	{
 		name: 'Receive',
@@ -173,7 +148,7 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: ReceiveScreen,
+		component: ReceiveComponent,
 	},
 	{
 		name: 'Swap',
@@ -184,7 +159,7 @@ const screens = [
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: SwapScreen,
+		component: SwapComponent,
 	},
 	{
 		name: 'ConfirmTransaction',
@@ -194,7 +169,7 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: ConfirmTransactionScreen,
+		component: ConfirmTransactionComponent,
 	},
 	{
 		name: 'Sent',
@@ -206,7 +181,7 @@ const screens = [
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
 		}),
-		component: SentScreen,
+		component: SentComponent,
 	},
 	{
 		name: 'ExportPhrase',
@@ -215,18 +190,18 @@ const screens = [
 			title: 'Export Account - Secret Phrase',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
-		component: ExportPhraseScreen,
+		component: ExportPhraseComponent,
 	},
 	{
 		name: 'Login',
-		component: LoginScreen,
+		component: LoginComponent,
 		options: {
 			headerShown: false,
 		},
 	},
 	{
 		name: 'RecoverPhrase',
-		component: PhraseScreen,
+		component: PhraseComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
@@ -235,7 +210,7 @@ const screens = [
 	},
 	{
 		name: 'Subscribe',
-		component: SubscribeScreen,
+		component: SubscribeComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
@@ -244,7 +219,7 @@ const screens = [
 	},
 	{
 		name: 'CreatePassword',
-		component: CreatePasswordScreen,
+		component: CreatePasswordComponent,
 		options: {
 			headerShown: true,
 			title: 'By Bit Wallet',
@@ -253,25 +228,15 @@ const screens = [
 	},
 	{
 		name: 'AllSet',
-		component: AllSetScreen,
+		component: AllSetComponent,
 		options: {
 			headerShown: true,
 			title: 'By Bit Wallet',
 		},
 	},
 	{
-		name: 'Nft',
-		component: NftScreen,
-		options: ({ navigation }) => ({
-			headerShown: true,
-			headerLeft: () => <></>,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-	},
-	{
 		name: 'Contacts',
-		component: ContactsScreen,
+		component: ContactsComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Contacts',
@@ -281,25 +246,15 @@ const screens = [
 	},
 	{
 		name: 'Activity',
-		component: ActivityScreen,
+		component: ActivityComponent,
 		options: {
 			headerShown: true,
 			title: 'Ethereum',
 		},
 	},
 	{
-		name: 'Account',
-		component: AccountScreen,
-		options: ({ navigation }) => ({
-			title: 'Account',
-			headerShown: true,
-			headerLeft: () => <></>,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-	},
-	{
 		name: 'Settings',
-		component: SettingsScreen,
+		component: SettingsComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Settings',
@@ -309,7 +264,7 @@ const screens = [
 	},
 	{
 		name: 'ExportPrivateKey',
-		component: ExportPrivateKeyScreen,
+		component: ExportPrivateKeyComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Export Account - Private Key',
@@ -318,7 +273,7 @@ const screens = [
 	},
 	{
 		name: 'SubscribeCreate',
-		component: SubscribeCreateScreen,
+		component: SubscribeCreateComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Before We Begin',
@@ -327,7 +282,7 @@ const screens = [
 	},
 	{
 		name: 'ConfirmPassword',
-		component: ConfirmPasswordScreen,
+		component: ConfirmPasswordComponent,
 		options: ({ navigation }) => ({
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerShown: true,
@@ -336,17 +291,10 @@ const screens = [
 	},
 	{
 		name: 'Scanner',
-		component: Scanner,
+		component: ScannerComponent,
 		options: {
 			headerShown: true,
 			title: 'Scan Address',
-		},
-	},
-	{
-		name: 'Preloader',
-		component: PreloaderScreen,
-		options: {
-			headerShown: false,
 		},
 	},
 ]
@@ -357,7 +305,7 @@ export function MyStack() {
 		<Stack.Navigator
 			style={{ flex: 1 }}
 			initialRouteName={
-				dataUser.length ? (lockWallet ? 'Unlock' : 'Wallet') : 'Login'
+				dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
 			}
 			options={{
 				headerShadowVisible: false,

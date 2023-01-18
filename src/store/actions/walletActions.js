@@ -1,6 +1,5 @@
 import {
 	SET_CHOOSE_COIN,
-	SET_NAVIGATION,
 	SET_ALL_COINS,
 	SET_PORTFOLIO_COINS,
 	SET_PORTFOLIO_TRANSACTIONS,
@@ -16,17 +15,9 @@ import {
 	SET_CHOOSE_COIN_SWAP_SECOND,
 	SET_LOADER,
 	SET_LOADER_SKELETON,
-	SET_NAV_SCREEN,
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
 } from '../type'
-
-export const setNavigation = (nav) => {
-	return {
-		type: SET_NAVIGATION,
-		payload: nav,
-	}
-}
 
 export const setAllCoins = (coins) => {
 	return {
@@ -126,12 +117,6 @@ export const setLoaderSkeleton = (loader) => {
 	return {
 		type: SET_LOADER_SKELETON,
 		payload: loader,
-	}
-}
-export const setNavScreen = (screen) => {
-	return {
-		type: SET_NAV_SCREEN,
-		payload: screen,
 	}
 }
 export const setSwapAmountFirst = (amount) => {

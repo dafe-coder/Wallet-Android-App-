@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, TouchableOpacity, StyleSheet, Linking } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
 import { SvgIconNav } from './svg/svgNav'
 
 export const WalletNav = ({ navigation }) => {
-	const [webview, setWebView] = useState(null)
 	const url = 'https://www.moonpay.com/buy'
 	return (
 		<View style={styles.wrap}>

@@ -6,11 +6,7 @@ import { AccountCard } from './../Components/AccountCard'
 import { WalletBottomSheet } from './../Components/BottomSheet'
 import { DeleteWallet } from '../Components/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-	setLoader,
-	setNavigation,
-	setLoaderSkeleton,
-} from '../store/actions/walletActions'
+import { setLoader, setLoaderSkeleton } from '../store/actions/walletActions'
 import {
 	setDeleteAccount,
 	setCurrentAccount,
@@ -78,12 +74,11 @@ export const EditProfileScreen = ({ navigation }) => {
 					dispatch(setCurrentAccount(filterData[0].name))
 					navigation.reset({
 						index: 0,
-						routes: [{ name: 'Wallet' }],
+						routes: [{ name: 'Home' }],
 					})
 				} else {
 					dispatch(setPassword(''))
 					dispatch(setCurrentAccount(''))
-					dispatch(setNavigation(null))
 					dispatch(setClearDataUser())
 					navigation.reset({
 						index: 0,
