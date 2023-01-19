@@ -4,7 +4,6 @@ import { WalletTitle, WalletButton } from '../Components/UI'
 import { SelectCoinSwap, SwapDetails, WalletBottomSheet } from '../Components'
 import { ChooseCoins } from './../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
-import LazyHOC from './../../LazyHOC'
 import {
 	setChooseCoinSwapSecond,
 	setChooseCoin,
@@ -64,66 +63,66 @@ export const SwapScreen = ({ navigation }) => {
 		dispatch(setChooseCoinSwapSecond(frst))
 	}
 	return (
-		<LazyHOC>
-			<ScrollView
-				style={{
-					flex: 1,
-					paddingTop: 29,
-					paddingHorizontal: 16,
-					paddingBottom: 30,
-				}}>
-				<WalletTitle style={{ marginBottom: 25 }}>Exchange</WalletTitle>
-				{chooseCoin != null && chooseCoinSwapSecond != null ? (
-					<SelectCoinSwap
-						onSwapCoins={onSwapCoins}
-						chooseCoinSwapFirst={chooseCoin}
-						chooseCoinSwapSecond={chooseCoinSwapSecond}
-						onOpenFirstSwap={onOpenFirstSwap}
-						onOpenSecondSwap={onOpenSecondSwap}
+		<ScrollView
+			style={{
+				flex: 1,
+				paddingTop: 29,
+				paddingHorizontal: 16,
+				paddingBottom: 30,
+				borderTopColor: '#2f2d2b',
+				borderTopWidth: 0.6,
+			}}>
+			<WalletTitle style={{ marginBottom: 25 }}>Exchange</WalletTitle>
+			{chooseCoin != null && chooseCoinSwapSecond != null ? (
+				<SelectCoinSwap
+					onSwapCoins={onSwapCoins}
+					chooseCoinSwapFirst={chooseCoin}
+					chooseCoinSwapSecond={chooseCoinSwapSecond}
+					onOpenFirstSwap={onOpenFirstSwap}
+					onOpenSecondSwap={onOpenSecondSwap}
+				/>
+			) : (
+				<></>
+			)}
+			{chooseCoin != null && chooseCoinSwapSecond != null ? (
+				<SwapDetails
+					chooseCoinSwapFirst={chooseCoin}
+					chooseCoinSwapSecond={chooseCoinSwapSecond}
+				/>
+			) : (
+				<></>
+			)}
+			<WalletButton
+				style={{ marginBottom: 80 }}
+				onPress={() => navigation.navigate('ConfirmSwap')}>
+				Swap
+			</WalletButton>
+			{chooseCoin != null ? (
+				<WalletBottomSheet
+					ref={firstSwapRef}
+					snapPoints={[openKeyboard ? '100%' : '65%']}>
+					<ChooseCoins
+						onCoinPress={onCloseFirstSwap}
+						chooseCoin={chooseCoin}
+						allCoins={allCoins}
 					/>
-				) : (
-					<></>
-				)}
-				{chooseCoin != null && chooseCoinSwapSecond != null ? (
-					<SwapDetails
-						chooseCoinSwapFirst={chooseCoin}
-						chooseCoinSwapSecond={chooseCoinSwapSecond}
+				</WalletBottomSheet>
+			) : (
+				<></>
+			)}
+			{chooseCoin != null ? (
+				<WalletBottomSheet
+					ref={secondSwapRef}
+					snapPoints={[openKeyboard ? '100%' : '65%']}>
+					<ChooseCoins
+						onCoinPress={onCloseSecondSwap}
+						chooseCoin={chooseCoinSwapSecond}
+						allCoins={allCoins}
 					/>
-				) : (
-					<></>
-				)}
-				<WalletButton
-					style={{ marginBottom: 80 }}
-					onPress={() => navigation.navigate('ConfirmSwap')}>
-					Swap
-				</WalletButton>
-				{chooseCoin != null ? (
-					<WalletBottomSheet
-						ref={firstSwapRef}
-						snapPoints={[openKeyboard ? '100%' : '65%']}>
-						<ChooseCoins
-							onCoinPress={onCloseFirstSwap}
-							chooseCoin={chooseCoin}
-							allCoins={allCoins}
-						/>
-					</WalletBottomSheet>
-				) : (
-					<></>
-				)}
-				{chooseCoin != null ? (
-					<WalletBottomSheet
-						ref={secondSwapRef}
-						snapPoints={[openKeyboard ? '100%' : '65%']}>
-						<ChooseCoins
-							onCoinPress={onCloseSecondSwap}
-							chooseCoin={chooseCoinSwapSecond}
-							allCoins={allCoins}
-						/>
-					</WalletBottomSheet>
-				) : (
-					<></>
-				)}
-			</ScrollView>
-		</LazyHOC>
+				</WalletBottomSheet>
+			) : (
+				<></>
+			)}
+		</ScrollView>
 	)
 }

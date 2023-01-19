@@ -4,9 +4,9 @@ import Carousel from 'react-native-reanimated-carousel'
 import { SliderItem } from './SliderItem'
 import { THEME } from './../Theme'
 
+const width = Dimensions.get('window').width
 export const Slider = ({ portfolioCoinsInit }) => {
 	const [indexSlider, setIndexSlider] = useState(0)
-	const width = Dimensions.get('window').width
 	return (
 		<View
 			style={{
@@ -17,7 +17,7 @@ export const Slider = ({ portfolioCoinsInit }) => {
 			}}>
 			<Carousel
 				loop={false}
-				width={width + 30}
+				width={width + width / 14}
 				mode='parallax'
 				pagingEnabled={true}
 				height={205}
@@ -31,7 +31,7 @@ export const Slider = ({ portfolioCoinsInit }) => {
 				<View
 					style={[
 						indexSlider == 0 ? styles.circleActive : styles.circle,
-						{ marginRight: 6 },
+						{ marginRight: 6, marginLeft: width / 12 },
 					]}></View>
 				<View
 					style={[
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	bar: {
 		position: 'relative',
 		bottom: 5,
-		width: '100%',
+		width: width,
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',

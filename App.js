@@ -16,7 +16,7 @@ LogBox.ignoreLogs([
 ])
 import { useFonts } from 'expo-font'
 import { AppWrap } from './AppWrap'
-
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 export default function App() {
 	const [hidePreloader, setHidePreloader] = useState(true)
 	const [fontsLoaded] = useFonts({
@@ -36,10 +36,10 @@ export default function App() {
 		return (
 			<GestureHandlerRootView
 				style={{ flex: 1, backgroundColor: THEME.PRIMARY }}>
-				<PreloaderScreen load={hidePreloader} />
 				<Provider store={store}>
 					<PortalProvider>
 						<AppWrap>
+							<PreloaderScreen load={hidePreloader} />
 							<NavigationContainer
 								style={{ flex: 1 }}
 								theme={{ colors: { background: THEME.PRIMARY } }}>

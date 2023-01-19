@@ -1,2 +1,4 @@
 добавлять 
 autoFocus={true} pincodeInput
+
+delete package.lock.json before expo build

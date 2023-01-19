@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingHorizontal: 16,
+		borderTopColor: '#2f2d2b',
+		borderTopWidth: 0.6,
 	},
 	title: {
 		marginBottom: 13,

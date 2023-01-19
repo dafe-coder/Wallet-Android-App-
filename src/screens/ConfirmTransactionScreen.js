@@ -64,7 +64,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		// navigation.navigate('Sent')
 	}
 	return (
-		<ScrollView>
+		<ScrollView contentContainerStyle={{ flex: 1 }}>
 			<View
 				style={{
 					flex: 1,

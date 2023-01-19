@@ -5,7 +5,6 @@ import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
 import {
-	SwapComponent,
 	SentComponent,
 	LoginComponent,
 	CreatePhraseComponent,
@@ -42,7 +41,9 @@ const screens = [
 				borderTopWidth: 0,
 			},
 			headerShown: false,
-			title: 'Ethereum',
+			contentStyle: {
+				borderTopWidth: 0,
+			},
 			headerLeft: () => <HistoryBtn navigation={navigation} />,
 			headerTitle: () => <HeaderTitle />,
 			headerRight: () => <AccountBtn navigation={navigation} />,
@@ -151,17 +152,6 @@ const screens = [
 		component: ReceiveComponent,
 	},
 	{
-		name: 'Swap',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Ethereum',
-			headerLeft: () => <></>,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: SwapComponent,
-	},
-	{
 		name: 'ConfirmTransaction',
 		options: ({ navigation }) => ({
 			headerShown: true,
@@ -197,6 +187,9 @@ const screens = [
 		component: LoginComponent,
 		options: {
 			headerShown: false,
+			contentStyle: {
+				borderTopWidth: 0,
+			},
 		},
 	},
 	{
@@ -311,7 +304,6 @@ export function MyStack() {
 				headerShadowVisible: false,
 			}}
 			screenOptions={{
-				headerTitleContainerStyle: { paddingVertical: 30 },
 				headerBackVisible: false,
 				contentStyle: {
 					borderTopColor: '#2f2d2b',

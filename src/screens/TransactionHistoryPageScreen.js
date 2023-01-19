@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Button } from 'react-native'
 import { WalletTitle, WalletText } from '../Components/UI'
 import { THEME } from '../Theme'
 import { TransactionsList } from '../Components'
 import { useSelector } from 'react-redux'
 import { SvgIcon } from '../Components/svg/svg'
+
 export const TransactionHistoryPageScreen = () => {
 	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
@@ -15,8 +16,14 @@ export const TransactionHistoryPageScreen = () => {
 			setTransactionList(filtered)
 		}
 	}, [transactions])
+
 	return (
-		<ScrollView style={{ paddingTop: 29 }}>
+		<ScrollView
+			style={{
+				paddingTop: 29,
+				borderTopColor: '#2f2d2b',
+				borderTopWidth: 0.6,
+			}}>
 			<View
 				style={{
 					marginHorizontal: 16,

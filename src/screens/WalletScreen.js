@@ -56,7 +56,13 @@ export const WalletScreen = ({ navigation }) => {
 
 	return (
 		<>
-			<ScrollView style={{ flex: 1, paddingTop: 20 }}>
+			<ScrollView
+				style={{
+					flex: 1,
+					paddingTop: 20,
+					borderTopColor: '#2f2d2b',
+					borderTopWidth: 0.6,
+				}}>
 				<Slider portfolioCoinsInit={portfolioCoinsInit} />
 				<View style={{ paddingHorizontal: 16, flex: 1 }}>
 					<WalletNav navigation={navigation} />

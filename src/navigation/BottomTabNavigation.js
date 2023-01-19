@@ -11,11 +11,18 @@ const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
 import { SvgIconNav } from '../Components/svg/svgNav'
 import { WalletText } from '../Components/UI'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	Dimensions,
+} from 'react-native'
 import { HistoryBtn } from './HeaderButtons/HistoryBtn'
 import { AccountBtn } from './HeaderButtons/AccountBtn'
 import { HeaderTitle } from './HeaderButtons/HeaderTitle'
 
+const width = Dimensions.get('window').width
 function MyTabBar({ state, descriptors, navigation }) {
 	return (
 		<View style={styles.wrap}>
@@ -80,7 +87,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 						accessibilityRole='button'
 						accessibilityLabel={options.tabBarAccessibilityLabel}
 						accessibilityState={isFocused ? { selected: true } : {}}
-						activeOpacity={0.9}
+						activeOpacity={1}
 						key={index.toString()}
 						testID={options.tabBarTestID}
 						onLongPress={onLongPress}
@@ -99,7 +106,15 @@ function MyTabBar({ state, descriptors, navigation }) {
 								/>
 							)}
 							<WalletText
-								style={label == 'Swap' ? { marginTop: 20 } : {}}
+								style={[
+									label == 'Swap' ? { marginTop: 20 } : {},
+									label == 'Account'
+										? {
+												minWidth: width / 7,
+												height: 23,
+										  }
+										: {},
+								]}
 								color={isFocused ? 'gold' : 'brown'}>
 								{initLabel(label)}
 							</WalletText>
@@ -114,10 +129,11 @@ export default function BottomTabNavigator() {
 	return (
 		<Tab.Navigator
 			style={{ flex: 1 }}
-			options={{
-				headerShadowVisible: false,
-			}}
 			screenOptions={{
+				tabBarStyle: {
+					elevation: 0,
+					borderWidth: 0,
+				},
 				headerStyle: {
 					borderBottomColor: '#2f2d2b',
 					borderBottomWidth: 0.6,
@@ -140,6 +156,7 @@ export default function BottomTabNavigator() {
 						{title.children.toUpperCase()}
 					</Text>
 				),
+				headerShadowVisible: false,
 			}}
 			tabBar={(props) => <MyTabBar {...props} />}>
 			<Tab.Screen
