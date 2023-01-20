@@ -62,7 +62,6 @@ export const SentScreen = ({ navigation }) => {
 			navigation.navigate('ConfirmTransaction')
 		}
 	}
-
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => Keyboard.dismiss()}

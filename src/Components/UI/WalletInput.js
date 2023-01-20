@@ -27,7 +27,7 @@ export const WalletInput = ({
 				style={[styles.input, styleInput]}
 				placeholder={placeholder}
 				placeholderTextColor={THEME.BROWN_TEXT}
-				value={value}
+				defaultValue={value}
 				onChangeText={setValue}
 			/>
 			{text != '' ? (

@@ -69,9 +69,6 @@ export const AccountScreen = ({ navigation }) => {
 					<AccountCard navigation={navigation} />
 				</View>
 				<AccountListMenu onPress={handlePresentPress} />
-				{/* <WalletBottomSheet ref={addAccountRef} snapPoints={['55%']}>
-					<AddAccount onPress={() => navigation.navigate('Contacts')} />
-				</WalletBottomSheet> */}
 				<WalletBottomSheet
 					ref={importAccountRef}
 					snapPoints={[!openKeyboard ? '75%' : '100%']}>

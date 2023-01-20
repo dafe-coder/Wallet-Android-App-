@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ScrollView, Keyboard } from 'react-native'
+import { ScrollView, Keyboard, ActivityIndicator, View } from 'react-native'
 import { WalletTitle, WalletButton } from '../Components/UI'
 import { SelectCoinSwap, SwapDetails, WalletBottomSheet } from '../Components'
 import { ChooseCoins } from './../Components/modal'
@@ -8,8 +8,17 @@ import {
 	setChooseCoinSwapSecond,
 	setChooseCoin,
 } from './../store/actions/walletActions'
-
+// import useIsReady from '../../hooks/useIsReady'
+// const BusyIndicator = () => {
+// 	return (
+// 		<View style={{ flex: 1, justifyContent: 'center' }}>
+// 			<ActivityIndicator size='large' />
+// 		</View>
+// 	)
+// }
 export const SwapScreen = ({ navigation }) => {
+	// const isReady = useIsReady()
+
 	const dispatch = useDispatch()
 	const { allCoins } = useSelector((state) => state.wallet)
 	const firstSwapRef = useRef(null)
@@ -40,7 +49,9 @@ export const SwapScreen = ({ navigation }) => {
 			)
 		}
 	}, [allCoins, chooseCoinSwapSecond])
-
+	// if (!isReady) {
+	// 	return <BusyIndicator></BusyIndicator>
+	// }
 	const onOpenFirstSwap = () => {
 		firstSwapRef.current?.expand()
 	}

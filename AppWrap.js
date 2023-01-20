@@ -40,14 +40,18 @@ export const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
+		getAllTokens(setLoadingOtherCoins).then((data) => {
+			setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+		})
+	}, [])
+
+	useEffect(() => {
 		if (dataUser.length >= 1 && currentAccount != '') {
 			dispatch(setLoaderSkeleton(false))
 			dataUser.forEach((item) => {
 				if (item.name == currentAccount) {
 					setLoadingBalanceCoins(true)
-					getAllTokens(setLoadingOtherCoins).then((data) => {
-						setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
-					})
+
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
 							setLoadingBalanceCoins(false)

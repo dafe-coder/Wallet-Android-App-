@@ -9,10 +9,13 @@ import Animated, {
 	interpolateColor,
 	Easing,
 } from 'react-native-reanimated'
+import { Dimensions } from 'react-native'
+
+const height = Dimensions.get('window').height
 
 export const PreloaderScreen = ({ load }) => {
 	const offset = useSharedValue(0)
-	const offsetLogo = useSharedValue(-400)
+	const offsetLogo = useSharedValue(-(height / 1.5))
 	const reanimatedBackgroundColor = useSharedValue(0)
 
 	const animatedStyles = useAnimatedStyle(() => {
