@@ -22,24 +22,11 @@ export const SwapScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { allCoins } = useSelector((state) => state.wallet)
 	const firstSwapRef = useRef(null)
-	const [openKeyboard, setOpenKeyboard] = useState(false)
 	const secondSwapRef = useRef(null)
 	const { chooseCoin, chooseCoinSwapSecond } = useSelector(
 		(state) => state.wallet
 	)
-	useEffect(() => {
-		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-			setOpenKeyboard(true)
-		})
-		const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-			setOpenKeyboard(false)
-		})
 
-		return () => {
-			showSubscription.remove()
-			hideSubscription.remove()
-		}
-	}, [])
 	useEffect(() => {
 		if (chooseCoinSwapSecond == null) {
 			dispatch(
@@ -109,9 +96,7 @@ export const SwapScreen = ({ navigation }) => {
 				Swap
 			</WalletButton>
 			{chooseCoin != null ? (
-				<WalletBottomSheet
-					ref={firstSwapRef}
-					snapPoints={[openKeyboard ? '100%' : '65%']}>
+				<WalletBottomSheet ref={firstSwapRef} snapPoints={['65%']}>
 					<ChooseCoins
 						onCoinPress={onCloseFirstSwap}
 						chooseCoin={chooseCoin}
@@ -122,9 +107,7 @@ export const SwapScreen = ({ navigation }) => {
 				<></>
 			)}
 			{chooseCoin != null ? (
-				<WalletBottomSheet
-					ref={secondSwapRef}
-					snapPoints={[openKeyboard ? '100%' : '65%']}>
+				<WalletBottomSheet ref={secondSwapRef} snapPoints={['65%']}>
 					<ChooseCoins
 						onCoinPress={onCloseSecondSwap}
 						chooseCoin={chooseCoinSwapSecond}

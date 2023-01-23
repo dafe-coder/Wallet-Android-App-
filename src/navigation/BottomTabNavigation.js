@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
 	WalletComponent,
@@ -19,8 +19,8 @@ import {
 	Dimensions,
 } from 'react-native'
 import { HistoryBtn } from './HeaderButtons/HistoryBtn'
-import { AccountBtn } from './HeaderButtons/AccountBtn'
-import { HeaderTitle } from './HeaderButtons/HeaderTitle'
+import { AccountBtn } from './HeaderButtons/AccountBtnBottomNav'
+import { HeaderTitle } from './HeaderButtons/HeaderTitleBottomNav'
 
 const width = Dimensions.get('window').width
 function MyTabBar({ state, descriptors, navigation }) {
@@ -125,88 +125,145 @@ function MyTabBar({ state, descriptors, navigation }) {
 		</View>
 	)
 }
+import { WalletBottomSheet } from '../Components'
+import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
+import { useNavigation } from '@react-navigation/native'
+
 export default function BottomTabNavigator() {
+	const navigation = useNavigation()
+	const chooseNetwork = useRef(null)
+	const selectAccountRef = useRef(null)
+
+	const openModalSelect = () => {
+		selectAccountRef.current.expand()
+	}
+
+	const onCloseModal = () => {
+		selectAccountRef.current.close()
+	}
+	const openModalSelectAccount = () => {
+		chooseNetwork.current?.expand()
+	}
+	const closeModalSelectAccount = () => {
+		chooseNetwork.current?.close()
+	}
 	return (
-		<Tab.Navigator
-			style={{ flex: 1 }}
-			screenOptions={{
-				tabBarStyle: {
-					elevation: 0,
-					borderWidth: 0,
-				},
-				headerStyle: {
-					borderBottomColor: '#2f2d2b',
-					borderBottomWidth: 0.6,
-				},
-				headerRightContainerStyle: {
-					paddingRight: 16,
-				},
-				headerLeftContainerStyle: {
-					paddingLeft: 16,
-				},
-				headerTitleAlign: 'center',
-				headerTitle: (title) => (
-					<Text
-						style={{
-							fontFamily: 'gt-medium',
-							color: THEME.GOLD_DARK,
-							fontSize: 14,
-							textTransform: 'uppercase',
-						}}>
-						{title.children.toUpperCase()}
-					</Text>
-				),
-				headerShadowVisible: false,
-			}}
-			tabBar={(props) => <MyTabBar {...props} />}>
-			<Tab.Screen
-				name='Wallet'
-				component={WalletComponent}
-				options={({ navigation }) => ({
-					headerLeft: () => <HistoryBtn navigation={navigation} />,
-					headerTitle: () => <HeaderTitle />,
-					headerRight: () => <AccountBtn navigation={navigation} />,
-				})}
-			/>
-			<Tab.Screen
-				name='TransactionPage'
-				component={TransactionHistoryPageComponent}
-				options={({ navigation }) => ({
-					headerShown: true,
-					headerLeft: () => <></>,
-					headerTitle: () => <HeaderTitle />,
-					headerRight: () => <AccountBtn navigation={navigation} />,
-				})}
-			/>
-			<Tab.Screen
-				name='Swap'
-				component={SwapComponent}
-				options={({ navigation }) => ({
-					headerShown: true,
-					headerLeft: () => <></>,
-					headerRight: () => <AccountBtn navigation={navigation} />,
-				})}
-			/>
-			<Tab.Screen
-				name='Nft'
-				component={NftComponent}
-				options={({ navigation }) => ({
-					headerShown: true,
-					headerLeft: () => <></>,
-					headerTitle: () => <HeaderTitle />,
-					headerRight: () => <AccountBtn navigation={navigation} />,
-				})}
-			/>
-			<Tab.Screen
-				name='Account'
-				component={AccountComponent}
-				options={({ navigation }) => ({
-					headerShown: true,
-					headerLeft: () => <></>,
-					headerRight: () => <AccountBtn navigation={navigation} />,
-				})}
-			/>
-		</Tab.Navigator>
+		<>
+			<Tab.Navigator
+				style={{ flex: 1 }}
+				screenOptions={{
+					headerStyle: {
+						borderBottomColor: 'transparent',
+						shadowColor: 'transparent',
+						elevation: 0,
+					},
+					tabBarStyle: {
+						elevation: 0,
+						borderWidth: 0,
+					},
+					headerRightContainerStyle: {
+						paddingRight: 16,
+					},
+					headerLeftContainerStyle: {
+						paddingLeft: 16,
+					},
+					headerTitleAlign: 'center',
+					headerTitle: (title) => (
+						<Text
+							style={{
+								fontFamily: 'gt-medium',
+								color: THEME.GOLD_DARK,
+								fontSize: 14,
+								textTransform: 'uppercase',
+							}}>
+							{title.children.toUpperCase()}
+						</Text>
+					),
+					headerShadowVisible: false,
+				}}
+				tabBar={(props) => <MyTabBar {...props} />}>
+				<Tab.Screen
+					name='Wallet'
+					component={WalletComponent}
+					options={({ navigation }) => ({
+						headerLeft: () => <HistoryBtn navigation={navigation} />,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => (
+							<AccountBtn
+								openModalSelect={openModalSelect}
+								navigation={navigation}
+							/>
+						),
+					})}
+				/>
+				<Tab.Screen
+					name='TransactionPage'
+					component={TransactionHistoryPageComponent}
+					options={({ navigation }) => ({
+						headerLeft: () => <></>,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => (
+							<AccountBtn
+								openModalSelect={openModalSelect}
+								navigation={navigation}
+							/>
+						),
+					})}
+				/>
+				<Tab.Screen
+					name='Swap'
+					component={SwapComponent}
+					options={({ navigation }) => ({
+						headerLeft: () => <></>,
+						headerRight: () => (
+							<AccountBtn
+								openModalSelect={openModalSelect}
+								navigation={navigation}
+							/>
+						),
+					})}
+				/>
+				<Tab.Screen
+					name='Nft'
+					component={NftComponent}
+					options={({ navigation }) => ({
+						headerLeft: () => <></>,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => (
+							<AccountBtn
+								openModalSelect={openModalSelect}
+								navigation={navigation}
+							/>
+						),
+					})}
+				/>
+				<Tab.Screen
+					name='Account'
+					component={AccountComponent}
+					options={({ navigation }) => ({
+						headerLeft: () => <></>,
+						headerRight: () => (
+							<AccountBtn
+								openModalSelect={openModalSelect}
+								navigation={navigation}
+							/>
+						),
+					})}
+				/>
+			</Tab.Navigator>
+			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
+				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
+				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
+			</WalletBottomSheet>
+		</>
 	)
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletTitle, WalletText } from '../UI'
 import { THEME } from '../../Theme'
@@ -9,11 +9,12 @@ import { SvgIcon } from './../svg/svg'
 export const SelectAccount = ({ navigation, onCloseModal }) => {
 	const dispatch = useDispatch()
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
-
 	const onSelectAccount = (item) => {
-		dispatch(setCurrentAccount(item.name))
-		navigation.navigate('Home')
-		onCloseModal()
+		if (item.name !== currentAccount) {
+			dispatch(setCurrentAccount(item.name))
+			navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
+			onCloseModal()
+		}
 	}
 
 	return (

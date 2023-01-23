@@ -37,12 +37,7 @@ export const ExportPhraseComponent = (props) => {
 export const SettingsComponent = (props) => {
 	return <SettingsScreen {...props} />
 }
-export const AccountComponent = (props) => {
-	return <AccountScreen {...props} />
-}
-export const NftComponent = (props) => {
-	return <NftScreen {...props} />
-}
+
 export const ContactsComponent = (props) => {
 	return <ContactsScreen {...props} />
 }
@@ -65,9 +60,6 @@ export const AllSetComponent = (props) => {
 	return <AllSetScreen {...props} />
 }
 
-export const WalletComponent = (props) => {
-	return <WalletScreen {...props} />
-}
 export const ReceiveComponent = (props) => {
 	return <ReceiveScreen {...props} />
 }
@@ -77,9 +69,7 @@ export const ConfirmTransactionComponent = (props) => {
 export const ExportPrivateKeyComponent = (props) => {
 	return <ExportPrivateKeyScreen {...props} />
 }
-export const SwapComponent = (props) => {
-	return <SwapScreen {...props} />
-}
+
 export const ConfirmPasswordComponent = (props) => {
 	return <ConfirmPasswordScreen {...props} />
 }
@@ -94,9 +84,6 @@ export const LoginComponent = (props) => {
 }
 export const CreatePhraseComponent = (props) => {
 	return <CreatePhraseScreen {...props} />
-}
-export const TransactionHistoryPageComponent = (props) => {
-	return <TransactionHistoryPageScreen {...props} />
 }
 export const ConfirmSwapComponent = (props) => {
 	return <ConfirmSwapScreen {...props} />
@@ -124,4 +111,20 @@ export const EditProfileComponent = (props) => {
 }
 export const TransactionHistoryComponent = (props) => {
 	return <TransactionHistoryScreen {...props} />
+}
+
+export const AccountComponent = (props) => {
+	return <AccountScreen {...props} />
+}
+export const NftComponent = (props) => {
+	return <NftScreen {...props} />
+}
+export const WalletComponent = (props) => {
+	return <WalletScreen {...props} />
+}
+export const SwapComponent = (props) => {
+	return <SwapScreen {...props} />
+}
+export const TransactionHistoryPageComponent = (props) => {
+	return <TransactionHistoryPageScreen {...props} />
 }

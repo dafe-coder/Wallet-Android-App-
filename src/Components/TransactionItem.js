@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { WalletText } from './UI'
 import { THEME } from './../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
@@ -37,9 +37,7 @@ export const TransactionItem = ({
 	return (
 		<>
 			{prevDate[index - 1] !==
-			getDateTransaction(+itemData.mined_at)
-				.map((item) => (item.length == 2 ? item + '.' : item))
-				.join('') ? (
+			getDateTransaction(+itemData.mined_at).join('.') ? (
 				<WalletText
 					color='gold'
 					style={{ paddingLeft: 20, marginBottom: 12, marginTop: 15 }}>

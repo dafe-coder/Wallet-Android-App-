@@ -1,9 +1,12 @@
+import React, { useRef } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
-import { AccountBtn, HistoryBtn, HeaderTitle, BackBtn, TextBtn } from './'
+import { BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
+import { HeaderTitle } from '../navigation/HeaderButtons/HeaderTitleBottomNav'
+import { AccountBtn } from '../navigation/HeaderButtons/AccountBtnBottomNav'
 import {
 	SentComponent,
 	LoginComponent,
@@ -36,18 +39,13 @@ const screens = [
 	{
 		name: 'Home',
 		component: BottomTabNavigator,
-		options: ({ navigation }) => ({
-			contentStyle: {
-				borderTopWidth: 0,
-			},
+		options: {
 			headerShown: false,
 			contentStyle: {
+				borderTopColor: 'transparent',
 				borderTopWidth: 0,
 			},
-			headerLeft: () => <HistoryBtn navigation={navigation} />,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
+		},
 	},
 	{
 		name: 'CreatePhrase',
@@ -103,17 +101,7 @@ const screens = [
 		}),
 		component: ExportPrivateKeyCopyComponent,
 	},
-	{
-		name: 'TransactionHistory',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: '',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: TransactionHistoryComponent,
-	},
+
 	{
 		name: 'EditProfile',
 		options: ({ navigation }) => ({
@@ -129,49 +117,6 @@ const screens = [
 			),
 		}),
 		component: EditProfileComponent,
-	},
-	{
-		name: 'PortfolioOpen',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Ethereum',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: PortfolioOpenComponent,
-	},
-	{
-		name: 'Receive',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'You Wallet Adress',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: ReceiveComponent,
-	},
-	{
-		name: 'ConfirmTransaction',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Confirm Transaction',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: ConfirmTransactionComponent,
-	},
-	{
-		name: 'Sent',
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Ethereum',
-			headerBackVisible: false,
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerTitle: () => <HeaderTitle />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-		component: SentComponent,
 	},
 	{
 		name: 'ExportPhrase',
@@ -228,32 +173,12 @@ const screens = [
 		},
 	},
 	{
-		name: 'Contacts',
-		component: ContactsComponent,
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Contacts',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
-	},
-	{
 		name: 'Activity',
 		component: ActivityComponent,
 		options: {
 			headerShown: true,
 			title: 'Ethereum',
 		},
-	},
-	{
-		name: 'Settings',
-		component: SettingsComponent,
-		options: ({ navigation }) => ({
-			headerShown: true,
-			title: 'Settings',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-			headerRight: () => <AccountBtn navigation={navigation} />,
-		}),
 	},
 	{
 		name: 'ExportPrivateKey',
@@ -292,48 +217,155 @@ const screens = [
 	},
 ]
 
+import { WalletBottomSheet } from '../Components'
+import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
+import { useNavigation } from '@react-navigation/native'
+
 export function MyStack() {
+	const navigation = useNavigation()
+	const chooseNetwork = useRef(null)
+	const selectAccountRef = useRef(null)
+
+	const openModalSelect = () => {
+		selectAccountRef.current.expand()
+	}
+
+	const onCloseModal = () => {
+		selectAccountRef.current.close()
+	}
+	const openModalSelectAccount = () => {
+		chooseNetwork.current?.expand()
+	}
+	const closeModalSelectAccount = () => {
+		chooseNetwork.current?.close()
+	}
 	const { lockWallet, dataUser } = useSelector((state) => state.storage)
 	return (
-		<Stack.Navigator
-			style={{ flex: 1 }}
-			initialRouteName={
-				dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-			}
-			options={{
-				headerShadowVisible: false,
-			}}
-			screenOptions={{
-				headerBackVisible: false,
-				contentStyle: {
-					borderTopColor: '#2f2d2b',
-					borderTopWidth: 0.6,
-				},
-				headerTitleAlign: 'center',
-				headerStyle: {
-					backgroundColor: THEME.PRIMARY,
-				},
-				animation: 'none',
-				headerTitle: (title) => (
-					<Text
-						style={{
-							fontFamily: 'gt-medium',
-							color: THEME.GOLD_DARK,
-							fontSize: 14,
-							textTransform: 'uppercase',
-						}}>
-						{title.children.toUpperCase()}
-					</Text>
-				),
-			}}>
-			{screens.map((s) => (
+		<>
+			<Stack.Navigator
+				style={{ flex: 1 }}
+				initialRouteName={
+					dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
+				}
+				options={{
+					headerShadowVisible: false,
+				}}
+				screenOptions={{
+					headerBackVisible: false,
+					contentStyle: {
+						borderTopColor: '#2f2d2b',
+						borderTopWidth: 0.6,
+					},
+					headerTitleAlign: 'center',
+					headerStyle: {
+						backgroundColor: THEME.PRIMARY,
+					},
+					animation: 'none',
+					headerTitle: (title) => (
+						<Text
+							style={{
+								fontFamily: 'gt-medium',
+								color: THEME.GOLD_DARK,
+								fontSize: 14,
+								textTransform: 'uppercase',
+							}}>
+							{title.children.toUpperCase()}
+						</Text>
+					),
+				}}>
+				{screens.map((s) => (
+					<Stack.Screen
+						key={s.name}
+						name={s.name}
+						options={s.options}
+						component={s.component}
+					/>
+				))}
 				<Stack.Screen
-					key={s.name}
-					name={s.name}
-					options={s.options}
-					component={s.component}
+					name='TransactionHistory'
+					component={TransactionHistoryComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: '',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
 				/>
-			))}
-		</Stack.Navigator>
+				<Stack.Screen
+					name='PortfolioOpen'
+					component={PortfolioOpenComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: '',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+				<Stack.Screen
+					name='Receive'
+					component={ReceiveComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: 'You Wallet Address',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+				<Stack.Screen
+					name='ConfirmTransaction'
+					component={ConfirmTransactionComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: 'Confirm Transaction',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+				<Stack.Screen
+					name='Sent'
+					component={SentComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerTitle: () => (
+							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						),
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+				<Stack.Screen
+					name='Contacts'
+					component={ContactsComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: 'Contacts',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+				<Stack.Screen
+					name='Settings'
+					component={SettingsComponent}
+					options={({ navigation }) => ({
+						headerShown: true,
+						title: 'Settings',
+						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+					})}
+				/>
+			</Stack.Navigator>
+			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
+				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
+				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
+			</WalletBottomSheet>
+		</>
 	)
 }
