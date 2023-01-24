@@ -7,6 +7,7 @@ export const SettingsListMenu = ({ onPress }) => {
 	const [phrase, setPhrase] = useState(false)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	useEffect(() => {
+		console.log(dataUser)
 		setPhrase(dataUser.filter((d) => d.name == currentAccount)[0].phrase !== '')
 	}, [dataUser, currentAccount])
 	const menuData = [

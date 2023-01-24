@@ -5,18 +5,21 @@ import { THEME } from '../Theme'
 import { TransactionsList } from '../Components'
 import { useSelector } from 'react-redux'
 import { SvgIcon } from '../Components/svg/svg'
-
+import useIsReady from '../../hooks/useIsReady'
+import { BusyIndicator } from '../Components/Loader'
 export const TransactionHistoryPageScreen = () => {
 	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
-
+	const isReady = useIsReady()
 	useEffect(() => {
 		if (transactions.length) {
 			let filtered = transactions.filter((item) => item.status !== 'failed')
 			setTransactionList(filtered)
 		}
 	}, [transactions])
-
+	if (!isReady) {
+		return <BusyIndicator></BusyIndicator>
+	}
 	return (
 		<ScrollView
 			style={{

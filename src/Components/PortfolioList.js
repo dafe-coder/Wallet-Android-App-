@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View } from 'react-native'
 import { PortfolioItem } from './PortfolioItem'
 import fixNum from './../../services/funcWallet/fixNum'
+import { useDispatch } from 'react-redux'
+import { setPortfolioOpen } from '../store/actions/walletActions'
 
 export const PortfolioList = ({ coins, style, navigation }) => {
+	const dispatch = useDispatch()
+
 	const [coinsInit, setCoinsInit] = useState([])
 	useEffect(() => {
 		setCoinsInit(coins)
 	}, [coins])
+	const onOpenPortfolioCoin = useCallback((coin) => {
+		dispatch(setPortfolioOpen(coin))
+		navigation.navigate('PortfolioOpen')
+	})
 	return (
 		<View style={[style]}>
 			{coinsInit.map((c) => {
@@ -15,7 +23,6 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 					<PortfolioItem
 						coin={c}
 						key={c.id}
-						navigation={navigation}
 						img={c.image.thumb}
 						title={c.symbol}
 						currentPrice={fixNum(c.market_data.current_price.usd)}
@@ -32,6 +39,7 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 								  ).toFixed(3)
 								: 0
 						}
+						onOpenPortfolioCoin={onOpenPortfolioCoin}
 					/>
 				)
 			})}

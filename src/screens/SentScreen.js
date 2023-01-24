@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setAddressTo, setChooseCoin } from './../store/actions/walletActions'
 import { SvgIcon } from './../Components/svg/svg'
 
+import useIsReady from '../../hooks/useIsReady'
+import { BusyIndicator } from '../Components/Loader'
 export const SentScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const { allCoins, chooseCoin, addressTo } = useSelector(
@@ -25,6 +27,7 @@ export const SentScreen = ({ navigation }) => {
 	const [fromAddress, setFromAddress] = useState('')
 	const [openKeyboard, setOpenKeyboard] = useState(false)
 	const [btnDisabled, setBtnDisabled] = useState(true)
+	const isReady = useIsReady()
 	const onAddAddress = (text) => {
 		setFromAddress(text)
 		dispatch(setAddressTo(text))
@@ -61,6 +64,9 @@ export const SentScreen = ({ navigation }) => {
 			dispatch(setAddressTo(fromAddress))
 			navigation.navigate('ConfirmTransaction')
 		}
+	}
+	if (!isReady) {
+		return <BusyIndicator></BusyIndicator>
 	}
 	return (
 		<TouchableWithoutFeedback

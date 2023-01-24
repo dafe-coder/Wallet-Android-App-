@@ -12,10 +12,12 @@ import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
-
+import useIsReady from '../../hooks/useIsReady'
+import { BusyIndicator } from '../Components/Loader'
 export const PortfolioOpenScreen = ({ navigation }) => {
 	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
+	const isReady = useIsReady()
 
 	useEffect(() => {
 		let filtered = transactions.filter((item) => item.status !== 'failed')
@@ -45,7 +47,9 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 
 		setTransactionList(arrSorted)
 	}, [portfolioOpen, transactions])
-
+	if (!isReady) {
+		return <BusyIndicator></BusyIndicator>
+	}
 	return (
 		<ScrollView
 			style={{

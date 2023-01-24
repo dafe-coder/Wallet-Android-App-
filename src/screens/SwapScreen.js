@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ScrollView, Keyboard, ActivityIndicator, View } from 'react-native'
+import React, { useRef } from 'react'
+import { ScrollView } from 'react-native'
 import { WalletTitle, WalletButton } from '../Components/UI'
 import { SelectCoinSwap, SwapDetails, WalletBottomSheet } from '../Components'
 import { ChooseCoins } from './../Components/modal'
@@ -8,16 +8,11 @@ import {
 	setChooseCoinSwapSecond,
 	setChooseCoin,
 } from './../store/actions/walletActions'
-// import useIsReady from '../../hooks/useIsReady'
-// const BusyIndicator = () => {
-// 	return (
-// 		<View style={{ flex: 1, justifyContent: 'center' }}>
-// 			<ActivityIndicator size='large' />
-// 		</View>
-// 	)
-// }
+import useIsReady from '../../hooks/useIsReady'
+import { BusyIndicator } from '../Components/Loader'
+
 export const SwapScreen = ({ navigation }) => {
-	// const isReady = useIsReady()
+	const isReady = useIsReady()
 
 	const dispatch = useDispatch()
 	const { allCoins } = useSelector((state) => state.wallet)
@@ -27,18 +22,9 @@ export const SwapScreen = ({ navigation }) => {
 		(state) => state.wallet
 	)
 
-	useEffect(() => {
-		if (chooseCoinSwapSecond == null) {
-			dispatch(
-				setChooseCoinSwapSecond(
-					allCoins.filter((d) => d.symbol.includes('btc'))[0]
-				)
-			)
-		}
-	}, [allCoins, chooseCoinSwapSecond])
-	// if (!isReady) {
-	// 	return <BusyIndicator></BusyIndicator>
-	// }
+	if (!isReady) {
+		return <BusyIndicator></BusyIndicator>
+	}
 	const onOpenFirstSwap = () => {
 		firstSwapRef.current?.expand()
 	}

@@ -17,6 +17,7 @@ import {
 } from './src/store/actions/walletActions'
 import { Image } from 'react-native'
 import { THEME } from './src/Theme'
+import { setChooseCoinSwapSecond } from './src/store/actions/walletActions'
 
 export const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
@@ -34,6 +35,9 @@ export const AppWrap = ({ children }) => {
 			allCoins.forEach((c) => {
 				if (c.symbol.toLowerCase() == 'eth') {
 					dispatch(setChooseCoin(c))
+				}
+				if (c.symbol.toLowerCase() == 'usdt') {
+					dispatch(setChooseCoinSwapSecond(c))
 				}
 			})
 		}

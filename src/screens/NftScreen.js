@@ -4,9 +4,15 @@ import { THEME } from '../Theme'
 import { WalletTitle, WalletText } from '../Components/UI'
 import { NftList } from '../Components'
 import { SvgIcon } from './../Components/svg/svg'
+import useIsReady from '../../hooks/useIsReady'
+import { BusyIndicator } from '../Components/Loader'
 
 export const NftScreen = ({ navigation }) => {
 	const [data, setData] = useState([])
+	const isReady = useIsReady()
+	if (!isReady) {
+		return <BusyIndicator></BusyIndicator>
+	}
 	return (
 		<ScrollView style={styles.body}>
 			{data.length ? (

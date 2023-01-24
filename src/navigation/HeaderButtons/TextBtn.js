@@ -29,12 +29,12 @@ export const TextBtn = ({ onPress, children, navigation, type }) => {
 					dispatch(setNewAccountName(accountName))
 					dispatch(setCurrentAccount(accountName))
 					dispatch(setAccountName(''))
-					dispatch(setLoaderSkeleton(true))
-					dispatch(setLoader(false))
 					navigation.reset({
 						index: 0,
 						routes: [{ name: 'Home' }],
 					})
+					dispatch(setLoaderSkeleton(true))
+					dispatch(setLoader(false))
 				}, 2000)
 			)
 		}

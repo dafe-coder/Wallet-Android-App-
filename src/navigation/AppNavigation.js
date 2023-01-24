@@ -33,6 +33,7 @@ import {
 	PhraseComponent,
 	CreatePasswordComponent,
 	AllSetComponent,
+	ConfirmSwapComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
@@ -55,6 +56,15 @@ const screens = [
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: CreatePhraseComponent,
+	},
+	{
+		name: 'ConfirmSwap',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'Confirm Transaction',
+			headerLeft: () => <BackBtn navigation={navigation} />,
+		}),
+		component: ConfirmSwapComponent,
 	},
 	{
 		name: 'Unlock',
