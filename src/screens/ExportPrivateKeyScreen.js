@@ -44,8 +44,8 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 						wallet.
 					</WalletTextWithIcon>
 					<WalletTextWithIcon img={'warning'}>
-						BYBIT WEB3 WALLET employees will NEVER ask for your Secret Private
-						Key. Do not share it with anyone.
+						WEB3 WALLET employees will NEVER ask for your Secret Private Key. Do
+						not share it with anyone.
 					</WalletTextWithIcon>
 				</View>
 

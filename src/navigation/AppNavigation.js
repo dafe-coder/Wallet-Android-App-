@@ -170,7 +170,7 @@ const screens = [
 		component: CreatePasswordComponent,
 		options: {
 			headerShown: true,
-			title: 'By Bit Wallet',
+			title: 'Wallet',
 			headerLeft: () => <></>,
 		},
 	},
@@ -179,7 +179,7 @@ const screens = [
 		component: AllSetComponent,
 		options: {
 			headerShown: true,
-			title: 'By Bit Wallet',
+			title: 'Wallet',
 		},
 	},
 	{

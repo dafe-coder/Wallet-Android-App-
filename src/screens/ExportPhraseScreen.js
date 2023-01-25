@@ -43,7 +43,7 @@ export const ExportPhraseScreen = ({ navigation }) => {
 						wallet.
 					</WalletTextWithIcon>
 					<WalletTextWithIcon img={'warning'}>
-						BYBIT WEB3 WALLET employees will NEVER ask for your Secret Recovery
+						WEB3 WALLET employees will NEVER ask for your Secret Recovery
 						Phrase. Do not share it with anyone.
 					</WalletTextWithIcon>
 				</View>

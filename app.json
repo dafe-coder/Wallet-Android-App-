@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Wallet",
-    "slug": "Wallet",
+    "slug": "WalletApk",
     "version": "2.01.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

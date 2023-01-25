@@ -11,10 +11,6 @@ export const Preloader = ({
 	return (
 		<View style={styles.container}>
 			<View style={styles.logoWrap}>
-				<Animated.Text
-					style={[styles.title, animatedStylesColor, transformTitle]}>
-					Byb<Text style={styles.whiteTitle}>i</Text>t
-				</Animated.Text>
 				<Animated.View
 					style={[
 						{

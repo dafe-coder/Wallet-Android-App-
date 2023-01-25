@@ -1,16 +1,15 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image } from 'react-native'
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletButton } from '../Components/UI'
 import { Rules } from './../Components'
+
+const height = Dimensions.get('window').height
 
 export const LoginScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View style={styles.logoWrap}>
-				<Text style={styles.title}>
-					Byb<Text style={styles.whiteTitle}>i</Text>t
-				</Text>
 				<View style={{ marginBottom: 20 }}>
 					<Image
 						source={require('../../assets/logo/wallet-logo.png')}
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
 	logoWrap: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginBottom: 100,
+		marginBottom: height / 15,
 	},
 	body: {
 		flex: 1,
