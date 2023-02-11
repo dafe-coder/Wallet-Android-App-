@@ -35,8 +35,8 @@ export const SwapDetails = ({
 					justifyContent: 'space-between',
 					paddingHorizontal: 20,
 				}}>
-				<WalletText color='brown'>Swap Details</WalletText>
-				<WalletText color='brown'>
+				<WalletText color='dark'>Swap Details</WalletText>
+				<WalletText color='dark'>
 					{chooseCoinSwapFirst.symbol.toUpperCase()}\
 					<Text style={{ color: THEME.WHITE }}>
 						{chooseCoinSwapSecond.symbol.toUpperCase()}
@@ -45,25 +45,25 @@ export const SwapDetails = ({
 			</View>
 			<View style={styles.wrap}>
 				<View style={styles.item}>
-					<WalletText color='brown'>Rate</WalletText>
+					<WalletText color='dark'>Rate</WalletText>
 					<WalletText color='white'>
 						1 {chooseCoinSwapFirst.symbol.toUpperCase()} ~ {priceTokenEnd}{' '}
 						{chooseCoinSwapSecond.symbol.toUpperCase()}
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='brown'>Fee</WalletText>
+					<WalletText color='dark'>Fee</WalletText>
 					<WalletText color='white'>
 						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
 						ETH
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='brown'>Price impact</WalletText>
+					<WalletText color='dark'>Price impact</WalletText>
 					<WalletText color='white'>{'<'}0.01%</WalletText>
 				</View>
 				<View style={[styles.item, { borderBottomWidth: 0 }]}>
-					<WalletText color='brown'>Minimum received</WalletText>
+					<WalletText color='dark'>Minimum received</WalletText>
 					<WalletText color='white'>
 						{confirm
 							? swapAmountSecond +
@@ -83,7 +83,7 @@ export const SwapDetails = ({
 						</WalletText>
 						<View>
 							<WalletText style={{ marginBottom: 5 }} size='m' color='white'>
-								-21$ <Text style={{ color: THEME.GOLD }}>0.0041</Text>
+								-21$ <Text style={{ color: THEME.VIOLET }}>0.0041</Text>
 							</WalletText>
 							<View
 								style={{
@@ -91,12 +91,12 @@ export const SwapDetails = ({
 									alignItems: 'center',
 									borderRadius: 50,
 									borderWidth: 1,
-									borderColor: THEME.GOLD,
+									borderColor: THEME.VIOLET,
 									paddingVertical: 2,
 									paddingHorizontal: 5,
 									width: null,
 								}}>
-								<WalletText style={{ fontSize: 12, color: THEME.GOLD }}>
+								<WalletText style={{ fontSize: 12, color: THEME.VIOLET }}>
 									7% Refund
 								</WalletText>
 							</View>

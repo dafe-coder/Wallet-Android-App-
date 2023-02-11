@@ -58,7 +58,7 @@ export const CreatePasswordScreen = ({ navigation }) => {
 				<SvgIcon type='logo' />
 			</View>
 			{!nextStep ? (
-				<WalletText center size='m'>
+				<WalletText center size='m' color='dark'>
 					Create a PIN code to secure your wallet
 				</WalletText>
 			) : (
@@ -84,12 +84,12 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					width: 9,
 					height: 9,
 					borderWidth: 1,
-					borderColor: THEME.BROWN_TEXT,
-					backgroundColor: THEME.BROWN_TEXT,
+					borderColor: THEME.DISABLED_TEXT,
+					backgroundColor: THEME.DISABLED_TEXT,
 					borderRadius: 50,
 				}}
 				circleFilledStyle={{
-					backgroundColor: THEME.GOLD,
+					backgroundColor: THEME.VIOLET,
 					width: 9,
 					marginHorizontal: 4,
 					height: 9,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 40,
 	},
 	image: {
-		marginBottom: 132,
+		marginBottom: 108,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

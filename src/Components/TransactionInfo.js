@@ -18,7 +18,7 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 		<View style={[styles.item, style]}>
 			<View style={styles.itemTop}>
 				<View style={styles.itemCenter}>
-					<WalletText color='brown'>Transaction Fee</WalletText>
+					<WalletText color='dark'>Transaction Fee</WalletText>
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={{ marginLeft: 7 }}
@@ -31,7 +31,7 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
 						ETH
 					</WalletText>
-					<WalletText color='brown' style={{ fontSize: 12, marginTop: 3 }}>
+					<WalletText color='dark' style={{ fontSize: 12, marginTop: 3 }}>
 						≈ {fixNum(amountSend)}$
 					</WalletText>
 				</View>

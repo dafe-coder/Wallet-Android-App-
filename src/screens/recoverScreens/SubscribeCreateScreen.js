@@ -54,8 +54,13 @@ export const SubscribeCreateScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View>
-				<WalletText style={{ marginBottom: 20 }} color='white' center size='m'>
-					Please enter your Secret Recovery Phrase when prompted.
+				<WalletText
+					style={{ marginBottom: 20 }}
+					fw='bold'
+					color='dark'
+					center
+					size='m'>
+					Please enter your Secret Recovery Phrase {'\n'} when prompted.
 				</WalletText>
 				<SubscribeBlock check={chk1} setCheck={setChk1}>
 					I understand this is a self-custody wallet and I am responsible for my
@@ -97,9 +102,9 @@ const styles = StyleSheet.create({
 		marginBottom: 13,
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

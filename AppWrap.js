@@ -106,7 +106,7 @@ export const AppWrap = ({ children }) => {
 				overlayColor='rgba(12, 11, 7, 0.9)'
 				size='large'
 				animation='fade'
-				color={THEME.GOLD}
+				color={THEME.VIOLET}
 				customIndicator={
 					<Image
 						style={{ height: 92, width: 92 }}

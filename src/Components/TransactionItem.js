@@ -65,7 +65,7 @@ export const TransactionItem = ({
 						<WalletText color='white'>
 							{type == 'receive' ? 'Receive' : type == 'send' ? 'Send' : 'Swap'}
 						</WalletText>
-						<WalletText color='brown'>
+						<WalletText color='dark'>
 							{type == 'receive' ? 'From:' : type == 'send' ? 'To:' : ''}{' '}
 							{type == 'receive'
 								? itemData.address_from.length > 10
@@ -108,7 +108,7 @@ export const TransactionItem = ({
 							? itemData.changes[1].asset.symbol
 							: itemData.changes[0].asset.symbol}
 					</WalletText>
-					<WalletText color='brown'>
+					<WalletText color='dark'>
 						$
 						{fixNum(
 							Number(

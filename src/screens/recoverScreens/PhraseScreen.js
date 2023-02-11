@@ -25,7 +25,7 @@ export const PhraseScreen = ({ navigation }) => {
 	const { postData } = useWalletService()
 	const { dataUser } = useSelector((state) => state.storage)
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
-	const [btnDisabled, setBtnDisabled] = useState(false)
+	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [onClick, setOnClick] = useState(false)
 	const [timeoutID, setTimeoutId] = useState(null)
 	const submitRestore = () => {
@@ -75,8 +75,9 @@ export const PhraseScreen = ({ navigation }) => {
 				<View>
 					<WalletText
 						style={{ marginBottom: 40 }}
-						color='white'
 						center
+						fw='bold'
+						color='dark'
 						size='m'>
 						Recover a wallet using your Secret {'\n'} Recovery Phrase.
 					</WalletText>
@@ -111,9 +112,9 @@ const styles = StyleSheet.create({
 		marginBottom: 13,
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

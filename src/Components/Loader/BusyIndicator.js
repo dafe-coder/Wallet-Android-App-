@@ -5,7 +5,7 @@ import { THEME } from '../../Theme'
 export const BusyIndicator = () => {
 	return (
 		<View style={{ flex: 1, justifyContent: 'center' }}>
-			<ActivityIndicator size='large' color={THEME.GOLD} />
+			<ActivityIndicator size='large' color={THEME.VIOLET} />
 		</View>
 	)
 }

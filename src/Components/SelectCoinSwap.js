@@ -50,8 +50,8 @@ export const SelectCoinSwap = ({
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 10 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='brown'>Asset</WalletText>
-					<WalletText color='brown'>
+					<WalletText color='dark'>Asset</WalletText>
+					<WalletText color='dark'>
 						Balance: {fixNum(chooseCoinSwapFirst.market_data.balance)}
 					</WalletText>
 				</View>
@@ -86,7 +86,7 @@ export const SelectCoinSwap = ({
 									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
 
-								<SvgIcon type='check' fill={THEME.GOLD_DARK} />
+								<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -104,7 +104,7 @@ export const SelectCoinSwap = ({
 			</TouchableOpacity>
 			<View style={{ marginBottom: 10, marginTop: 12 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='brown'>You Receive</WalletText>
+					<WalletText color='dark'>You Receive</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
@@ -135,7 +135,7 @@ export const SelectCoinSwap = ({
 									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
-								<SvgIcon type='check' fill={THEME.GOLD_DARK} />
+								<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
 							</TouchableOpacity>
 						</View>
 					</View>

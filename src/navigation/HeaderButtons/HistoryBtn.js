@@ -16,7 +16,7 @@ export const HistoryBtn = ({ navigation }) => {
 		<View>
 			<TouchableOpacity activeOpacity={0.7} onPress={onPressButton}>
 				<View style={styles.btn}>
-					<SvgIcon type='history' fill={filled ? THEME.GOLD : '#D3D0C9'} />
+					<SvgIcon type='history' fill={filled ? THEME.VIOLET : '#D3D0C9'} />
 				</View>
 			</TouchableOpacity>
 		</View>

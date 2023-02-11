@@ -15,7 +15,7 @@ export const NftItem = ({ number, image, title, priceEth, priceUsd }) => {
 			</View>
 			<View style={{ flexGrow: 1, marginLeft: 10, ...styles.center }}>
 				<WalletText color='white'>{number}</WalletText>
-				<WalletText color='brown' style={{ fontSize: 12 }}>
+				<WalletText color='dark' style={{ fontSize: 12 }}>
 					{title}
 				</WalletText>
 			</View>

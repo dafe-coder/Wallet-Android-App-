@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

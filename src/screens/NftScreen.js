@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
 		marginBottom: 13,
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

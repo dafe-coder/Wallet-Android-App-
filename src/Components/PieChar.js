@@ -121,7 +121,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 										: [
 												{
 													fontSize: 12,
-													fill: THEME.GOLD,
+													fill: THEME.VIOLET,
 												},
 												{
 													fontSize: 14,
@@ -179,7 +179,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 														setIndexActive(props.index)
 														return {
 															style: {
-																fill: THEME.GOLD,
+																fill: THEME.VIOLET,
 															},
 														}
 													}

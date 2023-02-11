@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 		lineHeight: 24,
 		color: THEME.WHITE,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 })

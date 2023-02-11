@@ -17,7 +17,7 @@ export const SettingsItemMenu = ({
 			<View style={styles.item}>
 				<View style={styles.titles}>
 					<WalletText>{title}</WalletText>
-					<WalletText color='brown'>{subTitle}</WalletText>
+					<WalletText color='dark'>{subTitle}</WalletText>
 				</View>
 				{switchButton ? (
 					<SwitchButton enabled={analytics} />

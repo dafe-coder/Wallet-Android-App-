@@ -73,7 +73,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 27 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='brown'>Select Token</WalletText>
+					<WalletText color='dark'>Select Token</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
@@ -91,7 +91,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 								style={{ marginLeft: 10, marginRight: 7 }}>
 								{chooseCoin.symbol}
 							</WalletText>
-							<SvgIcon type='check' fill={THEME.GOLD_DARK} />
+							<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
 						</TouchableOpacity>
 					</View>
 
@@ -116,7 +116,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 				</View>
 			</View>
 			<View style={[styles.header, { paddingHorizontal: 20 }]}>
-				<WalletText color='brown'>Amount</WalletText>
+				<WalletText color='dark'>Amount</WalletText>
 			</View>
 			<View
 				style={[
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
 		backgroundColor: THEME.WHITE,
 	},
 	maxBtn: {
-		backgroundColor: THEME.GOLD,
+		backgroundColor: THEME.VIOLET,
 		paddingHorizontal: 12,
 		paddingVertical: 3,
 		borderRadius: 50,

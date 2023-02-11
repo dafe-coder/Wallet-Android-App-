@@ -82,7 +82,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 							/>
 						) : (
 							<WalletText
-								color='brown'
+								color='dark'
 								size='m'
 								style={{ fontFamily: 'ub-medium' }}>
 								{currentAccount}

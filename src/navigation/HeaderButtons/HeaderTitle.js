@@ -27,7 +27,7 @@ export const HeaderTitle = () => {
 						upperCase>
 						{currentNetwork}
 					</WalletText>
-					<SvgIcon type='check' fill={THEME.GOLD_DARK} />
+					<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
 				</View>
 			</TouchableOpacity>
 			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>

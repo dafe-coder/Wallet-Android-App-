@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
 		backgroundColor: THEME.BROWN_DARK,
 	},
 	percentText: {
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 	},
 })

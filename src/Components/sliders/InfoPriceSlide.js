@@ -16,7 +16,7 @@ export const InfoPriseSlide = () => {
 		<>
 			{balance != null ? (
 				<View style={styles.wrap}>
-					<WalletText size='sm' style={THEME.WHITE_DARK_TEXT}>
+					<WalletText size='sm' style={THEME.DARK_TEXT}>
 						Your balance is equivalent
 					</WalletText>
 					<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 7 }}>

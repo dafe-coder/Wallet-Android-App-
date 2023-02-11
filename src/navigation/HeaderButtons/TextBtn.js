@@ -53,7 +53,7 @@ export const TextBtn = ({ onPress, children, navigation, type }) => {
 
 	return (
 		<TouchableOpacity activeOpacity={0.7} onPress={onPressBtn}>
-			<WalletText style={{ color: THEME.GOLD }}>{children}</WalletText>
+			<WalletText style={{ color: THEME.VIOLET }}>{children}</WalletText>
 		</TouchableOpacity>
 	)
 }

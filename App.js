@@ -16,14 +16,14 @@ LogBox.ignoreLogs([
 ])
 import { useFonts } from 'expo-font'
 import { AppWrap } from './AppWrap'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+
 export default function App() {
 	const [hidePreloader, setHidePreloader] = useState(true)
 	const [fontsLoaded] = useFonts({
-		'gt-bold': require('./assets/fonts/GothamPro-Bold.ttf'),
+		'sf-bold': require('./assets/fonts/SF-Pro-Display-Bold.ttf'),
 		'gt-medium': require('./assets/fonts/GothamPro-Medium.ttf'),
-		'ub-medium': require('./assets/fonts/Ubuntu-Medium.ttf'),
-		'ub-regular': require('./assets/fonts/Ubuntu-Regular.ttf'),
+		'ub-medium': require('./assets/fonts/Rubik-SemiBold.ttf'),
+		'ub-regular': require('./assets/fonts/Rubik-Regular.ttf'),
 	})
 	useEffect(() => {
 		setTimeout(() => {

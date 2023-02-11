@@ -23,7 +23,7 @@ export const PreloaderScreen = ({ load }) => {
 			backgroundColor: interpolateColor(
 				reanimatedBackgroundColor.value,
 				[0, 1],
-				[THEME.GOLD, THEME.PRIMARY]
+				[THEME.VIOLET, THEME.PRIMARY]
 			),
 		}
 	}, [reanimatedBackgroundColor])
@@ -50,7 +50,7 @@ export const PreloaderScreen = ({ load }) => {
 			color: interpolateColor(
 				reanimatedBackgroundColor.value,
 				[0, 1],
-				[THEME.PRIMARY, THEME.GOLD]
+				[THEME.PRIMARY, THEME.VIOLET]
 			),
 		}
 	}, [reanimatedBackgroundColor])
@@ -78,7 +78,7 @@ export const PreloaderScreen = ({ load }) => {
 		<Animated.View
 			style={[
 				{
-					backgroundColor: THEME.GOLD,
+					backgroundColor: THEME.VIOLET,
 					display: load ? 'flex' : 'none',
 					position: 'absolute',
 					left: 0,

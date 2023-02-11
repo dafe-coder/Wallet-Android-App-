@@ -24,7 +24,7 @@ export const AllSetScreen = ({ navigation }) => {
 					</WalletText>
 					<SwitchButton enabled={true} />
 				</View>
-				<WalletText color='brown'>
+				<WalletText color='dark'>
 					If enabled, all websites will default to opening the Web3 Wallet to
 					interact with dApps. You can change this in the settings menu.
 				</WalletText>
@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
 		marginBottom: 13,
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletButton } from '../Components/UI'
 import { Rules } from './../Components'
+import { SvgIcon } from './../Components/svg/svg'
 
 const height = Dimensions.get('window').height
 
@@ -13,13 +14,10 @@ export const LoginScreen = ({ navigation }) => {
 				<View style={{ marginBottom: 20 }}>
 					<Image
 						source={require('../../assets/logo/wallet-logo.png')}
-						style={{ width: 86, height: 86 }}
+						style={{ width: 149, height: 115 }}
 					/>
 				</View>
-				<Text style={styles.title}>
-					Web<Text style={styles.whiteTitle}>3</Text>
-					{'\n'}Wallet
-				</Text>
+				<SvgIcon type='logo-text' style={{ maxWidth: 310, width: '80%' }} />
 			</View>
 			<WalletButton
 				onPress={() => navigation.navigate('SubscribeCreate')}
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
 	logoWrap: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginBottom: height / 15,
+		marginBottom: height / 7,
 	},
 	body: {
 		flex: 1,
@@ -52,9 +50,9 @@ const styles = StyleSheet.create({
 		marginBottom: 13,
 		fontSize: 40,
 		lineHeight: 50,
-		color: THEME.GOLD,
+		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'gt-bold',
+		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

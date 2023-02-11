@@ -85,7 +85,7 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 							marginTop: 24,
 						}}>
 						<SvgIcon type='bar' />
-						<WalletText style={{ marginLeft: 7 }} color='brown'>
+						<WalletText style={{ marginLeft: 7 }} color='dark'>
 							No transactoins history yet
 						</WalletText>
 					</View>

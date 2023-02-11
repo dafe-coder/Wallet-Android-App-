@@ -30,13 +30,13 @@ export const Rules = ({ style }) => {
 const styles = StyleSheet.create({
 	link: {
 		textDecorationLine: 'underline',
-		color: THEME.BROWN_TEXT,
+		color: THEME.VIOLET_LIGHT,
 		fontSize: 14,
 		lineHeight: 18,
 		fontFamily: 'ub-regular',
 	},
 	text: {
-		color: THEME.BROWN_TEXT,
+		color: THEME.VIOLET_LIGHT,
 		fontSize: 14,
 		lineHeight: 20,
 		fontFamily: 'ub-regular',

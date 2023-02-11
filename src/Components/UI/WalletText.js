@@ -23,7 +23,7 @@ export const WalletText = ({
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
@@ -41,7 +41,25 @@ export const WalletText = ({
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
+							style,
+						]}>
+						{children}
+					</Text>
+				</View>
+			)
+		case 'disabled':
+			return (
+				<View>
+					<Text
+						style={[
+							styles.disabled,
+							size == 'sm' ? styles.sm : styles.m,
+							upperCase && styles.upperCase,
+							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'ub-regular' }
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
@@ -59,25 +77,25 @@ export const WalletText = ({
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
 					</Text>
 				</View>
 			)
-		case 'brown':
+		case 'dark':
 			return (
 				<View>
 					<Text
 						style={[
-							styles.brown,
+							styles.dark,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
@@ -89,13 +107,13 @@ export const WalletText = ({
 				<View>
 					<Text
 						style={[
-							styles.greenLigth,
+							styles.greenLight,
 							size == 'sm' ? styles.sm : styles.m,
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
@@ -113,7 +131,7 @@ export const WalletText = ({
 							center && styles.center,
 							fw == 'regular'
 								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'ub-medium' },
+								: { fontFamily: 'sf-bold' },
 							style,
 						]}>
 						{children}
@@ -129,30 +147,28 @@ const styles = StyleSheet.create({
 	},
 	sm: {
 		fontSize: 14,
-		fontFamily: 'ub-regular',
 		lineHeight: 20,
 	},
 	m: {
 		fontSize: 16,
-		fontFamily: 'ub-regular',
 		lineHeight: 22,
 	},
 	white: {
 		color: THEME.WHITE,
 	},
 	whiteDark: {
-		color: THEME.WHITE_DARK_TEXT,
+		color: THEME.DARK_TEXT,
 	},
 	gold: {
-		color: THEME.GOLD_DARK,
+		color: THEME.VIOLET_DARK,
 	},
 	red: {
 		color: THEME.RED,
 	},
-	brown: {
-		color: THEME.BROWN_TEXT,
+	dark: {
+		color: THEME.DARK,
 	},
-	greenLigth: {
+	greenLight: {
 		color: THEME.SUCCESS,
 	},
 	upperCase: {
@@ -160,5 +176,8 @@ const styles = StyleSheet.create({
 	},
 	center: {
 		textAlign: 'center',
+	},
+	disabled: {
+		color: THEME.DISABLED_TEXT,
 	},
 })

@@ -74,7 +74,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				}}>
 				<View style={{ paddingHorizontal: 16 }}>
 					<View style={{ marginBottom: 24 }}>
-						<WalletText color='brown' style={{ marginBottom: 7 }}>
+						<WalletText color='dark' style={{ marginBottom: 7 }}>
 							From
 						</WalletText>
 						<View style={styles.item}>
@@ -88,7 +88,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 						</View>
 					</View>
 					<View style={{ marginBottom: 24 }}>
-						<WalletText color='brown' style={{ marginBottom: 7 }}>
+						<WalletText color='dark' style={{ marginBottom: 7 }}>
 							To
 						</WalletText>
 						<View style={styles.item}>

@@ -40,7 +40,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 		<View style={styles.wrap}>
 			<View style={{ paddingHorizontal: 35, marginBottom: 18 }}>
 				<WalletText
-					style={{ marginBottom: 32, fontFamily: 'gt-bold' }}
+					style={{ marginBottom: 32, fontFamily: 'sf-bold' }}
 					size='m'
 					upperCase
 					color='white'

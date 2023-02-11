@@ -170,7 +170,7 @@ const screens = [
 		component: CreatePasswordComponent,
 		options: {
 			headerShown: true,
-			title: 'Wallet',
+			title: 'Create pin code',
 			headerLeft: () => <></>,
 		},
 	},
@@ -231,6 +231,15 @@ import { WalletBottomSheet } from '../Components'
 import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
 import { useNavigation } from '@react-navigation/native'
 
+function toUpperWords(title) {
+	let words = title.split(' ')
+	for (let i = 0; i < words.length; i++) {
+		words[i] =
+			words[i][0].toUpperCase() + words[i].substr(1).toLowerCase() + ' '
+	}
+	return words
+}
+
 export function MyStack() {
 	const navigation = useNavigation()
 	const chooseNetwork = useRef(null)
@@ -263,23 +272,22 @@ export function MyStack() {
 				screenOptions={{
 					headerBackVisible: false,
 					contentStyle: {
-						borderTopColor: '#2f2d2b',
-						borderTopWidth: 0.6,
+						borderTopColor: '#D1C9FA',
+						borderTopWidth: 0,
 					},
 					headerTitleAlign: 'center',
 					headerStyle: {
-						backgroundColor: THEME.PRIMARY,
+						backgroundColor: THEME.GREY_LIGHT,
 					},
 					animation: 'none',
 					headerTitle: (title) => (
 						<Text
 							style={{
-								fontFamily: 'gt-medium',
-								color: THEME.GOLD_DARK,
-								fontSize: 14,
-								textTransform: 'uppercase',
+								fontFamily: 'ub-regular',
+								color: THEME.VIOLET,
+								fontSize: 18,
 							}}>
-							{title.children.toUpperCase()}
+							{title.children.length > 1 ? toUpperWords(title.children) : ' '}
 						</Text>
 					),
 				}}>

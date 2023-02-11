@@ -63,7 +63,7 @@ export const ReceiveScreen = () => {
 				style={styles.btnSave}
 				activeOpacity={0.7}
 				onPress={saveQrToDisk}>
-				<WalletText style={{ color: THEME.GOLD, fontSize: 12 }}>
+				<WalletText style={{ color: THEME.VIOLET, fontSize: 12 }}>
 				Save QR code
 				</WalletText>
 				</TouchableOpacity>
@@ -93,7 +93,7 @@ export const ReceiveScreen = () => {
 							width='24'
 							height='24'
 							type='share'
-							fill={THEME.GOLD_DARK}
+							fill={THEME.VIOLET_DARK}
 						/>
 						<WalletText style={{ marginLeft: 8 }} color='gold'>
 							Share address
@@ -108,7 +108,7 @@ export const ReceiveScreen = () => {
 							width='24'
 							height='24'
 							type='copy'
-							fill={THEME.GOLD_DARK}
+							fill={THEME.VIOLET_DARK}
 						/>
 						<WalletText style={{ marginLeft: 8 }} color='gold'>
 							Copy address

@@ -31,7 +31,12 @@ export const ButtonCopy = ({ style, text, paste, setText }) => {
 				{color && !paste ? (
 					<WalletText color='gold'>Copied!</WalletText>
 				) : (
-					<SvgIcon type='copy' fill={color ? THEME.GOLD_DARK : ''} />
+					<SvgIcon
+						type='copy'
+						width={22}
+						height={22}
+						fill={color ? '#BDA5E4' : '#BDA5E4'}
+					/>
 				)}
 			</View>
 		</TouchableOpacity>
@@ -44,5 +49,11 @@ const styles = StyleSheet.create({
 		right: 20,
 		bottom: 20,
 		zIndex: 1,
+		backgroundColor: THEME.GREY_LIGHT,
+		width: 35,
+		height: 35,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 50,
 	},
 })

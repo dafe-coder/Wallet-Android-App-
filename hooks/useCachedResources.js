@@ -14,7 +14,7 @@ export default function useCachedResources() {
 
 				// Load fonts
 				await Font.loadAsync({
-					'gt-bold': require('../assets/fonts/GothamPro-Bold.ttf'),
+					'sf-bold': require('../assets/fonts/GothamPro-Bold.ttf'),
 					'gt-medium': require('../assets/fonts/GothamPro-Medium.ttf'),
 					'ub-medium': require('../assets/fonts/Ubuntu-Medium.ttf'),
 					'ub-regular': require('../assets/fonts/Ubuntu-Regular.ttf'),

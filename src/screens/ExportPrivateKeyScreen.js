@@ -76,7 +76,7 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 							borderRadius: 50,
 						}}
 						circleFilledStyle={{
-							backgroundColor: THEME.GOLD,
+							backgroundColor: THEME.VIOLET,
 							width: 9,
 							height: 9,
 							marginHorizontal: 4,

@@ -74,7 +74,7 @@ export const ExportPhraseScreen = ({ navigation }) => {
 							marginHorizontal: 4,
 						}}
 						circleFilledStyle={{
-							backgroundColor: THEME.GOLD,
+							backgroundColor: THEME.VIOLET,
 							width: 9,
 							marginHorizontal: 4,
 							height: 9,

@@ -31,7 +31,7 @@ export const WalletInput = ({
 				onChangeText={setValue}
 			/>
 			{text != '' ? (
-				<WalletText color='brown' style={{ marginTop: 5 }}>
+				<WalletText color='dark' style={{ marginTop: 5 }}>
 					{text}
 				</WalletText>
 			) : (

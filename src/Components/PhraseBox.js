@@ -62,10 +62,10 @@ export const PhraseBox = ({
 	return (
 		<View style={[styles.wrap, style, edit ? { marginBottom: 0 } : {}]}>
 			{!edit ? (
-				<View style={{ flexDirection: 'row' }}>
+				<View style={{ flexDirection: 'row', paddingLeft: 15 }}>
 					<TouchableOpacity activeOpacity={0.7} onPress={() => setActive(true)}>
 						<WalletText
-							color={active ? 'white-dark' : 'brown'}
+							color={active ? 'dark' : 'disabled'}
 							style={{ marginBottom: 7 }}>
 							Recovery Phrase
 						</WalletText>
@@ -74,7 +74,7 @@ export const PhraseBox = ({
 						activeOpacity={0.7}
 						onPress={() => setActive(false)}>
 						<WalletText
-							color={!active ? 'white-dark' : 'brown'}
+							color={!active ? 'dark' : 'disabled'}
 							style={{ marginLeft: 15 }}>
 							Private Key
 						</WalletText>
@@ -100,7 +100,7 @@ export const PhraseBox = ({
 					numberOfLines={7}
 					onChangeText={setText}
 					placeholder={phrase != '' ? phrase : 'Enter Secret Recovery Phrase'}
-					placeholderTextColor={edit ? THEME.WHITE_DARK_TEXT : THEME.BROWN_TEXT}
+					placeholderTextColor={edit ? THEME.DARK_TEXT : THEME.DISABLED_TEXT}
 					underlineColorAndroid='transparent'
 				/>
 			</View>
@@ -123,13 +123,12 @@ export const PhraseBox = ({
 
 const styles = StyleSheet.create({
 	textarea: {
-		borderWidth: 1,
-		backgroundColor: THEME.BROWN,
-		borderRadius: 5,
+		backgroundColor: '#F0F0F3',
+		borderRadius: 15,
 		padding: 15,
-		fontSize: 14,
-		lineHeight: 20,
-		color: THEME.WHITE_DARK_TEXT,
+		fontSize: 16,
+		lineHeight: 22,
+		color: THEME.DARK_TEXT,
 		textAlignVertical: 'top',
 		minHeight: 142,
 		maxHeight: 200,
