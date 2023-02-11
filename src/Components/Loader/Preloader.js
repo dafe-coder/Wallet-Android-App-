@@ -1,20 +1,16 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { THEME } from '../../Theme'
 
-export const Preloader = ({
-	animatedStylesColor,
-	transformTitle,
-	transformLogo,
-}) => {
+export const Preloader = ({ animatedStylesColor, transformLogo }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.logoWrap}>
 				<Animated.View
 					style={[
 						{
-							marginBottom: 20,
+							marginBottom: 22,
 							backgroundColor: 'red',
 							height: 0,
 						},

@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Keyboard } from 'react-native'
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet'
 import { THEME } from './../Theme'
 import { Portal, PortalHost } from '@gorhom/portal'
 export const WalletBottomSheet = React.forwardRef(
 	({ index = -1, snapPoints, children }, ref) => {
 		const handleSheetChanges = (index) => {
-			if (index == 0) {
-				// ref.current.close()
+			if (index == -1) {
+				Keyboard.dismiss()
 			}
 		}
 		const renderBackdrop = useCallback(

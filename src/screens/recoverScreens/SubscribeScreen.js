@@ -22,7 +22,11 @@ export const SubscribeScreen = ({ navigation }) => {
 	return (
 		<View style={styles.body}>
 			<View>
-				<WalletText style={{ marginBottom: 20 }} color='white' center size='m'>
+				<WalletText
+					style={{ marginBottom: 20, paddingHorizontal: 30 }}
+					color='white'
+					center
+					size='m'>
 					Please enter your Secret Recovery Phrase when prompted.
 				</WalletText>
 				<SubscribeBlock check={chk1} setCheck={setChk1}>

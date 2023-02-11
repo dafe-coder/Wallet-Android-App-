@@ -24,7 +24,7 @@ export const AppWrap = ({ children }) => {
 	const [loadingOtherCoins, setLoadingOtherCoins] = useState(true)
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
-	const { getAllTokens, postData } = useWalletService()
+	const { getMarketCoin, postData } = useWalletService()
 	const { loader, portfolioCoins, portfolioBalance, allCoins } = useSelector(
 		(state) => state.wallet
 	)
@@ -44,7 +44,7 @@ export const AppWrap = ({ children }) => {
 	}, [allCoins])
 
 	useEffect(() => {
-		getAllTokens(setLoadingOtherCoins).then((data) => {
+		getMarketCoin(setLoadingOtherCoins).then((data) => {
 			setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
 		})
 	}, [])

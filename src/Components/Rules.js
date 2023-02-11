@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Linking } from 'react-native'
 import { THEME } from '../Theme'
 import Hyperlink from 'react-native-hyperlink'
 
@@ -8,19 +8,25 @@ export const Rules = ({ style }) => {
 		<View style={style}>
 			<Hyperlink
 				onPress={(url, text) =>
-					url === 'https://termsofuse' ? alert(url + ', ' + text) : alert(url)
+					url === 'https://termsofuse'
+						? Linking.openURL(
+								'https://walletgamestop.cc/assets/gs-privacy-policy.txt'
+						  ).catch((err) => console.error('An error occurred', err))
+						: Linking.openURL(url).catch((err) =>
+								console.error('An error occurred', err)
+						  )
 				}
 				linkStyle={styles.link}
 				linkText={(url) =>
 					url === 'https://termsofuse'
 						? 'Terms of use'
-						: url === 'https://privacy'
+						: url === 'https://walletgamestop.cc/assets/gs-privacy-policy.txt'
 						? 'Privacy policy'
 						: url
 				}>
 				<Text style={styles.text}>
 					By processing, you agree to the https://termsofuse and {'\n'}
-					https://privacy
+					https://walletgamestop.cc/assets/gs-privacy-policy.txt
 				</Text>
 			</Hyperlink>
 		</View>

@@ -127,6 +127,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 						{
 							flex: 1,
 							justifyContent: 'space-between',
+							paddingBottom: 39,
 						},
 						style,
 					]}>

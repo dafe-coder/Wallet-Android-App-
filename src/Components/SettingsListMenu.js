@@ -6,9 +6,18 @@ import { useSelector } from 'react-redux'
 export const SettingsListMenu = ({ onPress }) => {
 	const [phrase, setPhrase] = useState(false)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { loaderSkeleton } = useSelector((state) => state.wallet)
 	useEffect(() => {
-		console.log(dataUser)
-		setPhrase(dataUser.filter((d) => d.name == currentAccount)[0].phrase !== '')
+		if (
+			dataUser.length >= 1 &&
+			currentAccount !== '' &&
+			loaderSkeleton &&
+			dataUser.filter((d) => d.name == currentAccount)[0].address !== undefined
+		) {
+			setPhrase(
+				dataUser.filter((d) => d.name == currentAccount)[0].phrase !== ''
+			)
+		}
 	}, [dataUser, currentAccount])
 	const menuData = [
 		{

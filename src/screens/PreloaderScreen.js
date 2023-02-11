@@ -64,7 +64,7 @@ export const PreloaderScreen = ({ load }) => {
 			duration: 3000,
 			easing: Easing.inOut(Easing.cubic),
 		})
-		offsetLogo.value = withTiming(-80, {
+		offsetLogo.value = withTiming(-92, {
 			duration: 3000,
 			easing: Easing.inOut(Easing.cubic),
 		})

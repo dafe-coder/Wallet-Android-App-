@@ -38,6 +38,7 @@ export const AccountListMenu = ({ onPress }) => {
 			image: 'help',
 			title: 'Help',
 			topLine: false,
+			onPress: onPress,
 		},
 		{
 			image: 'logout',

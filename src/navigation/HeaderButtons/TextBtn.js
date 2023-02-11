@@ -33,7 +33,6 @@ export const TextBtn = ({ onPress, children, navigation, type }) => {
 						index: 0,
 						routes: [{ name: 'Home' }],
 					})
-					dispatch(setLoaderSkeleton(true))
 					dispatch(setLoader(false))
 				}, 2000)
 			)
