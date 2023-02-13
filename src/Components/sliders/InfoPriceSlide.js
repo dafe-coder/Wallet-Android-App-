@@ -19,7 +19,13 @@ export const InfoPriseSlide = () => {
 					<WalletText size='sm' style={{ color: '#DACEF0' }}>
 						Your balance is equivalent
 					</WalletText>
-					<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 7 }}>
+					<WalletTitle
+						style={{
+							color: THEME.WHITE,
+							fontSize: 35,
+							lineHeight: 40,
+							marginTop: 7,
+						}}>
 						${balance.absolute_change_24h && fixNum(balance.assets_value)}
 					</WalletTitle>
 					<View style={styles.priceBlock}>

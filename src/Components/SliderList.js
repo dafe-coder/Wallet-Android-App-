@@ -29,14 +29,26 @@ export const Slider = ({ portfolioCoinsInit }) => {
 			/>
 			<View style={styles.bar}>
 				<View
-					style={[
-						indexSlider == 0 ? styles.circleActive : styles.circle,
-						{ marginRight: 6, marginLeft: width / 12 },
-					]}></View>
-				<View
-					style={[
-						indexSlider == 1 ? styles.circleActive : styles.circle,
-					]}></View>
+					style={{
+						marginLeft: width / 12,
+						flexDirection: 'row',
+						justifyContent: 'center',
+						alignItems: 'center',
+						paddingHorizontal: 10,
+						paddingVertical: 5,
+						backgroundColor: THEME.GREY_LIGHT_BG,
+						borderRadius: 30,
+					}}>
+					<View
+						style={[
+							indexSlider == 0 ? styles.circleActive : styles.circle,
+							{ marginRight: 6 },
+						]}></View>
+					<View
+						style={[
+							indexSlider == 1 ? styles.circleActive : styles.circle,
+						]}></View>
+				</View>
 			</View>
 		</View>
 	)
@@ -52,13 +64,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	circle: {
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: '#DACEF0',
 		width: 8,
 		height: 8,
 		borderRadius: 50,
 	},
 	circleActive: {
-		backgroundColor: THEME.BROWN_TEXT,
+		backgroundColor: THEME.VIOLET_LIGHT,
 		width: 8,
 		height: 8,
 		borderRadius: 50,

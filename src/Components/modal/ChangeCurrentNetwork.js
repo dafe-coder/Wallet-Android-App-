@@ -11,15 +11,15 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 	const networks = [
 		{
 			id: Math.random().toString(),
-			title: 'Ethereum',
-			img: require('../../../assets/network/eth.png'),
-			choose: currentNetwork == 'Ethereum',
+			title: 'Polygon',
+			img: require('../../../assets/network/pol.png'),
+			choose: currentNetwork == 'Polygon',
 		},
 		{
 			id: Math.random().toString(),
-			title: 'Loopring',
-			img: require('../../../assets/network/loo.png'),
-			choose: currentNetwork == 'Loopring',
+			title: 'Ethereum',
+			img: require('../../../assets/network/eth.png'),
+			choose: currentNetwork == 'Ethereum',
 		},
 	]
 	const onChooseNetwork = (item) => {
@@ -28,9 +28,7 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 	}
 	return (
 		<View style={{ width: '100%' }}>
-			<WalletTitle style={{ marginBottom: 30 }}>
-				Change Current Network
-			</WalletTitle>
+			<WalletTitle style={{ marginBottom: 30 }}>Select Network</WalletTitle>
 			<View>
 				{networks.map((n) => {
 					return (
@@ -40,7 +38,15 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 							style={styles.item}
 							key={n.id}>
 							<View style={styles.info}>
-								<Image source={n.img} />
+								<Image
+									source={n.img}
+									style={{
+										width: 36,
+										height: 36,
+										overflow: 'hidden',
+										borderRadius: 50,
+									}}
+								/>
 								<WalletText style={{ marginLeft: 12 }} size='m'>
 									{n.title}
 								</WalletText>
@@ -60,7 +66,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingVertical: 7,
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		borderBottomWidth: 1,
 	},
 	info: {

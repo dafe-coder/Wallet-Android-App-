@@ -28,8 +28,7 @@ export const WalletBottomSheet = React.forwardRef(
 						ref={ref}
 						index={index}
 						snapPoints={snapPoints}
-						handleStyle={styles.line}
-						handleIndicatorStyle={{ width: 64, height: 4 }}
+						handleIndicatorStyle={styles.line}
 						backgroundStyle={styles.sheetContainer}
 						detached={false}
 						enablePanDownToClose={true}
@@ -46,14 +45,20 @@ export const WalletBottomSheet = React.forwardRef(
 )
 
 const styles = StyleSheet.create({
+	line: {
+		width: 64,
+		height: 4,
+		backgroundColor: '#9C94AC',
+		borderRadius: 2.5,
+	},
 	contentContainer: {
 		flex: 1,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.WHITE,
 		paddingTop: 40,
 		paddingHorizontal: 16,
 	},
 	sheetContainer: {
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.WHITE,
 		borderTopEndRadius: 10,
 		borderTopLeftRadius: 10,
 	},

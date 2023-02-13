@@ -10,8 +10,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		lineHeight: 24,
-		color: THEME.WHITE,
-		textTransform: 'uppercase',
+		color: THEME.DARK,
 		fontFamily: 'sf-bold',
 		textAlign: 'center',
 	},

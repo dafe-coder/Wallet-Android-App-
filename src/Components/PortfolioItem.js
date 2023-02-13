@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 8,
+		marginBottom: 4,
 	},
 })

@@ -11,7 +11,7 @@ import {
 } from '../type'
 const initialState = {
 	password: '',
-	currentNetwork: 'Ethereum',
+	currentNetwork: 'Polygon',
 	dataUser: [],
 	currentAccount: '',
 	lockWallet: false,

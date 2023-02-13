@@ -23,7 +23,7 @@ export const HeaderTitle = () => {
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<WalletText
 						color='gold'
-						style={{ marginRight: 5, fontFamily: 'gt-medium' }}>
+						style={{ marginRight: 5, fontFamily: 'ub-regular' }}>
 						{currentNetwork}
 					</WalletText>
 					<SvgIcon type='check' fill={THEME.VIOLET} />

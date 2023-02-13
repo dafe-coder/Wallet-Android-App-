@@ -143,6 +143,23 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					</G>
 				</Svg>
 			)
+		case 'polygon-nav':
+			return (
+				<Svg
+					width={375}
+					height={79}
+					viewBox='0 0 375 79'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<G filter='url(#filter0_d_419_8651)' className='Base'>
+						<Path
+							d='M0 10C0 4.47715 4.47715 0 10 0H125.269C134.618 0 143.5 4.08871 149.579 11.1914L163.168 27.0665C176.116 42.1947 199.59 41.9488 212.219 26.5527L224.398 11.7052C230.476 4.29546 239.556 0 249.139 0H365C370.523 0 375 4.47715 375 10V97H0V10Z'
+							fill='white'
+						/>
+					</G>
+				</Svg>
+			)
 		case 'arrow-right':
 			return (
 				<Svg
@@ -434,7 +451,7 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					{...props}>
 					<Path
 						d='M12.022 1.157l-4.95 4.95a1 1 0 01-1.414 0l-4.95-4.95'
-						stroke={fill ? fill : '#F9B446'}
+						stroke={fill ? fill : '#9667E5'}
 						strokeWidth={1.5}
 						strokeLinejoin='round'
 					/>
