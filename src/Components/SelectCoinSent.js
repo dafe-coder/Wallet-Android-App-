@@ -91,7 +91,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 								style={{ marginLeft: 10, marginRight: 7 }}>
 								{chooseCoin.symbol}
 							</WalletText>
-							<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
+							<SvgIcon type='check' fill={THEME.VIOLET} />
 						</TouchableOpacity>
 					</View>
 

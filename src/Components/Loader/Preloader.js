@@ -22,7 +22,7 @@ export const Preloader = ({
 					]}>
 					<Image
 						source={require('../../../assets/logo/wallet-logo.png')}
-						style={[{ width: 86, height: 86 }]}
+						style={[{ width: 112, height: 86 }]}
 					/>
 				</Animated.View>
 				<Animated.Text style={[styles.title, animatedStylesColor]}>

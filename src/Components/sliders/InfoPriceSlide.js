@@ -16,14 +16,14 @@ export const InfoPriseSlide = () => {
 		<>
 			{balance != null ? (
 				<View style={styles.wrap}>
-					<WalletText size='sm' style={THEME.DARK_TEXT}>
+					<WalletText size='sm' style={{ color: '#DACEF0' }}>
 						Your balance is equivalent
 					</WalletText>
 					<WalletTitle style={{ fontSize: 35, lineHeight: 40, marginTop: 7 }}>
 						${balance.absolute_change_24h && fixNum(balance.assets_value)}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
-						<WalletText style={{ marginRight: 15 }}>
+						<WalletText style={{ marginRight: 15 }} color='white'>
 							~
 							{balance.absolute_change_24h &&
 								fixNum(balance.absolute_change_24h)}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'flex-start',
-		paddingTop: 32,
+		paddingTop: 40,
 	},
 	imageUp: {
 		marginRight: 4,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		borderRadius: 50,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.VIOLET,
 		paddingHorizontal: 15,
 		paddingVertical: 7,
 		marginTop: 20,

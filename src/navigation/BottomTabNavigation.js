@@ -102,7 +102,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 								<SvgIconNav
 									height='20'
 									type={initSvgType(label)}
-									fill={isFocused ? THEME.VIOLET_DARK : ''}
+									fill={isFocused ? THEME.VIOLET : ''}
 								/>
 							)}
 							<WalletText
@@ -172,7 +172,7 @@ export default function BottomTabNavigator() {
 						<Text
 							style={{
 								fontFamily: 'gt-medium',
-								color: THEME.VIOLET_DARK,
+								color: THEME.VIOLET,
 								fontSize: 14,
 								textTransform: 'uppercase',
 							}}>

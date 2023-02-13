@@ -38,19 +38,22 @@ export const CreatePhraseScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.wrap}>
-			<View style={{ paddingHorizontal: 35, marginBottom: 18 }}>
+			<View style={{ paddingHorizontal: 35, marginBottom: 24 }}>
 				<WalletText
-					style={{ marginBottom: 32, fontFamily: 'sf-bold' }}
+					style={{ marginBottom: 30, fontFamily: 'sf-bold', fontSize: 20 }}
 					size='m'
-					upperCase
-					color='white'
+					color='dark'
 					center>
 					Your Secret Recovery Phrase
 				</WalletText>
-				<WalletText size='m' style={{ marginBottom: 10 }} center color='white'>
+				<WalletText
+					color='gold'
+					size='m'
+					style={{ fontFamily: 'sf-bold', marginBottom: 10, color: '#8247E5' }}
+					center>
 					Read Carefilly
 				</WalletText>
-				<WalletText center>
+				<WalletText center size='m'>
 					This is your Recovery Phrase. Write it down on a paper and keep it in
 					a safe place. You’ll be asked to re-enter this phrase on the next
 					step.
@@ -65,7 +68,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 			</View>
 			<View style={{ paddingHorizontal: 16, marginTop: 'auto' }}>
 				<WalletButton onPress={onCreateAccount}>
-					I saved my Secret Recovery Phrase
+					I saved my Secret Phrase
 				</WalletButton>
 			</View>
 		</View>

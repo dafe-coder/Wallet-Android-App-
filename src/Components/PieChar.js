@@ -82,7 +82,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 					xmlns='http://www.w3.org/2000/svg'>
 					<Path
 						d='M138 73.5c0 35.622-28.878 64.5-64.5 64.5S9 109.122 9 73.5 37.878 9 73.5 9 138 37.878 138 73.5z'
-						stroke='#0C0B07'
+						stroke='#2D0F61'
 						strokeWidth={17}
 					/>
 				</Svg>
@@ -121,7 +121,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 										: [
 												{
 													fontSize: 12,
-													fill: THEME.VIOLET,
+													fill: THEME.WHITE,
 												},
 												{
 													fontSize: 14,
@@ -129,7 +129,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 												},
 												{
 													fontSize: 12,
-													fill: THEME.BROWN_TEXT,
+													fill: '#9C94AC',
 												},
 										  ]
 								}

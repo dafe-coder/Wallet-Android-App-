@@ -25,8 +25,8 @@ export const PortfolioSort = ({ style, onPress }) => {
 
 const styles = StyleSheet.create({
 	button: {
-		borderRadius: 5,
-		backgroundColor: THEME.BROWN_DARK,
+		borderRadius: 30,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 15,
 		flexDirection: 'row',

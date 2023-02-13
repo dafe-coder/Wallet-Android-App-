@@ -157,10 +157,10 @@ const styles = StyleSheet.create({
 		color: THEME.WHITE,
 	},
 	whiteDark: {
-		color: THEME.DARK_TEXT,
+		color: THEME.DARK,
 	},
 	gold: {
-		color: THEME.VIOLET_DARK,
+		color: THEME.VIOLET,
 	},
 	red: {
 		color: THEME.RED,

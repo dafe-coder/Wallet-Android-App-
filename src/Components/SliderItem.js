@@ -21,7 +21,7 @@ export const SliderItem = ({ index, portfolioCoinsInit }) => {
 			{/* {index == 0 ? (
 				<Image
 					style={styles.imageLogo}
-					source={require('../../assets/logoWalletMain.png')}
+					source={require('../../assets/logo_polygon.png')}
 				/>
 			) : (
 				<></>
@@ -50,16 +50,13 @@ const styles = StyleSheet.create({
 		left: '50%',
 		marginLeft: -27,
 		zIndex: 2,
-		top: -28,
-		width: 55,
-		height: 55,
+		top: -33,
+		width: 61,
+		height: 61,
 	},
 	item: {
 		borderRadius: 15,
-		overflow: 'hidden',
 		flex: 1,
-		borderWidth: 1,
-		borderColor: '#342E20',
 	},
 	image: {
 		width: null,

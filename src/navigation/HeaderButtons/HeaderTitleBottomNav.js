@@ -14,11 +14,10 @@ export const HeaderTitle = ({ openModalSelectAccount }) => {
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<WalletText
 						color='gold'
-						style={{ marginRight: 5, fontFamily: 'gt-medium' }}
-						upperCase>
+						style={{ marginRight: 5, fontFamily: 'gt-medium' }}>
 						{currentNetwork}
 					</WalletText>
-					<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
+					<SvgIcon type='check' fill={THEME.VIOLET} />
 				</View>
 			</TouchableOpacity>
 		</>

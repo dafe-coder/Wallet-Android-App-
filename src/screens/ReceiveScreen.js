@@ -93,7 +93,7 @@ export const ReceiveScreen = () => {
 							width='24'
 							height='24'
 							type='share'
-							fill={THEME.VIOLET_DARK}
+							fill={THEME.VIOLET}
 						/>
 						<WalletText style={{ marginLeft: 8 }} color='gold'>
 							Share address
@@ -108,7 +108,7 @@ export const ReceiveScreen = () => {
 							width='24'
 							height='24'
 							type='copy'
-							fill={THEME.VIOLET_DARK}
+							fill={THEME.VIOLET}
 						/>
 						<WalletText style={{ marginLeft: 8 }} color='gold'>
 							Copy address

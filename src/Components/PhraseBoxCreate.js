@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { THEME } from './../Theme'
 import { WalletText } from './UI'
 import { ButtonCopy } from './UI/ButtonCopy'
+import { THEME } from '../Theme'
 export const PhraseBoxCreate = ({ phrase, phraseText }) => {
 	return (
 		<View style={styles.box}>
@@ -11,11 +11,12 @@ export const PhraseBoxCreate = ({ phrase, phraseText }) => {
 					(item, i) =>
 						i + 1 <= 4 && (
 							<WalletText
+								fw='regular'
 								key={Math.random().toString()}
 								style={styles.itemText}
 								size='m'
-								color='white'>
-								{i + 1 + '.' + item}
+								color='dark'>
+								{i + 1 + '. ' + item}
 							</WalletText>
 						)
 				)}
@@ -26,11 +27,12 @@ export const PhraseBoxCreate = ({ phrase, phraseText }) => {
 						i + 1 >= 5 &&
 						i + 1 <= 8 && (
 							<WalletText
+								fw='regular'
 								key={Math.random().toString()}
 								style={styles.itemText}
 								size='m'
-								color='white'>
-								{i + 1 + '.' + item}
+								color='dark'>
+								{i + 1 + '. ' + item}
 							</WalletText>
 						)
 				)}
@@ -40,29 +42,30 @@ export const PhraseBoxCreate = ({ phrase, phraseText }) => {
 					(item, i) =>
 						i + 1 >= 9 && (
 							<WalletText
+								fw='regular'
 								key={Math.random().toString()}
 								style={styles.itemText}
 								size='m'
-								color='white'>
-								{i + 1 + '.' + item}
+								color='dark'>
+								{i + 1 + '. ' + item}
 							</WalletText>
 						)
 				)}
 			</View>
-			<ButtonCopy style={{ bottom: 10 }} text={phraseText} />
+			<ButtonCopy style={{ bottom: 15, right: 10 }} text={phraseText} />
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	box: {
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 20,
-		paddingBottom: 40,
+		paddingBottom: 45,
 		borderRadius: 10,
 		borderWidth: 1,
-		borderColor: THEME.BROWN_TEXT,
+		borderColor: THEME.GREY_LIGHT_BG,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},

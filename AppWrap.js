@@ -58,6 +58,7 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
+							console.log('response')
 							setLoadingBalanceCoins(false)
 							dispatch(
 								setPortfolioCoins(
@@ -103,7 +104,7 @@ export const AppWrap = ({ children }) => {
 			{children}
 			<Spinner
 				visible={loader}
-				overlayColor='rgba(12, 11, 7, 0.9)'
+				overlayColor='rgba(255, 255, 255, 0.9)'
 				size='large'
 				animation='fade'
 				color={THEME.VIOLET}

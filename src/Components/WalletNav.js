@@ -11,7 +11,12 @@ export const WalletNav = ({ navigation }) => {
 			<TouchableOpacity
 				activeOpacity={0.7}
 				onPress={() => navigation.navigate('Sent')}
-				style={styles.item}>
+				style={[
+					styles.item,
+					{
+						marginRight: 40,
+					},
+				]}>
 				<View style={styles.circle}>
 					<SvgIconNav type='send' />
 				</View>
@@ -24,9 +29,14 @@ export const WalletNav = ({ navigation }) => {
 						console.error('An error occurred', err)
 					)
 				}
-				style={styles.item}>
+				style={[
+					styles.item,
+					{
+						marginRight: 40,
+					},
+				]}>
 				<View style={styles.circle}>
-					<SvgIconNav type='buy' />
+					<SvgIconNav width={21} height={21} type='buy' />
 				</View>
 				<WalletText>Buy</WalletText>
 			</TouchableOpacity>
@@ -45,26 +55,23 @@ export const WalletNav = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		backgroundColor: THEME.BROWN_DARK,
 		borderRadius: 10,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 	},
 	item: {
-		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	circle: {
-		borderColor: '#44444480',
-		borderWidth: 1,
-		backgroundColor: '#51515130',
-		height: 45,
-		width: 45,
+		backgroundColor: THEME.GREY_LIGHT,
+		height: 50,
+		width: 50,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 50,
-		marginRight: 6,
+		marginBottom: 3,
 	},
 })

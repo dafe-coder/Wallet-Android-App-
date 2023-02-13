@@ -52,7 +52,7 @@ const screens = [
 		name: 'CreatePhrase',
 		options: ({ navigation }) => ({
 			headerShown: true,
-			title: '',
+			title: 'Polygon',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: CreatePhraseComponent,

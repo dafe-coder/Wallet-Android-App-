@@ -123,7 +123,7 @@ export const PhraseBox = ({
 
 const styles = StyleSheet.create({
 	textarea: {
-		backgroundColor: '#F0F0F3',
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		borderRadius: 15,
 		padding: 15,
 		fontSize: 16,

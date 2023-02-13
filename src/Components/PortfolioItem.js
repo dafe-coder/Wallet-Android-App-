@@ -21,7 +21,7 @@ export const PortfolioItem = ({
 				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>
 					<WalletText>{title.toUpperCase()}</WalletText>
-					<WalletText style={{ color: THEME.GREY }}>
+					<WalletText style={{ color: THEME.DISABLED_TEXT }}>
 						${fixNum(currentPrice)}
 					</WalletText>
 				</View>
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
 		width: 36,
 	},
 	item: {
-		backgroundColor: THEME.BROWN,
-		borderRadius: 5,
+		backgroundColor: THEME.GREY_LIGHT_BG,
+		borderRadius: 15,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 		flexDirection: 'row',

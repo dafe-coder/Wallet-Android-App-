@@ -86,7 +86,7 @@ export const SelectCoinSwap = ({
 									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
 
-								<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
+								<SvgIcon type='check' fill={THEME.VIOLET} />
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -135,7 +135,7 @@ export const SelectCoinSwap = ({
 									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
-								<SvgIcon type='check' fill={THEME.VIOLET_DARK} />
+								<SvgIcon type='check' fill={THEME.VIOLET} />
 							</TouchableOpacity>
 						</View>
 					</View>

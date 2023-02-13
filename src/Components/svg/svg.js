@@ -506,25 +506,28 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 		case 'history':
 			return (
 				<Svg
-					width={28}
-					height={28}
-					viewBox='0 0 28 28'
+					width={24}
+					height={24}
+					viewBox='0 0 24 24'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'
+					className='Icon_Edit'
 					{...props}>
 					<Path
-						d='M21.551 19.486a9.333 9.333 0 111.764-4.9m0 0l1.75-1.75m-1.75 1.75l-1.75-1.75'
-						stroke={fill}
+						d='M18.4721 16.7023C17.3398 18.2608 15.6831 19.3584 13.8064 19.7934C11.9297 20.2284 9.95909 19.9716 8.25656 19.0701C6.55404 18.1687 5.23397 16.6832 4.53889 14.8865C3.84381 13.0898 3.82039 11.1027 4.47295 9.29011C5.12551 7.47756 6.41021 5.96135 8.09103 5.02005C9.77184 4.07875 11.7359 3.77558 13.6223 4.16623C15.5087 4.55689 17.1908 5.61514 18.3596 7.14656C19.5283 8.67797 20.1052 10.5797 19.9842 12.5023M19.9842 12.5023L21.4842 11.0023M19.9842 12.5023L18.4842 11.0023'
+						stroke='#9667E5'
 						strokeWidth={2}
 						strokeLinecap='round'
 						strokeLinejoin='round'
+						className='Ellipse 105'
 					/>
 					<Path
-						d='M14 9.333V14l3.5 3.5'
-						stroke={fill}
+						d='M12 8V12L15 15'
+						stroke='#9667E5'
 						strokeWidth={2}
 						strokeLinecap='round'
 						strokeLinejoin='round'
+						className='Vector 153'
 					/>
 				</Svg>
 			)
@@ -554,7 +557,7 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					{...props}>
 					<Path
 						d='M4.985 5.686a.316.316 0 01-.496 0L.404.511A.316.316 0 01.652 0h8.17c.264 0 .411.304.248.511L4.985 5.686z'
-						fill='#B61E1E'
+						fill='#E54747'
 					/>
 				</Svg>
 			)
