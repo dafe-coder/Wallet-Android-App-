@@ -271,7 +271,7 @@ export function MyStack() {
 					headerBackVisible: false,
 					contentStyle: {
 						borderTopColor: '#D1C9FA',
-						borderTopWidth: 0.6,
+						borderTopWidth: 0.5,
 					},
 					headerTitleAlign: 'center',
 					headerStyle: {

@@ -15,6 +15,7 @@ import { ChooseCoins } from '../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAddressTo, setChooseCoin } from './../store/actions/walletActions'
 import { SvgIcon } from './../Components/svg/svg'
+import { THEME } from '../Theme'
 
 import useIsReady from '../../hooks/useIsReady'
 import { BusyIndicator } from '../Components/Loader'
@@ -86,7 +87,7 @@ export const SentScreen = ({ navigation }) => {
 					<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
 						<WalletText
 							color='disabled'
-							style={{ paddingLeft: 19, marginBottom: 7 }}>
+							style={{ paddingLeft: 23, marginBottom: 7 }}>
 							Recipient Address
 						</WalletText>
 						<TouchableOpacity
@@ -96,7 +97,11 @@ export const SentScreen = ({ navigation }) => {
 							<SvgIcon type='qr-camera' />
 						</TouchableOpacity>
 						<WalletInput
-							styleInput={{ paddingRight: 50 }}
+							styleInput={{
+								paddingRight: 50,
+								backgroundColor: THEME.GREY_LIGHT_BG,
+								borderWidth: 0,
+							}}
 							autoCapitalize='none'
 							setValue={onAddAddress}
 							value={fromAddress}

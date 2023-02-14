@@ -15,9 +15,9 @@ export const AllCoinsItem = ({ onPress, coin, chooseCoin }) => {
 			onPress={() => onPressCoin(coin)}>
 			<View style={styles.itemInfo}>
 				<Image style={styles.image} source={{ uri: coin.image.thumb }} />
-				<WalletText size='m' color='white'>
+				<WalletText size='m' color='dark'>
 					{coin.name + ' '}
-					<Text style={{ color: THEME.DARK_TEXT }}>
+					<Text style={{ color: THEME.DISABLED_TEXT }}>
 						({coin.symbol.toUpperCase()})
 					</Text>
 				</WalletText>
@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 		borderRadius: 50,
 		overflow: 'hidden',
-		backgroundColor: THEME.WHITE,
+		backgroundColor: THEME.GREY_LIGHT,
 	},
 	wrap: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		borderBottomWidth: 1,
 		paddingVertical: 10,
 	},

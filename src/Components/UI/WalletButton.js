@@ -34,7 +34,13 @@ export const WalletButton = ({
 							styles.btn,
 							styles.violet,
 							disabled && styles.disabled,
-							arrow ? {} : { paddingVertical: 20.5, justifyContent: 'center' },
+							arrow
+								? {}
+								: {
+										paddingLeft: 9,
+										paddingVertical: 20.5,
+										justifyContent: 'center',
+								  },
 						]}>
 						<Text
 							style={[
@@ -73,7 +79,14 @@ export const WalletButton = ({
 							styles.btn,
 							styles.border,
 							disabled && styles.disabled,
-							arrow ? {} : { paddingVertical: 20.5, justifyContent: 'center' },
+							arrow
+								? {}
+								: {
+										backgroundColor: THEME.WHITE,
+										paddingLeft: 9,
+										paddingVertical: 20.5,
+										justifyContent: 'center',
+								  },
 						]}>
 						<Text
 							style={[

@@ -129,18 +129,19 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 		case 'search':
 			return (
 				<Svg
-					viewBox='0 0 19 20'
+					width={19}
+					height={19}
+					viewBox='0 0 19 19'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'
 					{...props}>
-					<G opacity={0.6}>
-						<Path
-							fillRule='evenodd'
-							clipRule='evenodd'
-							d='M14.913 8.206a6.706 6.706 0 11-13.413 0 6.706 6.706 0 0113.413 0zm-1.732 6.527a8.206 8.206 0 111.104-1.014l.008.01 3.54 3.89a.763.763 0 01-.041 1.068.737.737 0 01-1.052-.043l-3.54-3.89a.884.884 0 01-.019-.02z'
-							fill='#F9B446'
-						/>
-					</G>
+					<Path
+						fillRule='evenodd'
+						clipRule='evenodd'
+						d='M14.9126 8.20632C14.9126 11.9101 11.9101 14.9126 8.20632 14.9126C4.50252 14.9126 1.5 11.9101 1.5 8.20632C1.5 4.50252 4.50252 1.5 8.20632 1.5C11.9101 1.5 14.9126 4.50252 14.9126 8.20632ZM13.1811 14.7333C11.8009 15.7869 10.0767 16.4126 8.20632 16.4126C3.67409 16.4126 0 12.7385 0 8.20632C0 3.67409 3.67409 0 8.20632 0C12.7385 0 16.4126 3.67409 16.4126 8.20632C16.4126 10.3287 15.6069 12.2629 14.2847 13.7198C14.2874 13.7227 14.2902 13.7257 14.2929 13.7286L17.8334 17.6189C18.1124 17.9255 18.0937 18.4035 17.7916 18.6866C17.4896 18.9697 17.0186 18.9507 16.7396 18.6442L13.1991 14.7539C13.193 14.7471 13.187 14.7403 13.1811 14.7333Z'
+						fill='#8247E5'
+						className='Union'
+					/>
 				</Svg>
 			)
 		case 'polygon-nav':
@@ -213,12 +214,12 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 						height={30}
 						x={1.5}
 						y={0.875}
-						stroke='#F9B446'
+						stroke='#632DBC'
 						strokeWidth={1.5}
 						rx={5}
 					/>
 					<Path
-						stroke='#F9B446'
+						stroke='#632DBC'
 						strokeLinecap='round'
 						strokeLinejoin='round'
 						strokeWidth={1.5}
@@ -691,14 +692,14 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					{...props}>
 					<Path
 						d='M12.508 22.2c5.799 0 10.5-4.701 10.5-10.5s-4.701-10.5-10.5-10.5c-5.8 0-10.5 4.701-10.5 10.5s4.7 10.5 10.5 10.5z'
-						stroke='#8B6917'
+						stroke={fill ? fill : '#E54747'}
 						strokeWidth={1.5}
 						strokeLinecap='round'
 						strokeLinejoin='round'
 					/>
 					<Path
 						d='M12.723 16.8V12M12.723 7.2h.012'
-						stroke='#8B6917'
+						stroke={fill ? fill : '#E54747'}
 						strokeWidth={2}
 						strokeLinecap='round'
 						strokeLinejoin='round'

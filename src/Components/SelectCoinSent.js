@@ -73,7 +73,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 27 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='dark'>Select Token</WalletText>
+					<WalletText color='disabled'>Select Token</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
@@ -86,7 +86,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 								source={{ uri: chooseCoin.image.thumb }}
 							/>
 							<WalletText
-								color='white'
+								color='dark'
 								size='m'
 								style={{ marginLeft: 10, marginRight: 7 }}>
 								{chooseCoin.symbol}
@@ -97,13 +97,13 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 
 					<View style={{ alignItems: 'flex-end' }} pointerEvents='none'>
 						<View>
-							<WalletText color='white' size='m'>
+							<WalletText color='dark' size='m'>
 								≈ ${fixNum(chooseCoin.market_data.balance_crypto.usd)}{' '}
 								{/* <Text style={styles.textGreen}> (0.1%)</Text> */}
 							</WalletText>
 						</View>
 						<TextInput
-							placeholderTextColor={THEME.DARK_TEXT}
+							placeholderTextColor={THEME.DISABLED_TEXT}
 							style={[styles.input, { height: null }]}
 							placeholder={
 								'≈ ' +
@@ -116,7 +116,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 				</View>
 			</View>
 			<View style={[styles.header, { paddingHorizontal: 20 }]}>
-				<WalletText color='dark'>Amount</WalletText>
+				<WalletText color='disabled'>Amount</WalletText>
 			</View>
 			<View
 				style={[
@@ -138,15 +138,15 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 					}}>
 					<View>
 						<View>
-							<WalletText color='white' size='m'>
+							<WalletText color='dark' size='m'>
 								{swap ? '$' : ''}
 								{topValue != '' ? topValue : 0.0}{' '}
 								{!swap ? chooseCoin.symbol.toUpperCase() : ''}
 							</WalletText>
 							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 								<TextInput
-									placeholderTextColor={THEME.DARK_TEXT}
-									style={[styles.input]}
+									placeholderTextColor={THEME.DISABLED_TEXT}
+									style={[styles.input, { minWidth: 100 }]}
 									value={value}
 									placeholder={
 										!swap
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 		marginBottom: 7,
 	},
 	item: {
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 15,
 		borderRadius: 5,

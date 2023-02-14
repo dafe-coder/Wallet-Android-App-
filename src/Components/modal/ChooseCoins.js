@@ -25,7 +25,7 @@ export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 
 	return (
 		<View style={{ flex: 1 }}>
-			<WalletTitle style={{ marginBottom: 24 }}>choose tokens</WalletTitle>
+			<WalletTitle style={{ marginBottom: 24 }}>Choose Tokens</WalletTitle>
 			<View style={{ position: 'relative' }}>
 				<View style={styles.svg}>
 					<SvgIcon type='search' style={{ width: 20, height: 20 }} />
@@ -36,13 +36,13 @@ export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 					styleInput={{
 						paddingVertical: 8,
 						paddingLeft: 55,
-						borderRadius: 10,
+						borderRadius: 30,
 						borderWidth: 1,
-						borderColor: THEME.DARK_TEXT,
-						backgroundColor: THEME.BROWN_DARK,
+						borderColor: '#DACEF0',
 					}}
 					style={{ width: '100%' }}
 					placeholder='Search token'
+					placeholderTextColor='#9C94AC'
 				/>
 			</View>
 

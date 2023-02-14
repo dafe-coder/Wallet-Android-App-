@@ -74,11 +74,13 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				}}>
 				<View style={{ paddingHorizontal: 16 }}>
 					<View style={{ marginBottom: 24 }}>
-						<WalletText color='dark' style={{ marginBottom: 7 }}>
+						<WalletText
+							color='disabled'
+							style={{ marginBottom: 7, paddingHorizontal: 18 }}>
 							From
 						</WalletText>
 						<View style={styles.item}>
-							<WalletText size='m' color='white'>
+							<WalletText size='m' color='dark'>
 								{dataUser.map((d) => {
 									if (d.name === currentAccount) {
 										return d.address.slice(0, 13) + '...' + d.address.slice(-10)
@@ -88,11 +90,13 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 						</View>
 					</View>
 					<View style={{ marginBottom: 24 }}>
-						<WalletText color='dark' style={{ marginBottom: 7 }}>
+						<WalletText
+							color='disabled'
+							style={{ marginBottom: 7, paddingHorizontal: 18 }}>
 							To
 						</WalletText>
 						<View style={styles.item}>
-							<WalletText size='m' color='white'>
+							<WalletText size='m' color='dark'>
 								{addressTo.slice(0, 13) + '...' + addressTo.slice(-10)}
 							</WalletText>
 						</View>
@@ -105,6 +109,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				</View>
 				<View style={styles.btns}>
 					<WalletButton
+						arrow={false}
 						type='border'
 						style={styles.btn}
 						onPress={() => navigation.navigate('Sent')}>
@@ -130,10 +135,10 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	item: {
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 15,
-		borderRadius: 5,
+		borderRadius: 30,
 	},
 	btns: {
 		flexDirection: 'row',

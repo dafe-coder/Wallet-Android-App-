@@ -17,6 +17,7 @@ export const TransactionFee = ({ onPress }) => {
 					height={24}
 					width={24}
 					type='info'
+					fill='#8247E5'
 				/>
 				<WalletText style={{ paddingHorizontal: '7%' }} center size='m'>
 					Gas fees are paid to crypto miners who process transactions on the
@@ -25,7 +26,7 @@ export const TransactionFee = ({ onPress }) => {
 					complexity.
 				</WalletText>
 			</View>
-			<WalletButton onPress={onPress} type='border'>
+			<WalletButton arrow={false} onPress={onPress} type='border'>
 				Cancel
 			</WalletButton>
 		</View>

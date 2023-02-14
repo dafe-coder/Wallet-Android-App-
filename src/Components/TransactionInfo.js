@@ -18,7 +18,7 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 		<View style={[styles.item, style]}>
 			<View style={styles.itemTop}>
 				<View style={styles.itemCenter}>
-					<WalletText color='dark'>Transaction Fee</WalletText>
+					<WalletText color='disabled'>Transaction Fee</WalletText>
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={{ marginLeft: 7 }}
@@ -27,20 +27,20 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 					</TouchableOpacity>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
-					<WalletText color='white'>
+					<WalletText color='dark'>
 						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
 						ETH
 					</WalletText>
-					<WalletText color='dark' style={{ fontSize: 12, marginTop: 3 }}>
+					<WalletText color='disabled' style={{ fontSize: 12, marginTop: 3 }}>
 						≈ {fixNum(amountSend)}$
 					</WalletText>
 				</View>
 			</View>
 			<View style={styles.itemBottom}>
-				<WalletText size='m' color='white'>
+				<WalletText size='m' color='dark'>
 					Total
 				</WalletText>
-				<WalletText color='white' size='m' style={{ fontFamily: 'ub-medium' }}>
+				<WalletText color='dark' size='m' style={{ fontFamily: 'ub-regular' }}>
 					≈
 					{fixNum(
 						Number(amountSend) / chooseCoin.market_data.current_price.usd
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	item: {
-		backgroundColor: THEME.BROWN_DARK,
-		borderRadius: 5,
+		backgroundColor: THEME.GREY_LIGHT_BG,
+		borderRadius: 15,
 	},
 	itemTop: {
 		paddingHorizontal: 20,
 		paddingVertical: 15,
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		borderBottomWidth: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

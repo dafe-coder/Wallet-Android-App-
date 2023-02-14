@@ -17,11 +17,13 @@ export const Gas = ({ onPress }) => {
 					alignItems: 'center',
 				}}>
 				<SvgIcon type='alert' />
-				<WalletText size='m' style={{ marginTop: 32 }}>
+				<WalletText size='m' style={{ color: '#632DBC', marginTop: 32 }}>
 					Not enough funds
 				</WalletText>
 			</View>
-			<WalletButton onPress={onPress}>ok</WalletButton>
+			<WalletButton onPress={onPress} type='border' arrow={false}>
+				ok
+			</WalletButton>
 		</View>
 	)
 }
