@@ -26,7 +26,7 @@ export const WalletInput = ({
 				secureTextEntry={showPass}
 				style={[styles.input, styleInput]}
 				placeholder={placeholder}
-				placeholderTextColor={THEME.BROWN_TEXT}
+				placeholderTextColor={THEME.DISABLED_TEXT}
 				defaultValue={value}
 				onChangeText={setValue}
 			/>
@@ -59,15 +59,14 @@ export const WalletInput = ({
 
 const styles = StyleSheet.create({
 	input: {
-		fontSize: 14,
-		lineHeight: 20,
+		fontSize: 16,
+		lineHeight: 22,
 		borderWidth: 1,
-		borderColor: THEME.BROWN,
-		backgroundColor: THEME.BROWN,
-		borderRadius: 5,
-		paddingHorizontal: 20,
+		borderColor: THEME.GREY_LIGHT,
+		borderRadius: 30,
+		paddingHorizontal: 24,
 		paddingVertical: 15,
-		color: THEME.BROWN_TEXT,
+		color: THEME.DARK,
 		fontFamily: 'ub-regular',
 	},
 	body: {

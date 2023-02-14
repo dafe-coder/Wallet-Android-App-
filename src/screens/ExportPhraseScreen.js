@@ -43,8 +43,8 @@ export const ExportPhraseScreen = ({ navigation }) => {
 						wallet.
 					</WalletTextWithIcon>
 					<WalletTextWithIcon img={'warning'}>
-						WEB3 WALLET employees will NEVER ask for your Secret Recovery
-						Phrase. Do not share it with anyone.
+						Polygon employees will NEVER ask for your Secret Recovery Phrase. Do
+						not share it with anyone.
 					</WalletTextWithIcon>
 				</View>
 				<View style={styles.bodyPin}>
@@ -68,8 +68,8 @@ export const ExportPhraseScreen = ({ navigation }) => {
 							width: 9,
 							height: 9,
 							borderWidth: 1,
-							borderColor: THEME.BROWN_TEXT,
-							backgroundColor: THEME.BROWN_TEXT,
+							borderColor: THEME.DISABLED_TEXT,
+							backgroundColor: THEME.DISABLED_TEXT,
 							borderRadius: 50,
 							marginHorizontal: 4,
 						}}
@@ -90,7 +90,7 @@ export const ExportPhraseScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	bodyPin: {
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT,
 		borderRadius: 10,
 		marginHorizontal: 16,
 		paddingTop: 20,

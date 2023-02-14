@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingVertical: 7,
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		borderBottomWidth: 1,
 	},
 	info: {

@@ -9,7 +9,7 @@ export const DeleteWallet = ({ onClose, onDelete }) => {
 			style={{ justifyContent: 'space-between', flex: 1, paddingBottom: 37 }}>
 			<View>
 				<WalletTitle style={{ marginBottom: 32 }}>Delete Wallet</WalletTitle>
-				<WalletText center size='m' color='white'>
+				<WalletText center size='m' color='dark'>
 					Are you sure you want to delete the wallet?
 				</WalletText>
 				<View style={styles.alert}>
@@ -21,8 +21,9 @@ export const DeleteWallet = ({ onClose, onDelete }) => {
 			</View>
 			<View style={styles.wrapBtn}>
 				<WalletButton
+					arrow={false}
 					onPress={onClose}
-					style={{ width: '48.6%' }}
+					style={{ width: '48.6%', height: '100%' }}
 					type='border'>
 					Cancel
 				</WalletButton>
@@ -37,8 +38,8 @@ export const DeleteWallet = ({ onClose, onDelete }) => {
 const styles = StyleSheet.create({
 	alert: {
 		padding: 16,
-		backgroundColor: '#251B0A',
-		borderRadius: 5,
+		backgroundColor: '#ECE9F2',
+		borderRadius: 15,
 		marginTop: 24,
 		flexDirection: 'row',
 		alignItems: 'center',

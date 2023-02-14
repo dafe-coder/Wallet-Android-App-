@@ -38,7 +38,7 @@ export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 						paddingLeft: 55,
 						borderRadius: 10,
 						borderWidth: 1,
-						borderColor: THEME.BROWN_TEXT,
+						borderColor: THEME.DARK_TEXT,
 						backgroundColor: THEME.BROWN_DARK,
 					}}
 					style={{ width: '100%' }}

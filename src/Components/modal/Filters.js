@@ -22,7 +22,7 @@ export const Filters = ({ onClose }) => {
 				activeOpacity={0.7}
 				style={styles.item}
 				onPress={() => onChooseSort('value')}>
-				<WalletText size='m' color='white'>
+				<WalletText size='m' color='dark'>
 					Portfolio Value
 				</WalletText>
 				{portfolioSort == 'value' ? <SvgIcon type='check' /> : <></>}
@@ -31,7 +31,7 @@ export const Filters = ({ onClose }) => {
 				activeOpacity={0.7}
 				style={styles.item}
 				onPress={() => onChooseSort('name')}>
-				<WalletText size='m' color='white'>
+				<WalletText size='m' color='dark'>
 					Name
 				</WalletText>
 				{portfolioSort == 'name' ? <SvgIcon type='check' /> : <></>}
@@ -40,7 +40,7 @@ export const Filters = ({ onClose }) => {
 				activeOpacity={0.7}
 				style={styles.item}
 				onPress={() => onChooseSort('change')}>
-				<WalletText size='m' color='white'>
+				<WalletText size='m' color='dark'>
 					Daily change
 				</WalletText>
 				{portfolioSort == 'change' ? <SvgIcon type='check' /> : <></>}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		borderBottomWidth: 1,
 		paddingVertical: 10,
 	},

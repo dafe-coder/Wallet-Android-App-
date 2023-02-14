@@ -8,8 +8,10 @@ export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 	return (
 		<TouchableOpacity activeOpacity={0.7} onPress={() => onPress(title)}>
 			<View style={[{ ...styles.item }, topLine ? { ...styles.topLine } : {}]}>
-				<SvgIconNav type={image} style={{ marginRight: 24 }} />
-				<WalletText color='white' size='m' fw='medium'>
+				<View style={styles.circle}>
+					<SvgIconNav type={image} style={{}} />
+				</View>
+				<WalletText color='dark' size='m' fw='regular'>
 					{title}
 				</WalletText>
 			</View>
@@ -18,17 +20,26 @@ export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 }
 
 const styles = StyleSheet.create({
+	circle: {
+		backgroundColor: THEME.GREY_LIGHT,
+		width: 30,
+		height: 30,
+		borderRadius: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginRight: 24,
+	},
 	item: {
 		paddingVertical: 16,
 		flexDirection: 'row',
 		alignItems: 'center',
-		paddingHorizontal: 35,
+		paddingHorizontal: 15,
 	},
 	img: {
 		marginRight: 20,
 	},
 	topLine: {
-		borderColor: THEME.BROWN_DARK,
+		borderColor: THEME.GREY_LIGHT,
 		borderTopWidth: 1,
 	},
 })

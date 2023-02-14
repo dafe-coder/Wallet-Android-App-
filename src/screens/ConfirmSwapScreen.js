@@ -38,61 +38,65 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		dispatch(setSwapAmountSecond(frstAmount))
 	}
 	return (
-		<ScrollView>
+		<ScrollView style={{ backgroundColor: 'yellow', flex: 1 }}>
 			<View
 				style={{
+					backgroundColor: 'red',
 					flex: 1,
 					paddingTop: 62,
 					paddingHorizontal: 16,
+					justifyContent: 'space-between',
 				}}>
-				<View style={[styles.itemSwap, { alignItems: 'center' }]}>
-					<View style={{ alignItems: 'center', flexBasis: '45%' }}>
-						<Image
-							style={{
-								width: 26,
-								height: 26,
-								borderRadius: 50,
-								overflow: 'hidden',
-								marginBottom: 4,
-							}}
-							source={{ uri: chooseCoin.image.thumb }}
-						/>
-						<WalletText>
-							{swapAmountFirst + ' ' + chooseCoin.symbol.toUpperCase()}
-						</WalletText>
-					</View>
-					<TouchableOpacity activeOpacity={0.7} onPress={onSwapCoins}>
-						<View style={styles.swapBtn}>
-							<SvgIcon type='swap-horizontal' />
+				<View style={{ backgroundColor: 'blue' }}>
+					<View style={[styles.itemSwap, { alignItems: 'center' }]}>
+						<View style={{ alignItems: 'center', flexBasis: '45%' }}>
+							<Image
+								style={{
+									width: 26,
+									height: 26,
+									borderRadius: 50,
+									overflow: 'hidden',
+									marginBottom: 4,
+								}}
+								source={{ uri: chooseCoin.image.thumb }}
+							/>
+							<WalletText>
+								{swapAmountFirst + ' ' + chooseCoin.symbol.toUpperCase()}
+							</WalletText>
 						</View>
-					</TouchableOpacity>
-					<View style={{ alignItems: 'center', flexBasis: '45%' }}>
-						<Image
-							style={{
-								width: 26,
-								height: 26,
-								borderRadius: 50,
-								overflow: 'hidden',
-								marginBottom: 4,
-							}}
-							source={{ uri: chooseCoinSwapSecond.image.thumb }}
-						/>
-						<WalletText>
-							{swapAmountSecond +
-								' ' +
-								chooseCoinSwapSecond.symbol.toUpperCase()}
-						</WalletText>
+						<TouchableOpacity activeOpacity={0.7} onPress={onSwapCoins}>
+							<View style={styles.swapBtn}>
+								<SvgIcon type='swap-horizontal' />
+							</View>
+						</TouchableOpacity>
+						<View style={{ alignItems: 'center', flexBasis: '45%' }}>
+							<Image
+								style={{
+									width: 26,
+									height: 26,
+									borderRadius: 50,
+									overflow: 'hidden',
+									marginBottom: 4,
+								}}
+								source={{ uri: chooseCoinSwapSecond.image.thumb }}
+							/>
+							<WalletText>
+								{swapAmountSecond +
+									' ' +
+									chooseCoinSwapSecond.symbol.toUpperCase()}
+							</WalletText>
+						</View>
 					</View>
+					{chooseCoin != null && chooseCoinSwapSecond != null ? (
+						<SwapDetails
+							confirm
+							chooseCoinSwapFirst={chooseCoin}
+							chooseCoinSwapSecond={chooseCoinSwapSecond}
+						/>
+					) : (
+						<></>
+					)}
 				</View>
-				{chooseCoin != null && chooseCoinSwapSecond != null ? (
-					<SwapDetails
-						confirm
-						chooseCoinSwapFirst={chooseCoin}
-						chooseCoinSwapSecond={chooseCoinSwapSecond}
-					/>
-				) : (
-					<></>
-				)}
 				<WalletButton onPress={() => {}} style={{ marginBottom: 60 }}>
 					Swap
 				</WalletButton>
@@ -105,17 +109,15 @@ const styles = StyleSheet.create({
 	swapBtn: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: 'rgba(41, 39, 32, 0.5)',
-		borderColor: '#515151',
-		borderWidth: 1,
+		backgroundColor: '#ECE9F2',
 		width: 40,
 		height: 40,
 		borderRadius: 50,
 	},
 	itemSwap: {
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingVertical: 17,
-		borderRadius: 5,
+		borderRadius: 15,
 		marginBottom: 48,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

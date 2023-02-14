@@ -64,9 +64,8 @@ export const WalletScreen = ({ navigation }) => {
 				<Slider portfolioCoinsInit={portfolioCoinsInit} />
 				<View style={{ paddingHorizontal: 16, flex: 1 }}>
 					<WalletNav navigation={navigation} />
-
 					<PortfolioSort
-						style={{ marginTop: 24, marginBottom: 13 }}
+						style={{ marginTop: 10, marginBottom: 13 }}
 						onPress={openModalFilter}
 					/>
 					{filterPortfolioCoinsLoader && loaderSkeleton ? (

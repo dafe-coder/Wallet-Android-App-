@@ -23,13 +23,17 @@ export const NftScreen = ({ navigation }) => {
 			) : (
 				<View style={{ ...styles.wrapTop, paddingTop: 117 }}>
 					<SvgIcon type='nft' />
-					<WalletTitle style={{ marginTop: 30, marginBottom: 16 }}>
+					<WalletTitle style={{ marginTop: 35, marginBottom: 16 }}>
 						Your NFTs
 					</WalletTitle>
-					<WalletText upperCase center style={{ marginTop: 25 }} fw='medium'>
+					<WalletText
+						center
+						style={{ color: '#8247E5', marginTop: 25 }}
+						fw='medium'
+						size='m'>
 						No NFTs Yet
 					</WalletText>
-					<WalletText size='m' center style={{ width: 210, marginTop: 20 }}>
+					<WalletText size='m' center style={{ marginTop: 20 }}>
 						Your future NFTs will be displayed here.
 					</WalletText>
 				</View>
@@ -48,8 +52,6 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingHorizontal: 16,
-		borderTopColor: '#2f2d2b',
-		borderTopWidth: 0.6,
 	},
 	title: {
 		marginBottom: 13,

@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { WalletTitle } from '../Components/UI/WalletTitle'
+import { WalletTitle, WalletButton } from '../Components/UI/'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI/WalletText'
 import { SvgIcon } from '../Components/svg/svg'
 import { PhraseBox } from '../Components/PhraseBox'
 import { useSelector } from 'react-redux'
 
-export const ExportPrivateKeyCopyScreen = () => {
+export const ExportPrivateKeyCopyScreen = ({ navigation }) => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
@@ -18,6 +18,7 @@ export const ExportPrivateKeyCopyScreen = () => {
 			</View>
 			{dataUser.map((d) => {
 				if (d.name === currentAccount) {
+					console.log(atob(d.phrase))
 					return (
 						<PhraseBox
 							key={Math.random().toString()}
@@ -40,6 +41,9 @@ export const ExportPrivateKeyCopyScreen = () => {
 					</WalletText>
 				</View>
 			</View>
+			<View style={{ paddingHorizontal: 16, marginTop: 60, marginBottom: 50 }}>
+				<WalletButton onPress={() => navigation.goBack()}>close</WalletButton>
+			</View>
 		</ScrollView>
 	)
 }
@@ -47,7 +51,7 @@ export const ExportPrivateKeyCopyScreen = () => {
 const styles = StyleSheet.create({
 	alert: {
 		marginTop: 20,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT,
 		borderRadius: 10,
 		paddingHorizontal: 10,
 		paddingVertical: 15,
@@ -55,6 +59,5 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
-		marginBottom: 90,
 	},
 })

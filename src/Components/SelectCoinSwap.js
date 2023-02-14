@@ -61,7 +61,7 @@ export const SelectCoinSwap = ({
 							<TextInput
 								value={firstAmount}
 								onChangeText={setFirstAmount}
-								placeholderTextColor={THEME.BROWN_TEXT}
+								placeholderTextColor={THEME.DARK_TEXT}
 								style={styles.input}
 								placeholder='0.00'
 								keyboardType='numeric'
@@ -111,7 +111,7 @@ export const SelectCoinSwap = ({
 						<View pointerEvents='none'>
 							<TextInput
 								keyboardType='numeric'
-								placeholderTextColor={THEME.BROWN_TEXT}
+								placeholderTextColor={THEME.DARK_TEXT}
 								style={styles.input}
 								value={secondAmount}
 								placeholder='0.00'
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
 		color: THEME.SUCCESS,
 	},
 	input: {
-		color: THEME.BROWN_TEXT,
+		color: THEME.DARK_TEXT,
 		fontSize: 16,
 		fontFamily: 'ub-regular',
 	},

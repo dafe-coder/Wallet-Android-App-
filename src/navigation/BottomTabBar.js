@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 18,
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		bottom: -1,
+		bottom: -2,
 		left: -1,
 		position: 'absolute',
 		backgroundColor: 'transparent',

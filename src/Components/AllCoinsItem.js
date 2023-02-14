@@ -17,7 +17,7 @@ export const AllCoinsItem = ({ onPress, coin, chooseCoin }) => {
 				<Image style={styles.image} source={{ uri: coin.image.thumb }} />
 				<WalletText size='m' color='white'>
 					{coin.name + ' '}
-					<Text style={{ color: THEME.BROWN_TEXT }}>
+					<Text style={{ color: THEME.DARK_TEXT }}>
 						({coin.symbol.toUpperCase()})
 					</Text>
 				</WalletText>

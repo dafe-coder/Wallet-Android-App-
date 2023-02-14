@@ -42,12 +42,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 		dataUser.filter((d) => d.name == currentAccount)[0].address !== undefined
 	) {
 		return (
-			<View
-				style={[
-					styles.wrap,
-					style,
-					edit ? { borderWidth: 1, borderColor: THEME.BROWN_TEXT } : {},
-				]}>
+			<View style={[styles.wrap, style]}>
 				<View style={styles.logo}>
 					{dataUser.map((n) =>
 						n.name == currentAccount ? (
@@ -74,7 +69,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 						{edit ? (
 							<TextInput
 								style={[styles.input, errorValue ? { color: THEME.RED } : {}]}
-								placeholderTextColor={THEME.BROWN_TEXT}
+								placeholderTextColor={THEME.DARK_TEXT}
 								placeholder={currentAccount}
 								autoFocus
 								value={value}
@@ -82,9 +77,8 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 							/>
 						) : (
 							<WalletText
-								color='dark'
 								size='m'
-								style={{ fontFamily: 'ub-medium' }}>
+								style={{ color: '#8247E5', fontFamily: 'ub-regular' }}>
 								{currentAccount}
 							</WalletText>
 						)}
@@ -125,18 +119,18 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		backgroundColor: THEME.BROWN_DARK,
-		borderRadius: 5,
+		backgroundColor: THEME.GREY_LIGHT_BG,
+		borderRadius: 15,
 		paddingVertical: 12,
 		paddingHorizontal: 14,
 		flexDirection: 'row',
 		position: 'relative',
 	},
 	input: {
-		fontFamily: 'ub-medium',
+		fontFamily: 'ub-regular',
 		minWidth: 90,
 		maxWidth: 200,
-		color: THEME.BROWN_TEXT,
+		color: THEME.DARK_TEXT,
 	},
 	logo: {
 		marginRight: 10,

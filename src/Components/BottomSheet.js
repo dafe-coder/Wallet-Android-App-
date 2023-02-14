@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 	},
 	sheetContainer: {
 		backgroundColor: THEME.WHITE,
-		borderTopEndRadius: 10,
-		borderTopLeftRadius: 10,
+		borderTopEndRadius: 20,
+		borderTopLeftRadius: 20,
 	},
 })

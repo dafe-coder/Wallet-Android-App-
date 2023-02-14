@@ -61,12 +61,18 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 					resizeMode='cover'
 					style={styles.bgImage}
 					source={require('../../assets/card.png')}>
-					<WalletTitle style={{ fontSize: 30, lineHeight: 40, marginTop: 40 }}>
+					<WalletTitle
+						style={{
+							color: THEME.WHITE,
+							fontSize: 30,
+							lineHeight: 40,
+							marginTop: 40,
+						}}>
 						{fixNum(portfolioOpen.market_data.balance)}{' '}
 						{portfolioOpen.symbol.toUpperCase()}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
-						<WalletText>
+						<WalletText color='white'>
 							~ ${fixNum(portfolioOpen.market_data.balance_crypto.usd)}
 						</WalletText>
 					</View>
@@ -85,8 +91,8 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 							marginTop: 24,
 						}}>
 						<SvgIcon type='bar' />
-						<WalletText style={{ marginLeft: 7 }} color='dark'>
-							No transactoins history yet
+						<WalletText style={{ color: THEME.DISABLED_TEXT, marginLeft: 7 }}>
+							No transactions history yet
 						</WalletText>
 					</View>
 				) : (
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		borderRadius: 50,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.VIOLET,
 		paddingHorizontal: 15,
 		paddingVertical: 7,
 		marginTop: 25,

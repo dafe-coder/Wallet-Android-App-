@@ -103,7 +103,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 							</WalletText>
 						</View>
 						<TextInput
-							placeholderTextColor={THEME.BROWN_TEXT}
+							placeholderTextColor={THEME.DARK_TEXT}
 							style={[styles.input, { height: null }]}
 							placeholder={
 								'≈ ' +
@@ -145,7 +145,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 							</WalletText>
 							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 								<TextInput
-									placeholderTextColor={THEME.BROWN_TEXT}
+									placeholderTextColor={THEME.DARK_TEXT}
 									style={[styles.input]}
 									value={value}
 									placeholder={
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	input: {
-		color: THEME.BROWN_TEXT,
+		color: THEME.DARK_TEXT,
 		fontSize: 16,
 		fontFamily: 'ub-regular',
 		height: 25,

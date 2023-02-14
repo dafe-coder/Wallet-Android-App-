@@ -69,8 +69,8 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 					width: 9,
 					height: 9,
 					borderWidth: 1,
-					borderColor: THEME.BROWN_TEXT,
-					backgroundColor: THEME.BROWN_TEXT,
+					borderColor: THEME.DARK_TEXT,
+					backgroundColor: THEME.DARK_TEXT,
 					borderRadius: 50,
 					marginHorizontal: 4,
 				}}

@@ -85,7 +85,7 @@ export const SentScreen = ({ navigation }) => {
 					}}>
 					<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
 						<WalletText
-							color='dark'
+							color='disabled'
 							style={{ paddingLeft: 19, marginBottom: 7 }}>
 							Recipient Address
 						</WalletText>

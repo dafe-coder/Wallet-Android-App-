@@ -98,7 +98,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 		if (
 			(!active && textArr.length == 12) ||
 			textArr.length == 15 ||
-			textArr.length == 24
+			(textArr.length == 24 && text !== '')
 		) {
 			setSuccess('success')
 			setBtnDisabled(false)
@@ -112,9 +112,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 	useEffect(() => {
 		if (name != '' && name.length <= 20) {
 			setNameValid(true)
-			setBtnDisabled(false)
 		} else if (name != '') {
-			setBtnDisabled(true)
 			setNameValid(false)
 		}
 	}, [name])
@@ -142,12 +140,12 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 							on a new device, any imported accounts will not be present until
 							manually imported on your new wallet.
 						</WalletText>
-						<View style={{ flexDirection: 'row' }}>
+						<View style={{ flexDirection: 'row', paddingHorizontal: 23 }}>
 							<TouchableOpacity
 								activeOpacity={0.7}
 								onPress={() => setActive(true)}>
 								<WalletText
-									color={active ? 'white-dark' : 'brown'}
+									color={active ? 'dark' : 'disabled'}
 									style={{ marginBottom: 7 }}>
 									Private Key
 								</WalletText>
@@ -156,7 +154,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 								activeOpacity={0.7}
 								onPress={() => setActive(false)}>
 								<WalletText
-									color={!active ? 'white-dark' : 'brown'}
+									color={!active ? 'dark' : 'disabled'}
 									style={{ marginLeft: 15 }}>
 									Secret Recovery phrase
 								</WalletText>
@@ -176,7 +174,7 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 								success == 'error'
 									? { borderColor: THEME.RED }
 									: success == 'success'
-									? { borderColor: THEME.BROWN_TEXT }
+									? { borderColor: THEME.DARK_TEXT }
 									: {},
 							]}
 							value={text}

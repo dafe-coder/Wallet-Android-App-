@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { TransactionItem } from './TransactionItem'
-export const TransactionsList = ({ data }) => {
+export const TransactionsList = ({ style, data }) => {
 	const [date, setDate] = useState(['0'])
 	useEffect(() => {
 		data.forEach((itemData, i) => {
@@ -32,7 +32,7 @@ export const TransactionsList = ({ data }) => {
 	}
 	let count = 0
 	return (
-		<View style={{ marginTop: 24 }}>
+		<View style={[{ marginTop: 24, marginBottom: 80 }, style]}>
 			{data.map((item, i) => {
 				if (item.changes.length) {
 					return (

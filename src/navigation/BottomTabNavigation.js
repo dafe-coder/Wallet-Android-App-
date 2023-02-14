@@ -71,9 +71,8 @@ export default function BottomTabNavigator() {
 								fontFamily: 'ub-regular',
 								color: THEME.VIOLET,
 								fontSize: 18,
-								textTransform: 'uppercase',
 							}}>
-							{title.children.toUpperCase()}
+							{title.children}
 						</Text>
 					),
 					headerShadowVisible: false,

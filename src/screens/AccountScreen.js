@@ -91,7 +91,5 @@ const styles = StyleSheet.create({
 		paddingTop: 30,
 		position: 'relative',
 		zIndex: 0,
-		borderTopColor: '#2f2d2b',
-		borderTopWidth: 0.6,
 	},
 })

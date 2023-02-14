@@ -13,6 +13,7 @@ import { THEME } from './../Theme'
 import { useSelector } from 'react-redux'
 import * as Clipboard from 'expo-clipboard'
 import { SvgIcon } from './../Components/svg/svg'
+import { ButtonCopy } from './../Components/UI/ButtonCopy'
 
 export const ReceiveScreen = () => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
@@ -73,15 +74,16 @@ export const ReceiveScreen = () => {
 				</WalletTitle>
 				{address != '' ? <QrCode setRef={setRef} value={address} /> : <></>}
 				<View style={styles.address}>
-					<WalletText color='white'>
+					<WalletText color='dark'>
 						{address.slice(0, 13) + '...' + address.slice(-10)}
 					</WalletText>
+					<ButtonCopy text={address} style={{ bottom: 10, right: 7 }} />
 				</View>
 				<View
 					style={{
 						flexDirection: 'row',
 						alignItems: 'center',
-						justifyContent: 'space-between',
+						justifyContent: 'center',
 						marginTop: 48,
 					}}>
 					<TouchableOpacity
@@ -93,25 +95,10 @@ export const ReceiveScreen = () => {
 							width='24'
 							height='24'
 							type='share'
-							fill={THEME.VIOLET}
+							fill={'#9667E5'}
 						/>
-						<WalletText style={{ marginLeft: 8 }} color='gold'>
+						<WalletText style={{ marginLeft: 8, color: '#9667E5' }}>
 							Share address
-						</WalletText>
-					</TouchableOpacity>
-					<TouchableOpacity
-						activeOpacity={0.7}
-						style={styles.link}
-						onPress={onCopy}>
-						<SvgIcon
-							style={{ marginTop: 4 }}
-							width='24'
-							height='24'
-							type='copy'
-							fill={THEME.VIOLET}
-						/>
-						<WalletText style={{ marginLeft: 8 }} color='gold'>
-							Copy address
 						</WalletText>
 					</TouchableOpacity>
 				</View>
@@ -126,10 +113,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	address: {
-		backgroundColor: THEME.BROWN_DARK,
-		borderRadius: 5,
+		backgroundColor: THEME.GREY_LIGHT_BG,
+		borderRadius: 30,
 		paddingHorizontal: 20,
-		paddingVertical: 10,
+		paddingVertical: 12,
 		marginTop: 24,
 	},
 	btnSave: {

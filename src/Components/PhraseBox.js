@@ -91,7 +91,7 @@ export const PhraseBox = ({
 						success == 'error'
 							? { borderColor: THEME.RED }
 							: success == 'success'
-							? { borderColor: THEME.BROWN_TEXT }
+							? { borderColor: THEME.DARK_TEXT }
 							: {},
 						edit ? styles.editInput : {},
 					]}
@@ -130,8 +130,7 @@ const styles = StyleSheet.create({
 		lineHeight: 22,
 		color: THEME.DARK_TEXT,
 		textAlignVertical: 'top',
-		minHeight: 142,
-		maxHeight: 200,
+		height: 142,
 	},
 	wrap: {
 		position: 'relative',
@@ -146,8 +145,6 @@ const styles = StyleSheet.create({
 		left: 35,
 	},
 	editInput: {
-		borderWidth: 1,
-		borderColor: THEME.BROWN_TEXT,
 		paddingRight: 80,
 	},
 })

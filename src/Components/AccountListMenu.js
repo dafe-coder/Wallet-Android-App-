@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { AccountItemMenu } from './AccountItemMenu'
-
+import { THEME } from '../Theme'
 export const AccountListMenu = ({ onPress }) => {
 	const menuData = [
 		// {
@@ -37,7 +37,7 @@ export const AccountListMenu = ({ onPress }) => {
 		{
 			image: 'help',
 			title: 'Help',
-			topLine: false,
+			topLine: true,
 		},
 		{
 			image: 'logout',
@@ -63,7 +63,10 @@ export const AccountListMenu = ({ onPress }) => {
 
 const styles = StyleSheet.create({
 	list: {
+		marginHorizontal: 16,
 		marginTop: 30,
 		marginBottom: 70,
+		borderBottomColor: THEME.GREY_LIGHT,
+		borderBottomWidth: 1,
 	},
 })

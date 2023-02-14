@@ -7,7 +7,7 @@ export const ConnectsApp = () => {
 		<View>
 			<WalletTitle style={{ marginBottom: 16 }}>Connected Apps</WalletTitle>
 			<WalletText center size='m'>
-				You're not currently connected {'\n'}to any apps.
+				You're not currently connected to any apps.
 			</WalletText>
 		</View>
 	)

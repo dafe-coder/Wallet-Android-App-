@@ -44,7 +44,7 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 						wallet.
 					</WalletTextWithIcon>
 					<WalletTextWithIcon img={'warning'}>
-						WEB3 WALLET employees will NEVER ask for your Secret Private Key. Do
+						Polygon employees will NEVER ask for your Secret Recovery Phrase. Do
 						not share it with anyone.
 					</WalletTextWithIcon>
 				</View>
@@ -71,8 +71,8 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 							width: 9,
 							height: 9,
 							borderWidth: 1,
-							borderColor: THEME.BROWN_TEXT,
-							backgroundColor: THEME.BROWN_TEXT,
+							borderColor: THEME.DISABLED_TEXT,
+							backgroundColor: THEME.DISABLED_TEXT,
 							borderRadius: 50,
 						}}
 						circleFilledStyle={{
@@ -92,7 +92,7 @@ export const ExportPrivateKeyScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	bodyPin: {
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT,
 		borderRadius: 10,
 		marginHorizontal: 16,
 		paddingTop: 20,

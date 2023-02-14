@@ -11,9 +11,9 @@ export const SwitchButton = ({ enabled }) => {
 	return (
 		<View>
 			<Switch
-				trackColor={{ false: THEME.BROWN, true: THEME.BROWN }}
+				trackColor={{ false: '#DACEF0', true: '#DACEF0' }}
 				thumbColor={THEME.VIOLET}
-				ios_backgroundColor={THEME.BROWN}
+				ios_backgroundColor='#DACEF0'
 				onValueChange={toggleSwitch}
 				value={enabled}
 			/>

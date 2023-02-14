@@ -97,7 +97,7 @@ export const EditProfileScreen = ({ navigation }) => {
 			<View style={{ paddingHorizontal: 16, paddingTop: 29 }}>
 				<AccountCard edit style={{ marginBottom: 15 }} />
 				<WalletButton type='border' onPress={onOpenDeleteModal}>
-					<Text style={{ color: THEME.RED }}>delete wallet</Text>
+					<Text style={{ color: THEME.VIOLET }}>delete wallet</Text>
 				</WalletButton>
 				<WalletBottomSheet ref={deleteRef} snapPoints={['55%']}>
 					<DeleteWallet onDelete={onDelete} onClose={onCloseDeleteModal} />

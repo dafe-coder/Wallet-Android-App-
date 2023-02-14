@@ -24,15 +24,13 @@ export const TransactionHistoryPageScreen = () => {
 		<ScrollView
 			style={{
 				paddingTop: 29,
-				borderTopColor: '#2f2d2b',
-				borderTopWidth: 0.6,
 			}}>
 			<View
 				style={{
 					marginHorizontal: 16,
 					paddingHorizontal: 16,
 					paddingBottom: 16,
-					borderBottomColor: THEME.BROWN_DARK,
+					borderBottomColor: THEME.GREY_LIGHT,
 					borderBottomWidth: 1,
 				}}>
 				<WalletTitle style={{ fontSize: 16, lineHeigh: 24, textAlign: 'left' }}>
@@ -50,8 +48,8 @@ export const TransactionHistoryPageScreen = () => {
 							height: 450,
 						}}>
 						<SvgIcon type='bar' />
-						<WalletText style={{ marginLeft: 7 }} color='dark'>
-							No transactoins history yet
+						<WalletText style={{ color: THEME.DISABLED_TEXT, marginLeft: 7 }}>
+							No transactions history yet
 						</WalletText>
 					</View>
 				) : (

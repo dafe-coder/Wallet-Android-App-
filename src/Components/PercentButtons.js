@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	itemPercent: {
-		borderColor: THEME.BROWN_TEXT,
+		borderColor: THEME.DARK_TEXT,
 		borderWidth: 1,
 		borderRadius: 25,
 		width: '23%',

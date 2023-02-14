@@ -5,6 +5,7 @@ import { SvgIcon } from './../svg/svg'
 
 export const WalletButton = ({
 	disabled = false,
+	arrow = true,
 	type = 'violet',
 	style,
 	children,
@@ -29,7 +30,12 @@ export const WalletButton = ({
 					style={{ ...style }}
 					activeOpacity={disabled ? 1 : 0.8}>
 					<View
-						style={[styles.btn, styles.violet, disabled && styles.disabled]}>
+						style={[
+							styles.btn,
+							styles.violet,
+							disabled && styles.disabled,
+							arrow ? {} : { paddingVertical: 20.5, justifyContent: 'center' },
+						]}>
 						<Text
 							style={[
 								styles.text,
@@ -38,17 +44,21 @@ export const WalletButton = ({
 							]}>
 							{children}
 						</Text>
-						<View
-							style={[
-								styles.circle,
-								!disabled ? styles.circleViolet : styles.circleGray,
-							]}>
-							<SvgIcon
-								type='arrow-right'
-								style={{ marginLeft: 3 }}
-								fill={disabled ? '#DACEF0' : false}
-							/>
-						</View>
+						{arrow ? (
+							<View
+								style={[
+									styles.circle,
+									!disabled ? styles.circleViolet : styles.circleGray,
+								]}>
+								<SvgIcon
+									type='arrow-right'
+									style={{ marginLeft: 3 }}
+									fill={disabled ? '#DACEF0' : false}
+								/>
+							</View>
+						) : (
+							<></>
+						)}
 					</View>
 				</TouchableOpacity>
 			)
@@ -59,7 +69,12 @@ export const WalletButton = ({
 					style={{ ...style }}
 					activeOpacity={disabled ? 1 : 0.8}>
 					<View
-						style={[styles.btn, styles.border, disabled && styles.disabled]}>
+						style={[
+							styles.btn,
+							styles.border,
+							disabled && styles.disabled,
+							arrow ? {} : { paddingVertical: 20.5, justifyContent: 'center' },
+						]}>
 						<Text
 							style={[
 								styles.text,
@@ -68,13 +83,17 @@ export const WalletButton = ({
 							]}>
 							{children}
 						</Text>
-						<View style={[styles.circle, styles.circleGray]}>
-							<SvgIcon
-								style={{ marginLeft: 3 }}
-								fill={THEME.VIOLET_LIGHT}
-								type='arrow-right'
-							/>
-						</View>
+						{arrow ? (
+							<View style={[styles.circle, styles.circleGray]}>
+								<SvgIcon
+									style={{ marginLeft: 3 }}
+									fill={THEME.VIOLET_LIGHT}
+									type='arrow-right'
+								/>
+							</View>
+						) : (
+							<></>
+						)}
 					</View>
 				</TouchableOpacity>
 			)

@@ -5,15 +5,16 @@ import { useSelector } from 'react-redux'
 
 export const SettingsListMenu = ({ onPress }) => {
 	const [phrase, setPhrase] = useState(false)
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { dataUser, currentAccount, currentNetwork } = useSelector(
+		(state) => state.storage
+	)
 	useEffect(() => {
-		console.log(dataUser)
 		setPhrase(dataUser.filter((d) => d.name == currentAccount)[0].phrase !== '')
 	}, [dataUser, currentAccount])
 	const menuData = [
 		{
 			title: 'Current  Network',
-			subTitle: 'Ethereum Mainnet',
+			subTitle: currentNetwork + ' Mainnet',
 			topLine: true,
 			onPress: onPress,
 		},
@@ -47,10 +48,11 @@ export const SettingsListMenu = ({ onPress }) => {
 			onPress: onPress,
 		},
 		{
-			title: 'Share Ananlytics',
-			subTitle: 'Share analytics with Web3 Wallet',
+			title: 'Share Analytics',
+			subTitle: 'Share analytics with Polygon',
 			switchButton: true,
 			topLine: true,
+			onPress: () => {},
 		},
 	]
 	return (

@@ -35,36 +35,36 @@ export const SwapDetails = ({
 					justifyContent: 'space-between',
 					paddingHorizontal: 20,
 				}}>
-				<WalletText color='dark'>Swap Details</WalletText>
-				<WalletText color='dark'>
+				<WalletText color='disabled'>Swap Details</WalletText>
+				<WalletText color='disabled'>
 					{chooseCoinSwapFirst.symbol.toUpperCase()}\
-					<Text style={{ color: THEME.WHITE }}>
+					<Text style={{ color: THEME.DARK }}>
 						{chooseCoinSwapSecond.symbol.toUpperCase()}
 					</Text>
 				</WalletText>
 			</View>
 			<View style={styles.wrap}>
 				<View style={styles.item}>
-					<WalletText color='dark'>Rate</WalletText>
-					<WalletText color='white'>
+					<WalletText color='disabled'>Rate</WalletText>
+					<WalletText color='dark'>
 						1 {chooseCoinSwapFirst.symbol.toUpperCase()} ~ {priceTokenEnd}{' '}
 						{chooseCoinSwapSecond.symbol.toUpperCase()}
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='dark'>Fee</WalletText>
-					<WalletText color='white'>
+					<WalletText color='disabled'>Fee</WalletText>
+					<WalletText color='dark'>
 						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
 						ETH
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='dark'>Price impact</WalletText>
-					<WalletText color='white'>{'<'}0.01%</WalletText>
+					<WalletText color='disabled'>Price impact</WalletText>
+					<WalletText color='dark'>{'<'}0.01%</WalletText>
 				</View>
 				<View style={[styles.item, { borderBottomWidth: 0 }]}>
-					<WalletText color='dark'>Minimum received</WalletText>
-					<WalletText color='white'>
+					<WalletText color='disabled'>Minimum received</WalletText>
+					<WalletText color='dark'>
 						{confirm
 							? swapAmountSecond +
 							  ' ' +
@@ -78,11 +78,11 @@ export const SwapDetails = ({
 							styles.item,
 							{ borderBottomWidth: 0, alignItems: 'flex-start' },
 						]}>
-						<WalletText size='m' color='white'>
+						<WalletText size='m' color='dark'>
 							Transaction cost
 						</WalletText>
 						<View>
-							<WalletText style={{ marginBottom: 5 }} size='m' color='white'>
+							<WalletText style={{ marginBottom: 5 }} size='m' color='dark'>
 								-21$ <Text style={{ color: THEME.VIOLET }}>0.0041</Text>
 							</WalletText>
 							<View
@@ -91,7 +91,7 @@ export const SwapDetails = ({
 									alignItems: 'center',
 									borderRadius: 50,
 									borderWidth: 1,
-									borderColor: THEME.VIOLET,
+									borderColor: '#DACEF0',
 									paddingVertical: 2,
 									paddingHorizontal: 5,
 									width: null,
@@ -113,13 +113,13 @@ export const SwapDetails = ({
 const styles = StyleSheet.create({
 	wrap: {
 		borderRadius: 10,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 	},
 	item: {
 		paddingHorizontal: 20,
 		paddingVertical: 10,
 		borderBottomWidth: 1,
-		borderBottomColor: THEME.BROWN,
+		borderBottomColor: THEME.GREY_LIGHT,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',

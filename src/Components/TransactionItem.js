@@ -13,7 +13,12 @@ export const TransactionItem = ({
 	itemData,
 	index,
 }) => {
-	let path = type == 'receive' ? 'receive' : type == 'send' ? 'send' : 'swap'
+	let path =
+		type == 'receive'
+			? 'receive-green'
+			: type == 'send'
+			? 'send-red'
+			: 'swap-violet'
 
 	Number.prototype.noExponents = function () {
 		var data = String(this).split(/[eE]/)
@@ -39,7 +44,7 @@ export const TransactionItem = ({
 			{prevDate[index - 1] !==
 			getDateTransaction(+itemData.mined_at).join('.') ? (
 				<WalletText
-					color='gold'
+					color='disabled'
 					style={{ paddingLeft: 20, marginBottom: 12, marginTop: 15 }}>
 					{getDateTransaction(+itemData.mined_at).map((item) =>
 						item.length == 2 ? item + '.' : item
@@ -62,10 +67,10 @@ export const TransactionItem = ({
 						<SvgIconNav type={path} />
 					</View>
 					<View>
-						<WalletText color='white'>
+						<WalletText color='dark'>
 							{type == 'receive' ? 'Receive' : type == 'send' ? 'Send' : 'Swap'}
 						</WalletText>
-						<WalletText color='dark'>
+						<WalletText color='disabled'>
 							{type == 'receive' ? 'From:' : type == 'send' ? 'To:' : ''}{' '}
 							{type == 'receive'
 								? itemData.address_from.length > 10
@@ -86,7 +91,7 @@ export const TransactionItem = ({
 					</View>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
-					<WalletText color='white'>
+					<WalletText color='dark'>
 						{itemData.changes[1]
 							? fixNum(
 									Number(
@@ -136,20 +141,20 @@ const styles = StyleSheet.create({
 		borderRadius: 50,
 	},
 	iconGreen: {
-		backgroundColor: '#334D3F',
+		backgroundColor: THEME.GREY_LIGHT,
 	},
 	iconRed: {
-		backgroundColor: '#45292F',
+		backgroundColor: THEME.GREY_LIGHT,
 	},
 	iconYellow: {
-		backgroundColor: '#F9B446',
+		backgroundColor: THEME.GREY_LIGHT,
 	},
 	item: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
-		borderRadius: 5,
+		borderRadius: 15,
 		paddingVertical: 10,
 		marginBottom: 8,
 	},

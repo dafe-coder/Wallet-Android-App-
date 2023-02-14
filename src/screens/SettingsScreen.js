@@ -41,7 +41,7 @@ export const SettingsScreen = ({ navigation }) => {
 				<ChangeCurrentNetwork onPress={onCloseNetwork} />
 			</WalletBottomSheet>
 
-			<WalletBottomSheet ref={connectedAppsRef} snapPoints={['55%']}>
+			<WalletBottomSheet ref={connectedAppsRef} snapPoints={['45%']}>
 				<ConnectsApp />
 			</WalletBottomSheet>
 		</ScrollView>

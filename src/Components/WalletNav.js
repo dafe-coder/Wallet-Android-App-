@@ -20,7 +20,7 @@ export const WalletNav = ({ navigation }) => {
 				<View style={styles.circle}>
 					<SvgIconNav type='send' />
 				</View>
-				<WalletText>Send</WalletText>
+				<WalletText color='dark'>Send</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.7}
@@ -38,7 +38,7 @@ export const WalletNav = ({ navigation }) => {
 				<View style={styles.circle}>
 					<SvgIconNav width={21} height={21} type='buy' />
 				</View>
-				<WalletText>Buy</WalletText>
+				<WalletText color='dark'>Buy</WalletText>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.7}
@@ -47,7 +47,7 @@ export const WalletNav = ({ navigation }) => {
 				<View style={styles.circle}>
 					<SvgIconNav type='receive' />
 				</View>
-				<WalletText>Receive</WalletText>
+				<WalletText color='dark'>Receive</WalletText>
 			</TouchableOpacity>
 		</View>
 	)

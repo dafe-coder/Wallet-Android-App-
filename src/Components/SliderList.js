@@ -13,7 +13,7 @@ export const Slider = ({ portfolioCoinsInit }) => {
 				flex: 1,
 				position: 'relative',
 				left: -15,
-				marginBottom: 20,
+				marginBottom: 10,
 			}}>
 			<Carousel
 				loop={false}

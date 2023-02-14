@@ -58,8 +58,8 @@ export const UnlockScreen = ({ navigation }) => {
 							width: 9,
 							height: 9,
 							borderWidth: 1,
-							borderColor: THEME.BROWN_TEXT,
-							backgroundColor: THEME.BROWN_TEXT,
+							borderColor: THEME.DISABLED_TEXT,
+							backgroundColor: THEME.DISABLED_TEXT,
 							borderRadius: 50,
 						}}
 						circleFilledStyle={{
@@ -87,7 +87,7 @@ export const UnlockScreen = ({ navigation }) => {
 				<WalletButton
 					type='border'
 					onPress={() => navigation.navigate('RiskAlert')}>
-					Recover Wallet
+					Reset Wallet
 				</WalletButton>
 			</View>
 		</View>

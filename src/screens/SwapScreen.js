@@ -53,8 +53,6 @@ export const SwapScreen = ({ navigation }) => {
 				paddingTop: 29,
 				paddingHorizontal: 16,
 				paddingBottom: 30,
-				borderTopColor: '#2f2d2b',
-				borderTopWidth: 0.6,
 			}}>
 			<WalletTitle style={{ marginBottom: 25 }}>Exchange</WalletTitle>
 			{chooseCoin != null && chooseCoinSwapSecond != null ? (
@@ -77,7 +75,7 @@ export const SwapScreen = ({ navigation }) => {
 				<></>
 			)}
 			<WalletButton
-				style={{ marginBottom: 80 }}
+				style={{ marginBottom: 160 }}
 				onPress={() => navigation.navigate('ConfirmSwap')}>
 				Swap
 			</WalletButton>

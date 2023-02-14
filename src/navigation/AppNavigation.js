@@ -266,14 +266,12 @@ export function MyStack() {
 				initialRouteName={
 					dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
 				}
-				options={{
-					headerShadowVisible: false,
-				}}
 				screenOptions={{
+					headerShadowVisible: false,
 					headerBackVisible: false,
 					contentStyle: {
 						borderTopColor: '#D1C9FA',
-						borderTopWidth: 0,
+						borderTopWidth: 0.6,
 					},
 					headerTitleAlign: 'center',
 					headerStyle: {

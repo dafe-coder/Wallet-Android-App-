@@ -28,8 +28,6 @@ export const TransactionHistoryScreen = () => {
 					marginHorizontal: 16,
 					paddingHorizontal: 16,
 					paddingBottom: 16,
-					borderBottomColor: THEME.BROWN_DARK,
-					borderBottomWidth: 1,
 				}}>
 				<WalletTitle style={{ fontSize: 16, lineHeigh: 24, textAlign: 'left' }}>
 					Transaction history
@@ -46,12 +44,12 @@ export const TransactionHistoryScreen = () => {
 							height: 450,
 						}}>
 						<SvgIcon type='bar' />
-						<WalletText style={{ marginLeft: 7 }} color='dark'>
-							No transactoins history yet
+						<WalletText style={{ color: THEME.DISABLED_TEXT, marginLeft: 7 }}>
+							No transactions history yet
 						</WalletText>
 					</View>
 				) : (
-					<TransactionsList data={transactions} />
+					<TransactionsList style={{ marginBottom: 0 }} data={transactions} />
 				)}
 			</View>
 		</ScrollView>

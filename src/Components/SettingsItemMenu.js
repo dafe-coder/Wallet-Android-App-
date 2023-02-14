@@ -17,7 +17,7 @@ export const SettingsItemMenu = ({
 			<View style={styles.item}>
 				<View style={styles.titles}>
 					<WalletText>{title}</WalletText>
-					<WalletText color='dark'>{subTitle}</WalletText>
+					<WalletText color='disabled'>{subTitle}</WalletText>
 				</View>
 				{switchButton ? (
 					<SwitchButton enabled={analytics} />
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 	item: {
 		borderRadius: 5,
 		paddingHorizontal: 20,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
