@@ -664,20 +664,23 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					viewBox='0 0 22 21'
 					fill='none'
 					xmlns='http://www.w3.org/2000/svg'
+					className='TopBars_assets/Icon_Excange'
 					{...props}>
 					<Path
-						d='M6.188 16.055V3.805m0 0L1.375 8.569m4.813-4.764L11 8.569'
-						stroke='#6A6351'
+						d='M6.1875 16.0547L6.1875 3.80469M6.1875 3.80469L1.375 8.56858M6.1875 3.80469L11 8.56858'
+						stroke='#9C94AC'
 						strokeWidth={2}
 						strokeLinecap='round'
 						strokeLinejoin='round'
+						className='Vector'
 					/>
 					<Path
-						d='M15.813 3.805v13.067m0 0l4.812-5.082m-4.813 5.082L11 11.79'
-						stroke='#F9B446'
+						d='M15.8125 3.80492L15.8125 16.8716M15.8125 16.8716L20.625 11.7901M15.8125 16.8716L11 11.7901'
+						stroke='#632DBC'
 						strokeWidth={2}
 						strokeLinecap='round'
 						strokeLinejoin='round'
+						className='Vector_2'
 					/>
 				</Svg>
 			)

@@ -46,14 +46,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	itemPercent: {
-		borderColor: THEME.DARK_TEXT,
+		borderColor: '#DACEF0',
 		borderWidth: 1,
 		borderRadius: 25,
 		width: '23%',
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingVertical: 6,
-		backgroundColor: THEME.BROWN_DARK,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 	},
 	percentText: {
 		color: THEME.VIOLET,

@@ -97,7 +97,13 @@ export const AppWrap = ({ children }) => {
 		) {
 			dispatch(setAllCoins(otherCoins))
 		}
-	}, [loadingBalanceCoins, loadingOtherCoins, portfolioBalance])
+	}, [
+		loadingBalanceCoins,
+		loadingOtherCoins,
+		portfolioBalance,
+		portfolioCoins,
+		otherCoins,
+	])
 
 	return (
 		<PersistGate loading={null} persistor={persistor}>

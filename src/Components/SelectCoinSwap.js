@@ -50,18 +50,23 @@ export const SelectCoinSwap = ({
 		<View style={[styles.wrap, style]}>
 			<View style={{ marginBottom: 10 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='dark'>Asset</WalletText>
-					<WalletText color='dark'>
+					<WalletText color='disabled'>Asset</WalletText>
+					<WalletText color='disabled'>
 						Balance: {fixNum(chooseCoinSwapFirst.market_data.balance)}
 					</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
-						<View>
+						<View
+							style={{
+								borderRightColor: '#DACEF0',
+								borderRightWidth: 1,
+								width: '50%',
+							}}>
 							<TextInput
 								value={firstAmount}
 								onChangeText={setFirstAmount}
-								placeholderTextColor={THEME.DARK_TEXT}
+								placeholderTextColor={THEME.DISABLED_TEXT}
 								style={styles.input}
 								placeholder='0.00'
 								keyboardType='numeric'
@@ -81,7 +86,7 @@ export const SelectCoinSwap = ({
 								/>
 								<WalletText
 									size='m'
-									color='white'
+									color='dark'
 									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapFirst.symbol.toUpperCase()}
 								</WalletText>
@@ -104,14 +109,20 @@ export const SelectCoinSwap = ({
 			</TouchableOpacity>
 			<View style={{ marginBottom: 10, marginTop: 12 }}>
 				<View style={[styles.header, { paddingHorizontal: 20 }]}>
-					<WalletText color='dark'>You Receive</WalletText>
+					<WalletText color='disabled'>You Receive</WalletText>
 				</View>
 				<View style={styles.item}>
 					<View style={styles.itemTop}>
-						<View pointerEvents='none'>
+						<View
+							pointerEvents='none'
+							style={{
+								borderRightColor: '#DACEF0',
+								borderRightWidth: 1,
+								width: '50%',
+							}}>
 							<TextInput
 								keyboardType='numeric'
-								placeholderTextColor={THEME.DARK_TEXT}
+								placeholderTextColor={THEME.DISABLED_TEXT}
 								style={styles.input}
 								value={secondAmount}
 								placeholder='0.00'
@@ -131,7 +142,7 @@ export const SelectCoinSwap = ({
 								/>
 								<WalletText
 									size='m'
-									color='white'
+									color='dark'
 									style={{ marginHorizontal: 7 }}>
 									{chooseCoinSwapSecond.symbol.toUpperCase()}
 								</WalletText>
@@ -155,14 +166,12 @@ const styles = StyleSheet.create({
 		height: 25,
 	},
 	btn: {
-		backgroundColor: '#51515130',
+		backgroundColor: THEME.GREY_LIGHT,
 		borderRadius: 50,
 		width: 40,
 		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderWidth: 1,
-		borderColor: '#44444480',
 	},
 	chooseCoin: {
 		flexDirection: 'row',
@@ -174,10 +183,10 @@ const styles = StyleSheet.create({
 		marginBottom: 7,
 	},
 	item: {
-		backgroundColor: THEME.BROWN,
+		backgroundColor: THEME.GREY_LIGHT_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 10,
-		borderRadius: 5,
+		borderRadius: 15,
 	},
 	itemTop: {
 		flexDirection: 'row',
@@ -189,7 +198,7 @@ const styles = StyleSheet.create({
 		color: THEME.SUCCESS,
 	},
 	input: {
-		color: THEME.DARK_TEXT,
+		color: THEME.DISABLED_TEXT,
 		fontSize: 16,
 		fontFamily: 'ub-regular',
 	},

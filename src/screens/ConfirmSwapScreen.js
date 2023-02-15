@@ -38,16 +38,15 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		dispatch(setSwapAmountSecond(frstAmount))
 	}
 	return (
-		<ScrollView style={{ backgroundColor: 'yellow', flex: 1 }}>
+		<ScrollView style={{ flex: 1 }}>
 			<View
 				style={{
-					backgroundColor: 'red',
 					flex: 1,
 					paddingTop: 62,
 					paddingHorizontal: 16,
 					justifyContent: 'space-between',
 				}}>
-				<View style={{ backgroundColor: 'blue' }}>
+				<View>
 					<View style={[styles.itemSwap, { alignItems: 'center' }]}>
 						<View style={{ alignItems: 'center', flexBasis: '45%' }}>
 							<Image
