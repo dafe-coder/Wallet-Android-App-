@@ -18,7 +18,6 @@ export const ExportPrivateKeyCopyScreen = ({ navigation }) => {
 			</View>
 			{dataUser.map((d) => {
 				if (d.name === currentAccount) {
-					console.log(atob(d.phrase))
 					return (
 						<PhraseBox
 							key={Math.random().toString()}

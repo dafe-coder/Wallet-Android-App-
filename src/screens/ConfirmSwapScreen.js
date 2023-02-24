@@ -17,6 +17,8 @@ import {
 	setSwapAmountFirst,
 	setSwapAmountSecond,
 } from './../store/actions/walletActions'
+import { swapCoins } from '../../services/funcWallet/swap'
+
 export const ConfirmSwapScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const {
@@ -25,6 +27,16 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		swapAmountFirst,
 		swapAmountSecond,
 	} = useSelector((state) => state.wallet)
+	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const [privateKey, setPrivateKey] = useState('')
+
+	useEffect(() => {
+		if (dataUser.length >= 1) {
+			setPrivateKey(
+				atob(dataUser.filter((d) => d.name == currentAccount)[0].privateKey)
+			)
+		}
+	}, [dataUser])
 
 	const onSwapCoins = () => {
 		const frst = chooseCoin
@@ -37,6 +49,19 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		dispatch(setSwapAmountFirst(scndAmount))
 		dispatch(setSwapAmountSecond(frstAmount))
 	}
+
+	const sendCoinsToSwap = () => {
+		swapCoins(
+			privateKey,
+			chooseCoin.contract_address != 'eth'
+				? chooseCoin.contract_address
+				: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+			chooseCoinSwapSecond.contract_address != 'eth'
+				? chooseCoinSwapSecond.contract_address
+				: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+		)
+	}
+
 	return (
 		<ScrollView style={{ flex: 1 }}>
 			<View
@@ -96,7 +121,7 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 						<></>
 					)}
 				</View>
-				<WalletButton onPress={() => {}} style={{ marginBottom: 60 }}>
+				<WalletButton onPress={sendCoinsToSwap} style={{ marginBottom: 60 }}>
 					Swap
 				</WalletButton>
 			</View>

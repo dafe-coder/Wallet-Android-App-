@@ -28,7 +28,7 @@ export default function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			setHidePreloader(false)
-		}, 5000)
+		}, 5500)
 	}, [])
 	if (!fontsLoaded) {
 		return undefined

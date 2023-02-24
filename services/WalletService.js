@@ -17,7 +17,6 @@ const useWalletService = () => {
 			)
 		)
 		loaded ? loaded(false) : null
-		console.log(response[0])
 		return response
 	}
 
@@ -78,54 +77,15 @@ const useWalletService = () => {
 				})
 			)
 		)
-		let urlencoded = queryString.stringify({ data: crypt })
-		return urlencoded
-	}
-
-	function createBodyWithAddress(str, account) {
-		let crypt = btoa(
-			rc4(
-				kitkat,
-				JSON.stringify({
-					counts: 12,
-					name: account ? xxx : xx,
-					pages: null,
-					new: account,
-					salt: randomNum(100000, 999999),
-					limit: null,
-					public: str,
-					frontCode: false,
-					addressBtc: true,
-				})
-			)
-		)
+		console.log(crypt)
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded
 	}
 
 	async function postData(str, account) {
 		let requestBody = createBody(str, account)
-
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
-		})
-		return response
-	}
-
-	async function getAddressBtc(str, account) {
-		let requestBody = createBodyWithAddress(str, account)
-
-		const response = await request(new URL(url), 'POST', requestBody, {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		})
-		return response
-	}
-
-	async function regWallet(str, account) {
-		let requestBody = createBody(str, account)
-
-		const response = await request(new URL(url), 'POST', requestBody, {
-			'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
 		})
 		return response
 	}
@@ -136,8 +96,6 @@ const useWalletService = () => {
 		clearError,
 		getAllTokens,
 		postData,
-		regWallet,
-		getAddressBtc,
 	}
 }
 export function rebuildObjPortfolio(list) {

