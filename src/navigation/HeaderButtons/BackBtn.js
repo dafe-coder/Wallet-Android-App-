@@ -5,11 +5,10 @@ import { THEME } from '../../Theme'
 
 export const BackBtn = ({ navigation }) => {
 	const onPressButton = () => {
-		console.log(1)
 		navigation.goBack()
 	}
 	return (
-		<TouchableOpacity activeOpacity={0.7} onPress={onPressButton}>
+		<TouchableOpacity activeOpacity={1} onPress={onPressButton}>
 			<View style={styles.btn}>
 				<SvgIcon
 					type='check-left'

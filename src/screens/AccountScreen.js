@@ -54,6 +54,8 @@ export const AccountScreen = ({ navigation }) => {
 				routes: [{ name: 'Unlock' }],
 			})
 			dispatch(setLockWallet(true))
+		} else {
+			console.log('coming soon!')
 		}
 	}
 

@@ -9,19 +9,17 @@ export const HeaderTitle = ({ openModalSelectAccount }) => {
 	const { currentNetwork } = useSelector((state) => state.storage)
 
 	return (
-		<>
-			<TouchableOpacity
-				activeOpacity={0.7}
-				onPress={() => openModalSelectAccount()}>
-				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-					<WalletText
-						color='gold'
-						style={{ fontSize: 18, marginRight: 5, fontFamily: 'ub-regular' }}>
-						{currentNetwork}
-					</WalletText>
-					<SvgIcon type='check' fill={THEME.VIOLET} />
-				</View>
-			</TouchableOpacity>
-		</>
+		<TouchableOpacity
+			activeOpacity={0.7}
+			onPress={() => openModalSelectAccount()}>
+			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+				<WalletText
+					color='gold'
+					style={{ fontSize: 18, marginRight: 5, fontFamily: 'ub-regular' }}>
+					{currentNetwork + ''}
+				</WalletText>
+				<SvgIcon type='check' fill={THEME.VIOLET} />
+			</View>
+		</TouchableOpacity>
 	)
 }

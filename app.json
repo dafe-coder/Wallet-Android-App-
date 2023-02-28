@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#0C0B07"
       },
-      "package": "com.webbit.wallet"
+      "package": "com.poly.webid"
     },
     "web": {
       "favicon": "./assets/favicon.png"

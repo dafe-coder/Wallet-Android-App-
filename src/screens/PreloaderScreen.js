@@ -241,7 +241,7 @@ export const PreloaderScreen = ({ load }) => {
 					top: 0,
 					right: 0,
 					bottom: 0,
-					zIndex: 100,
+					zIndex: load ? 100 : -100,
 					flex: 1,
 				},
 			]}>

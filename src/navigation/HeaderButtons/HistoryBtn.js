@@ -4,7 +4,6 @@ import { SvgIcon } from '../../Components/svg/svg'
 
 export const HistoryBtn = ({ navigation }) => {
 	const onPressButton = () => {
-		console.log(1)
 		navigation.navigate('TransactionHistory')
 	}
 	return (
