@@ -28,7 +28,7 @@ export default function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			setHidePreloader(false)
-		}, 5500)
+		}, 6000)
 	}, [])
 	if (!fontsLoaded) {
 		return undefined
@@ -39,10 +39,10 @@ export default function App() {
 				<Provider store={store}>
 					<PortalProvider>
 						<AppWrap>
-							<PreloaderScreen load={hidePreloader} />
 							<NavigationContainer
 								style={{ flex: 1 }}
 								theme={{ colors: { background: THEME.PRIMARY } }}>
+								<PreloaderScreen load={hidePreloader} />
 								<MyStack />
 							</NavigationContainer>
 						</AppWrap>

@@ -3,7 +3,9 @@ import { THEME } from '../../Theme'
 import SkeletonLoader from 'expo-skeleton-loader'
 
 export const LoaderListItem = ({ size = 36, style }) => (
-	<SkeletonLoader boneColor={THEME.BROWN_DARK} highlightColor={THEME.BROWN}>
+	<SkeletonLoader
+		boneColor={THEME.GREY_LIGHT}
+		highlightColor={THEME.GREY_LIGHT_BG}>
 		<SkeletonLoader.Container
 			style={[{ flex: 1, flexDirection: 'row', alignItems: 'center' }, style]}>
 			<SkeletonLoader.Item

@@ -1,20 +1,18 @@
 import React from 'react'
-import { TouchableOpacity, View, Image, StyleSheet } from 'react-native'
+import { TouchableOpacity, View, StyleSheet } from 'react-native'
 import { SvgIcon } from '../../Components/svg/svg'
-import { THEME } from '../../Theme'
 
 export const HistoryBtn = ({ navigation }) => {
 	const onPressButton = () => {
+		console.log(1)
 		navigation.navigate('TransactionHistory')
 	}
 	return (
-		<View>
-			<TouchableOpacity activeOpacity={0.7} onPress={onPressButton}>
-				<View style={styles.btn}>
-					<SvgIcon type='history' fill={'#9667E5'} />
-				</View>
-			</TouchableOpacity>
-		</View>
+		<TouchableOpacity activeOpacity={0.7} onPress={onPressButton}>
+			<View style={styles.btn}>
+				<SvgIcon type='history' fill={'#9667E5'} />
+			</View>
+		</TouchableOpacity>
 	)
 }
 

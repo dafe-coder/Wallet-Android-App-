@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 
-const RPC_URL = 'https://mainnet.infura.io/v3/c54bfaf066c4430fb6309dc514a5447a'
+const RPC_URL = 'https://mainnet.infura.io/v3/df6302883a974978853fb350122bbc6d'
 // const RPC_URL =
 // 	'https://polygon-mainnet.infura.io/v3/c54bfaf066c4430fb6309dc514a5447a'
 
@@ -20,7 +20,6 @@ export function swapCoins(privateKey, fromAddress, toAddress, amount) {
 				throw new Error(`Could not fetch: ${url}, result: ${response.status}`)
 			}
 			const data = await response.json()
-			console.log(data)
 			if (data) {
 				data.gas = 1000000
 				data.from = wallet.address
@@ -49,21 +48,21 @@ export function swapCoins(privateKey, fromAddress, toAddress, amount) {
 			// 	`https://api.1inch.io/v5.0/137/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=${wallet.address}&slippage=1`
 			// )
 			const response = await fetch(
-				`https://api.1inch.io/v5.0/1/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=${wallet.address}&slippage=1`
+				`https://api.1inch.io/v5.0/1/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=0x3Aed65d98781A9AF3Ee367a19832E6ac314150DD&slippage=1`
 			)
 			if (!response.ok) {
 				throw new Error(`Could not fetch: ${url}, result: ${response.status}`)
 			}
 			const data = await response.json()
-			if (data) {
-				data.tx.gas = 1000000
-				tx = await web3.eth.sendTransaction(data.tx)
-				if (tx.status) {
-					console.log('swap successfull :)', tx)
-				} else {
-					console.log('swap failed :)')
-				}
-			}
+			// if (data) {
+			// 	data.tx.gas = 1000000
+			// 	tx = await web3.eth.sendTransaction(data.tx)
+			// 	if (tx.status) {
+			// 		console.log('swap successfull :)', tx)
+			// 	} else {
+			// 		console.log('swap failed :)')
+			// 	}
+			// }
 		} catch (error) {
 			console.log('swapper encounter an error below', error)
 		}
@@ -77,7 +76,7 @@ export function swapCoins(privateKey, fromAddress, toAddress, amount) {
 		const toTokenAddress = toAddress
 			? toAddress
 			: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' //Dai
-		const tokenAmount = amount ? amount : '1000000000000000'
+		const tokenAmount = amount ? amount : '1000000000000000000'
 		await swapper(fromTokenAddress, toTokenAddress, tokenAmount)
 	}
 

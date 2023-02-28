@@ -7,8 +7,8 @@ const width = Dimensions.get('window').width
 export const LoaderSlider = ({ style }) => (
 	<SkeletonLoader
 		style={{ flex: 1 }}
-		boneColor={THEME.BROWN_DARK}
-		highlightColor={THEME.BROWN}>
+		boneColor={THEME.GREY_LIGHT}
+		highlightColor={THEME.GREY_LIGHT_BG}>
 		<SkeletonLoader.Container
 			style={[{ flex: 1, flexDirection: 'row', alignItems: 'center' }, style]}>
 			<SkeletonLoader.Item

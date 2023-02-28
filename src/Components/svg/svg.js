@@ -147,6 +147,7 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 		case 'polygon-nav':
 			return (
 				<Svg
+					preserveAspectRatio='none'
 					width={375}
 					height={79}
 					viewBox='0 0 375 79'

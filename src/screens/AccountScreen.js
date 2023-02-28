@@ -11,7 +11,7 @@ import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
 import { ImportAccount } from '../Components/modal'
 import { useDispatch } from 'react-redux'
-import { setLockWallet } from '../store/actions/storageAction'
+import { setLockWallet } from '../store/actions/walletActions'
 
 export const AccountScreen = ({ navigation }) => {
 	const dispatch = useDispatch()

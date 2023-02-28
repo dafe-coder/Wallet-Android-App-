@@ -6,7 +6,6 @@ import {
 	SET_CURRENT_ACCOUNT,
 	SET_DELETE_ACCOUNT,
 	SET_CLEAR_DATAUSER,
-	SET_LOCK_WALLET,
 	SET_SHARE_ANALYTICS,
 } from '../type'
 const initialState = {
@@ -14,7 +13,6 @@ const initialState = {
 	currentNetwork: 'Polygon',
 	dataUser: [],
 	currentAccount: '',
-	lockWallet: false,
 	analytics: true,
 }
 
@@ -45,11 +43,7 @@ export const storageReducer = (state = initialState, action) => {
 				...state,
 				analytics: action.payload,
 			}
-		case SET_LOCK_WALLET:
-			return {
-				...state,
-				lockWallet: action.payload,
-			}
+
 		case SET_CLEAR_DATAUSER:
 			return {
 				...state,

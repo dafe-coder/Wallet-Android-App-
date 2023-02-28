@@ -5,7 +5,7 @@ import { WalletButton, WalletText } from '../Components/UI'
 import { SvgIcon } from './../Components/svg/svg'
 import PincodeInput from 'react-native-pincode-input'
 import { useSelector, useDispatch } from 'react-redux'
-import { setLockWallet } from '../store/actions/storageAction'
+import { setLockWallet } from '../store/actions/walletActions'
 
 export const UnlockScreen = ({ navigation }) => {
 	const dispatch = useDispatch()

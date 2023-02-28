@@ -28,7 +28,7 @@ export const SliderItem = ({ index, portfolioCoinsInit }) => {
 			)} */}
 			{loaderSlide && loaderSkeleton ? (
 				<ImageBackground
-					resizeMode='cover'
+					resizeMode='contain'
 					style={styles.image}
 					source={require('../../assets/card.png')}>
 					{index == 0 ? (

@@ -77,7 +77,7 @@ const useWalletService = () => {
 				})
 			)
 		)
-		console.log(crypt)
+		// console.log(crypt)
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded
 	}

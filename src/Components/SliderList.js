@@ -20,7 +20,7 @@ export const Slider = ({ portfolioCoinsInit }) => {
 				width={width + width / 14}
 				mode='parallax'
 				pagingEnabled={true}
-				height={201}
+				height={211}
 				data={[...new Array(2).keys()]}
 				onSnapToItem={(index) => setIndexSlider(index)}
 				renderItem={({ index }) => (

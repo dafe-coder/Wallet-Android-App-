@@ -258,7 +258,8 @@ export function MyStack() {
 	const closeModalSelectAccount = () => {
 		chooseNetwork.current?.close()
 	}
-	const { lockWallet, dataUser } = useSelector((state) => state.storage)
+	const { lockWallet } = useSelector((state) => state.wallet)
+	const { dataUser } = useSelector((state) => state.storage)
 	return (
 		<>
 			<Stack.Navigator

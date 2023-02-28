@@ -10,7 +10,9 @@ export const HeaderTitle = ({ openModalSelectAccount }) => {
 
 	return (
 		<>
-			<TouchableOpacity activeOpacity={0.7} onPress={openModalSelectAccount}>
+			<TouchableOpacity
+				activeOpacity={0.7}
+				onPress={() => openModalSelectAccount()}>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<WalletText
 						color='gold'

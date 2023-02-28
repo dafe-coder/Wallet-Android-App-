@@ -9,15 +9,10 @@ import Animated, {
 	withDelay,
 	Easing,
 } from 'react-native-reanimated'
-import { Dimensions } from 'react-native'
-
-const height = Dimensions.get('window').height
 
 export const PreloaderScreen = ({ load }) => {
-	const offset = useSharedValue(0)
 	const offsetWhiteBlock = useSharedValue('-140%')
 	const offsetLogoAnim = useSharedValue(0)
-	const offsetLogoAnimofвdввы = useSharedValue(0)
 	const offsetLogoAnimText = useSharedValue(0)
 	const offsetLogoDash = useSharedValue(656)
 	const offsetLogoEos = useSharedValue(630)
@@ -32,16 +27,6 @@ export const PreloaderScreen = ({ load }) => {
 	const offsetLogoRipple = useSharedValue(450)
 	const offsetLogoQtum = useSharedValue(453)
 	const offsetLogoCardano = useSharedValue(474)
-
-	const transformTitle = useAnimatedStyle(() => {
-		return {
-			transform: [
-				{
-					translateY: withSpring(offset.value),
-				},
-			],
-		}
-	})
 
 	const transformLogoDash = useAnimatedStyle(() => {
 		return {
@@ -125,10 +110,6 @@ export const PreloaderScreen = ({ load }) => {
 	})
 
 	const onInitAnim = () => {
-		offset.value = withTiming(-90, {
-			duration: 3000,
-			easing: Easing.inOut(Easing.cubic),
-		})
 		offsetWhiteBlock.value = withDelay(
 			2300,
 			withTiming(0, {
@@ -281,7 +262,6 @@ export const PreloaderScreen = ({ load }) => {
 					qtum: transformLogoQtum,
 					cardano: transformLogoCardano,
 				}}
-				transformTitle={transformTitle}
 				logoAnim={transformLogoAnim}
 				logoAnimText={transformLogoAnimText}
 			/>

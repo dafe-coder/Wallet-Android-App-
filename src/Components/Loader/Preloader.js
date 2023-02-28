@@ -8,7 +8,6 @@ const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
 export const Preloader = ({
-	transformTitle,
 	transformLogo,
 	transformWhiteBlock,
 	logoAnim,
@@ -207,11 +206,6 @@ export const Preloader = ({
 					/>
 				</Animated.View>
 			</View>
-
-			{/* <Animated.Text style={[styles.title, animatedStylesColor]}>
-				Web<Text style={styles.whiteTitle}>3</Text>
-				{'\n'}Wallet
-			</Animated.Text> */}
 		</View>
 	)
 }

@@ -11,9 +11,7 @@ export function MyTabBar({ state, descriptors, navigation }) {
 	return (
 		<View style={styles.wrap}>
 			<View style={styles.polygon}>
-				<View style={styles.leftWhiteBlock} />
-				<SvgIcon width={width} type='polygon-nav' />
-				<View style={styles.rightWhiteBlock} />
+				<SvgIcon width={width + 2} type='polygon-nav' />
 			</View>
 			{state.routes.map((route, index) => {
 				const { options } = descriptors[route.key]
@@ -151,23 +149,5 @@ const styles = StyleSheet.create({
 		// elevation: 24,
 		// shadowColor: THEME.VIOLET,
 		// overflow: 'hidden',
-	},
-	leftWhiteBlock: {
-		width: '10%',
-		height: '100%',
-		backgroundColor: THEME.WHITE,
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		top: 0,
-	},
-	rightWhiteBlock: {
-		width: '10%',
-		height: '100%',
-		backgroundColor: THEME.WHITE,
-		position: 'absolute',
-		bottom: 0,
-		right: 0,
-		top: 0,
 	},
 })

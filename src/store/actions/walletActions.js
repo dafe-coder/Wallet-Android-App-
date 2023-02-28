@@ -17,8 +17,15 @@ import {
 	SET_LOADER_SKELETON,
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
+	SET_LOCK_WALLET,
 } from '../type'
 
+export const setLockWallet = (lock) => {
+	return {
+		type: SET_LOCK_WALLET,
+		payload: lock,
+	}
+}
 export const setAllCoins = (coins) => {
 	return {
 		type: SET_ALL_COINS,

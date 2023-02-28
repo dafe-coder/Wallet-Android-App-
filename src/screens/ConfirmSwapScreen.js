@@ -50,15 +50,17 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		dispatch(setSwapAmountSecond(frstAmount))
 	}
 
+	useEffect(() => {
+		console.log(chooseCoin)
+	}, [chooseCoinSwapSecond])
+
 	const sendCoinsToSwap = () => {
 		swapCoins(
 			privateKey,
 			chooseCoin.contract_address != 'eth'
 				? chooseCoin.contract_address
 				: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-			chooseCoinSwapSecond.contract_address != 'eth'
-				? chooseCoinSwapSecond.contract_address
-				: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+			'0xdac17f958d2ee523a2206206994597c13d831ec7'
 		)
 	}
 

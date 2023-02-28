@@ -32,14 +32,14 @@ export const SubscribeScreen = ({ navigation }) => {
 				</WalletText>
 				<SubscribeBlock check={chk1} setCheck={setChk1}>
 					I understand this is a self-custody wallet and I am responsible for my
-					funds and assets. Web3 Wallet can NOT access my wallet or reverse
+					funds and assets. Polygon Wallet can NOT access my wallet or reverse
 					transactions on my behalf.
 				</SubscribeBlock>
 				<SubscribeBlock check={chk2} setCheck={setChk2}>
 					I have read and agree to the Terms & Conditions specified here.
 				</SubscribeBlock>
 				<SubscribeBlock check={chk3} setCheck={setChk3}>
-					I want to help Web3 Wallet by choosing to share my analytics.
+					I want to help Polygon Wallet by choosing to share my analytics.
 				</SubscribeBlock>
 			</View>
 			<View
