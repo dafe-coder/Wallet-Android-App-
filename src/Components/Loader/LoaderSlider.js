@@ -13,6 +13,7 @@ export const LoaderSlider = ({ style }) => (
 			style={[{ flex: 1, flexDirection: 'row', alignItems: 'center' }, style]}>
 			<SkeletonLoader.Item
 				style={{
+					borderRadius: 15,
 					width: width + 30,
 					height: 205,
 				}}

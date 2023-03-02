@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Wallet",
-    "slug": "WalletApk",
+    "slug": "walletpolygon",
     "version": "2.01.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#F5F5F8"
+      "backgroundColor": "#ECE9F2"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -32,8 +32,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "e46236a0-9104-4a89-b556-aff6c60a003c"
+        "projectId": "4df4f0d4-75cf-4bf5-b0ca-d6c8eeacc69b"
       }
-    }
+    },
+    "owner": "daffek"
   }
 }

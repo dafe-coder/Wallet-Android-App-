@@ -31,7 +31,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		infoRef.current?.close()
 	}
 	const onOpenSuccess = () => {
-		infoRef.current?.expand()
+		infoSuccess.current?.expand()
 	}
 	const onCloseSuccess = () => {
 		infoSuccess.current?.close()

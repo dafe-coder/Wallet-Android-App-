@@ -24,11 +24,13 @@ export const AppWrap = ({ children }) => {
 	const [loadingOtherCoins, setLoadingOtherCoins] = useState(true)
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
-	const { getAllTokens, postData } = useWalletService()
+	const { getAllTokens, postData, getToken } = useWalletService()
 	const { loader, portfolioCoins, portfolioBalance, allCoins } = useSelector(
 		(state) => state.wallet
 	)
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { dataUser, currentAccount, currentNetwork } = useSelector(
+		(state) => state.storage
+	)
 
 	useEffect(() => {
 		if (allCoins.length) {
@@ -37,7 +39,23 @@ export const AppWrap = ({ children }) => {
 					dispatch(setChooseCoin(c))
 				}
 				if (c.symbol.toLowerCase() == 'usdt') {
-					dispatch(setChooseCoinSwapSecond(c))
+					getToken(false, c.id).then((data) => {
+						const coinInfo = {
+							...c,
+							contract_address: data.platforms[
+								currentNetwork.toLowerCase() == 'polygon'
+									? 'polygon-pos'
+									: 'ethereum'
+							]
+								? data.platforms[
+										currentNetwork.toLowerCase() == 'polygon'
+											? 'polygon-pos'
+											: 'ethereum'
+								  ]
+								: '',
+						}
+						dispatch(setChooseCoinSwapSecond(coinInfo))
+					})
 				}
 			})
 		}
@@ -58,10 +76,16 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
+							// console.log(JSON.stringify(response.transactions, null, 4))
+
 							setLoadingBalanceCoins(false)
 							dispatch(
 								setPortfolioCoins(
-									rebuildObjPortfolio(response.positions.positions)
+									rebuildObjPortfolio(
+										response.positions.positions.filter(
+											(item) => item.chain == currentNetwork.toLowerCase()
+										)
+									)
 								)
 							)
 							dispatch(setPortfolioTransactions(response.transactions))
@@ -72,7 +96,7 @@ export const AppWrap = ({ children }) => {
 				}
 			})
 		}
-	}, [dataUser, currentAccount])
+	}, [dataUser, currentAccount, currentNetwork])
 
 	useEffect(() => {
 		if (

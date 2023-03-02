@@ -10,11 +10,16 @@ export const SwapDetails = ({
 	confirm,
 }) => {
 	const [priceTokenEnd, setPriceTokenEnd] = useState('')
-	const { allCoins, swapAmountSecond } = useSelector((state) => state.wallet)
+	const { allCoins, swapAmountSecond, swapAmountFirst } = useSelector(
+		(state) => state.wallet
+	)
+	const { currentNetwork } = useSelector((state) => state.storage)
 	const [eth, setEth] = useState(null)
+	const [matic, setMatic] = useState(null)
 
 	useEffect(() => {
 		setEth(allCoins.filter((c) => c.symbol.toUpperCase() == 'ETH')[0])
+		setMatic(allCoins.filter((c) => c.symbol.toUpperCase() == 'MATIC')[0])
 	}, [allCoins])
 	useEffect(() => {
 		if (chooseCoinSwapFirst != null)
@@ -54,8 +59,14 @@ export const SwapDetails = ({
 				<View style={styles.item}>
 					<WalletText color='disabled'>Fee</WalletText>
 					<WalletText color='dark'>
-						≈ {eth != null ? fixNum(1 / eth.market_data.current_price.usd) : ''}{' '}
-						ETH
+						≈{' '}
+						{currentNetwork.toLowerCase() !== 'polygon'
+							? eth != null
+								? fixNum(1 / eth.market_data.current_price.usd)
+								: +' ETH'
+							: matic != null
+							? fixNum(0.01 / matic.market_data.current_price.usd) + ' MATIC'
+							: ''}
 					</WalletText>
 				</View>
 				<View style={styles.item}>
@@ -83,7 +94,38 @@ export const SwapDetails = ({
 						</WalletText>
 						<View>
 							<WalletText style={{ marginBottom: 5 }} size='m' color='dark'>
-								-21$ <Text style={{ color: THEME.VIOLET }}>0.0041</Text>
+								-
+								{currentNetwork.toLowerCase() !== 'polygon'
+									? eth != null && swapAmountFirst != ''
+										? fixNum(
+												(1 / eth.market_data.current_price.usd +
+													Number(swapAmountFirst)) *
+													eth.market_data.current_price.usd
+										  )
+										: ''
+									: matic != null && swapAmountFirst != ''
+									? fixNum(
+											(0.01 / matic.market_data.current_price.usd +
+												Number(swapAmountFirst)) *
+												matic.market_data.current_price.usd
+									  )
+									: ''}
+								${' '}
+								<Text style={{ color: THEME.VIOLET }}>
+									{currentNetwork.toLowerCase() !== 'polygon'
+										? eth != null && swapAmountFirst != ''
+											? fixNum(
+													1 / eth.market_data.current_price.usd +
+														Number(swapAmountFirst)
+											  )
+											: ''
+										: matic != null && swapAmountFirst != ''
+										? fixNum(
+												0.01 / matic.market_data.current_price.usd +
+													Number(swapAmountFirst)
+										  )
+										: ''}
+								</Text>
 							</WalletText>
 							<View
 								style={{

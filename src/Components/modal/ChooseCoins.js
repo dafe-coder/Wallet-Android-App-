@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { WalletTitle, WalletInput } from './../UI/'
 import { SvgIcon } from '../svg/svg'
-import { THEME } from './../../Theme'
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import { AllCoinsItem } from '../'
 
@@ -50,14 +49,14 @@ export const ChooseCoins = ({ onCoinPress, allCoins, chooseCoin }) => {
 				<BottomSheetFlatList
 					contentContainerStyle={{ marginTop: 20, paddingBottom: 20 }}
 					data={filteredCoins}
-					renderItem={(item) => (
+					renderItem={(item, i) => (
 						<AllCoinsItem
 							chooseCoin={chooseCoin}
 							onPress={onCoinPress}
 							coin={item.item}
 						/>
 					)}
-					keyExtractor={(item) => item.id}
+					keyExtractor={(item) => item.id + Math.random()}
 				/>
 			) : (
 				<></>

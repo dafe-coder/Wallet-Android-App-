@@ -15,6 +15,7 @@ export const Success = ({ onPress }) => {
 			<View
 				style={{
 					alignItems: 'center',
+					height: 100,
 				}}>
 				<SvgIcon type='check-with-box' />
 				<WalletText size='m' style={{ marginTop: 32 }}>

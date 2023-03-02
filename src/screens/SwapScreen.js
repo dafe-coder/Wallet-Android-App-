@@ -10,15 +10,18 @@ import {
 } from './../store/actions/walletActions'
 import useIsReady from '../../hooks/useIsReady'
 import { BusyIndicator } from '../Components/Loader'
+import useWalletService from '../../services/WalletService'
 
 export const SwapScreen = ({ navigation }) => {
+	const [tokenIsLoading, setTokenIsLoading] = React.useState(true)
+	const { getToken } = useWalletService()
 	const isReady = useIsReady()
 
 	const dispatch = useDispatch()
-	const { allCoins } = useSelector((state) => state.wallet)
+	const { currentNetwork } = useSelector((state) => state.storage)
 	const firstSwapRef = useRef(null)
 	const secondSwapRef = useRef(null)
-	const { chooseCoin, chooseCoinSwapSecond } = useSelector(
+	const { chooseCoin, chooseCoinSwapSecond, allCoins } = useSelector(
 		(state) => state.wallet
 	)
 
@@ -28,16 +31,64 @@ export const SwapScreen = ({ navigation }) => {
 	const onOpenFirstSwap = () => {
 		firstSwapRef.current?.expand()
 	}
-	const onCloseFirstSwap = (coin) => {
-		dispatch(setChooseCoin(coin))
+	const onCloseFirstSwap = async (coin) => {
 		firstSwapRef.current?.close()
+		if (
+			coin.id.toLowerCase() !== 'ethereum' &&
+			coin.id.toLowerCase() !== 'eth' &&
+			coin.id.length < 15
+		) {
+			await getToken(setTokenIsLoading, coin.id).then((data) => {
+				const coinInfo = {
+					...coin,
+					contract_address: data.platforms[
+						currentNetwork.toLowerCase() == 'polygon'
+							? 'polygon-pos'
+							: 'ethereum'
+					]
+						? data.platforms[
+								currentNetwork.toLowerCase() == 'polygon'
+									? 'polygon-pos'
+									: 'ethereum'
+						  ]
+						: '',
+				}
+				dispatch(setChooseCoin(coinInfo))
+			})
+		} else {
+			dispatch(setChooseCoin(coin))
+		}
 	}
 	const onOpenSecondSwap = () => {
 		secondSwapRef.current?.expand()
 	}
-	const onCloseSecondSwap = (coin) => {
-		dispatch(setChooseCoinSwapSecond(coin))
+	const onCloseSecondSwap = async (coin) => {
 		secondSwapRef.current?.close()
+		if (
+			coin.id.toLowerCase() !== 'ethereum' &&
+			coin.id.toLowerCase() !== 'eth' &&
+			coin.id.length < 15
+		) {
+			await getToken(setTokenIsLoading, coin.id).then((data) => {
+				const coinInfo = {
+					...coin,
+					contract_address: data.platforms[
+						currentNetwork.toLowerCase() == 'polygon'
+							? 'polygon-pos'
+							: 'ethereum'
+					]
+						? data.platforms[
+								currentNetwork.toLowerCase() == 'polygon'
+									? 'polygon-pos'
+									: 'ethereum'
+						  ]
+						: '',
+				}
+				dispatch(setChooseCoinSwapSecond(coinInfo))
+			})
+		} else {
+			dispatch(setChooseCoinSwapSecond(coin))
+		}
 	}
 
 	const onSwapCoins = () => {

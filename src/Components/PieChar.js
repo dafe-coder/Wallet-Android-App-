@@ -31,6 +31,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 	const { portfolioBalance, portfolioCoins } = useSelector(
 		(state) => state.wallet
 	)
+	const { currentNetwork } = useSelector((state) => state.storage)
 	const [textLabel, setTextLabel] = useState(['$0.00'])
 	const [indexActive, setIndexActive] = useState('')
 	const [graphicData, setGraphicData] = useState([])
@@ -56,10 +57,14 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 						c.symbol.toUpperCase() +
 						` ${(
 							(c.market_data.balance_crypto.usd > 0
-								? c.market_data.balance_crypto.usd
+								? c.market_data.balance_crypto.usd * 100
 								: 0.1 * 100) /
-							(portfolioBalance.total_value > 0
-								? portfolioBalance.total_value
+							(portfolioBalance[
+								`${currentNetwork.toLowerCase()}_assets_value`
+							] > 0
+								? portfolioBalance[
+										`${currentNetwork.toLowerCase()}_assets_value`
+								  ]
 								: 0.3)
 						).toFixed(0)}%`,
 				}))
@@ -68,9 +73,13 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 	}, [portfolioBalance, portfolioCoinsInit])
 	useEffect(() => {
 		if (portfolioBalance != null) {
-			setTextLabel([`$${fixNum(portfolioBalance.total_value)}`])
+			setTextLabel([
+				`$${fixNum(
+					portfolioBalance[`${currentNetwork.toLowerCase()}_assets_value`]
+				)}`,
+			])
 		}
-	}, [portfolioBalance])
+	}, [portfolioBalance, currentNetwork])
 	return (
 		<View style={styles.body}>
 			<View style={styles.circle}>
@@ -129,7 +138,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 												},
 												{
 													fontSize: 12,
-													fill: '#9C94AC',
+													fill: '#ffffff',
 												},
 										  ]
 								}
@@ -191,7 +200,11 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 													return text.split(',').join(' ') ===
 														textLabel.join(' ')
 														? setTextLabel([
-																`$${fixNum(portfolioBalance.total_value)}`,
+																`$${fixNum(
+																	portfolioBalance[
+																		`${currentNetwork.toLowerCase()}_assets_value`
+																	]
+																)}`,
 														  ])
 														: setTextLabel(text.split(','))
 												},

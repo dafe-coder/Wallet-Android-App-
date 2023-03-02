@@ -15,6 +15,7 @@ export const Gas = ({ onPress }) => {
 			<View
 				style={{
 					alignItems: 'center',
+					height: 100,
 				}}>
 				<SvgIcon type='alert' />
 				<WalletText size='m' style={{ color: '#632DBC', marginTop: 32 }}>

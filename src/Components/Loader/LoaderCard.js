@@ -23,7 +23,7 @@ export const LoaderCard = ({ style }) => (
 				style={{
 					width: width,
 					height: 72,
-					borderRadius: 5,
+					borderRadius: 15,
 				}}
 			/>
 		</SkeletonLoader.Container>

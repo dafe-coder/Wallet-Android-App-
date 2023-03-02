@@ -7,6 +7,7 @@ import fixNum from './../../../services/funcWallet/fixNum'
 import { SvgIcon } from './../svg/svg'
 export const InfoPriseSlide = () => {
 	const { portfolioBalance } = useSelector((state) => state.wallet)
+	const { currentNetwork } = useSelector((state) => state.storage)
 	const [balance, setBalance] = useState(null)
 	useEffect(() => {
 		if (portfolioBalance != null) setBalance(portfolioBalance)
@@ -26,7 +27,9 @@ export const InfoPriseSlide = () => {
 							lineHeight: 40,
 							marginTop: 7,
 						}}>
-						${balance.absolute_change_24h && fixNum(balance.assets_value)}
+						$
+						{balance.absolute_change_24h &&
+							fixNum(balance[`${currentNetwork.toLowerCase()}_assets_value`])}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
 						<WalletText style={{ marginRight: 15 }} color='white'>
