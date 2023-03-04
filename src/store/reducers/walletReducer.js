@@ -18,6 +18,7 @@ import {
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
 	SET_LOCK_WALLET,
+	SET_UPDATE_WALLET,
 } from '../type'
 
 const initialState = {
@@ -41,6 +42,7 @@ const initialState = {
 	loader: false,
 	loaderSkeleton: false,
 	lockWallet: true,
+	updateWallet: {},
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -139,6 +141,11 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				loaderSkeleton: action.payload,
+			}
+		case SET_UPDATE_WALLET:
+			return {
+				...state,
+				updateWallet: {},
 			}
 		default:
 			return state

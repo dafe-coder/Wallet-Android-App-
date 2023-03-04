@@ -8,7 +8,8 @@ export function swapCoins(
 	setLoader,
 	currentNetwork,
 	onOpenSuccess,
-	onOpenGas
+	onOpenGas,
+	chooseCoin
 ) {
 	setLoader(true)
 	console.log(fromAddress, toAddress)
@@ -33,24 +34,20 @@ export function swapCoins(
 					`https://api.1inch.io/v5.0/1/approve/transaction?tokenAddress=${tokenAddress}&amount=${tokenAmount}`
 				)
 			}
-			if (!response.ok) {
-				throw new Error(`Could not fetch: ${url}, result: ${response.status}`)
-			}
 			const data = await response.json()
 			if (data) {
 				data.gas = 1000000
 				data.from = wallet.address
 				tx = await web3.eth.sendTransaction(data)
-				console.log(tx)
 				if (tx.status) {
-					console.log('Approval Successful! :)')
+					// console.log('Approval Successful! :)')
 				} else {
 					console.log('Approval Unsuccessful! :( ')
 				}
 			}
 		} catch (error) {
 			setLoader(false)
-			console.log('could not approve token', error)
+			// console.log('could not approve token', error)
 			setTimeout(() => {
 				onOpenGas()
 			}, 1000)
@@ -75,15 +72,12 @@ export function swapCoins(
 					`https://api.1inch.io/v5.0/1/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=${wallet.address}&slippage=1`
 				)
 			}
-			if (!response.ok) {
-				throw new Error(`Could not fetch: ${url}, result: ${response.status}`)
-			}
 			const data = await response.json()
 			if (data) {
 				data.tx.gas = 1000000
 				tx = await web3.eth.sendTransaction(data.tx)
 				if (tx.status) {
-					console.log('swap successfull :)', JSON.stringify(tx, null, 4))
+					// console.log('swap successfull :)', JSON.stringify(tx, null, 4))
 					setLoader(false)
 					setTimeout(() => {
 						onOpenSuccess()
@@ -93,12 +87,12 @@ export function swapCoins(
 					setTimeout(() => {
 						onOpenGas()
 					}, 1000)
-					console.log('swap failed :)')
+					// console.log('swap failed :)')
 				}
 			}
 		} catch (error) {
 			setLoader(false)
-			console.log('swapper encounter an error below', error)
+			// console.log('swapper encounter an error below', error)
 			setTimeout(() => {
 				onOpenGas()
 			}, 1000)
@@ -109,7 +103,9 @@ export function swapCoins(
 		const fromTokenAddress = fromAddress
 		const toTokenAddress = toAddress
 
-		const tokenAmount = amount ? web3.utils.toWei(amount) : '1000000000000000'
+		const tokenAmount = amount
+			? web3.utils.toWei(amount, chooseCoin.decimals === 6 ? 'mwei' : 'ether')
+			: '1000000000000000'
 		await swapper(fromTokenAddress, toTokenAddress, tokenAmount)
 	}
 

@@ -25,37 +25,45 @@ export const AppWrap = ({ children }) => {
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
 	const { getAllTokens, postData, getToken } = useWalletService()
-	const { loader, portfolioCoins, portfolioBalance, allCoins } = useSelector(
-		(state) => state.wallet
-	)
+	const { loader, portfolioCoins, portfolioBalance, allCoins, updateWallet } =
+		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount, currentNetwork } = useSelector(
 		(state) => state.storage
 	)
 
+	const addedAddressToken = async (c, setChooseCoin) => {
+		await getToken(false, c.id).then((data) => {
+			const coinInfo = {
+				...c,
+				contract_address: data.platforms[
+					currentNetwork.toLowerCase() == 'polygon' ? 'polygon-pos' : 'ethereum'
+				]
+					? data.platforms[
+							currentNetwork.toLowerCase() == 'polygon'
+								? 'polygon-pos'
+								: 'ethereum'
+					  ]
+					: '',
+			}
+			dispatch(setChooseCoin(coinInfo))
+		})
+	}
+
 	useEffect(() => {
 		if (allCoins.length) {
 			allCoins.forEach((c) => {
-				if (c.symbol.toLowerCase() == 'eth') {
+				if (currentNetwork == 'Ethereum' && c.symbol.toLowerCase() == 'eth') {
+					dispatch(setChooseCoin(c))
+				} else if (
+					currentNetwork == 'Polygon' &&
+					c.symbol.toLowerCase() == 'matic'
+				) {
 					dispatch(setChooseCoin(c))
 				}
-				if (c.symbol.toLowerCase() == 'usdt') {
-					getToken(false, c.id).then((data) => {
-						const coinInfo = {
-							...c,
-							contract_address: data.platforms[
-								currentNetwork.toLowerCase() == 'polygon'
-									? 'polygon-pos'
-									: 'ethereum'
-							]
-								? data.platforms[
-										currentNetwork.toLowerCase() == 'polygon'
-											? 'polygon-pos'
-											: 'ethereum'
-								  ]
-								: '',
-						}
-						dispatch(setChooseCoinSwapSecond(coinInfo))
-					})
+				if (c.symbol.toLowerCase() == 'usdt' && c.id.length > 8) {
+					dispatch(setChooseCoinSwapSecond(c))
+				} else if (c.symbol.toLowerCase() == 'usdt') {
+					addedAddressToken(c, setChooseCoinSwapSecond)
 				}
 			})
 		}
@@ -76,7 +84,15 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
 						.then((response) => {
-							// console.log(JSON.stringify(response.transactions, null, 4))
+							// console.log(
+							// 	JSON.stringify(
+							// 		response.positions.positions.filter(
+							// 			(item) => item.chain == currentNetwork.toLowerCase()
+							// 		),
+							// 		null,
+							// 		4
+							// 	)
+							// )
 
 							setLoadingBalanceCoins(false)
 							dispatch(
@@ -96,7 +112,7 @@ export const AppWrap = ({ children }) => {
 				}
 			})
 		}
-	}, [dataUser, currentAccount, currentNetwork])
+	}, [dataUser, currentAccount, currentNetwork, updateWallet])
 
 	useEffect(() => {
 		if (

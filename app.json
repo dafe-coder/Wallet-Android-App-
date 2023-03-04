@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Wallet",
+    "name": "Polygon ID",
     "slug": "walletpolygon",
     "version": "2.01.14",
     "orientation": "portrait",
@@ -23,7 +23,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#0C0B07"
+        "backgroundColor": "#632DBC"
       },
       "package": "com.poly.webid"
     },

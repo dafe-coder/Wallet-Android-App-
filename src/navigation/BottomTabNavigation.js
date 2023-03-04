@@ -17,7 +17,7 @@ import { MyTabBar } from './BottomTabBar'
 import { WalletBottomSheet } from '../Components'
 import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
 import { useNavigation } from '@react-navigation/native'
-import { View } from 'react-native'
+
 export default function BottomTabNavigator() {
 	const navigation = useNavigation()
 	const chooseNetwork = useRef(null)
@@ -41,6 +41,7 @@ export default function BottomTabNavigator() {
 			<Tab.Navigator
 				style={{ flex: 1 }}
 				screenOptions={{
+					tabBarHideOnKeyboard: true,
 					headerStyle: {
 						borderBottomColor: 'transparent',
 						shadowColor: 'transparent',

@@ -18,6 +18,7 @@ import {
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
 	SET_LOCK_WALLET,
+	SET_UPDATE_WALLET,
 } from '../type'
 
 export const setLockWallet = (lock) => {
@@ -136,5 +137,10 @@ export const setSwapAmountSecond = (amount) => {
 	return {
 		type: SET_SWAP_AMOUNT_SECOND,
 		payload: amount,
+	}
+}
+export const setUpdateWallet = () => {
+	return {
+		type: SET_UPDATE_WALLET,
 	}
 }

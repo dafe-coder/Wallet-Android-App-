@@ -8,9 +8,7 @@ import { Transaction } from '@ethereumjs/tx' // npm install ethereumjs-tx
  * @param MIN_ABI - application binary interface, sould look like this don't change;
  */
 
-let INFRA_PROJECT_ID = 'df6302883a974978853fb350122bbc6d'
-
-const web3 = new Web3('wss://mainnet.infura.io/ws/v3/' + INFRA_PROJECT_ID)
+const web3 = new Web3('https://rpc.ankr.com/eth')
 
 const MIN_ABI = [
 	{

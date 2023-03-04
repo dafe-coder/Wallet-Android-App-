@@ -16,9 +16,10 @@ import {
 	setChooseCoin,
 	setSwapAmountFirst,
 	setSwapAmountSecond,
+	setLoader,
+	setUpdateWallet,
 } from './../store/actions/walletActions'
 import { swapCoins } from '../../services/funcWallet/swap'
-import { setLoader } from './../store/actions/walletActions'
 import { WalletBottomSheet } from './../Components'
 import { Gas, Success } from '../Components/modal'
 
@@ -43,6 +44,11 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 	}
 	const onCloseSuccess = () => {
 		infoSuccess.current?.close()
+		dispatch(setUpdateWallet())
+		navigation.reset({
+			index: 0,
+			routes: [{ name: 'Home' }],
+		})
 	}
 	const onOpenGas = () => {
 		gasRef.current?.expand()
@@ -75,18 +81,24 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 		dispatch(setLoader(loaderSwap))
 	}, [loaderSwap])
 
+	const createAddress = (chooseCoin) => {
+		if (currentNetwork == 'Ethereum' && chooseCoin.contract_address === 'eth') {
+			return '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+		} else if (
+			currentNetwork == 'Polygon' &&
+			chooseCoin.symbol.toLowerCase() === 'matic'
+		) {
+			return '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+		} else {
+			return chooseCoin.contract_address
+		}
+	}
+
 	const sendCoinsToSwap = () => {
 		if (!loaderSwap) {
-			const fromTokenAddress =
-				chooseCoin.contract_address !== 'eth' &&
-				chooseCoin.symbol.toLowerCase() !== 'matic'
-					? chooseCoin.contract_address
-					: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-			const toTokenAddress =
-				chooseCoinSwapSecond.contract_address !== 'eth' &&
-				chooseCoinSwapSecond.symbol.toLowerCase() !== 'matic'
-					? chooseCoinSwapSecond.contract_address
-					: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+			let fromTokenAddress = createAddress(chooseCoin)
+			let toTokenAddress = createAddress(chooseCoinSwapSecond)
+
 			swapCoins(
 				privateKey,
 				fromTokenAddress,
@@ -95,7 +107,8 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 				setLoaderSwap,
 				currentNetwork,
 				onOpenSuccess,
-				onOpenGas
+				onOpenGas,
+				chooseCoin
 			)
 		}
 	}

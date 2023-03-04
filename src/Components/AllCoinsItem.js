@@ -18,11 +18,12 @@ export const AllCoinsItem = ({ onPress, coin, chooseCoin }) => {
 				<WalletText size='m' color='dark'>
 					{coin.name + ' '}
 					<Text style={{ color: THEME.DISABLED_TEXT }}>
-						({coin.symbol.toUpperCase()})
+						({coin.symbol && coin.symbol.toUpperCase()})
 					</Text>
 				</WalletText>
 			</View>
-			{chooseCoin.symbol &&
+			{chooseCoin !== null &&
+			chooseCoin.symbol &&
 			chooseCoin.symbol.toLowerCase() == coin.symbol.toLowerCase() ? (
 				<SvgIcon type='check' />
 			) : (
