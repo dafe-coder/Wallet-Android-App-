@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
 		width: 50,
 		position: 'absolute',
 		right: 20,
-		bottom: 110,
+		bottom: 105,
 		backgroundColor: 'rgba(189, 165, 228, 0.4)',
 		borderRadius: 50,
 		borderColor: THEME.VIOLET,
