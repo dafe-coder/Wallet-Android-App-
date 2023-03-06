@@ -10,20 +10,20 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 	const dispatch = useDispatch()
 	const networks = [
 		{
-			id: Math.random().toString(),
+			id: 0,
 			title: 'Polygon',
 			img: require('../../../assets/network/pol.png'),
-			choose: currentNetwork == 'Polygon',
+			choose: currentNetwork.title == 'Polygon',
 		},
 		{
-			id: Math.random().toString(),
+			id: 1,
 			title: 'Ethereum',
 			img: require('../../../assets/network/eth.png'),
-			choose: currentNetwork == 'Ethereum',
+			choose: currentNetwork.title == 'Ethereum',
 		},
 	]
 	const onChooseNetwork = (item) => {
-		dispatch(setCurrentNetwork(item.title))
+		dispatch(setCurrentNetwork({ title: item.title, id: item.id }))
 		onPress()
 	}
 	return (

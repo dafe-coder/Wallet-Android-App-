@@ -60,7 +60,7 @@ export const SwapDetails = ({
 					<WalletText color='disabled'>Fee</WalletText>
 					<WalletText color='dark'>
 						≈{' '}
-						{currentNetwork.toLowerCase() !== 'polygon'
+						{currentNetwork.title.toLowerCase() !== 'polygon'
 							? eth != null
 								? fixNum(1 / eth.market_data.current_price.usd)
 								: +' ETH'
@@ -95,7 +95,7 @@ export const SwapDetails = ({
 						<View>
 							<WalletText style={{ marginBottom: 5 }} size='m' color='dark'>
 								-
-								{currentNetwork.toLowerCase() !== 'polygon'
+								{currentNetwork.title.toLowerCase() !== 'polygon'
 									? eth != null && swapAmountFirst != ''
 										? fixNum(
 												(1 / eth.market_data.current_price.usd +
@@ -112,7 +112,7 @@ export const SwapDetails = ({
 									: ''}
 								${' '}
 								<Text style={{ color: THEME.VIOLET }}>
-									{currentNetwork.toLowerCase() !== 'polygon'
+									{currentNetwork.title.toLowerCase() !== 'polygon'
 										? eth != null && swapAmountFirst != ''
 											? fixNum(
 													1 / eth.market_data.current_price.usd +

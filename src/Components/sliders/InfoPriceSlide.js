@@ -29,7 +29,9 @@ export const InfoPriseSlide = () => {
 						}}>
 						$
 						{balance.absolute_change_24h &&
-							fixNum(balance[`${currentNetwork.toLowerCase()}_assets_value`])}
+							fixNum(
+								balance[`${currentNetwork.title.toLowerCase()}_assets_value`]
+							)}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
 						<WalletText style={{ marginRight: 15 }} color='white'>

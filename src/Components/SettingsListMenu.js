@@ -14,7 +14,7 @@ export const SettingsListMenu = ({ onPress }) => {
 	const menuData = [
 		{
 			title: 'Current  Network',
-			subTitle: currentNetwork + ' Mainnet',
+			subTitle: currentNetwork.title + ' Mainnet',
 			topLine: true,
 			onPress: onPress,
 		},

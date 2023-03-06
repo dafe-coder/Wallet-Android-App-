@@ -24,7 +24,7 @@ export const HeaderTitle = () => {
 					<WalletText
 						color='gold'
 						style={{ marginRight: 5, fontFamily: 'ub-regular' }}>
-						{currentNetwork}
+						{currentNetwork.title}
 					</WalletText>
 					<SvgIcon type='check' fill={THEME.VIOLET} />
 				</View>

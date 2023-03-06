@@ -60,10 +60,10 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 								? c.market_data.balance_crypto.usd * 100
 								: 0.1 * 100) /
 							(portfolioBalance[
-								`${currentNetwork.toLowerCase()}_assets_value`
+								`${currentNetwork.title.toLowerCase()}_assets_value`
 							] > 0
 								? portfolioBalance[
-										`${currentNetwork.toLowerCase()}_assets_value`
+										`${currentNetwork.title.toLowerCase()}_assets_value`
 								  ]
 								: 0.3)
 						).toFixed(0)}%`,
@@ -75,7 +75,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 		if (portfolioBalance != null) {
 			setTextLabel([
 				`$${fixNum(
-					portfolioBalance[`${currentNetwork.toLowerCase()}_assets_value`]
+					portfolioBalance[`${currentNetwork.title.toLowerCase()}_assets_value`]
 				)}`,
 			])
 		}
@@ -202,7 +202,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 														? setTextLabel([
 																`$${fixNum(
 																	portfolioBalance[
-																		`${currentNetwork.toLowerCase()}_assets_value`
+																		`${currentNetwork.title.toLowerCase()}_assets_value`
 																	]
 																)}`,
 														  ])

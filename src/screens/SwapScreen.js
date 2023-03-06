@@ -42,12 +42,12 @@ export const SwapScreen = ({ navigation }) => {
 				const coinInfo = {
 					...coin,
 					contract_address: data.platforms[
-						currentNetwork.toLowerCase() == 'polygon'
+						currentNetwork.title.toLowerCase() == 'polygon'
 							? 'polygon-pos'
 							: 'ethereum'
 					]
 						? data.platforms[
-								currentNetwork.toLowerCase() == 'polygon'
+								currentNetwork.title.toLowerCase() == 'polygon'
 									? 'polygon-pos'
 									: 'ethereum'
 						  ]
@@ -73,12 +73,12 @@ export const SwapScreen = ({ navigation }) => {
 				const coinInfo = {
 					...coin,
 					contract_address: data.platforms[
-						currentNetwork.toLowerCase() == 'polygon'
+						currentNetwork.title.toLowerCase() == 'polygon'
 							? 'polygon-pos'
 							: 'ethereum'
 					]
 						? data.platforms[
-								currentNetwork.toLowerCase() == 'polygon'
+								currentNetwork.title.toLowerCase() == 'polygon'
 									? 'polygon-pos'
 									: 'ethereum'
 						  ]

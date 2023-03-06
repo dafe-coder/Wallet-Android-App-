@@ -7,6 +7,8 @@ import {
 	SET_DELETE_ACCOUNT,
 	SET_CLEAR_DATAUSER,
 	SET_SHARE_ANALYTICS,
+	SET_CHOOSE_ASSETS,
+	SET_INIT_CHOOSE_ASSETS,
 } from '../type'
 
 export const setPassword = (password) => {
@@ -54,5 +56,17 @@ export const setShareAnalytics = (boolean) => {
 	return {
 		type: SET_SHARE_ANALYTICS,
 		payload: boolean,
+	}
+}
+export const setChooseAssets = (coin) => {
+	return {
+		type: SET_CHOOSE_ASSETS,
+		payload: coin,
+	}
+}
+export const setInitChooseAssets = (arr) => {
+	return {
+		type: SET_INIT_CHOOSE_ASSETS,
+		payload: arr,
 	}
 }

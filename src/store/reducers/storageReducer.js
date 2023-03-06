@@ -6,13 +6,19 @@ import {
 	SET_CURRENT_ACCOUNT,
 	SET_DELETE_ACCOUNT,
 	SET_CLEAR_DATAUSER,
+	SET_CHOOSE_ASSETS,
 	SET_SHARE_ANALYTICS,
+	SET_INIT_CHOOSE_ASSETS,
 } from '../type'
 const initialState = {
 	password: '',
-	currentNetwork: 'Polygon',
+	currentNetwork: { title: 'Polygon', id: 0 },
 	dataUser: [],
 	currentAccount: '',
+	chooseAssets: [
+		{ id: 0, coins: ['eth', 'matic', 'tether'] },
+		{ id: 1, coins: ['eth', 'matic', 'tether'] },
+	],
 	analytics: true,
 }
 
@@ -50,12 +56,86 @@ export const storageReducer = (state = initialState, action) => {
 				dataUser: [],
 			}
 		case SET_DELETE_ACCOUNT:
-			const newArrDelete = state.dataUser.filter(
-				(d) => d.name !== action.payload
-			)
+			const newArrDelete = {
+				first: state.dataUser.first.filter((d) => d.name !== action.payload),
+				second: state.dataUser.second,
+			}
 			return {
 				...state,
 				dataUser: newArrDelete,
+			}
+		case SET_INIT_CHOOSE_ASSETS:
+			let arrAssetsInit = []
+			if (state.currentNetwork.id == 0) {
+				arrAssetsInit = [
+					...state.chooseAssets.filter(
+						(item) => item.id !== state.currentNetwork.id
+					),
+					{
+						id: state.currentNetwork.id,
+						coins: [
+							...action.payload,
+							...state.chooseAssets
+								.find((item) => item.id == state.currentNetwork.id)
+								.coins.filter((item) => !action.payload.includes(item)),
+						],
+					},
+				]
+			} else {
+				arrAssetsInit = [
+					...state.chooseAssets.filter(
+						(item) => item.id !== state.currentNetwork.id
+					),
+					{
+						id: state.currentNetwork.id,
+						coins: [
+							...action.payload,
+							...state.chooseAssets
+								.find((item) => item.id == state.currentNetwork.id)
+								.coins.filter((item) => !action.payload.includes(item)),
+						],
+					},
+				]
+			}
+			return {
+				...state,
+				chooseAssets: arrAssetsInit,
+			}
+		case SET_CHOOSE_ASSETS:
+			const newArrAssets =
+				state.chooseAssets
+					.find((item) => item.id == state.currentNetwork.id)
+					.coins.includes(action.payload) == false
+					? [
+							...state.chooseAssets.filter(
+								(item) => item.id !== state.currentNetwork.id
+							),
+							{
+								id: state.currentNetwork.id,
+								coins: [
+									...state.chooseAssets.find(
+										(item) => item.id == state.currentNetwork.id
+									).coins,
+									action.payload,
+								],
+							},
+					  ]
+					: [
+							...state.chooseAssets.filter(
+								(item) => item.id !== state.currentNetwork.id
+							),
+							{
+								id: state.currentNetwork.id,
+								coins: [
+									...state.chooseAssets
+										.find((item) => item.id == state.currentNetwork.id)
+										.coins.filter((item) => item !== action.payload),
+								],
+							},
+					  ]
+			return {
+				...state,
+				chooseAssets: newArrAssets,
 			}
 		case SET_NEW_ACCOUNT_NAME:
 			const newArr = state.dataUser.map((d) => {

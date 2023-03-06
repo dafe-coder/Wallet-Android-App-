@@ -144,6 +144,34 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 					/>
 				</Svg>
 			)
+		case 'plus-small':
+			return (
+				<Svg
+					width={17}
+					height={18}
+					viewBox='0 0 17 18'
+					fill='none'
+					xmlns='http://www.w3.org/2000/svg'
+					{...props}>
+					<G clipPath='url(#clip0_515_255)' className='add 1'>
+						<Path
+							d='M16.0556 9.94735H0.944444C0.428148 9.94735 0 9.51788 0 8.99998C0 8.48209 0.428148 8.05261 0.944444 8.05261H16.0556C16.5719 8.05261 17 8.48209 17 8.99998C17 9.51788 16.5719 9.94735 16.0556 9.94735Z'
+							fill='#632DBC'
+							className='Vector'
+						/>
+						<Path
+							d='M8.49913 17.5263C7.98284 17.5263 7.55469 17.0969 7.55469 16.579V1.42106C7.55469 0.903168 7.98284 0.473694 8.49913 0.473694C9.01543 0.473694 9.44358 0.903168 9.44358 1.42106V16.579C9.44358 17.0969 9.01543 17.5263 8.49913 17.5263Z'
+							fill='#632DBC'
+							className='Vector_2'
+						/>
+					</G>
+					<Defs>
+						<ClipPath className='clip0_515_255'>
+							<Rect width={17} height={18} fill='white' />
+						</ClipPath>
+					</Defs>
+				</Svg>
+			)
 		case 'polygon-nav':
 			return (
 				<Svg

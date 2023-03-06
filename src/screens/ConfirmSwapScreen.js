@@ -82,10 +82,13 @@ export const ConfirmSwapScreen = ({ navigation }) => {
 	}, [loaderSwap])
 
 	const createAddress = (chooseCoin) => {
-		if (currentNetwork == 'Ethereum' && chooseCoin.contract_address === 'eth') {
+		if (
+			currentNetwork.title == 'Ethereum' &&
+			chooseCoin.contract_address === 'eth'
+		) {
 			return '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
 		} else if (
-			currentNetwork == 'Polygon' &&
+			currentNetwork.title == 'Polygon' &&
 			chooseCoin.symbol.toLowerCase() === 'matic'
 		) {
 			return '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'

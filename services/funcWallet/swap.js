@@ -15,7 +15,7 @@ export function swapCoins(
 	console.log(fromAddress, toAddress)
 
 	const RPC_URL =
-		currentNetwork.toLowerCase() == 'polygon'
+		currentNetwork.title.toLowerCase() == 'polygon'
 			? 'https://rpc.ankr.com/polygon'
 			: 'https://rpc.ankr.com/eth'
 
@@ -25,7 +25,7 @@ export function swapCoins(
 	async function approve(tokenAddress, tokenAmount) {
 		try {
 			let response = null
-			if (currentNetwork.toLowerCase() == 'polygon') {
+			if (currentNetwork.title.toLowerCase() == 'polygon') {
 				response = await fetch(
 					`https://api.1inch.io/v5.0/137/approve/transaction?tokenAddress=${tokenAddress}&amount=${tokenAmount}`
 				)
@@ -63,7 +63,7 @@ export function swapCoins(
 				await approve(fromTokenAddress, tokenAmount)
 			}
 			let response = null
-			if (currentNetwork.toLowerCase() == 'polygon') {
+			if (currentNetwork.title.toLowerCase() == 'polygon') {
 				response = await fetch(
 					`https://api.1inch.io/v5.0/137/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=${wallet.address}&slippage=1`
 				)
