@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
 	WalletComponent,
@@ -11,31 +11,9 @@ const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
 import { Text } from 'react-native'
 import { HistoryBtn } from './HeaderButtons/HistoryBtn'
-import { AccountBtn } from './HeaderButtons/AccountBtnBottomNav'
-import { HeaderTitle } from './HeaderButtons/HeaderTitleBottomNav'
 import { MyTabBar } from './BottomTabBar'
-import { WalletBottomSheet } from '../Components'
-import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
-import { useNavigation } from '@react-navigation/native'
 
 export default function BottomTabNavigator() {
-	const navigation = useNavigation()
-	const chooseNetwork = useRef(null)
-	const selectAccountRef = useRef(null)
-
-	const openModalSelect = () => {
-		selectAccountRef.current.expand()
-	}
-
-	const onCloseModal = () => {
-		selectAccountRef.current.close()
-	}
-	const openModalSelectAccount = () => {
-		chooseNetwork.current?.expand()
-	}
-	const closeModalSelectAccount = () => {
-		chooseNetwork.current?.close()
-	}
 	return (
 		<>
 			<Tab.Navigator
@@ -84,15 +62,6 @@ export default function BottomTabNavigator() {
 					component={WalletComponent}
 					options={({ navigation }) => ({
 						headerLeft: () => <HistoryBtn navigation={navigation} />,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => (
-							<AccountBtn
-								openModalSelect={openModalSelect}
-								navigation={navigation}
-							/>
-						),
 					})}
 				/>
 				<Tab.Screen
@@ -100,15 +69,6 @@ export default function BottomTabNavigator() {
 					component={TransactionHistoryPageComponent}
 					options={({ navigation }) => ({
 						headerLeft: () => <></>,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => (
-							<AccountBtn
-								openModalSelect={openModalSelect}
-								navigation={navigation}
-							/>
-						),
 					})}
 				/>
 				<Tab.Screen
@@ -116,12 +76,12 @@ export default function BottomTabNavigator() {
 					component={SwapComponent}
 					options={({ navigation }) => ({
 						headerLeft: () => <></>,
-						headerRight: () => (
-							<AccountBtn
-								openModalSelect={openModalSelect}
-								navigation={navigation}
-							/>
-						),
+						// headerRight: () => (
+						// 	<AccountBtn
+						// 		openModalSelect={openModalSelect}
+						// 		navigation={navigation}
+						// 	/>
+						// ),
 					})}
 				/>
 				<Tab.Screen
@@ -129,15 +89,15 @@ export default function BottomTabNavigator() {
 					component={NftComponent}
 					options={({ navigation }) => ({
 						headerLeft: () => <></>,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => (
-							<AccountBtn
-								openModalSelect={openModalSelect}
-								navigation={navigation}
-							/>
-						),
+						// headerTitle: () => (
+						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						// ),
+						// headerRight: () => (
+						// 	<AccountBtn
+						// 		openModalSelect={openModalSelect}
+						// 		navigation={navigation}
+						// 	/>
+						// ),
 					})}
 				/>
 				<Tab.Screen
@@ -145,21 +105,15 @@ export default function BottomTabNavigator() {
 					component={AccountComponent}
 					options={({ navigation }) => ({
 						headerLeft: () => <></>,
-						headerRight: () => (
-							<AccountBtn
-								openModalSelect={openModalSelect}
-								navigation={navigation}
-							/>
-						),
+						// headerRight: () => (
+						// 	<AccountBtn
+						// 		openModalSelect={openModalSelect}
+						// 		navigation={navigation}
+						// 	/>
+						// ),
 					})}
 				/>
 			</Tab.Navigator>
-			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
-			</WalletBottomSheet>
 		</>
 	)
 }

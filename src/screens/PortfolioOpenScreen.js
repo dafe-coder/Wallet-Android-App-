@@ -14,8 +14,9 @@ import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
 import useIsReady from '../../hooks/useIsReady'
 import { BusyIndicator } from '../Components/Loader'
-export const PortfolioOpenScreen = ({ navigation }) => {
-	const { transactions, portfolioOpen } = useSelector((state) => state.wallet)
+export const PortfolioOpenScreen = ({ navigation, route }) => {
+	const coin = route.params.coin
+	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
 	const isReady = useIsReady()
 
@@ -24,13 +25,13 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 		let filteredToken = filtered.filter((item) =>
 			item.changes[0]
 				? item.changes[0].asset.symbol.toLowerCase() ==
-				  portfolioOpen.symbol.toLowerCase()
+				  coin.symbol.toLowerCase()
 				: false
 		)
 		let filteredTokenSwap = filtered.filter((item) =>
 			item.changes[1]
 				? item.changes[1].asset.symbol.toLowerCase() ==
-				  portfolioOpen.symbol.toLowerCase()
+				  coin.symbol.toLowerCase()
 				: false
 		)
 		let arrFinal = [...filteredToken, ...filteredTokenSwap]
@@ -46,7 +47,7 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 		})
 
 		setTransactionList(arrSorted)
-	}, [portfolioOpen, transactions])
+	}, [coin, transactions])
 	if (!isReady) {
 		return <BusyIndicator></BusyIndicator>
 	}
@@ -54,7 +55,7 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 		<ScrollView
 			style={{
 				paddingHorizontal: 16,
-				marginTop: 29,
+				paddingTop: 29,
 			}}>
 			<View style={styles.card}>
 				<ImageBackground
@@ -68,12 +69,11 @@ export const PortfolioOpenScreen = ({ navigation }) => {
 							lineHeight: 40,
 							marginTop: 40,
 						}}>
-						{fixNum(portfolioOpen.market_data.balance)}{' '}
-						{portfolioOpen.symbol.toUpperCase()}
+						{fixNum(coin.market_data.balance)} {coin.symbol.toUpperCase()}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
 						<WalletText color='white'>
-							~ ${fixNum(portfolioOpen.market_data.balance_crypto.usd)}
+							~ ${fixNum(coin.market_data.balance_crypto.usd)}
 						</WalletText>
 					</View>
 				</ImageBackground>

@@ -1,5 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+	View,
+	ScrollView,
+	StyleSheet,
+	TouchableOpacity,
+	Pressable,
+} from 'react-native'
 import {
 	WalletNav,
 	PortfolioList,
@@ -7,13 +13,19 @@ import {
 	PortfolioSort,
 } from './../Components/'
 import { WalletBottomSheet } from '../Components/'
-import { Filters, ChooseAssets } from './../Components/modal'
+import {
+	Filters,
+	ChooseAssets,
+	ChangeCurrentNetwork,
+	SelectAccount,
+} from './../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { filterData } from '../../services/funcWallet/filterData'
 import { LoaderListItem } from '../Components/Loader/LoaderListItem'
 import { THEME } from './../Theme'
 import { SvgIcon } from './../Components/svg/svg'
 import { setChooseAssets } from '../store/actions/storageAction'
+import { AccountBtn, HeaderTitle } from '../navigation'
 
 export const WalletScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -50,9 +62,34 @@ export const WalletScreen = ({ navigation }) => {
 			)
 		}
 	}, [portfolioCoins, allCoins])
-
+	React.useEffect(() => {
+		navigation.setOptions({
+			headerTitle: () => (
+				<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+			),
+			headerRight: () => (
+				<AccountBtn openModalSelect={openModalSelect} navigation={navigation} />
+			),
+		})
+	}, [navigation])
 	const filterRef = useRef(null)
 	const chooseAssetsRef = useRef(null)
+	const chooseNetwork = useRef(null)
+	const selectAccountRef = useRef(null)
+
+	const openModalSelect = () => {
+		selectAccountRef.current.expand()
+	}
+
+	const onCloseModal = () => {
+		selectAccountRef.current.close()
+	}
+	const openModalSelectAccount = () => {
+		chooseNetwork.current?.expand()
+	}
+	const closeModalSelectAccount = () => {
+		chooseNetwork.current?.close()
+	}
 	const onCloseFilters = () => {
 		filterRef.current?.close()
 	}
@@ -110,10 +147,17 @@ export const WalletScreen = ({ navigation }) => {
 					allCoins={allCoins}
 				/>
 			</WalletBottomSheet>
-			<TouchableOpacity activeOpacity={0.7} onPress={onOpenAssets}>
-				<View style={styles.btnAddedAsset}>
-					<SvgIcon type='plus-small' />
-				</View>
+			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
+				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
+			</WalletBottomSheet>
+			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
+				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
+			</WalletBottomSheet>
+			<TouchableOpacity
+				style={styles.btnAddedAsset}
+				activeOpacity={0.7}
+				onPress={onOpenAssets}>
+				<SvgIcon type='plus-small' />
 			</TouchableOpacity>
 		</>
 	)

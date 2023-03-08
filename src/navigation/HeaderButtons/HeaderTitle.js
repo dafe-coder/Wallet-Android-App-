@@ -22,6 +22,7 @@ export const HeaderTitle = () => {
 			<TouchableOpacity activeOpacity={0.7} onPress={openModalSelectAccount}>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<WalletText
+						size='m'
 						color='gold'
 						style={{ marginRight: 5, fontFamily: 'ub-regular' }}>
 						{currentNetwork.title}

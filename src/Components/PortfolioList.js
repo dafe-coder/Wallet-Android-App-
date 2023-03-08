@@ -13,8 +13,10 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 		setCoinsInit(coins)
 	}, [coins])
 	const onOpenPortfolioCoin = useCallback((coin) => {
-		dispatch(setPortfolioOpen(coin))
-		navigation.navigate('PortfolioOpen')
+		navigation.navigate({
+			name: 'PortfolioOpen',
+			params: { coin: coin },
+		})
 	})
 	return (
 		<View style={[style]}>

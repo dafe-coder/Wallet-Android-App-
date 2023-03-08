@@ -38,17 +38,6 @@ import {
 const Stack = createNativeStackNavigator()
 const screens = [
 	{
-		name: 'Home',
-		component: BottomTabNavigator,
-		options: {
-			headerShown: false,
-			contentStyle: {
-				borderTopColor: 'transparent',
-				borderTopWidth: 0,
-			},
-		},
-	},
-	{
 		name: 'CreatePhrase',
 		options: ({ navigation }) => ({
 			headerShown: true,
@@ -227,10 +216,6 @@ const screens = [
 	},
 ]
 
-import { WalletBottomSheet } from '../Components'
-import { ChangeCurrentNetwork, SelectAccount } from '../Components/modal'
-import { useNavigation } from '@react-navigation/native'
-
 function toUpperWords(title) {
 	let words = title.split(' ')
 	for (let i = 0; i < words.length; i++) {
@@ -241,23 +226,6 @@ function toUpperWords(title) {
 }
 
 export function MyStack() {
-	const navigation = useNavigation()
-	const chooseNetwork = useRef(null)
-	const selectAccountRef = useRef(null)
-
-	const openModalSelect = () => {
-		selectAccountRef.current.expand()
-	}
-
-	const onCloseModal = () => {
-		selectAccountRef.current.close()
-	}
-	const openModalSelectAccount = () => {
-		chooseNetwork.current?.expand()
-	}
-	const closeModalSelectAccount = () => {
-		chooseNetwork.current?.close()
-	}
 	const { lockWallet } = useSelector((state) => state.wallet)
 	const { dataUser } = useSelector((state) => state.storage)
 	return (
@@ -299,16 +267,27 @@ export function MyStack() {
 					/>
 				))}
 				<Stack.Screen
+					name='Home'
+					component={BottomTabNavigator}
+					options={{
+						headerShown: false,
+						contentStyle: {
+							borderTopColor: 'transparent',
+							borderTopWidth: 0,
+						},
+					}}
+				/>
+				<Stack.Screen
 					name='TransactionHistory'
 					component={TransactionHistoryComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
 						title: '',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerTitle: () => (
+						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						// ),
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -318,10 +297,10 @@ export function MyStack() {
 						headerShown: true,
 						title: '',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerTitle: () => (
+						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						// ),
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -331,7 +310,7 @@ export function MyStack() {
 						headerShown: true,
 						title: 'You Wallet Address',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -341,7 +320,6 @@ export function MyStack() {
 						headerShown: true,
 						title: 'Confirm Transaction',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -350,10 +328,10 @@ export function MyStack() {
 					options={({ navigation }) => ({
 						headerShown: true,
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerTitle: () => (
-							<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						),
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerTitle: () => (
+						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
+						// ),
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -363,7 +341,7 @@ export function MyStack() {
 						headerShown: true,
 						title: 'Contacts',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -373,16 +351,10 @@ export function MyStack() {
 						headerShown: true,
 						title: 'Settings',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
+						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 			</Stack.Navigator>
-			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
-			</WalletBottomSheet>
 		</>
 	)
 }

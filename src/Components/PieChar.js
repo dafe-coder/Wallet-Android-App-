@@ -42,7 +42,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 				y:
 					c.market_data.balance_crypto.usd > 0
 						? c.market_data.balance_crypto.usd
-						: 0.000000001,
+						: 0.5,
 				x: [
 					c.name.toUpperCase(),
 					fixNum(c.market_data.balance) + ' ' + c.symbol.toUpperCase(),
@@ -150,7 +150,7 @@ export const PieChar = ({ portfolioCoinsInit }) => {
 						height={252}
 						innerRadius={69}
 						colorScale={graphicColor}
-						padAngle={5}
+						padAngle={2}
 						cornerRadius={50}
 						style={{
 							data: {
