@@ -5,9 +5,11 @@ import { THEME } from './../../Theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentNetwork } from '../../store/actions/storageAction'
 import { SvgIcon } from '../svg/svg'
-export const ChangeCurrentNetwork = ({ onPress }) => {
+
+export const ChangeCurrentNetwork = ({ onPress, navigation }) => {
 	const { currentNetwork } = useSelector((state) => state.storage)
 	const dispatch = useDispatch()
+
 	const networks = [
 		{
 			id: 0,
@@ -23,6 +25,7 @@ export const ChangeCurrentNetwork = ({ onPress }) => {
 		},
 	]
 	const onChooseNetwork = (item) => {
+		navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
 		dispatch(setCurrentNetwork({ title: item.title, id: item.id }))
 		onPress()
 	}

@@ -148,7 +148,10 @@ export const WalletScreen = ({ navigation }) => {
 				/>
 			</WalletBottomSheet>
 			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork onPress={closeModalSelectAccount} />
+				<ChangeCurrentNetwork
+					onPress={closeModalSelectAccount}
+					navigation={navigation}
+				/>
 			</WalletBottomSheet>
 			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
 				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />

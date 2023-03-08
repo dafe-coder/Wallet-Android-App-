@@ -10,16 +10,15 @@ export const HeaderTitle = ({ openModalSelectAccount }) => {
 
 	return (
 		<TouchableOpacity
+			style={{ flexDirection: 'row', alignItems: 'center' }}
 			activeOpacity={0.7}
 			onPress={() => openModalSelectAccount()}>
-			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-				<WalletText
-					color='gold'
-					style={{ fontSize: 18, marginRight: 5, fontFamily: 'ub-regular' }}>
-					{currentNetwork.title + ''}
-				</WalletText>
-				<SvgIcon type='check' fill={THEME.VIOLET} />
-			</View>
+			<WalletText
+				color='gold'
+				style={{ fontSize: 18, marginRight: 5, fontFamily: 'ub-regular' }}>
+				{currentNetwork.title + ''}
+			</WalletText>
+			<SvgIcon type='check' fill={THEME.VIOLET} />
 		</TouchableOpacity>
 	)
 }

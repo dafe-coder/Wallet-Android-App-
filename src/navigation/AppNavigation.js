@@ -284,10 +284,6 @@ export function MyStack() {
 						headerShown: true,
 						title: '',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerTitle: () => (
-						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						// ),
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -297,10 +293,6 @@ export function MyStack() {
 						headerShown: true,
 						title: '',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerTitle: () => (
-						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						// ),
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -310,7 +302,6 @@ export function MyStack() {
 						headerShown: true,
 						title: 'You Wallet Address',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -328,10 +319,6 @@ export function MyStack() {
 					options={({ navigation }) => ({
 						headerShown: true,
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerTitle: () => (
-						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						// ),
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -341,7 +328,6 @@ export function MyStack() {
 						headerShown: true,
 						title: 'Contacts',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 				<Stack.Screen
@@ -351,7 +337,6 @@ export function MyStack() {
 						headerShown: true,
 						title: 'Settings',
 						headerLeft: () => <BackBtn navigation={navigation} />,
-						// headerRight: () => <AccountBtn openModalSelect={openModalSelect} />,
 					})}
 				/>
 			</Stack.Navigator>

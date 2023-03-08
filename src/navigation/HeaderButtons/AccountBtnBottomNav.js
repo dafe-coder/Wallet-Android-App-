@@ -6,26 +6,25 @@ export const AccountBtn = ({ openModalSelect }) => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
-		<View>
-			<TouchableOpacity activeOpacity={0.7} onPress={openModalSelect}>
-				<View style={[styles.logoImage, { backgroundColor: THEME.BROWN_DARK }]}>
-					{dataUser.map((n) =>
-						n.name == currentAccount ? (
-							<Image
-								key={Math.random().toString()}
-								style={styles.image}
-								resizeMode='cover'
-								source={
-									n.avatar != ''
-										? { uri: n.avatar }
-										: require('../../../assets/avatar.png')
-								}
-							/>
-						) : null
-					)}
-				</View>
-			</TouchableOpacity>
-		</View>
+		<TouchableOpacity
+			activeOpacity={0.7}
+			onPress={openModalSelect}
+			style={[styles.logoImage, { backgroundColor: THEME.BROWN_DARK }]}>
+			{dataUser.map((n) =>
+				n.name == currentAccount ? (
+					<Image
+						key={Math.random().toString()}
+						style={styles.image}
+						resizeMode='cover'
+						source={
+							n.avatar != ''
+								? { uri: n.avatar }
+								: require('../../../assets/avatar.png')
+						}
+					/>
+				) : null
+			)}
+		</TouchableOpacity>
 	)
 }
 

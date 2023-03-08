@@ -9,17 +9,22 @@ import {
 import { AccountCard } from '../Components'
 import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
-import { ImportAccount } from '../Components/modal'
+import { ImportAccount, SelectAccount } from '../Components/modal'
 import { useDispatch } from 'react-redux'
 import { setLockWallet } from '../store/actions/walletActions'
-
+import { AccountBtn } from '../navigation'
 export const AccountScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	// ref
-	// const addAccountRef = useRef(null)
+	const selectAccountRef = useRef(null)
 	const importAccountRef = useRef(null)
 	const [openKeyboard, setOpenKeyboard] = useState(false)
-
+	React.useEffect(() => {
+		navigation.setOptions({
+			headerRight: () => (
+				<AccountBtn openModalSelect={openModalSelect} navigation={navigation} />
+			),
+		})
+	}, [navigation])
 	useEffect(() => {
 		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
 			setOpenKeyboard(true)
@@ -33,7 +38,12 @@ export const AccountScreen = ({ navigation }) => {
 			hideSubscription.remove()
 		}
 	}, [])
-
+	const openModalSelect = () => {
+		selectAccountRef.current.expand()
+	}
+	const onCloseModal = () => {
+		selectAccountRef.current.close()
+	}
 	const onCloseImport = () => {
 		Keyboard.dismiss()
 		importAccountRef.current?.close()
@@ -81,6 +91,9 @@ export const AccountScreen = ({ navigation }) => {
 						onCloseImport={onCloseImport}
 						navigation={navigation}
 					/>
+				</WalletBottomSheet>
+				<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
+					<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
 				</WalletBottomSheet>
 			</ScrollView>
 		</TouchableWithoutFeedback>

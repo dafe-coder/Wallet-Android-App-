@@ -1,5 +1,5 @@
-export * from './HeaderButtons/AccountBtn'
+export * from './HeaderButtons/AccountBtnBottomNav'
 export * from './HeaderButtons/HistoryBtn'
-export * from './HeaderButtons/HeaderTitle'
+export * from './HeaderButtons/HeaderTitleBottomNav'
 export * from './HeaderButtons/BackBtn'
 export * from './HeaderButtons/TextBtn'

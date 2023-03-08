@@ -67,51 +67,30 @@ export default function BottomTabNavigator() {
 				<Tab.Screen
 					name='TransactionPage'
 					component={TransactionHistoryPageComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerLeft: () => <></>,
-					})}
+					}}
 				/>
 				<Tab.Screen
 					name='Swap'
 					component={SwapComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerLeft: () => <></>,
-						// headerRight: () => (
-						// 	<AccountBtn
-						// 		openModalSelect={openModalSelect}
-						// 		navigation={navigation}
-						// 	/>
-						// ),
-					})}
+					}}
 				/>
 				<Tab.Screen
 					name='Nft'
 					component={NftComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerLeft: () => <></>,
-						// headerTitle: () => (
-						// 	<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-						// ),
-						// headerRight: () => (
-						// 	<AccountBtn
-						// 		openModalSelect={openModalSelect}
-						// 		navigation={navigation}
-						// 	/>
-						// ),
-					})}
+					}}
 				/>
 				<Tab.Screen
 					name='Account'
 					component={AccountComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerLeft: () => <></>,
-						// headerRight: () => (
-						// 	<AccountBtn
-						// 		openModalSelect={openModalSelect}
-						// 		navigation={navigation}
-						// 	/>
-						// ),
-					})}
+					}}
 				/>
 			</Tab.Navigator>
 		</>
