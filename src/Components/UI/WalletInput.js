@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		paddingVertical: 15,
 		color: THEME.DARK,
-		fontFamily: 'ub-regular',
+		fontFamily: 'mt-reg',
 	},
 	body: {
 		position: 'relative',

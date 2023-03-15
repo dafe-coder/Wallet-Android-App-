@@ -18,7 +18,7 @@ export const SubscribeBlock = ({ check, setCheck, children }) => {
 					justifyContent: 'flex-start',
 					alignItems: 'flex-start',
 				}}
-				fontFamily='ub-regular'
+				fontFamily='mt-reg'
 				textStyle={{
 					color: THEME.DARK_TEXT,
 				}}

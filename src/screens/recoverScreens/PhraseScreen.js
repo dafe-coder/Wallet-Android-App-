@@ -73,21 +73,17 @@ export const PhraseScreen = ({ navigation }) => {
 			accessible={false}>
 			<View style={styles.body}>
 				<View>
-					<WalletText
-						style={{ marginBottom: 40 }}
-						center
-						fw='bold'
-						color='dark'
-						size='m'>
-						Recover a wallet using your Secret {'\n'} Recovery Phrase.
-					</WalletText>
 					<PhraseBox setBtnDisabled={setBtnDisabled} paste />
 				</View>
 				<View
 					style={{
 						paddingHorizontal: 16,
 					}}>
-					<WalletButton checked disabled={btnDisabled} onPress={submitRestore}>
+					<WalletButton
+						type='violet'
+						checked
+						disabled={btnDisabled}
+						onPress={submitRestore}>
 						Import Wallet
 					</WalletButton>
 				</View>
@@ -106,6 +102,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: 40,
 		justifyContent: 'space-between',
+		alignItems: 'center',
 		paddingBottom: 40,
 	},
 	title: {
@@ -114,7 +111,7 @@ const styles = StyleSheet.create({
 		lineHeight: 50,
 		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'sf-bold',
+		fontFamily: 'mt-semi-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

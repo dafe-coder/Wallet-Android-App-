@@ -51,3 +51,13 @@ export * from './Scanner'
 
 export * from './PreloaderScreen'
 export * from './ConfirmSwapScreen'
+
+//  ---\\\///--- Tutorial Screens ---\\\///---
+
+export * from './tutorialScreens/TutorialFirstScreen'
+export * from './tutorialScreens/TutorialSecondScreen'
+export * from './tutorialScreens/TutorialThirdScreen'
+export * from './tutorialScreens/TutorialEndScreen'
+
+export * from './ManageCryptosScreen'
+export * from './WalletSuccessScreen'

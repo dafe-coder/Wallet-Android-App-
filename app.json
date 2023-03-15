@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Polygon ID",
-    "slug": "walletpolygon",
+    "slug": "robinhood",
     "version": "2.01.14",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -32,7 +32,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "4df4f0d4-75cf-4bf5-b0ca-d6c8eeacc69b"
+        "projectId": "328ef7d5-061a-4eb7-a476-50c06d4d4f59"
       }
     },
     "owner": "daffek"

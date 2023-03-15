@@ -54,18 +54,6 @@ export const CreatePasswordScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.body}>
-			<View style={styles.image}>
-				<SvgIcon type='logo' />
-			</View>
-			{!nextStep ? (
-				<WalletText center size='m' color='dark'>
-					Create a PIN code to secure your wallet
-				</WalletText>
-			) : (
-				<WalletText center size='m'>
-					Enter your pin again
-				</WalletText>
-			)}
 			<PincodeInput
 				ref={pincodeInput}
 				length={6}
@@ -84,8 +72,8 @@ export const CreatePasswordScreen = ({ navigation }) => {
 					width: 9,
 					height: 9,
 					borderWidth: 1,
-					borderColor: THEME.DISABLED_TEXT,
-					backgroundColor: THEME.DISABLED_TEXT,
+					borderColor: THEME.GREY,
+					backgroundColor: THEME.GREY,
 					borderRadius: 50,
 				}}
 				circleFilledStyle={{
@@ -97,6 +85,15 @@ export const CreatePasswordScreen = ({ navigation }) => {
 				pin={pin}
 				onTextChange={handleOnTextChange}
 			/>
+			{!nextStep ? (
+				<WalletText color='white' center size='m'>
+					Create a PIN code to secure your wallet.
+				</WalletText>
+			) : (
+				<WalletText color='white' center size='m'>
+					Confirm PIN code.
+				</WalletText>
+			)}
 		</View>
 	)
 }
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingTop: 40,
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 		paddingBottom: 40,
 	},
 	image: {

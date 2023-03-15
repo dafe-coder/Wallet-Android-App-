@@ -7,7 +7,7 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 import { THEME } from './../Theme'
-import { WalletText, ButtonCopy } from './UI/'
+import { ButtonCopy } from './UI/'
 import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
 
@@ -22,6 +22,14 @@ export const PhraseBox = ({
 	const [active, setActive] = useState(true)
 	const [success, setSuccess] = useState('default')
 	const [text, setText] = useState('')
+
+	useEffect(() => {
+		if (text !== '' && text.trim().split(' ').length > 2) {
+			setActive(true)
+		} else {
+			setActive(false)
+		}
+	}, [text])
 
 	useEffect(() => {
 		if (text !== '' && active) {
@@ -61,37 +69,15 @@ export const PhraseBox = ({
 
 	return (
 		<View style={[styles.wrap, style, edit ? { marginBottom: 0 } : {}]}>
-			{!edit ? (
-				<View style={{ flexDirection: 'row', paddingLeft: 15 }}>
-					<TouchableOpacity activeOpacity={0.7} onPress={() => setActive(true)}>
-						<WalletText
-							color={active ? 'dark' : 'disabled'}
-							style={{ marginBottom: 7 }}>
-							Recovery Phrase
-						</WalletText>
-					</TouchableOpacity>
-					<TouchableOpacity
-						activeOpacity={0.7}
-						onPress={() => setActive(false)}>
-						<WalletText
-							color={!active ? 'dark' : 'disabled'}
-							style={{ marginLeft: 15 }}>
-							Private Key
-						</WalletText>
-					</TouchableOpacity>
-				</View>
-			) : (
-				<></>
-			)}
 			<View pointerEvents={edit ? 'none' : 'auto'}>
 				<TextInput
 					autoCapitalize='none'
 					style={[
 						styles.textarea,
 						success == 'error'
-							? { borderColor: THEME.RED }
+							? { borderBottomColor: THEME.RED }
 							: success == 'success'
-							? { borderColor: THEME.DARK_TEXT }
+							? { borderBottomColor: THEME.DARK_TEXT }
 							: {},
 						edit ? styles.editInput : {},
 					]}
@@ -99,8 +85,12 @@ export const PhraseBox = ({
 					multiline={true}
 					numberOfLines={7}
 					onChangeText={setText}
-					placeholder={phrase != '' ? phrase : 'Enter Secret Recovery Phrase'}
-					placeholderTextColor={edit ? THEME.DARK_TEXT : THEME.DISABLED_TEXT}
+					placeholder={
+						phrase != ''
+							? phrase
+							: `Enter or paste here the 12 or 24${'\n'} words from your recovery phrase, private key.`
+					}
+					placeholderTextColor={THEME.WHITE}
 					underlineColorAndroid='transparent'
 				/>
 			</View>
@@ -108,7 +98,7 @@ export const PhraseBox = ({
 				setText={setText}
 				paste={paste}
 				text={phrase != '' ? phrase : text}
-				style={{ right: 35, bottom: 20 }}
+				style={{ marginTop: 30 }}
 			/>
 			{success == 'error' && active ? (
 				<Text style={styles.errorText}>Invalid Secret Recovery Phrase!</Text>
@@ -123,26 +113,29 @@ export const PhraseBox = ({
 
 const styles = StyleSheet.create({
 	textarea: {
-		backgroundColor: THEME.GREY_LIGHT_BG,
-		borderRadius: 15,
-		padding: 15,
-		fontSize: 16,
-		lineHeight: 22,
-		color: THEME.DARK_TEXT,
-		textAlignVertical: 'top',
-		height: 142,
+		paddingVertical: 20,
+		fontSize: 14,
+		lineHeight: 17,
+		paddingHorizontal: 20,
+		color: THEME.WHITE,
+		textAlignVertical: 'center',
+		height: 80,
+		textAlign: 'center',
+		borderBottomColor: '#262838',
+		borderBottomWidth: 1,
 	},
 	wrap: {
 		position: 'relative',
 		paddingHorizontal: 16,
-		marginBottom: 150,
+		alignItems: 'center',
 	},
 	errorText: {
 		color: THEME.RED,
 		fontSize: 12,
 		position: 'absolute',
-		bottom: -23,
-		left: 35,
+		bottom: -43,
+		paddingHorizontal: 35,
+		textAlign: 'center',
 	},
 	editInput: {
 		paddingRight: 80,

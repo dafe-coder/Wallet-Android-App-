@@ -34,9 +34,63 @@ import {
 	CreatePasswordComponent,
 	AllSetComponent,
 	ConfirmSwapComponent,
+	TutorialFirstComponent,
+	TutorialSecondComponent,
+	TutorialThirdComponent,
+	TutorialEndComponent,
+	ManageCryptosComponent,
+	WalletSuccessComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'WalletSuccess',
+		options: {
+			headerShown: false,
+			title: '',
+		},
+		component: WalletSuccessComponent,
+	},
+	{
+		name: 'ManageCryptos',
+		options: {
+			headerShown: true,
+			title: 'Manage cryptos',
+		},
+		component: ManageCryptosComponent,
+	},
+	{
+		name: 'TutorialFirst',
+		options: {
+			headerShown: false,
+			title: '',
+		},
+		component: TutorialFirstComponent,
+	},
+	{
+		name: 'TutorialSecond',
+		options: {
+			headerShown: false,
+			title: '',
+		},
+		component: TutorialSecondComponent,
+	},
+	{
+		name: 'TutorialThird',
+		options: {
+			headerShown: false,
+			title: '',
+		},
+		component: TutorialThirdComponent,
+	},
+	{
+		name: 'TutorialEnd',
+		options: {
+			headerShown: false,
+			title: '',
+		},
+		component: TutorialEndComponent,
+	},
 	{
 		name: 'CreatePhrase',
 		options: ({ navigation }) => ({
@@ -141,8 +195,8 @@ const screens = [
 		component: PhraseComponent,
 		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'Before We Begin',
-			headerLeft: () => <BackBtn navigation={navigation} />,
+			title: 'Add wallet',
+			headerLeft: () => <></>,
 		}),
 	},
 	{
@@ -159,7 +213,7 @@ const screens = [
 		component: CreatePasswordComponent,
 		options: {
 			headerShown: true,
-			title: 'Create pin code',
+			title: 'Create PIN code',
 			headerLeft: () => <></>,
 		},
 	},
@@ -203,7 +257,7 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerLeft: () => <BackBtn navigation={navigation} />,
 			headerShown: true,
-			title: 'enter pin code',
+			title: 'Confirm PIN code',
 		}),
 	},
 	{
@@ -233,7 +287,8 @@ export function MyStack() {
 			<Stack.Navigator
 				style={{ flex: 1 }}
 				initialRouteName={
-					dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
+					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
+					'Home'
 				}
 				screenOptions={{
 					headerShadowVisible: false,
@@ -244,15 +299,15 @@ export function MyStack() {
 					},
 					headerTitleAlign: 'center',
 					headerStyle: {
-						backgroundColor: THEME.GREY_LIGHT,
+						backgroundColor: THEME.PRIMARY,
 					},
 					animation: 'none',
 					headerTitle: (title) => (
 						<Text
 							style={{
-								fontFamily: 'ub-regular',
-								color: THEME.VIOLET,
-								fontSize: 18,
+								fontFamily: 'mt-reg',
+								color: THEME.WHITE,
+								fontSize: 24,
 							}}>
 							{title.children.length > 1 ? toUpperWords(title.children) : ' '}
 						</Text>

@@ -30,6 +30,12 @@ import {
 	Scanner,
 	ConfirmSwapScreen,
 	TransactionHistoryPageScreen,
+	TutorialFirstScreen,
+	TutorialSecondScreen,
+	TutorialThirdScreen,
+	TutorialEndScreen,
+	ManageCryptosScreen,
+	WalletSuccessScreen,
 } from '../screens'
 export const ExportPhraseComponent = (props) => {
 	return <ExportPhraseScreen {...props} />
@@ -127,4 +133,22 @@ export const SwapComponent = (props) => {
 }
 export const TransactionHistoryPageComponent = (props) => {
 	return <TransactionHistoryPageScreen {...props} />
+}
+export const TutorialFirstComponent = (props) => {
+	return <TutorialFirstScreen {...props} />
+}
+export const TutorialSecondComponent = (props) => {
+	return <TutorialSecondScreen {...props} />
+}
+export const TutorialThirdComponent = (props) => {
+	return <TutorialThirdScreen {...props} />
+}
+export const TutorialEndComponent = (props) => {
+	return <TutorialEndScreen {...props} />
+}
+export const ManageCryptosComponent = (props) => {
+	return <ManageCryptosScreen {...props} />
+}
+export const WalletSuccessComponent = (props) => {
+	return <WalletSuccessScreen {...props} />
 }

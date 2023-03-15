@@ -78,7 +78,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 						) : (
 							<WalletText
 								size='m'
-								style={{ color: '#8247E5', fontFamily: 'ub-regular' }}>
+								style={{ color: '#8247E5', fontFamily: 'mt-reg' }}>
 								{currentAccount}
 							</WalletText>
 						)}
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 		position: 'relative',
 	},
 	input: {
-		fontFamily: 'ub-regular',
+		fontFamily: 'mt-reg',
 		minWidth: 90,
 		maxWidth: 200,
 		color: THEME.DARK_TEXT,

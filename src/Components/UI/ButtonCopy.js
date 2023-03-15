@@ -26,31 +26,31 @@ export const ButtonCopy = ({ style, text, paste, setText }) => {
 			style={[styles.btn, style]}
 			activeOpacity={1}
 			onPress={onPressBtn}>
-			<View
-				style={{ alignItems: 'center', justifyContent: 'center', height: 25 }}>
-				{color && !paste ? (
-					<WalletText color='gold'>Copied!</WalletText>
-				) : (
-					<View style={styles.circle}>
-						<SvgIcon
-							type='copy'
-							width={22}
-							height={22}
-							fill={color ? '#9667E5' : '#9667E5'}
-						/>
-					</View>
-				)}
-			</View>
+			<SvgIcon
+				style={{ marginRight: 10 }}
+				type='copy'
+				width={20}
+				height={20}
+				fill={color ? '#9667E5' : '#9667E5'}
+			/>
+			{color && !paste ? (
+				<WalletText color='gold'>Copied!</WalletText>
+			) : (
+				<WalletText>Paste</WalletText>
+			)}
 		</TouchableOpacity>
 	)
 }
 
 const styles = StyleSheet.create({
 	btn: {
-		position: 'absolute',
-		right: 20,
-		bottom: 20,
-		zIndex: 1,
+		flexDirection: 'row',
+		paddingHorizontal: 18,
+		paddingVertical: 7,
+		backgroundColor: THEME.VIOLET,
+		justifyContent: 'center',
+		borderRadius: 40,
+		width: 'auto',
 	},
 	circle: {
 		backgroundColor: THEME.GREY_LIGHT,

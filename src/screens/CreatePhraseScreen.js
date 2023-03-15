@@ -40,7 +40,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 		<View style={styles.wrap}>
 			<View style={{ paddingHorizontal: 35, marginBottom: 24 }}>
 				<WalletText
-					style={{ marginBottom: 30, fontFamily: 'sf-bold', fontSize: 20 }}
+					style={{ marginBottom: 30, fontFamily: 'mt-semi-bold', fontSize: 20 }}
 					size='m'
 					color='dark'
 					center>
@@ -49,7 +49,11 @@ export const CreatePhraseScreen = ({ navigation }) => {
 				<WalletText
 					color='gold'
 					size='m'
-					style={{ fontFamily: 'sf-bold', marginBottom: 10, color: '#8247E5' }}
+					style={{
+						fontFamily: 'mt-semi-bold',
+						marginBottom: 10,
+						color: '#8247E5',
+					}}
 					center>
 					Read Carefilly
 				</WalletText>

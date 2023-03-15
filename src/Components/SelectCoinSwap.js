@@ -200,6 +200,6 @@ const styles = StyleSheet.create({
 	input: {
 		color: THEME.DISABLED_TEXT,
 		fontSize: 16,
-		fontFamily: 'ub-regular',
+		fontFamily: 'mt-reg',
 	},
 })

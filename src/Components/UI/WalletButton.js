@@ -50,21 +50,6 @@ export const WalletButton = ({
 							]}>
 							{children}
 						</Text>
-						{arrow ? (
-							<View
-								style={[
-									styles.circle,
-									!disabled ? styles.circleViolet : styles.circleGray,
-								]}>
-								<SvgIcon
-									type='arrow-right'
-									style={{ marginLeft: 3 }}
-									fill={disabled ? '#DACEF0' : false}
-								/>
-							</View>
-						) : (
-							<></>
-						)}
 					</View>
 				</TouchableOpacity>
 			)
@@ -96,17 +81,6 @@ export const WalletButton = ({
 							]}>
 							{children}
 						</Text>
-						{arrow ? (
-							<View style={[styles.circle, styles.circleGray]}>
-								<SvgIcon
-									style={{ marginLeft: 3 }}
-									fill={THEME.VIOLET_LIGHT}
-									type='arrow-right'
-								/>
-							</View>
-						) : (
-							<></>
-						)}
 					</View>
 				</TouchableOpacity>
 			)
@@ -129,6 +103,7 @@ const styles = StyleSheet.create({
 	},
 	violet: {
 		backgroundColor: THEME.VIOLET,
+		width: 200,
 	},
 	border: {
 		borderWidth: 1,
@@ -136,12 +111,10 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		borderRadius: 30,
-		paddingVertical: 8.5,
-		justifyContent: 'space-between',
+		paddingVertical: 17,
+		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
-		paddingLeft: 24,
-		paddingRight: 9,
 	},
 	textPrimary: {
 		color: THEME.VIOLET,
@@ -153,13 +126,12 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		lineHeight: 22,
 		textAlign: 'center',
-		fontFamily: 'ub-medium',
-		textTransform: 'uppercase',
+		fontFamily: 'mt-med',
 	},
 	disabled: {
-		borderColor: '#DACEF0',
+		borderColor: THEME.GREY,
 		borderWidth: 1,
-		backgroundColor: 'transparent',
+		backgroundColor: THEME.GREY,
 	},
 	disabledText: {
 		color: '#DACEF0',

@@ -24,9 +24,8 @@ export const Rules = ({ style }) => {
 						: url
 				}>
 				<Text style={styles.text}>
-					By processing, you agree to the
-					https://polygonfinance.org/assets/pp-polygon.txt and {'\n'}
-					https://polygonfinance.org/assets/pp-polygon.txt1
+					By proceeding, you agree to App Name
+					https://polygonfinance.org/assets/pp-polygon.txt
 				</Text>
 			</Hyperlink>
 		</View>
@@ -35,17 +34,16 @@ export const Rules = ({ style }) => {
 
 const styles = StyleSheet.create({
 	link: {
-		textDecorationLine: 'underline',
-		color: THEME.VIOLET_LIGHT,
+		color: THEME.VIOLET,
 		fontSize: 14,
 		lineHeight: 18,
-		fontFamily: 'ub-regular',
+		fontFamily: 'mt-reg',
 	},
 	text: {
-		color: THEME.VIOLET_LIGHT,
+		color: THEME.DISABLED_TEXT,
 		fontSize: 14,
 		lineHeight: 20,
-		fontFamily: 'ub-regular',
+		fontFamily: 'mt-reg',
 		textAlign: 'center',
 	},
 })

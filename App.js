@@ -20,10 +20,9 @@ import { AppWrap } from './AppWrap'
 export default function App() {
 	const [hidePreloader, setHidePreloader] = useState(true)
 	const [fontsLoaded] = useFonts({
-		'sf-bold': require('./assets/fonts/SF-Pro-Display-Bold.ttf'),
-		'gt-medium': require('./assets/fonts/GothamPro-Medium.ttf'),
-		'ub-medium': require('./assets/fonts/Rubik-SemiBold.ttf'),
-		'ub-regular': require('./assets/fonts/Rubik-Regular.ttf'),
+		'mt-semi-bold': require('./assets/fonts/Montserrat-SemiBold.ttf'),
+		'mt-med': require('./assets/fonts/Montserrat-Medium.ttf'),
+		'mt-reg': require('./assets/fonts/Montserrat-Regular.ttf'),
 	})
 	useEffect(() => {
 		setTimeout(() => {

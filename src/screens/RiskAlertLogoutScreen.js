@@ -11,7 +11,7 @@ export const RiskAlertLogoutScreen = ({ navigation }) => {
 				<WalletTitle
 					style={{
 						fontSize: 16,
-						fontFamily: 'ub-medium',
+						fontFamily: 'mt-med',
 						marginBottom: 24,
 						marginTop: 44,
 					}}>

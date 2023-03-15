@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native'
 
 export const WalletText = ({
 	size = 'sm',
-	color = 'white-dark',
+	color = 'white',
 	children,
 	style,
 	upperCase = false,
@@ -22,8 +22,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -40,8 +40,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -58,8 +58,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -76,8 +76,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -94,8 +94,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -112,8 +112,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}
@@ -130,8 +130,8 @@ export const WalletText = ({
 							upperCase && styles.upperCase,
 							center && styles.center,
 							fw == 'regular'
-								? { fontFamily: 'ub-regular' }
-								: { fontFamily: 'sf-bold' },
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
 							style,
 						]}>
 						{children}

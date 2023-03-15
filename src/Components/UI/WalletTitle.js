@@ -2,16 +2,37 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 import { THEME } from '../../Theme'
 
-export const WalletTitle = ({ style, children }) => {
-	return <Text style={{ ...styles.title, ...style }}>{children}</Text>
+export const WalletTitle = ({ style, children, color, size }) => {
+	let colorTitle = null
+	let sizeTitle = null
+	switch (color) {
+		case 'white':
+			colorTitle = { color: THEME.WHITE }
+			break
+		default:
+			colorTitle = {
+				color: THEME.DARK,
+			}
+			break
+	}
+	switch (size) {
+		case 'm':
+			sizeTitle = { fontSize: 24, lineHeight: 29 }
+			break
+		default:
+			sizeTitle = { fontSize: 24, lineHeight: 29 }
+			break
+	}
+	return (
+		<Text style={{ ...styles.title, ...colorTitle, ...sizeTitle, ...style }}>
+			{children}
+		</Text>
+	)
 }
 
 const styles = StyleSheet.create({
 	title: {
-		fontSize: 20,
-		lineHeight: 24,
-		color: THEME.DARK,
-		fontFamily: 'sf-bold',
+		fontFamily: 'mt-reg',
 		textAlign: 'center',
 	},
 })

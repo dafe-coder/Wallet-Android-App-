@@ -47,7 +47,7 @@ export default function BottomTabNavigator() {
 					headerTitle: (title) => (
 						<Text
 							style={{
-								fontFamily: 'ub-regular',
+								fontFamily: 'mt-reg',
 								color: THEME.VIOLET,
 								fontSize: 18,
 							}}>

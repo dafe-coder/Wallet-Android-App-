@@ -31,7 +31,7 @@ export const RiskAlertScreen = ({ navigation }) => {
 				<WalletTitle
 					style={{
 						fontSize: 16,
-						fontFamily: 'ub-medium',
+						fontFamily: 'mt-med',
 						marginBottom: 24,
 						marginTop: 44,
 					}}>
