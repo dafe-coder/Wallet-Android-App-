@@ -3,14 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
 	WalletComponent,
 	TransactionHistoryPageComponent,
-	SwapComponent,
 	AccountComponent,
-	NftComponent,
 } from './pages'
 const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
 import { Text } from 'react-native'
-import { HistoryBtn } from './HeaderButtons/HistoryBtn'
+import { DoubleButtons } from './'
 import { MyTabBar } from './BottomTabBar'
 
 export default function BottomTabNavigator() {
@@ -24,8 +22,9 @@ export default function BottomTabNavigator() {
 						borderBottomColor: 'transparent',
 						shadowColor: 'transparent',
 						elevation: 0,
-						backgroundColor: THEME.GREY_LIGHT,
+						backgroundColor: THEME.PRIMARY,
 					},
+					headerTransparent: true,
 					tabBarStyle: {
 						display: 'none',
 						elevation: 0,
@@ -61,26 +60,13 @@ export default function BottomTabNavigator() {
 					name='Wallet'
 					component={WalletComponent}
 					options={({ navigation }) => ({
-						headerLeft: () => <HistoryBtn navigation={navigation} />,
+						headerTitle: () => <></>,
+						headerLeft: () => <DoubleButtons navigation={navigation} />,
 					})}
 				/>
 				<Tab.Screen
 					name='TransactionPage'
 					component={TransactionHistoryPageComponent}
-					options={{
-						headerLeft: () => <></>,
-					}}
-				/>
-				<Tab.Screen
-					name='Swap'
-					component={SwapComponent}
-					options={{
-						headerLeft: () => <></>,
-					}}
-				/>
-				<Tab.Screen
-					name='Nft'
-					component={NftComponent}
 					options={{
 						headerLeft: () => <></>,
 					}}

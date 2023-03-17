@@ -20,14 +20,18 @@ export const PortfolioItem = ({
 			<View style={{ flexDirection: 'row' }}>
 				<Image style={styles.logo} source={{ uri: img }} />
 				<View style={{ marginLeft: 10 }}>
-					<WalletText>{title.toUpperCase()}</WalletText>
-					<WalletText style={{ color: THEME.DISABLED_TEXT }}>
+					<WalletText size='m' fw='bold'>
+						{title.toUpperCase()}
+					</WalletText>
+					<WalletText
+						style={{ fontSize: 12, lineHeight: 15, marginTop: 4 }}
+						color='white'>
 						${fixNum(currentPrice)}
 					</WalletText>
 				</View>
 			</View>
 			<View style={{ alignItems: 'flex-end' }}>
-				<WalletText>{fixNum(balance)}</WalletText>
+				<WalletText fw='bold'>{fixNum(balance)}</WalletText>
 				<WalletText
 					style={
 						changePercent > 0 ? { color: THEME.SUCCESS } : { color: THEME.RED }
@@ -41,13 +45,11 @@ export const PortfolioItem = ({
 
 const styles = StyleSheet.create({
 	logo: {
-		height: 36,
-		width: 36,
+		height: 44,
+		width: 44,
 	},
 	item: {
-		backgroundColor: THEME.GREY_LIGHT_BG,
 		borderRadius: 15,
-		paddingHorizontal: 20,
 		paddingVertical: 10,
 		flexDirection: 'row',
 		justifyContent: 'space-between',

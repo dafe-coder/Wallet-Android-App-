@@ -16,4 +16,5 @@ export const THEME = {
 	GREY_LIGHT: '#ECE9F2',
 	GREY_LIGHT_BG: '#F0F0F3',
 	DISABLED_TEXT: '#6C757D',
+	YELLOW: '#F1AE4A',
 }

@@ -1,31 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {
-	View,
-	ScrollView,
-	StyleSheet,
-	TouchableOpacity,
-	Pressable,
-} from 'react-native'
-import {
-	WalletNav,
-	PortfolioList,
-	Slider,
-	PortfolioSort,
-} from './../Components/'
-import { WalletBottomSheet } from '../Components/'
-import {
-	Filters,
-	ChooseAssets,
-	ChangeCurrentNetwork,
-	SelectAccount,
-} from './../Components/modal'
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import { WalletNav, PortfolioList, WalletBottomSheet } from './../Components/'
+import { WalletText } from '../Components/UI'
+import { Filters, ChooseAssets } from './../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
 import { filterData } from '../../services/funcWallet/filterData'
 import { LoaderListItem } from '../Components/Loader/LoaderListItem'
 import { THEME } from './../Theme'
 import { SvgIcon } from './../Components/svg/svg'
 import { setChooseAssets } from '../store/actions/storageAction'
-import { AccountBtn, HeaderTitle } from '../navigation'
+import { InfoPriseSlide } from './../Components/sliders/InfoPriceSlide'
 
 export const WalletScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -62,45 +46,16 @@ export const WalletScreen = ({ navigation }) => {
 			)
 		}
 	}, [portfolioCoins, allCoins])
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTitle: () => (
-				<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-			),
-			headerRight: () => (
-				<AccountBtn openModalSelect={openModalSelect} navigation={navigation} />
-			),
-		})
-	}, [navigation])
+
 	const filterRef = useRef(null)
 	const chooseAssetsRef = useRef(null)
-	const chooseNetwork = useRef(null)
-	const selectAccountRef = useRef(null)
 
-	const openModalSelect = () => {
-		selectAccountRef.current.expand()
-	}
-
-	const onCloseModal = () => {
-		selectAccountRef.current.close()
-	}
-	const openModalSelectAccount = () => {
-		chooseNetwork.current?.expand()
-	}
-	const closeModalSelectAccount = () => {
-		chooseNetwork.current?.close()
-	}
 	const onCloseFilters = () => {
 		filterRef.current?.close()
 	}
-	const openModalFilter = () => {
-		filterRef.current?.expand()
-	}
+
 	const onCloseAssets = () => {
 		chooseAssetsRef.current?.close()
-	}
-	const onOpenAssets = () => {
-		chooseAssetsRef.current?.expand()
 	}
 
 	const onChooseAssets = (coin) => {
@@ -113,23 +68,47 @@ export const WalletScreen = ({ navigation }) => {
 			<ScrollView
 				style={{
 					flex: 1,
-					paddingTop: 20,
 				}}>
-				<Slider portfolioCoinsInit={portfolioCoinsInit} />
-				<View style={{ paddingHorizontal: 16, flex: 1, position: 'relative' }}>
+				<InfoPriseSlide />
+				<View
+					style={{
+						marginHorizontal: 24,
+						flex: 1,
+						position: 'relative',
+					}}>
 					<WalletNav navigation={navigation} />
-					<PortfolioSort
-						style={{ marginTop: 10, marginBottom: 13 }}
-						onPress={openModalFilter}
-					/>
+					<View
+						style={{
+							marginTop: 40,
+							marginBottom: 30,
+							justifyContent: 'space-between',
+							flexDirection: 'row',
+						}}>
+						<WalletText size='m' color='disabled'>
+							Wallet
+						</WalletText>
+						<TouchableOpacity
+							onPress={() =>
+								navigation.navigate('ManageCryptos', { home: true })
+							}
+							activeOpacity={0.7}
+							style={{ flexDirection: 'row', alignItems: 'center' }}>
+							<WalletText
+								style={{ fontFamily: 'mt-med', marginRight: 6 }}
+								color='gold'>
+								Manage
+							</WalletText>
+							<SvgIcon type='play' />
+						</TouchableOpacity>
+					</View>
 					{filterPortfolioCoinsLoader && loaderSkeleton ? (
 						<PortfolioList
 							navigation={navigation}
 							coins={filterPortfolioCoins}
-							style={{ marginBottom: 175 }}
+							style={{ marginBottom: 105 }}
 						/>
 					) : (
-						<View style={{ marginBottom: 175 }}>
+						<View style={{ marginBottom: 105 }}>
 							<LoaderListItem style={{ marginBottom: 10 }} />
 							<LoaderListItem style={{ marginBottom: 10 }} />
 							<LoaderListItem style={{ marginBottom: 10 }} />
@@ -147,21 +126,6 @@ export const WalletScreen = ({ navigation }) => {
 					allCoins={allCoins}
 				/>
 			</WalletBottomSheet>
-			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork
-					onPress={closeModalSelectAccount}
-					navigation={navigation}
-				/>
-			</WalletBottomSheet>
-			<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-				<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
-			</WalletBottomSheet>
-			<TouchableOpacity
-				style={styles.btnAddedAsset}
-				activeOpacity={0.7}
-				onPress={onOpenAssets}>
-				<SvgIcon type='plus-small' />
-			</TouchableOpacity>
 		</>
 	)
 }

@@ -1,20 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { View, ScrollView } from 'react-native'
-import { WalletTitle, WalletText } from './../Components/UI/'
-import { THEME } from './../Theme'
+import React, { useEffect, useState } from 'react'
+import { View, ScrollView, Image } from 'react-native'
+import { WalletText } from './../Components/UI/'
 import { TransactionsList } from './../Components/'
 import { useSelector } from 'react-redux'
-import { SvgIcon } from './../Components/svg/svg'
 import useIsReady from '../../hooks/useIsReady'
-import { HeaderTitle } from '../navigation'
 import { BusyIndicator } from '../Components/Loader'
-import { WalletBottomSheet } from './../Components/'
-import { ChangeCurrentNetwork } from '../Components/modal'
 
+const arrList = Array.from(new Array(6).keys())
 export const TransactionHistoryScreen = ({ navigation }) => {
 	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
-	const chooseNetwork = useRef(null)
 
 	const isReady = useIsReady()
 	useEffect(() => {
@@ -23,62 +18,59 @@ export const TransactionHistoryScreen = ({ navigation }) => {
 			setTransactionList(filtered)
 		}
 	}, [transactions])
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTitle: () => (
-				<HeaderTitle openModalSelectAccount={openModalSelectAccount} />
-			),
-		})
-	}, [navigation])
-	const openModalSelectAccount = () => {
-		chooseNetwork.current?.expand()
-	}
-	const closeModalSelectAccount = () => {
-		chooseNetwork.current?.close()
-	}
+
 	if (!isReady) {
 		return <BusyIndicator></BusyIndicator>
 	}
 	return (
 		<>
 			<ScrollView style={{ paddingTop: 29 }}>
-				<View
-					style={{
-						marginHorizontal: 16,
-						paddingHorizontal: 16,
-						paddingBottom: 16,
-					}}>
-					<WalletTitle
-						style={{ fontSize: 16, lineHeigh: 24, textAlign: 'left' }}>
-						Transaction history
-					</WalletTitle>
-				</View>
-				<View style={{ paddingHorizontal: 16, paddingBottom: 70 }}>
+				<View style={{ paddingHorizontal: 24, paddingBottom: 70 }}>
 					{transactionList.length < 1 ? (
 						<View
 							style={{
-								flexDirection: 'row',
-								justifyContent: 'center',
-								alignItems: 'center',
+								position: 'relative',
 								marginTop: 24,
 								height: 450,
 							}}>
-							<SvgIcon type='bar' />
-							<WalletText style={{ color: THEME.DISABLED_TEXT, marginLeft: 7 }}>
-								No transactions history yet
-							</WalletText>
+							{arrList.map((_, i) => (
+								<View
+									key={i}
+									style={{
+										width: '100%',
+										height: 60,
+										marginBottom: 17,
+									}}>
+									<Image
+										resizeMode='contain'
+										style={{
+											width: '100%',
+											height: 64,
+										}}
+										source={require('../../assets/transaction-load.png')}
+									/>
+								</View>
+							))}
+							<View
+								style={{
+									position: 'absolute',
+									top: 0,
+									right: 0,
+									left: 0,
+									bottom: 0,
+									justifyContent: 'center',
+									alignItems: 'center',
+								}}>
+								<WalletText size='m' center color='white'>
+									Your activity will {'\n'}appear here!
+								</WalletText>
+							</View>
 						</View>
 					) : (
 						<TransactionsList style={{ marginBottom: 0 }} data={transactions} />
 					)}
 				</View>
 			</ScrollView>
-			<WalletBottomSheet ref={chooseNetwork} snapPoints={['55%']}>
-				<ChangeCurrentNetwork
-					onPress={closeModalSelectAccount}
-					navigation={navigation}
-				/>
-			</WalletBottomSheet>
 		</>
 	)
 }

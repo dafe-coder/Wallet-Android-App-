@@ -5,6 +5,7 @@ import { THEME } from './../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
 import Web3 from 'web3'
 import { SvgIconNav } from './svg/svgNav'
+import dateFormat from 'dateformat'
 
 export const TransactionItem = ({
 	prevDate,
@@ -39,38 +40,38 @@ export const TransactionItem = ({
 		return str + z
 	}
 
+	const checkColor = () => {
+		switch (type) {
+			case 'send':
+				return 'yellow'
+			case 'trade':
+				return 'gold'
+			default:
+				return 'green-light'
+		}
+	}
 	return (
 		<>
 			{prevDate[index - 1] !==
 			getDateTransaction(+itemData.mined_at).join('.') ? (
 				<WalletText
 					color='disabled'
-					style={{ paddingLeft: 20, marginBottom: 12, marginTop: 15 }}>
-					{getDateTransaction(+itemData.mined_at).map((item) =>
-						item.length == 2 ? item + '.' : item
-					)}
+					style={{ marginBottom: 12, marginTop: 15 }}>
+					{dateFormat(new Date(+itemData.mined_at * 1000), 'mmmm d, yyyy')}
 				</WalletText>
 			) : (
 				<></>
 			)}
 			<View style={styles.item}>
 				<View style={styles.itemLeft}>
-					<View
-						style={[
-							styles.icon,
-							type == 'receive'
-								? styles.iconGreen
-								: type == 'send'
-								? styles.iconRed
-								: styles.iconYellow,
-						]}>
+					<View style={[styles.icon]}>
 						<SvgIconNav type={path} />
 					</View>
 					<View>
-						<WalletText color='dark'>
+						<WalletText size='m' fw='bold' color={checkColor()}>
 							{type == 'receive' ? 'Receive' : type == 'send' ? 'Send' : 'Swap'}
 						</WalletText>
-						<WalletText color='disabled'>
+						<WalletText color='white' style={{ fontSize: 12 }}>
 							{type == 'receive' ? 'From:' : type == 'send' ? 'To:' : ''}{' '}
 							{type == 'receive'
 								? itemData.address_from.length > 10
@@ -91,30 +92,8 @@ export const TransactionItem = ({
 					</View>
 				</View>
 				<View style={{ alignItems: 'flex-end' }}>
-					<WalletText color='dark'>
-						{itemData.changes[1]
-							? fixNum(
-									Number(
-										Web3.utils.fromWei(
-											itemData.changes[1].value.noExponents(),
-											'ether'
-										)
-									)
-							  )
-							: fixNum(
-									Number(
-										Web3.utils.fromWei(
-											itemData.changes[0].value.noExponents(),
-											'ether'
-										)
-									)
-							  )}{' '}
-						{type == 'trade' && itemData.changes[1]
-							? itemData.changes[1].asset.symbol
-							: itemData.changes[0].asset.symbol}
-					</WalletText>
-					<WalletText color='dark'>
-						$
+					<WalletText fw='bold' size='m' color={checkColor()}>
+						${' '}
 						{fixNum(
 							Number(
 								Web3.utils.fromWei(
@@ -122,8 +101,12 @@ export const TransactionItem = ({
 									'ether'
 								)
 							) * itemData.changes[0].asset.price.value
-						)}{' '}
-						USD
+						)}
+					</WalletText>
+					<WalletText color='white' style={{ fontSize: 12 }}>
+						{getDateTransaction(+itemData.mined_at).map((item) =>
+							item.length == 2 ? item + '.' : item
+						)}
 					</WalletText>
 				</View>
 			</View>
@@ -138,7 +121,8 @@ const styles = StyleSheet.create({
 		height: 36,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 50,
+		backgroundColor: THEME.GREY,
+		borderRadius: 6,
 	},
 	iconGreen: {
 		backgroundColor: THEME.GREY_LIGHT,
@@ -152,8 +136,6 @@ const styles = StyleSheet.create({
 	item: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		backgroundColor: THEME.GREY_LIGHT_BG,
-		paddingHorizontal: 20,
 		borderRadius: 15,
 		paddingVertical: 10,
 		marginBottom: 8,

@@ -10,7 +10,7 @@ export const QrCode = ({ value, setRef }) => {
 				value={value}
 				color='black'
 				backgroundColor='white'
-				size={130}
+				size={200}
 				getRef={(c) => setRef(c)}
 			/>
 		</View>
@@ -19,11 +19,6 @@ export const QrCode = ({ value, setRef }) => {
 
 const styles = StyleSheet.create({
 	block: {
-		backgroundColor: THEME.WHITE,
-		padding: 20,
-		width: 172,
-		height: 172,
-		margin: 0,
 		marginRight: 'auto',
 		marginLeft: 'auto',
 		borderRadius: 10,

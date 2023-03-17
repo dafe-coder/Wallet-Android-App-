@@ -1,63 +1,26 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { SvgCoin } from './svg/svgCoin'
+import { View, StyleSheet, Image } from 'react-native'
 import { WalletText, SwitchButton } from './UI'
 import { THEME } from '../Theme'
-const coins = [
-	{
-		id: 1,
-		title: 'Bitcoin',
-		symbol: 'Btc',
-		image: <SvgCoin type='btc' />,
-		switch: true,
-		balance: 0.0,
-	},
-	{
-		id: 2,
-		title: 'Ethereum',
-		symbol: 'Eth',
-		image: <SvgCoin type='eth' />,
-		switch: true,
-		balance: 0.0,
-	},
-	{
-		id: 3,
-		title: 'BNB',
-		symbol: 'BNB',
-		image: <SvgCoin type='bnb' />,
-		switch: true,
-		balance: 0,
-	},
-	{
-		id: 4,
-		title: 'Polygon',
-		symbol: 'Matic',
-		image: <SvgCoin type='polygon' />,
-		switch: true,
-		balance: 0,
-	},
-	{
-		id: 5,
-		title: 'Avalanche',
-		symbol: 'Avax',
-		image: <SvgCoin type='avax' />,
-		switch: true,
-		balance: 0,
-	},
-]
+import { useSelector } from 'react-redux'
+import fixNum from './../../services/funcWallet/fixNum'
 
-export const ChooseCryptos = ({ style }) => {
+export const ChooseCryptosHome = ({ style }) => {
+	const { allCoins } = useSelector((state) => state.wallet)
 	return (
 		<View style={style}>
-			{coins.map((item) => (
+			{allCoins.map((item) => (
 				<View key={item.id} style={styles.item}>
-					<View style={styles.coinBlock}>{item.image}</View>
+					<Image
+						style={{ marginRight: 8, width: 40, height: 40 }}
+						source={{ uri: item.image.thumb }}
+					/>
 					<View>
 						<WalletText size='m' fw='bold'>
-							{item.title}
+							{item.name}
 						</WalletText>
 						<WalletText style={{ fontSize: 12 }}>
-							{item.balance + ' '}
+							{fixNum(item.market_data.balance) + ' '}
 							{item.symbol.toUpperCase()}
 						</WalletText>
 					</View>
@@ -84,6 +47,7 @@ const styles = StyleSheet.create({
 		paddingRight: 6,
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
+		alignItems: 'center',
 		paddingBottom: 16,
 		marginBottom: 24,
 		borderBottomColor: THEME.DISABLED_TEXT,

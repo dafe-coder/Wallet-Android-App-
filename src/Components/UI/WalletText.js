@@ -138,6 +138,24 @@ export const WalletText = ({
 					</Text>
 				</View>
 			)
+		case 'yellow':
+			return (
+				<View>
+					<Text
+						style={[
+							styles.yellow,
+							size == 'sm' ? styles.sm : styles.m,
+							upperCase && styles.upperCase,
+							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
+							style,
+						]}>
+						{children}
+					</Text>
+				</View>
+			)
 	}
 }
 
@@ -167,6 +185,9 @@ const styles = StyleSheet.create({
 	},
 	dark: {
 		color: THEME.DARK,
+	},
+	yellow: {
+		color: THEME.YELLOW,
 	},
 	greenLight: {
 		color: THEME.SUCCESS,

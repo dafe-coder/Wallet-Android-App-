@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { TransactionItem } from './TransactionItem'
+import dateFormat from 'dateformat'
+
 export const TransactionsList = ({ style, data }) => {
 	const [date, setDate] = useState(['0'])
 	useEffect(() => {
@@ -32,7 +34,7 @@ export const TransactionsList = ({ style, data }) => {
 	}
 	let count = 0
 	return (
-		<View style={[{ marginTop: 24, marginBottom: 80 }, style]}>
+		<View style={[{ marginBottom: 80 }, style]}>
 			{data.map((item, i) => {
 				if (item.changes.length) {
 					return (

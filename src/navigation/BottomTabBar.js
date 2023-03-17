@@ -10,9 +10,6 @@ const width = Dimensions.get('window').width
 export function MyTabBar({ state, descriptors, navigation }) {
 	return (
 		<View style={styles.wrap}>
-			<View style={styles.polygon}>
-				<SvgIcon width={width + 2} type='polygon-nav' />
-			</View>
 			{state.routes.map((route, index) => {
 				const { options } = descriptors[route.key]
 				const label =
@@ -58,12 +55,10 @@ export function MyTabBar({ state, descriptors, navigation }) {
 				}
 				const initSvgType = (label) => {
 					switch (label) {
-						case 'Nft':
-							return 'bar'
 						case 'TransactionPage':
-							return 'activity'
+							return 'buy'
 						case 'Account':
-							return 'man'
+							return 'cog'
 						default:
 							return label.toLowerCase()
 					}
@@ -79,33 +74,15 @@ export function MyTabBar({ state, descriptors, navigation }) {
 						testID={options.tabBarTestID}
 						onLongPress={onLongPress}
 						onPress={onPress}>
-						<View style={[styles.item]}>
-							{label == 'Swap' ? (
-								<View
-									style={[styles.mainBtn, { position: 'absolute', top: -43 }]}>
-									<SvgIconNav type='swap' width={22} height={24} />
-								</View>
-							) : (
-								<SvgIconNav
-									height='20'
-									type={initSvgType(label)}
-									fill={isFocused ? THEME.VIOLET : ''}
-								/>
-							)}
-							<WalletText
-								style={[
-									{ marginTop: 5 },
-									label == 'Swap' ? { marginTop: 25 } : {},
-									label == 'Account'
-										? {
-												minWidth: width / 7,
-												height: 23,
-										  }
-										: {},
-									isFocused ? { color: '#632DBC' } : { color: '#BDA5E4' },
-								]}>
-								{initLabel(label)}
-							</WalletText>
+						<View
+							style={[
+								styles.item,
+								isFocused ? { backgroundColor: '#fff' } : {},
+							]}>
+							<SvgIconNav
+								type={initSvgType(label)}
+								fill={isFocused ? '#000' : '#fff'}
+							/>
 						</View>
 					</TouchableOpacity>
 				)
@@ -118,7 +95,10 @@ const styles = StyleSheet.create({
 	item: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		width: 58,
+		width: 84,
+		height: 52,
+		borderRadius: 50,
+		backgroundColor: THEME.GREY,
 	},
 	wrap: {
 		width: '100.3%',

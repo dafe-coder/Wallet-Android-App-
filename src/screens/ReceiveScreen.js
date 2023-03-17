@@ -32,17 +32,21 @@ export const ReceiveScreen = () => {
 		<ScrollView>
 			<View
 				style={{ paddingTop: 70, paddingHorizontal: 16, paddingBottom: 60 }}>
-				<WalletTitle style={{ marginBottom: 34 }}>
-					Scan QR Code and Pay
-				</WalletTitle>
 				{address !== '' ? <QrCode setRef={setRef} value={address} /> : <></>}
 				<View style={styles.address}>
-					<WalletText color='dark'>
-						{address !== undefined && address !== ''
-							? address.slice(0, 13) + '...' + address.slice(-10)
-							: ''}
+					<WalletText
+						center
+						color='white'
+						size='m'
+						style={{ marginBottom: 16 }}>
+						My Tokenname address
 					</WalletText>
-					<ButtonCopy text={address} style={{ bottom: 10, right: 7 }} />
+					<WalletText
+						style={{ fontSize: 12, lineHeight: 14 }}
+						center
+						color='disabled'>
+						{address !== undefined && address !== '' ? address : ''}
+					</WalletText>
 				</View>
 				<View
 					style={{
@@ -51,19 +55,14 @@ export const ReceiveScreen = () => {
 						justifyContent: 'center',
 						marginTop: 48,
 					}}>
+					<ButtonCopy text={address} style={{ marginRight: 20 }} />
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.link}
 						onPress={shareQR}>
-						<SvgIcon
-							style={{ marginTop: 1 }}
-							width='24'
-							height='24'
-							type='share'
-							fill={'#9667E5'}
-						/>
-						<WalletText style={{ marginLeft: 8, color: '#9667E5' }}>
-							Share address
+						<SvgIcon width='24' height='24' type='share' fill={'#9667E5'} />
+						<WalletText fw='bold' color='white' style={{ marginLeft: 8 }}>
+							Share
 						</WalletText>
 					</TouchableOpacity>
 				</View>
@@ -76,13 +75,19 @@ const styles = StyleSheet.create({
 	link: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		backgroundColor: THEME.GREY,
+		borderRadius: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingVertical: 6,
+		paddingHorizontal: 20,
 	},
 	address: {
-		backgroundColor: THEME.GREY_LIGHT_BG,
-		borderRadius: 30,
-		paddingHorizontal: 20,
+		paddingHorizontal: 24,
 		paddingVertical: 12,
 		marginTop: 24,
+		justifyContent: 'center',
+		alignContent: 'center',
 	},
 	btnSave: {
 		backgroundColor: THEME.BROWN,

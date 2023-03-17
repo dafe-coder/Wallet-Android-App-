@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 import { BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
-import { HeaderTitle } from '../navigation/HeaderButtons/HeaderTitleBottomNav'
-import { AccountBtn } from '../navigation/HeaderButtons/AccountBtnBottomNav'
+import { DoubleButtons } from './'
+
 import {
 	SentComponent,
 	LoginComponent,
@@ -337,8 +337,9 @@ export function MyStack() {
 					component={TransactionHistoryComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
-						title: '',
-						headerLeft: () => <BackBtn navigation={navigation} />,
+						headerTitle: () => <></>,
+						headerLeft: () => <DoubleButtons navigation={navigation} />,
+						headerRight: () => <BackBtn navigation={navigation} />,
 					})}
 				/>
 				<Stack.Screen
@@ -355,8 +356,9 @@ export function MyStack() {
 					component={ReceiveComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
-						title: 'You Wallet Address',
-						headerLeft: () => <BackBtn navigation={navigation} />,
+						title: 'Receive',
+						headerLeft: () => <></>,
+						headerRight: () => <BackBtn navigation={navigation} />,
 					})}
 				/>
 				<Stack.Screen
