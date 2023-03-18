@@ -2,7 +2,7 @@
   "expo": {
     "name": "Polygon ID",
     "slug": "walletpolygon",
-    "version": "2.01.14",
+    "version": "1.18.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.poly.webid"
+      "package": "com.research.matic"
     },
     "web": {
       "favicon": "./assets/favicon.png"
