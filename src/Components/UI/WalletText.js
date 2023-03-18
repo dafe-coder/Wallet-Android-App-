@@ -10,11 +10,12 @@ export const WalletText = ({
 	upperCase = false,
 	center = false,
 	fw = 'regular',
+	styleWrap,
 }) => {
 	switch (color) {
 		case 'white':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.white,
@@ -32,7 +33,7 @@ export const WalletText = ({
 			)
 		case 'white-dark':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.whiteDark,
@@ -50,7 +51,7 @@ export const WalletText = ({
 			)
 		case 'disabled':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.disabled,
@@ -68,7 +69,7 @@ export const WalletText = ({
 			)
 		case 'gold':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.gold,
@@ -86,7 +87,7 @@ export const WalletText = ({
 			)
 		case 'dark':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.dark,
@@ -104,7 +105,7 @@ export const WalletText = ({
 			)
 		case 'green-light':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.greenLight,
@@ -122,7 +123,7 @@ export const WalletText = ({
 			)
 		case 'red':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.red,
@@ -140,7 +141,7 @@ export const WalletText = ({
 			)
 		case 'yellow':
 			return (
-				<View>
+				<View style={styleWrap}>
 					<Text
 						style={[
 							styles.yellow,

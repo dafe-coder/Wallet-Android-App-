@@ -39,10 +39,20 @@ import {
 	TutorialThirdComponent,
 	TutorialEndComponent,
 	ManageCryptosComponent,
+	ChooseCryptosComponent,
 	WalletSuccessComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'ChooseCryptos',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: '',
+		}),
+		component: ChooseCryptosComponent,
+	},
 	{
 		name: 'WalletSuccess',
 		options: {
@@ -288,7 +298,7 @@ export function MyStack() {
 				style={{ flex: 1 }}
 				initialRouteName={
 					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'Home'
+					'ChooseCryptos'
 				}
 				screenOptions={{
 					headerShadowVisible: false,
@@ -375,7 +385,8 @@ export function MyStack() {
 					component={SentComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
-						headerLeft: () => <BackBtn navigation={navigation} />,
+						title: '',
+						headerRight: () => <BackBtn navigation={navigation} />,
 					})}
 				/>
 				<Stack.Screen

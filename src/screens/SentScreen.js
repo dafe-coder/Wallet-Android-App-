@@ -1,160 +1,107 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
 	View,
+	Text,
 	TouchableOpacity,
+	TextInput,
 	StyleSheet,
 	ScrollView,
-	Keyboard,
-	TouchableWithoutFeedback,
 } from 'react-native'
-import { WalletInput, WalletText } from './../Components/UI/'
+import { WalletKeyboard, WalletText } from './../Components/UI/'
 import { SelectCoinSent } from '../Components'
 import { WalletButton } from './../Components/UI/WalletButton'
-import { WalletBottomSheet } from '../Components'
-import { ChooseCoins } from '../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
-import { setAddressTo, setChooseCoin } from './../store/actions/walletActions'
 import { SvgIcon } from './../Components/svg/svg'
 import { THEME } from '../Theme'
+import { ChooseCoin } from './../Components/ChooseCoin'
 
-import useIsReady from '../../hooks/useIsReady'
-import { BusyIndicator } from '../Components/Loader'
 export const SentScreen = ({ navigation }) => {
-	const dispatch = useDispatch()
-	const { allCoins, chooseCoin, addressTo } = useSelector(
-		(state) => state.wallet
-	)
-	const coinsRef = useRef(null)
-	const [fromAddress, setFromAddress] = useState('')
-	const [openKeyboard, setOpenKeyboard] = useState(false)
+	const { chooseCoin } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(true)
-	const isReady = useIsReady()
-	const onAddAddress = (text) => {
-		setFromAddress(text)
-		dispatch(setAddressTo(text))
-	}
-
-	useEffect(() => {
-		if (addressTo != '') {
-			setFromAddress(addressTo)
-		}
-	}, [addressTo])
-	const onChooseCoin = () => {
-		coinsRef.current.expand()
-	}
-	const onCoinPress = (coin) => {
-		dispatch(setChooseCoin(coin))
-		coinsRef.current.close()
-	}
-	useEffect(() => {
-		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-			setOpenKeyboard(true)
-		})
-		const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-			setOpenKeyboard(false)
-		})
-
-		return () => {
-			showSubscription.remove()
-			hideSubscription.remove()
-		}
-	}, [])
+	const [value, setValue] = useState('')
 
 	const onSubmitSent = () => {
 		if (!btnDisabled) {
-			dispatch(setAddressTo(fromAddress))
 			navigation.navigate('ConfirmTransaction')
 		}
 	}
-	if (!isReady) {
-		return <BusyIndicator></BusyIndicator>
-	}
 	return (
-		<TouchableWithoutFeedback
-			onPress={() => Keyboard.dismiss()}
-			accessible={false}>
-			<ScrollView
-				contentContainerStyle={{
-					flexGrow: 1,
-					paddingBottom: 50,
-					paddingTop: 29,
-					justifyContent: 'space-between',
+		<ScrollView
+			contentContainerStyle={{
+				flexGrow: 1,
+				paddingBottom: 50,
+				paddingTop: 29,
+				paddingHorizontal: 24,
+				justifyContent: 'space-between',
+			}}>
+			<View
+				style={{
+					flex: 1,
 				}}>
-				<View
-					style={{
-						flex: 1,
-					}}>
-					<View style={{ marginBottom: 39, flex: 0, paddingHorizontal: 16 }}>
-						<WalletText
-							color='disabled'
-							style={{ paddingLeft: 23, marginBottom: 7 }}>
-							Recipient Address
-						</WalletText>
-						<TouchableOpacity
-							style={styles.qrButton}
-							activeOpacity={0.7}
-							onPress={() => navigation.navigate('Scanner')}>
-							<SvgIcon type='qr-camera' />
-						</TouchableOpacity>
-						<WalletInput
-							styleInput={{
-								paddingRight: 50,
-								backgroundColor: THEME.GREY_LIGHT_BG,
-								borderWidth: 0,
-							}}
-							autoCapitalize='none'
-							setValue={onAddAddress}
-							value={fromAddress}
-							placeholder='Public Address (0x...) or ENS'
-						/>
-					</View>
+				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
 					<View
 						style={{
-							marginHorizontal: 16,
-							flex: 1,
-							justifyContent: 'space-between',
+							width: '100%',
+							justifyContent: 'center',
+							alignItems: 'center',
+							flexDirection: 'row',
 						}}>
-						{chooseCoin != null ? (
-							<SelectCoinSent
-								setBtnDisabled={setBtnDisabled}
-								onChooseCoin={onChooseCoin}
-							/>
-						) : (
-							<></>
-						)}
-						<WalletButton
-							disabled={btnDisabled}
-							style={{
-								marginTop: 60,
-							}}
-							onPress={onSubmitSent}>
-							Send
-						</WalletButton>
-					</View>
-				</View>
-				<WalletBottomSheet
-					ref={coinsRef}
-					snapPoints={[openKeyboard ? '100%' : '65%']}>
-					{allCoins.length ? (
-						<ChooseCoins
-							chooseCoin={chooseCoin}
-							allCoins={allCoins}
-							onCoinPress={onCoinPress}
+						<TextInput
+							style={styles.text}
+							placeholderTextColor={THEME.WHITE}
+							placeholder='$ 0'
+							value={value.length ? '$ ' + value : ''}
 						/>
-					) : (
-						<></>
-					)}
-				</WalletBottomSheet>
-			</ScrollView>
-		</TouchableWithoutFeedback>
+						<TouchableOpacity style={styles.maxBtn} activeOpacity={0.7}>
+							<Text style={styles.maxBtnText}>MAX</Text>
+						</TouchableOpacity>
+					</View>
+					<WalletText style={{ fontSize: 12, marginTop: 10 }}>0 ETH</WalletText>
+				</View>
+				<View
+					style={{
+						marginHorizontal: 16,
+						flex: 1,
+						justifyContent: 'space-between',
+					}}></View>
+			</View>
+			<View style={{ alignItems: 'center' }}>
+				<ChooseCoin style={{ marginTop: 70 }} />
+				<WalletKeyboard
+					style={{ marginTop: 50, marginBottom: 30 }}
+					setValue={setValue}
+				/>
+				<WalletButton disabled={btnDisabled} onPress={onSubmitSent}>
+					Send
+				</WalletButton>
+			</View>
+		</ScrollView>
 	)
 }
 
 const styles = StyleSheet.create({
+	maxBtn: {
+		backgroundColor: ' rgba(82, 140, 254, 0.2)',
+		borderRadius: 6,
+		paddingHorizontal: 6,
+		paddingVertical: 4,
+		position: 'absolute',
+		right: 0,
+		zIndex: 10,
+	},
+	maxBtnText: { color: THEME.VIOLET, fontSize: 10, fontFamily: 'mt-semi-bold' },
 	qrButton: {
 		position: 'absolute',
 		bottom: 19,
 		right: 35,
 		zIndex: 1,
+	},
+	text: {
+		lineHeight: 46,
+		fontSize: 38,
+		color: THEME.WHITE,
+		fontFamily: 'mt-med',
+		minWidth: 100,
+		textAlign: 'center',
 	},
 })

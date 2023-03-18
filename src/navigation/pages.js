@@ -36,6 +36,7 @@ import {
 	TutorialEndScreen,
 	ManageCryptosScreen,
 	WalletSuccessScreen,
+	ChooseCryptosScreen,
 } from '../screens'
 export const ExportPhraseComponent = (props) => {
 	return <ExportPhraseScreen {...props} />
@@ -151,4 +152,7 @@ export const ManageCryptosComponent = (props) => {
 }
 export const WalletSuccessComponent = (props) => {
 	return <WalletSuccessScreen {...props} />
+}
+export const ChooseCryptosComponent = (props) => {
+	return <ChooseCryptosScreen {...props} />
 }

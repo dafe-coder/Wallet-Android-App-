@@ -61,3 +61,4 @@ export * from './tutorialScreens/TutorialEndScreen'
 
 export * from './ManageCryptosScreen'
 export * from './WalletSuccessScreen'
+export * from './ChooseCryptosScreen'
