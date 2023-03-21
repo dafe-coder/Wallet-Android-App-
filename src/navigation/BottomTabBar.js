@@ -40,22 +40,9 @@ export function MyTabBar({ state, descriptors, navigation }) {
 						target: route.key,
 					})
 				}
-
-				const initLabel = (label) => {
-					switch (label) {
-						case 'Nft':
-							return 'NFTs'
-						case 'Wallet':
-							return 'Coins'
-						case 'TransactionPage':
-							return 'Activity'
-						default:
-							return label
-					}
-				}
 				const initSvgType = (label) => {
 					switch (label) {
-						case 'TransactionPage':
+						case 'Add Cash':
 							return 'buy'
 						case 'Account':
 							return 'cog'

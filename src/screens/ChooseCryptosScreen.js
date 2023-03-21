@@ -8,6 +8,9 @@ import { SearchButton } from '../Components'
 
 export const ChooseCryptosScreen = ({ navigation }) => {
 	const { allCoins } = useSelector((state) => state.wallet)
+	React.useEffect(() => {
+		console.log(allCoins)
+	}, [allCoins])
 
 	React.useEffect(() => {
 		navigation.setOptions({

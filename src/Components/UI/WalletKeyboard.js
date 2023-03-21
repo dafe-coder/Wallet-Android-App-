@@ -28,6 +28,7 @@ export const WalletKeyboard = ({ setValue, style }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
+		width: '100%',
 		flexWrap: 'wrap',
 		flexDirection: 'row',
 	},

@@ -41,9 +41,19 @@ import {
 	ManageCryptosComponent,
 	ChooseCryptosComponent,
 	WalletSuccessComponent,
+	SentAddressComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'SentAddress',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: '',
+		}),
+		component: SentAddressComponent,
+	},
 	{
 		name: 'ChooseCryptos',
 		options: ({ navigation }) => ({
@@ -298,15 +308,11 @@ export function MyStack() {
 				style={{ flex: 1 }}
 				initialRouteName={
 					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'ChooseCryptos'
+					'Home'
 				}
 				screenOptions={{
 					headerShadowVisible: false,
 					headerBackVisible: false,
-					contentStyle: {
-						borderTopColor: '#D1C9FA',
-						borderTopWidth: 0.5,
-					},
 					headerTitleAlign: 'center',
 					headerStyle: {
 						backgroundColor: THEME.PRIMARY,

@@ -4,6 +4,7 @@ import {
 	WalletComponent,
 	TransactionHistoryPageComponent,
 	AccountComponent,
+	BuyComponent,
 } from './pages'
 const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
@@ -22,7 +23,7 @@ export default function BottomTabNavigator() {
 						borderBottomColor: 'transparent',
 						shadowColor: 'transparent',
 						elevation: 0,
-						backgroundColor: THEME.PRIMARY,
+						backgroundColor: 'transparent',
 					},
 					headerTransparent: true,
 					tabBarStyle: {
@@ -47,8 +48,8 @@ export default function BottomTabNavigator() {
 						<Text
 							style={{
 								fontFamily: 'mt-reg',
-								color: THEME.VIOLET,
-								fontSize: 18,
+								color: THEME.DISABLED_TEXT,
+								fontSize: 16,
 							}}>
 							{title.children}
 						</Text>
@@ -65,9 +66,10 @@ export default function BottomTabNavigator() {
 					})}
 				/>
 				<Tab.Screen
-					name='TransactionPage'
-					component={TransactionHistoryPageComponent}
+					name='Buy'
+					component={BuyComponent}
 					options={{
+						title: 'Add Cash',
 						headerLeft: () => <></>,
 					}}
 				/>
