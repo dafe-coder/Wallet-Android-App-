@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { THEME } from '../../Theme'
 import { SvgIcon } from './../svg/svg'
-
+import { WalletText } from '../UI'
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
@@ -20,7 +20,12 @@ export const Preloader = ({
 				<SvgIcon type='logo' />
 			</Animated.View>
 			<Animated.View style={[styles.logoWalletText, logoAnimText]}>
-				<SvgIcon type='logo-text' />
+				<WalletText
+					style={{ fontSize: 40, lineHeight: 50 }}
+					color='gold'
+					fw='bold'>
+					Web3 Emos Wallet
+				</WalletText>
 			</Animated.View>
 			<View style={{ width: 110, flex: 1, position: 'relative' }}>
 				<Animated.View

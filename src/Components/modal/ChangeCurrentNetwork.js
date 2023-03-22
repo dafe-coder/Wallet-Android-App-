@@ -51,7 +51,7 @@ export const ChangeCurrentNetwork = ({ onPress, navigation }) => {
 									}}
 								/>
 								<WalletText style={{ marginLeft: 12 }} size='m'>
-									{n.title}
+									{n.title == 'Polygon' ? 'Polygon Network' : n.title}
 								</WalletText>
 							</View>
 							{n.choose ? <SvgIcon type='check' /> : <></>}

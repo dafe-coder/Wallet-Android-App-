@@ -41,7 +41,7 @@ const screens = [
 		name: 'CreatePhrase',
 		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'Polygon',
+			title: 'Web3 Emos Wallet',
 			headerLeft: () => <BackBtn navigation={navigation} />,
 		}),
 		component: CreatePhraseComponent,
