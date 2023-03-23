@@ -5,7 +5,7 @@ import { WalletText } from '../Components/UI'
 import { useSelector } from 'react-redux'
 import fixNum from '../../services/funcWallet/fixNum'
 import { SearchButton } from '../Components'
-
+import { TitleLeft } from '../navigation'
 export const ChooseCryptosScreen = ({ navigation }) => {
 	const { allCoins } = useSelector((state) => state.wallet)
 	React.useEffect(() => {
@@ -14,11 +14,7 @@ export const ChooseCryptosScreen = ({ navigation }) => {
 
 	React.useEffect(() => {
 		navigation.setOptions({
-			headerLeft: () => (
-				<WalletText color='disabled' size='m' style={{ marginLeft: 10 }}>
-					Choose a crypto to send
-				</WalletText>
-			),
+			headerLeft: () => <TitleLeft>Choose a crypto to send</TitleLeft>,
 		})
 	}, [navigation])
 

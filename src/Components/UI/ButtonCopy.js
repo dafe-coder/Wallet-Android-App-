@@ -4,8 +4,9 @@ import { SvgIcon } from '../svg/svg'
 import { THEME } from './../../Theme'
 import * as Clipboard from 'expo-clipboard'
 import { WalletText } from './WalletText'
-export const ButtonCopy = ({ style, text, paste, setText }) => {
+export const ButtonCopy = ({ style, text, paste = false, setText }) => {
 	const [color, setColor] = useState(false)
+
 	const onPressBtn = () => {
 		paste ? onPaste() : onCopy()
 		setColor(true)
@@ -31,12 +32,18 @@ export const ButtonCopy = ({ style, text, paste, setText }) => {
 				type='copy'
 				width={20}
 				height={20}
-				fill={color ? '#9667E5' : '#9667E5'}
+				fill={color ? THEME.WHITE : THEME.WHITE}
 			/>
 			{color && !paste ? (
-				<WalletText color='gold'>Copied!</WalletText>
+				<WalletText color='white' fw='bold'>
+					Copied!
+				</WalletText>
+			) : !color && !paste ? (
+				<WalletText color='white' fw='bold'>
+					Copy
+				</WalletText>
 			) : (
-				<WalletText>Paste</WalletText>
+				<WalletText fw='bold'>Paste</WalletText>
 			)}
 		</TouchableOpacity>
 	)

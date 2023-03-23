@@ -5,6 +5,7 @@ import { SvgIcon } from './../svg/svg'
 
 export const WalletButton = ({
 	disabled = false,
+	width,
 	arrow = true,
 	type = 'violet',
 	style,
@@ -13,78 +14,80 @@ export const WalletButton = ({
 	checked = false,
 }) => {
 	const onPressButton = () => {
-		if (checked) {
-			if (!disabled) {
+		if (onPress) {
+			if (checked) {
+				if (!disabled) {
+					onPress()
+				}
+			} else {
 				onPress()
 			}
-		} else {
-			onPress()
 		}
 	}
 
+	let bgColor = null
+
 	switch (type) {
 		case 'violet':
-			return (
-				<TouchableOpacity
-					onPress={onPressButton}
-					style={{ ...style }}
-					activeOpacity={disabled ? 1 : 0.8}>
-					<View
-						style={[
-							styles.btn,
-							styles.violet,
-							disabled && styles.disabled,
-							arrow
-								? {}
-								: {
-										paddingLeft: 9,
-										paddingVertical: 20.5,
-										justifyContent: 'center',
-								  },
-						]}>
-						<Text
-							style={[
-								styles.text,
-								styles.textWhite,
-								disabled && styles.disabledText,
-							]}>
-							{children}
-						</Text>
-					</View>
-				</TouchableOpacity>
-			)
+			bgColor = {
+				backgroundColor: THEME.VIOLET,
+				borderWidth: 1,
+				borderColor: THEME.VIOLET,
+			}
+			break
 		case 'border':
-			return (
-				<TouchableOpacity
-					onPress={onPressButton}
-					style={{ ...style }}
-					activeOpacity={disabled ? 1 : 0.8}>
-					<View
-						style={[
-							styles.btn,
-							styles.border,
-							disabled && styles.disabled,
-							arrow
-								? {}
-								: {
-										backgroundColor: THEME.WHITE,
-										paddingLeft: 9,
-										paddingVertical: 20.5,
-										justifyContent: 'center',
-								  },
-						]}>
-						<Text
-							style={[
-								styles.text,
-								styles.textPrimary,
-								disabled && styles.disabledText,
-							]}>
-							{children}
-						</Text>
-					</View>
-				</TouchableOpacity>
-			)
+			bgColor = {
+				borderWidth: 1,
+				borderColor: THEME.WHITE,
+			}
+			break
+
+		case 'red':
+			bgColor = {
+				backgroundColor: THEME.RED,
+				borderWidth: 1,
+				borderColor: THEME.RED,
+			}
+			break
+		case 'white':
+			bgColor = {
+				backgroundColor: THEME.WHITE,
+				borderWidth: 1,
+				borderColor: THEME.WHITE,
+			}
+			break
 	}
+	return (
+		<TouchableOpacity
+			onPress={onPressButton}
+			style={{ ...style }}
+			activeOpacity={disabled ? 1 : 0.8}>
+			<View
+				style={[
+					width ? { width: width } : {},
+					styles.btn,
+					bgColor,
+					disabled && styles.disabled,
+					arrow
+						? {}
+						: {
+								paddingLeft: 9,
+								paddingVertical: 20.5,
+								justifyContent: 'center',
+						  },
+				]}>
+				<Text
+					style={[
+						styles.text,
+						styles.textWhite,
+						type == 'white' ? { color: THEME.GREY } : {},
+						disabled && styles.disabledText,
+					]}>
+					{children}
+				</Text>
+			</View>
+		</TouchableOpacity>
+	)
 }
 
 const styles = StyleSheet.create({
@@ -101,17 +104,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderRadius: 50,
 	},
-	violet: {
-		backgroundColor: THEME.VIOLET,
-		width: 200,
-	},
 	border: {
 		borderWidth: 1,
-		borderColor: THEME.VIOLET_LIGHT,
+		borderColor: THEME.WHITE,
 	},
 	btn: {
 		borderRadius: 30,
-		paddingVertical: 17,
+		paddingVertical: 17.5,
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
@@ -124,9 +123,9 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 14,
-		lineHeight: 22,
+		lineHeight: 17,
 		textAlign: 'center',
-		fontFamily: 'mt-med',
+		fontFamily: 'mt-semi-bold',
 	},
 	disabled: {
 		borderColor: THEME.GREY,

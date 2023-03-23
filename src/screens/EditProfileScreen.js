@@ -1,108 +1,99 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { View, Text, Keyboard, TouchableWithoutFeedback } from 'react-native'
-import { WalletButton } from './../Components/UI/WalletButton'
+import React from 'react'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
+import { WalletText } from './../Components/UI/'
 import { THEME } from './../Theme'
 import { AccountCard } from './../Components/AccountCard'
-import { WalletBottomSheet } from './../Components/BottomSheet'
-import { DeleteWallet } from '../Components/modal'
-import { useDispatch, useSelector } from 'react-redux'
-import { setLoader, setLoaderSkeleton } from '../store/actions/walletActions'
-import {
-	setDeleteAccount,
-	setCurrentAccount,
-	setClearDataUser,
-	setPassword,
-} from '../store/actions/storageAction'
+import { WalletModal, DeleteWalletWarning } from '../Components/modal'
+import { useSelector } from 'react-redux'
+import { SvgIconNav } from './../Components/svg/svgNav'
+import { SvgIcon } from '../Components/svg/svg'
 
 export const EditProfileScreen = ({ navigation }) => {
-	const dispatch = useDispatch()
+	const [isVisible, setIsVisible] = React.useState(false)
+	const [isPhrase, setIsPhrase] = React.useState(false)
 	const { currentAccount, dataUser } = useSelector((state) => state.storage)
-	const deleteRef = useRef(null)
-	const [isKeyboardVisible, setKeyboardVisible] = useState(false)
-	const [timeoutId, setTimeoutId] = useState(null)
-	const [timeoutId2, setTimeoutId2] = useState(null)
 
-	useEffect(() => {
-		const keyboardDidShowListener = Keyboard.addListener(
-			'keyboardDidShow',
-			() => {
-				setKeyboardVisible(true) // or some other action
-			}
-		)
-		const keyboardDidHideListener = Keyboard.addListener(
-			'keyboardDidHide',
-			() => {
-				setKeyboardVisible(false) // or some other action
-			}
-		)
-
-		return () => {
-			keyboardDidHideListener.remove()
-			keyboardDidShowListener.remove()
-			clearTimeout(timeoutId)
-			clearTimeout(timeoutId2)
-		}
-	}, [])
-	const onOpenDeleteModal = () => {
-		Keyboard.dismiss()
-		if (isKeyboardVisible) {
-			setTimeoutId(
-				setTimeout(() => {
-					deleteRef.current?.expand()
-				}, 400)
-			)
+	React.useEffect(() => {
+		const filterData = dataUser.filter((d) => d.name === currentAccount)
+		if (filterData[0] && filterData[0].phrase) {
+			setIsPhrase(true)
 		} else {
-			deleteRef.current?.expand()
+			setIsPhrase(false)
 		}
-	}
-
-	const onCloseDeleteModal = () => {
-		deleteRef.current?.close()
-	}
+	}, [dataUser])
 
 	const onDelete = () => {
-		const deleteCurrent = currentAccount
-		const filterData = dataUser.filter((d) => d.name !== currentAccount)
-
-		dispatch(setLoader(true))
-		deleteRef.current?.close()
-		dispatch(setLoaderSkeleton(false))
-		setTimeoutId2(
-			setTimeout(() => {
-				if (dataUser.length >= 2) {
-					dispatch(setDeleteAccount(deleteCurrent))
-					dispatch(setCurrentAccount(filterData[0].name))
-					navigation.reset({
-						index: 0,
-						routes: [{ name: 'Home' }],
-					})
-				} else {
-					dispatch(setPassword(''))
-					dispatch(setCurrentAccount(''))
-					dispatch(setClearDataUser())
-					navigation.reset({
-						index: 0,
-						routes: [{ name: 'Login' }],
-					})
-				}
-				dispatch(setLoader(false))
-			}, 2000)
-		)
+		setIsVisible(false)
+		setTimeout(() => {
+			navigation.navigate('ConfirmPassword')
+		}, 10)
 	}
 
 	return (
-		<TouchableWithoutFeedback
-			onPress={() => Keyboard.dismiss()}
-			accessible={false}>
-			<View style={{ paddingHorizontal: 16, paddingTop: 29 }}>
-				<AccountCard edit style={{ marginBottom: 15 }} />
-				<WalletButton type='border' onPress={onOpenDeleteModal}>
-					<Text style={{ color: THEME.VIOLET }}>delete wallet</Text>
-				</WalletButton>
-				<WalletBottomSheet ref={deleteRef} snapPoints={['55%']}>
-					<DeleteWallet onDelete={onDelete} onClose={onCloseDeleteModal} />
-				</WalletBottomSheet>
+		<View style={{ paddingHorizontal: 24, paddingTop: 5 }}>
+			<AccountCard edit style={{ marginBottom: 15 }} />
+			<View>
+				{isPhrase && (
+					<TouchableOpacity
+						style={styles.item}
+						onPress={() =>
+							navigation.navigate('ConfirmPassword', { from: 'exportPhrase' })
+						}
+						activeOpacity={0.7}>
+						<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+							<SvgIconNav type='reorder' />
+							<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+								View Recovery Phrase
+							</WalletText>
+						</View>
+						<SvgIcon fill={THEME.WHITE} type='play' />
+					</TouchableOpacity>
+				)}
+				<TouchableOpacity
+					style={styles.item}
+					onPress={() =>
+						navigation.navigate('ConfirmPassword', { from: 'exportKey' })
+					}
+					activeOpacity={0.7}>
+					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+						<SvgIconNav type='key' />
+						<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+							View Private Key
+						</WalletText>
+					</View>
+					<SvgIcon fill={THEME.WHITE} type='play' />
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.item}
+					activeOpacity={0.7}
+					onPress={() => setIsVisible(true)}>
+					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+						<SvgIconNav type='trash' />
+						<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+							Delete wallet
+						</WalletText>
+					</View>
+					<SvgIcon fill={THEME.WHITE} type='play' />
+				</TouchableOpacity>
 			</View>
-		</TouchableWithoutFeedback>
+			<WalletModal setIsVisible={setIsVisible} isVisible={isVisible}>
+				<DeleteWalletWarning
+					onDelete={onDelete}
+					onClose={() => setIsVisible(false)}
+				/>
+			</WalletModal>
+		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	item: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingVertical: 20,
+		borderBottomColor: THEME.DISABLED_TEXT,
+		borderBottomWidth: 1,
+		paddingRight: 10,
+	},
+})

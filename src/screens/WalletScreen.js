@@ -26,6 +26,12 @@ export const WalletScreen = ({ navigation }) => {
 	} = useSelector((state) => state.wallet)
 	const { chooseAssets } = useSelector((state) => state.storage)
 
+	React.useEffect(() => {
+		navigation.setOptions({
+			headerTransparent: true,
+		})
+	}, [navigation])
+
 	useEffect(() => {
 		if (portfolioCoinsInit.length) {
 			setFilterPortfolioCoinsLoader(false)

@@ -9,7 +9,7 @@ import {
 const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
 import { Text } from 'react-native'
-import { DoubleButtons } from './'
+import { DoubleButtons, TitleLeft } from './'
 import { MyTabBar } from './BottomTabBar'
 
 export default function BottomTabNavigator() {
@@ -23,9 +23,9 @@ export default function BottomTabNavigator() {
 						borderBottomColor: 'transparent',
 						shadowColor: 'transparent',
 						elevation: 0,
-						backgroundColor: 'transparent',
+						backgroundColor: THEME.PRIMARY,
 					},
-					headerTransparent: true,
+					headerTransparent: false,
 					tabBarStyle: {
 						display: 'none',
 						elevation: 0,
@@ -77,7 +77,8 @@ export default function BottomTabNavigator() {
 					name='Account'
 					component={AccountComponent}
 					options={{
-						headerLeft: () => <></>,
+						headerTitle: () => <></>,
+						headerLeft: () => <TitleLeft>Settings account</TitleLeft>,
 					}}
 				/>
 			</Tab.Navigator>

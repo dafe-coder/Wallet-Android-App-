@@ -1,21 +1,16 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { WalletTitle } from './../Components/UI/WalletTitle'
 import { THEME } from './../Theme'
 import { WalletText } from './../Components/UI/WalletText'
 import { SvgIcon } from './../Components/svg/svg'
 import { PhraseBox } from './../Components/PhraseBox'
 import { useSelector } from 'react-redux'
-import { WalletButton } from './../Components/UI/WalletButton'
+
 export const ExportPhraseCopyScreen = ({ navigation }) => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
-		<ScrollView style={{ paddingTop: 32 }}>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<SvgIcon type='logo' />
-				<WalletTitle style={{ marginTop: 50 }}>You seed Phrase</WalletTitle>
-			</View>
+		<ScrollView style={{ paddingTop: 32, paddingHorizontal: 24 }}>
 			{dataUser.map((d) => {
 				if (d.name === currentAccount) {
 					return (
@@ -40,9 +35,6 @@ export const ExportPhraseCopyScreen = ({ navigation }) => {
 					</WalletText>
 				</View>
 			</View>
-			<View style={{ paddingHorizontal: 16, marginTop: 60, marginBottom: 50 }}>
-				<WalletButton onPress={() => navigation.goBack()}>close</WalletButton>
-			</View>
 		</ScrollView>
 	)
 }
@@ -50,12 +42,10 @@ export const ExportPhraseCopyScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	alert: {
 		marginTop: 20,
-		backgroundColor: THEME.GREY_LIGHT,
+		backgroundColor: THEME.GREY,
 		borderRadius: 10,
-		paddingHorizontal: 10,
-		paddingVertical: 15,
+		padding: 16,
 		flexDirection: 'row',
-		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
 	},

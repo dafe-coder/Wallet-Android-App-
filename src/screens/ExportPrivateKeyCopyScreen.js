@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { WalletTitle, WalletButton } from '../Components/UI/'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI/WalletText'
 import { SvgIcon } from '../Components/svg/svg'
@@ -11,11 +10,7 @@ export const ExportPrivateKeyCopyScreen = ({ navigation }) => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 
 	return (
-		<ScrollView style={{ paddingTop: 32 }}>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<SvgIcon type='logo' />
-				<WalletTitle style={{ marginTop: 50 }}>You Private Key</WalletTitle>
-			</View>
+		<ScrollView style={{ paddingTop: 32, paddingHorizontal: 24 }}>
 			{dataUser.map((d) => {
 				if (d.name === currentAccount) {
 					return (
@@ -34,14 +29,10 @@ export const ExportPrivateKeyCopyScreen = ({ navigation }) => {
 					<SvgIcon type='alert' />
 				</View>
 				<View style={{ flexBasis: '89%' }}>
-					<WalletText color='red' style={{ marginLeft: 8 }}>
-						Keep Private Key safe! {'\n'}Do not share this key with anyone!
-						These key can be used to steal all of your accounts
+					<WalletText style={{ color: '#528CFE', marginLeft: 8 }}>
+						Never share Private Key with {'\n'}anyone, store it securely!
 					</WalletText>
 				</View>
-			</View>
-			<View style={{ paddingHorizontal: 16, marginTop: 60, marginBottom: 50 }}>
-				<WalletButton onPress={() => navigation.goBack()}>close</WalletButton>
 			</View>
 		</ScrollView>
 	)
@@ -50,12 +41,10 @@ export const ExportPrivateKeyCopyScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	alert: {
 		marginTop: 20,
-		backgroundColor: THEME.GREY_LIGHT,
+		backgroundColor: THEME.GREY,
 		borderRadius: 10,
-		paddingHorizontal: 10,
-		paddingVertical: 15,
+		padding: 16,
 		flexDirection: 'row',
-		marginHorizontal: 16,
 		justifyContent: 'flex-start',
 		alignItems: 'flex-start',
 	},

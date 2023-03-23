@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
 	},
 	wrap: {
 		position: 'relative',
-		paddingHorizontal: 16,
 		alignItems: 'center',
 	},
 	errorText: {
@@ -136,8 +135,5 @@ const styles = StyleSheet.create({
 		bottom: -43,
 		paddingHorizontal: 35,
 		textAlign: 'center',
-	},
-	editInput: {
-		paddingRight: 80,
 	},
 })

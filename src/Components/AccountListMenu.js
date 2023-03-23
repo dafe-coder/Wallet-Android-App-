@@ -4,45 +4,51 @@ import { AccountItemMenu } from './AccountItemMenu'
 import { THEME } from '../Theme'
 export const AccountListMenu = ({ onPress }) => {
 	const menuData = [
-		// {
-		// 	image: 'plus',
-		// 	title: 'Add Account',
-		// 	topLine: true,
-		// 	onPress: onPress,
-		// },
+		{
+			image: 'wallet-case',
+			title: 'Wallet',
+			topLine: false,
+			onPress: onPress,
+		},
 		{
 			image: 'import',
-			title: 'Import Account',
+			title: 'Import existing wallet',
 			topLine: true,
 			onPress: onPress,
 		},
 		{
-			image: 'lock',
-			title: 'Lock Wallet',
+			image: 'backup',
+			title: 'Backup',
+			topLine: true,
+			onPress: onPress,
+		},
+		{
+			image: 'shield',
+			title: 'Security',
+			topLine: true,
+			onPress: onPress,
+		},
+		{
+			image: 'notification',
+			title: 'Notifications',
 			topLine: true,
 			onPress: onPress,
 		},
 		// {
-		// 	image: 'settings',
-		// 	title: 'Contacts',
+		// 	image: 'paid',
+		// 	title: 'Currency',
 		// 	topLine: true,
 		// 	onPress: onPress,
 		// },
 		{
-			image: 'settings',
-			title: 'Settings',
+			image: 'radio',
+			title: 'Wallet Connect',
 			topLine: true,
 			onPress: onPress,
 		},
 		{
-			image: 'help',
-			title: 'Help',
-			topLine: true,
-			onPress: onPress,
-		},
-		{
-			image: 'logout',
-			title: 'Logout',
+			image: 'info',
+			title: 'About',
 			topLine: true,
 			onPress: onPress,
 		},
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		marginTop: 30,
 		marginBottom: 70,
-		borderBottomColor: THEME.GREY_LIGHT,
+		borderBottomColor: THEME.DISABLED_TEXT,
 		borderBottomWidth: 1,
 	},
 })

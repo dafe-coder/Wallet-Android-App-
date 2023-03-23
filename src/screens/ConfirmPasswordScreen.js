@@ -12,7 +12,7 @@ import {
 	setClearDataUser,
 } from '../store/actions/storageAction'
 
-export const ConfirmPasswordScreen = ({ navigation }) => {
+export const ConfirmPasswordScreen = ({ navigation, route }) => {
 	const dispatch = useDispatch()
 	const [pin, setPin] = useState('')
 	const { password } = useSelector((state) => state.storage)
@@ -26,17 +26,27 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 	const handleOnTextChange = (pin) => {
 		setPin(pin)
 		if (pin.length === 6 && pin === password) {
-			dispatch(setLoader(true))
-			setTimeout(() => {
-				dispatch(setPassword(''))
-				dispatch(setCurrentAccount(''))
-				dispatch(setClearDataUser())
-				navigation.reset({
-					index: 0,
-					routes: [{ name: 'Login' }],
-				})
-				dispatch(setLoader(false))
-			}, 3000)
+			if (route.params && route.params.from === 'exportPhrase') {
+				navigation.navigate('ExportPhraseCopy')
+			} else if (route.params && route.params.from === 'exportKey') {
+				navigation.navigate('ExportPrivateKeyCopy')
+			} else if (route.params && route.params.from === 'backup') {
+				navigation.navigate('BackupSubscribe')
+			} else if (route.params && route.params.from === 'backupRestore') {
+				navigation.navigate('RecoverPhrase', { from: 'backupRestore' })
+			} else {
+				dispatch(setLoader(true))
+				setTimeout(() => {
+					dispatch(setPassword(''))
+					dispatch(setCurrentAccount(''))
+					dispatch(setClearDataUser())
+					navigation.reset({
+						index: 0,
+						routes: [{ name: 'Login' }],
+					})
+					dispatch(setLoader(false))
+				}, 3000)
+			}
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {
 			setPin('')
@@ -46,16 +56,11 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 
 	return (
 		<View style={styles.body}>
-			<View style={styles.image}>
-				<SvgIcon type='logo' />
-			</View>
-			<WalletText center size='m'>
-				Enter your PIN code
-			</WalletText>
 			<PincodeInput
 				ref={pincodeInput}
 				length={6}
 				containerStyle={{
+					marginTop: 100,
 					width: '100%',
 					height: 60,
 					justifyContent: 'center',
@@ -69,8 +74,8 @@ export const ConfirmPasswordScreen = ({ navigation }) => {
 					width: 9,
 					height: 9,
 					borderWidth: 1,
-					borderColor: THEME.DARK_TEXT,
-					backgroundColor: THEME.DARK_TEXT,
+					borderColor: THEME.GREY,
+					backgroundColor: THEME.GREY,
 					borderRadius: 50,
 					marginHorizontal: 4,
 				}}

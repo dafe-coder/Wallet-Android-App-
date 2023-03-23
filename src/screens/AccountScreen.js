@@ -12,19 +12,12 @@ import { WalletBottomSheet } from '../Components'
 import { ImportAccount, SelectAccount } from '../Components/modal'
 import { useDispatch } from 'react-redux'
 import { setLockWallet } from '../store/actions/walletActions'
-import { AccountBtn } from '../navigation'
+
 export const AccountScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const selectAccountRef = useRef(null)
 	const importAccountRef = useRef(null)
 	const [openKeyboard, setOpenKeyboard] = useState(false)
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerRight: () => (
-				<AccountBtn openModalSelect={openModalSelect} navigation={navigation} />
-			),
-		})
-	}, [navigation])
+
 	useEffect(() => {
 		const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
 			setOpenKeyboard(true)
@@ -38,24 +31,18 @@ export const AccountScreen = ({ navigation }) => {
 			hideSubscription.remove()
 		}
 	}, [])
-	const openModalSelect = () => {
-		selectAccountRef.current.expand()
-	}
-	const onCloseModal = () => {
-		selectAccountRef.current.close()
-	}
 	const onCloseImport = () => {
 		Keyboard.dismiss()
 		importAccountRef.current?.close()
 	}
 	// callbacks
 	function handlePresentPress(title) {
-		if (title == 'Import Account') {
+		if (title == 'Import existing wallet') {
 			importAccountRef.current.expand()
-		} else if (title == 'Settings') {
-			navigation.navigate('Settings')
-		} else if (title == 'Contacts') {
-			navigation.navigate('Contacts')
+		} else if (title == 'Wallet') {
+			navigation.navigate('EditProfile')
+		} else if (title == 'Backup') {
+			navigation.navigate('BackupPrimary')
 		} else if (title == 'Logout') {
 			navigation.navigate('RiskAlertLogout')
 		} else if (title == 'Lock Wallet') {
@@ -74,12 +61,6 @@ export const AccountScreen = ({ navigation }) => {
 			onPress={() => Keyboard.dismiss()}
 			accessible={false}>
 			<ScrollView style={styles.wrap}>
-				<View
-					style={{
-						paddingHorizontal: 16,
-					}}>
-					<AccountCard navigation={navigation} />
-				</View>
 				<AccountListMenu onPress={handlePresentPress} />
 				<WalletBottomSheet
 					ref={importAccountRef}
@@ -92,9 +73,6 @@ export const AccountScreen = ({ navigation }) => {
 						navigation={navigation}
 					/>
 				</WalletBottomSheet>
-				<WalletBottomSheet ref={selectAccountRef} snapPoints={['55%']}>
-					<SelectAccount onCloseModal={onCloseModal} navigation={navigation} />
-				</WalletBottomSheet>
 			</ScrollView>
 		</TouchableWithoutFeedback>
 	)
@@ -103,7 +81,6 @@ export const AccountScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	wrap: {
 		flex: 1,
-		paddingTop: 30,
 		position: 'relative',
 		zIndex: 0,
 	},

@@ -157,6 +157,24 @@ export const WalletText = ({
 					</Text>
 				</View>
 			)
+		case 'blue':
+			return (
+				<View style={styleWrap}>
+					<Text
+						style={[
+							styles.blue,
+							size == 'sm' ? styles.sm : styles.m,
+							upperCase && styles.upperCase,
+							center && styles.center,
+							fw == 'regular'
+								? { fontFamily: 'mt-reg' }
+								: { fontFamily: 'mt-semi-bold' },
+							style,
+						]}>
+						{children}
+					</Text>
+				</View>
+			)
 	}
 }
 
@@ -201,5 +219,8 @@ const styles = StyleSheet.create({
 	},
 	disabled: {
 		color: THEME.DISABLED_TEXT,
+	},
+	blue: {
+		color: THEME.BLUE,
 	},
 })

@@ -39,6 +39,11 @@ import {
 	ChooseCryptosScreen,
 	SentAddressScreen,
 	BuyScreen,
+	BackupPrimaryScreen,
+	BackupSubscribeScreen,
+	BackupWarningScreen,
+	BackupPhraseScreen,
+	BackupWordsScreen,
 } from '../screens'
 export const ExportPhraseComponent = (props) => {
 	return <ExportPhraseScreen {...props} />
@@ -163,4 +168,19 @@ export const SentAddressComponent = (props) => {
 }
 export const BuyComponent = (props) => {
 	return <BuyScreen {...props} />
+}
+export const BackupPrimaryComponent = (props) => {
+	return <BackupPrimaryScreen {...props} />
+}
+export const BackupSubscribeComponent = (props) => {
+	return <BackupSubscribeScreen {...props} />
+}
+export const BackupWarningComponent = (props) => {
+	return <BackupWarningScreen {...props} />
+}
+export const BackupPhraseComponent = (props) => {
+	return <BackupPhraseScreen {...props} />
+}
+export const BackupWordsComponent = (props) => {
+	return <BackupWordsScreen {...props} />
 }

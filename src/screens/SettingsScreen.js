@@ -7,20 +7,13 @@ import {
 	SelectAccount,
 } from '../Components/modal'
 import { AccountCard, WalletBottomSheet } from '../Components'
-import { AccountBtn } from '../navigation'
 
 export const SettingsScreen = ({ navigation }) => {
 	// ref
 	const networkRef = useRef(null)
 	const selectAccountRef = useRef(null)
 	const connectedAppsRef = useRef(null)
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerRight: () => (
-				<AccountBtn openModalSelect={openModalSelect} navigation={navigation} />
-			),
-		})
-	}, [navigation])
+
 	const openModalSelect = () => {
 		selectAccountRef.current.expand()
 	}
@@ -49,9 +42,6 @@ export const SettingsScreen = ({ navigation }) => {
 
 	return (
 		<ScrollView style={{ flex: 1, paddingTop: 29 }}>
-			<View style={{ paddingHorizontal: 16 }}>
-				<AccountCard navigation={navigation} />
-			</View>
 			<View style={{ paddingBottom: 80 }}>
 				<SettingsListMenu onPress={handlePresentPress} />
 			</View>

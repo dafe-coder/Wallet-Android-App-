@@ -1,34 +1,26 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { WalletTitle, WalletText, WalletButton } from './../UI/'
-import { SvgIcon } from './../svg/svg'
 
 export const DeleteWallet = ({ onClose, onDelete }) => {
 	return (
-		<View
-			style={{ justifyContent: 'space-between', flex: 1, paddingBottom: 37 }}>
+		<View>
 			<View>
-				<WalletTitle style={{ marginBottom: 32 }}>Delete Wallet</WalletTitle>
-				<WalletText center size='m' color='dark'>
-					Are you sure you want to delete the wallet?
+				<WalletTitle style={{ marginBottom: 32 }} color='white' fw='bold'>
+					Delete Wallet
+				</WalletTitle>
+				<WalletText center size='m' color='white'>
+					To delete your wallet, you must {'\n'} perform a manual backup.
 				</WalletText>
-				<View style={styles.alert}>
-					<SvgIcon type='alert' />
-					<WalletText color='red' style={{ marginLeft: 16 }}>
-						Please, make sure you saved the phrase!
-					</WalletText>
-				</View>
 			</View>
 			<View style={styles.wrapBtn}>
 				<WalletButton
-					arrow={false}
-					onPress={onClose}
-					style={{ width: '48.6%', height: '100%' }}
-					type='border'>
-					Cancel
+					onPress={onDelete}
+					style={{ width: '43%', marginRight: '8%' }}>
+					Ok
 				</WalletButton>
-				<WalletButton onPress={onDelete} style={{ width: '48.4%' }}>
-					delete
+				<WalletButton type='border' onPress={onClose} style={{ width: '43%' }}>
+					Cancel
 				</WalletButton>
 			</View>
 		</View>
@@ -46,6 +38,7 @@ const styles = StyleSheet.create({
 	},
 	wrapBtn: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
+		marginTop: 35,
 	},
 })

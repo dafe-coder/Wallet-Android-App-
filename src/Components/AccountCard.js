@@ -6,20 +6,30 @@ import {
 	TouchableOpacity,
 	TextInput,
 } from 'react-native'
-import { WalletText, ButtonCopy } from './UI/'
+import { WalletText, WalletTitle } from './UI/'
 import { THEME } from '../Theme'
 import { SvgIcon } from './svg/svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAccountName } from '../store/actions/walletActions'
 import { LoaderCard } from './Loader/LoaderCard'
+import fixNum from './../../services/funcWallet/fixNum'
 
 export const AccountCard = ({ style, navigation, edit = false }) => {
 	const dispatch = useDispatch()
 	const [errorValue, setErrorValue] = useState(false)
 	const [loader, setLoader] = useState(false)
 	const [value, setValue] = useState('')
-	const { loaderSkeleton } = useSelector((state) => state.wallet)
-	const { currentAccount, dataUser } = useSelector((state) => state.storage)
+	const { loaderSkeleton, portfolioBalance } = useSelector(
+		(state) => state.wallet
+	)
+	const { currentAccount, dataUser, currentNetwork } = useSelector(
+		(state) => state.storage
+	)
+
+	React.useEffect(() => {
+		console.log(currentNetwork)
+	}, [currentNetwork])
+
 	useEffect(() => {
 		setLoader(loaderSkeleton)
 	}, [loaderSkeleton])
@@ -43,72 +53,33 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 	) {
 		return (
 			<View style={[styles.wrap, style]}>
-				<View style={styles.logo}>
-					{dataUser.map((n) =>
-						n.name == currentAccount ? (
-							<Image
-								key={Math.random().toString()}
-								style={{
-									borderRadius: 50,
-									width: 60,
-									height: 60,
-									overflow: 'hidden',
-								}}
-								resizeMode='cover'
-								source={
-									n.avatar != ''
-										? { uri: n.avatar }
-										: require('../../assets/avatar.png')
-								}
-							/>
-						) : null
-					)}
-				</View>
 				<View style={styles.info}>
 					<View style={{ flexDirection: 'row', marginBottom: 4 }}>
-						{edit ? (
-							<TextInput
-								style={[styles.input, errorValue ? { color: THEME.RED } : {}]}
-								placeholderTextColor={THEME.DARK_TEXT}
-								placeholder={currentAccount}
-								autoFocus
-								value={value}
-								onChangeText={(text) => setValue(text)}
-							/>
-						) : (
-							<WalletText
-								size='m'
-								style={{ color: '#8247E5', fontFamily: 'mt-reg' }}>
-								{currentAccount}
-							</WalletText>
-						)}
-
-						<TouchableOpacity
-							onPress={() => (!edit ? navigation.navigate('EditProfile') : {})}
-							style={{ marginLeft: 35 }}
-							activeOpacity={!edit ? 0.7 : 1}>
-							<SvgIcon type='pen' />
-						</TouchableOpacity>
+						<WalletText size='m'>
+							{dataUser.length
+								? dataUser
+										.filter((d) => d.name == currentAccount)[0]
+										.address.slice(0, 22) +
+								  '...' +
+								  dataUser
+										.filter((d) => d.name == currentAccount)[0]
+										.address.slice(-4)
+								: ''}
+						</WalletText>
 					</View>
-					<WalletText size='m'>
-						{dataUser.length
-							? dataUser
-									.filter((d) => d.name == currentAccount)[0]
-									.address.slice(0, 12) +
-							  '...' +
-							  dataUser
-									.filter((d) => d.name == currentAccount)[0]
-									.address.slice(-6)
-							: ''}
-					</WalletText>
-					<ButtonCopy
-						text={
-							dataUser.length
-								? dataUser.filter((d) => d.name == currentAccount)[0].address
-								: ''
-						}
-						style={{ right: 0, bottom: 0 }}
-					/>
+					<WalletTitle
+						color='white'
+						fw='bold'
+						size='m'
+						style={{ marginTop: 12 }}>
+						$
+						{' ' +
+							fixNum(
+								portfolioBalance[
+									currentNetwork.title.toLowerCase() + '_assets_value'
+								]
+							)}
+					</WalletTitle>
 				</View>
 			</View>
 		)
@@ -119,10 +90,10 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		backgroundColor: THEME.GREY_LIGHT_BG,
-		borderRadius: 15,
-		paddingVertical: 12,
-		paddingHorizontal: 14,
+		borderColor: THEME.DISABLED_TEXT,
+		borderWidth: 1,
+		borderRadius: 6,
+		padding: 16,
 		flexDirection: 'row',
 		position: 'relative',
 	},
@@ -132,16 +103,8 @@ const styles = StyleSheet.create({
 		maxWidth: 200,
 		color: THEME.DARK_TEXT,
 	},
-	logo: {
-		marginRight: 10,
-		borderRadius: 50,
-		width: 50,
-		height: 50,
-		justifyContent: 'center',
-		alignItems: 'center',
-		overflow: 'hidden',
-	},
 	info: {
 		flexGrow: 1,
+		alignItems: 'flex-start',
 	},
 })

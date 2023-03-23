@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
-import { DoubleButtons } from './'
+import { DoubleButtons, TitleLeft } from './'
 
 import {
 	SentComponent,
@@ -42,9 +42,59 @@ import {
 	ChooseCryptosComponent,
 	WalletSuccessComponent,
 	SentAddressComponent,
+	BackupPrimaryComponent,
+	BackupSubscribeComponent,
+	BackupWarningComponent,
+	BackupPhraseComponent,
+	BackupWordsComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'BackupWords',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Finish backup',
+		}),
+		component: BackupWordsComponent,
+	},
+	{
+		name: 'BackupPhrase',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Save your phrase',
+		}),
+		component: BackupPhraseComponent,
+	},
+	{
+		name: 'BackupWarning',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Warning',
+		}),
+		component: BackupWarningComponent,
+	},
+	{
+		name: 'BackupSubscribe',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Manual backup',
+		}),
+		component: BackupSubscribeComponent,
+	},
+	{
+		name: 'BackupPrimary',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Manual backup',
+		}),
+		component: BackupPrimaryComponent,
+	},
 	{
 		name: 'SentAddress',
 		options: ({ navigation }) => ({
@@ -160,8 +210,8 @@ const screens = [
 		name: 'ExportPhraseCopy',
 		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'Seed Phrase',
-			headerLeft: () => <BackBtn navigation={navigation} />,
+			title: 'Your recovery phrase',
+			headerRight: () => <BackBtn navigation={navigation} />,
 		}),
 		component: ExportPhraseCopyComponent,
 	},
@@ -169,8 +219,8 @@ const screens = [
 		name: 'ExportPrivateKeyCopy',
 		options: ({ navigation }) => ({
 			headerShown: true,
-			title: 'Private Key',
-			headerLeft: () => <BackBtn navigation={navigation} />,
+			title: 'Your private key',
+			headerRight: () => <BackBtn navigation={navigation} />,
 		}),
 		component: ExportPrivateKeyCopyComponent,
 	},
@@ -180,14 +230,9 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Settings',
-			headerLeft: () => (
-				<TextBtn onPress={() => navigation.goBack()}>Cancel</TextBtn>
-			),
-			headerRight: () => (
-				<TextBtn navigation={navigation} type='ready'>
-					Ready
-				</TextBtn>
-			),
+			headerLeft: () => <TitleLeft>Wallet name</TitleLeft>,
+			headerRight: () => <></>,
+			headerTitle: () => <></>,
 		}),
 		component: EditProfileComponent,
 	},
