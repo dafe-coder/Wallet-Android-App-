@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Polygon ID",
+    "name": "Web3 Emos",
     "slug": "walletpolygon",
     "version": "1.22.3",
     "orientation": "portrait",
@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.research.matic"
+      "package": "com.research.polygone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
