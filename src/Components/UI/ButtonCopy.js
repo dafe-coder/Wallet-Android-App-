@@ -8,6 +8,7 @@ export const ButtonCopy = ({ style, text, paste = false, setText }) => {
 	const [color, setColor] = useState(false)
 
 	const onPressBtn = () => {
+		console.log(1)
 		paste ? onPaste() : onCopy()
 		setColor(true)
 		setTimeout(() => {
@@ -25,7 +26,7 @@ export const ButtonCopy = ({ style, text, paste = false, setText }) => {
 	return (
 		<TouchableOpacity
 			style={[styles.btn, style]}
-			activeOpacity={1}
+			activeOpacity={0.7}
 			onPress={onPressBtn}>
 			<SvgIcon
 				style={{ marginRight: 10 }}

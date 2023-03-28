@@ -2,12 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { View } from 'react-native'
 import { PortfolioItem } from './PortfolioItem'
 import fixNum from './../../services/funcWallet/fixNum'
-import { useDispatch } from 'react-redux'
-import { setPortfolioOpen } from '../store/actions/walletActions'
 
 export const PortfolioList = ({ coins, style, navigation }) => {
-	const dispatch = useDispatch()
-
 	const [coinsInit, setCoinsInit] = useState([])
 	useEffect(() => {
 		setCoinsInit(coins)
@@ -26,9 +22,14 @@ export const PortfolioList = ({ coins, style, navigation }) => {
 						coin={c}
 						key={i}
 						img={c.image.thumb}
+						symbol={c.symbol}
 						title={c.symbol}
-						currentPrice={fixNum(c.market_data.current_price.usd)}
 						balance={+c.market_data.balance > 0 ? +c.market_data.balance : 0}
+						balanceDollar={
+							+c.market_data.balance_crypto.usd > 0
+								? +c.market_data.balance_crypto.usd
+								: 0
+						}
 						changePercent={
 							c.market_data.relativeChange
 								? c.market_data.relativeChange.toFixed(2)

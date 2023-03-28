@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
-import { DoubleButtons, TitleLeft } from './'
+import { DoubleButtons, TitleLeft, HeaderSettings } from './'
 
 import {
 	SentComponent,
@@ -47,9 +47,75 @@ import {
 	BackupWarningComponent,
 	BackupPhraseComponent,
 	BackupWordsComponent,
+	SecurityComponent,
+	AboutComponent,
+	DAppsComponent,
+	NotificationComponent,
+	ImportStepsComponent,
+	ImportComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'ImportWallet',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => (
+				<TitleLeft>
+					Import an existing wallet using {'\n'}a recovery phrase
+				</TitleLeft>
+			),
+			headerRight: () => <BackBtn navigation={navigation} />,
+		}),
+		component: ImportComponent,
+	},
+	{
+		name: 'ImportSteps',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerRight: () => <BackBtn navigation={navigation} />,
+		}),
+		component: ImportStepsComponent,
+	},
+	{
+		name: 'Notification',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => <TitleLeft>Notifications</TitleLeft>,
+			headerRight: () => <BackBtn navigation={navigation} />,
+		}),
+		component: NotificationComponent,
+	},
+	{
+		name: 'DApps',
+		options: ({ navigation }) => ({
+			headerShown: true,
+			title: 'dApps',
+			headerRight: () => <BackBtn navigation={navigation} />,
+		}),
+		component: DAppsComponent,
+	},
+	{
+		name: 'About',
+		options: () => ({
+			headerShown: true,
+			title: '',
+			headerLeft: () => <TitleLeft>About</TitleLeft>,
+		}),
+		component: AboutComponent,
+	},
+	{
+		name: 'Security',
+		options: ({ navigation }) => ({
+			headerRight: () => <BackBtn navigation={navigation} />,
+			headerShown: true,
+			title: 'Security',
+		}),
+		component: SecurityComponent,
+	},
 	{
 		name: 'BackupWords',
 		options: ({ navigation }) => ({
@@ -211,7 +277,7 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Your recovery phrase',
-			headerRight: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <BackBtn navigation={navigation} go='home' />,
 		}),
 		component: ExportPhraseCopyComponent,
 	},
@@ -220,7 +286,7 @@ const screens = [
 		options: ({ navigation }) => ({
 			headerShown: true,
 			title: 'Your private key',
-			headerRight: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <BackBtn navigation={navigation} go='home' />,
 		}),
 		component: ExportPrivateKeyCopyComponent,
 	},
@@ -320,7 +386,7 @@ const screens = [
 		name: 'ConfirmPassword',
 		component: ConfirmPasswordComponent,
 		options: ({ navigation }) => ({
-			headerLeft: () => <BackBtn navigation={navigation} />,
+			headerRight: () => <BackBtn navigation={navigation} />,
 			headerShown: true,
 			title: 'Confirm PIN code',
 		}),
@@ -370,7 +436,7 @@ export function MyStack() {
 								color: THEME.WHITE,
 								fontSize: 24,
 							}}>
-							{title.children.length > 1 ? toUpperWords(title.children) : ' '}
+							{title.children}
 						</Text>
 					),
 				}}>
@@ -385,13 +451,14 @@ export function MyStack() {
 				<Stack.Screen
 					name='Home'
 					component={BottomTabNavigator}
-					options={{
+					options={({ navigation }) => ({
+						headerRight: () => <BackBtn navigation={navigation} />,
 						headerShown: false,
 						contentStyle: {
 							borderTopColor: 'transparent',
 							borderTopWidth: 0,
 						},
-					}}
+					})}
 				/>
 				<Stack.Screen
 					name='TransactionHistory'

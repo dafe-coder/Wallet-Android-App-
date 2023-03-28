@@ -6,14 +6,25 @@ import { Dimensions } from 'react-native'
 
 const width = Dimensions.get('window').width
 
-export const Card = ({ title, children, style, styleBody, imgSize }) => {
+export const Card = ({
+	size = 'm',
+	title,
+	children,
+	style,
+	styleBody,
+	imgSize,
+}) => {
 	return (
 		<View style={[styles.card, style]}>
 			<View style={styles.imgBlock}>
 				<Image
 					style={[styles.imgBg, imgSize]}
 					resizeMode='contain'
-					source={require('../../assets/bg-card.png')}
+					source={
+						size == 'm'
+							? require('../../assets/bg-card.png')
+							: require('../../assets/bg-card-wallet-sm.png')
+					}
 				/>
 			</View>
 			<View style={[styles.cardBody, styleBody]}>
@@ -49,6 +60,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flex: 1,
+		zIndex: -1,
 	},
 	imgBg: {
 		width: width * 1.5,

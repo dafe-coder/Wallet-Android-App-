@@ -1,12 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react'
 import {
-	View,
 	StyleSheet,
 	ScrollView,
 	Keyboard,
 	TouchableWithoutFeedback,
 } from 'react-native'
-import { AccountCard } from '../Components'
 import { AccountListMenu } from '../Components'
 import { WalletBottomSheet } from '../Components'
 import { ImportAccount, SelectAccount } from '../Components/modal'
@@ -38,19 +36,19 @@ export const AccountScreen = ({ navigation }) => {
 	// callbacks
 	function handlePresentPress(title) {
 		if (title == 'Import existing wallet') {
-			importAccountRef.current.expand()
+			navigation.navigate('ImportSteps')
 		} else if (title == 'Wallet') {
 			navigation.navigate('EditProfile')
 		} else if (title == 'Backup') {
 			navigation.navigate('BackupPrimary')
-		} else if (title == 'Logout') {
-			navigation.navigate('RiskAlertLogout')
-		} else if (title == 'Lock Wallet') {
-			navigation.reset({
-				index: 0,
-				routes: [{ name: 'Unlock' }],
-			})
-			dispatch(setLockWallet(true))
+		} else if (title == 'Security') {
+			navigation.navigate('Security')
+		} else if (title == 'About') {
+			navigation.navigate('About')
+		} else if (title == 'Wallet Connect') {
+			navigation.navigate('DApps')
+		} else if (title == 'Notifications') {
+			navigation.navigate('Notification')
 		} else {
 			console.log('coming soon!')
 		}

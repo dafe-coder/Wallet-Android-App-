@@ -44,7 +44,30 @@ import {
 	BackupWarningScreen,
 	BackupPhraseScreen,
 	BackupWordsScreen,
+	AboutScreen,
+	SecurityScreen,
+	DAppsScreen,
+	NotificationScreen,
+	ImportStepsScreen,
+	ImportScreen,
 } from '../screens'
+
+export const ImportComponent = (props) => {
+	return <ImportScreen {...props} />
+}
+
+export const ImportStepsComponent = (props) => {
+	return <ImportStepsScreen {...props} />
+}
+export const NotificationComponent = (props) => {
+	return <NotificationScreen {...props} />
+}
+export const AboutComponent = (props) => {
+	return <AboutScreen {...props} />
+}
+export const DAppsComponent = (props) => {
+	return <DAppsScreen {...props} />
+}
 export const ExportPhraseComponent = (props) => {
 	return <ExportPhraseScreen {...props} />
 }
@@ -183,4 +206,7 @@ export const BackupPhraseComponent = (props) => {
 }
 export const BackupWordsComponent = (props) => {
 	return <BackupWordsScreen {...props} />
+}
+export const SecurityComponent = (props) => {
+	return <SecurityScreen {...props} />
 }

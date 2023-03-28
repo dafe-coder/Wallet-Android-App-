@@ -6,11 +6,12 @@ import fixNum from './../../services/funcWallet/fixNum'
 export const PortfolioItem = ({
 	img,
 	title,
-	currentPrice,
 	balance,
 	changePercent,
 	onOpenPortfolioCoin,
 	coin,
+	balanceDollar,
+	symbol = 'ETH',
 }) => {
 	return (
 		<TouchableOpacity
@@ -26,24 +27,43 @@ export const PortfolioItem = ({
 					<WalletText
 						style={{ fontSize: 12, lineHeight: 15, marginTop: 4 }}
 						color='white'>
-						${fixNum(currentPrice)}
+						{fixNum(balance) + ' ' + symbol.toUpperCase()}
 					</WalletText>
 				</View>
 			</View>
 			<View style={{ alignItems: 'flex-end' }}>
-				<WalletText fw='bold'>{fixNum(balance)}</WalletText>
-				<WalletText
-					style={
-						changePercent > 0 ? { color: THEME.SUCCESS } : { color: THEME.RED }
-					}>
-					{changePercent}%
+				<WalletText fw='bold' size='m'>
+					$ {fixNum(balanceDollar)}
 				</WalletText>
+				<View
+					style={[
+						styles.percentBox,
+						changePercent > 0
+							? { backgroundColor: 'rgba(72, 212, 158, 0.2)' }
+							: { backgroundColor: 'rgba(222, 57, 87, 0.2)' },
+					]}>
+					<WalletText
+						style={[
+							{ fontSize: 10, lineHeight: 12 },
+							changePercent > 0
+								? { color: THEME.SUCCESS }
+								: { color: THEME.RED },
+						]}>
+						{changePercent}%
+					</WalletText>
+				</View>
 			</View>
 		</TouchableOpacity>
 	)
 }
 
 const styles = StyleSheet.create({
+	percentBox: {
+		paddingHorizontal: 6,
+		paddingVertical: 4,
+		borderRadius: 6,
+		marginTop: 4,
+	},
 	logo: {
 		height: 44,
 		width: 44,

@@ -5,7 +5,7 @@ import { SvgIcon } from './../svg/svg'
 
 export const WalletButton = ({
 	disabled = false,
-	width,
+	size = 'auto',
 	arrow = true,
 	type = 'violet',
 	style,
@@ -64,7 +64,7 @@ export const WalletButton = ({
 			activeOpacity={disabled ? 1 : 0.8}>
 			<View
 				style={[
-					width ? { width: width } : {},
+					size == 'm' ? { width: 200 } : {},
 					styles.btn,
 					bgColor,
 					disabled && styles.disabled,
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
 	btn: {
 		borderRadius: 30,
 		paddingVertical: 17.5,
+		paddingHorizontal: 24,
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',

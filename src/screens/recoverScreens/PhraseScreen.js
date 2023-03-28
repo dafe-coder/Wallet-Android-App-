@@ -103,7 +103,7 @@ export const PhraseScreen = ({ navigation, route }) => {
 						paddingHorizontal: 16,
 					}}>
 					<WalletButton
-						width={200}
+						size='m'
 						type='violet'
 						checked
 						disabled={btnDisabled}

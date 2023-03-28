@@ -29,9 +29,8 @@ export const ExportPhraseCopyScreen = ({ navigation }) => {
 					<SvgIcon type='alert' />
 				</View>
 				<View style={{ flexBasis: '89%' }}>
-					<WalletText color='red' style={{ marginLeft: 8 }}>
-						Keep phrase safe! {'\n'}Do not share this phrase with anyone! These
-						words can be used to steal all of your accounts
+					<WalletText color='blue' style={{ marginLeft: 8 }}>
+						Never share recovery phrase with anyone, store it securely!
 					</WalletText>
 				</View>
 			</View>

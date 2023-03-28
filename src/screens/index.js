@@ -70,3 +70,11 @@ export * from './backup/BackupSubscribeScreen'
 export * from './backup/BackupWarningScreen'
 export * from './backup/BackupPhraseScreen'
 export * from './backup/BackupWordsScreen'
+
+export * from './SecurityScreen'
+export * from './AboutScreen'
+export * from './DAppsScreen'
+export * from './NotificationScreen'
+
+export * from './import/ImportStepsScreen'
+export * from './import/ImportScreen'

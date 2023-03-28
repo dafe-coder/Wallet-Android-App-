@@ -3,9 +3,16 @@ import { TouchableOpacity } from 'react-native'
 import { SvgIcon } from '../../Components/svg/svg'
 import { THEME } from '../../Theme'
 
-export const BackBtn = ({ navigation }) => {
+export const BackBtn = ({ navigation, go }) => {
 	const onPressButton = () => {
-		navigation.goBack()
+		if (go == 'home') {
+			navigation.reset({
+				index: 0,
+				routes: [{ name: 'Home' }],
+			})
+		} else {
+			navigation.goBack()
+		}
 	}
 	return (
 		<TouchableOpacity activeOpacity={1} onPress={onPressButton}>

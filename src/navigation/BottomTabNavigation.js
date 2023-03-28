@@ -11,6 +11,7 @@ import { THEME } from '../Theme'
 import { Text } from 'react-native'
 import { DoubleButtons, TitleLeft } from './'
 import { MyTabBar } from './BottomTabBar'
+import { HeaderSettings } from './HeaderButtons/HeaderSettings'
 
 export default function BottomTabNavigator() {
 	return (
@@ -62,6 +63,7 @@ export default function BottomTabNavigator() {
 					component={WalletComponent}
 					options={({ navigation }) => ({
 						headerTitle: () => <></>,
+						headerRight: () => <HeaderSettings navigation={navigation} />,
 						headerLeft: () => <DoubleButtons navigation={navigation} />,
 					})}
 				/>
