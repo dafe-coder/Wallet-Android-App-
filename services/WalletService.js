@@ -77,7 +77,7 @@ const useWalletService = () => {
 					counts: 12,
 					name: account ? xxx : xx,
 					pages: null,
-					new: account,
+					new: true,
 					salt: randomNum(100000, 999999),
 					limit: null,
 					public: strDecr,
