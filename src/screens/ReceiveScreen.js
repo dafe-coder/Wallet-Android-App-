@@ -14,17 +14,12 @@ import { SvgIcon } from './../Components/svg/svg'
 import { ButtonCopy } from './../Components/UI/ButtonCopy'
 
 export const ReceiveScreen = () => {
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { addressWallet } = useSelector((state) => state.wallet)
 	const [qrRef, setRef] = useState()
-	const [address, setAddress] = useState('')
-
-	useEffect(() => {
-		setAddress(dataUser.filter((d) => d.name == currentAccount)[0].address)
-	}, [dataUser, currentAccount])
 
 	const shareQR = () => {
 		Share.share({
-			message: address,
+			message: addressWallet,
 		})
 	}
 
@@ -35,14 +30,18 @@ export const ReceiveScreen = () => {
 				<WalletTitle style={{ marginBottom: 34 }}>
 					Scan QR Code and Pay
 				</WalletTitle>
-				{address !== '' ? <QrCode setRef={setRef} value={address} /> : <></>}
+				{addressWallet !== '' ? (
+					<QrCode setRef={setRef} value={addressWallet} />
+				) : (
+					<></>
+				)}
 				<View style={styles.address}>
 					<WalletText color='dark'>
-						{address !== undefined && address !== ''
-							? address.slice(0, 13) + '...' + address.slice(-10)
+						{addressWallet !== undefined && addressWallet !== ''
+							? addressWallet.slice(0, 13) + '...' + addressWallet.slice(-10)
 							: ''}
 					</WalletText>
-					<ButtonCopy text={address} style={{ bottom: 10, right: 7 }} />
+					<ButtonCopy text={addressWallet} style={{ bottom: 10, right: 7 }} />
 				</View>
 				<View
 					style={{

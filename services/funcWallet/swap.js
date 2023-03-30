@@ -12,8 +12,6 @@ export function swapCoins(
 	chooseCoin
 ) {
 	setLoader(true)
-	console.log(fromAddress, toAddress)
-
 	const RPC_URL =
 		currentNetwork.title.toLowerCase() == 'polygon'
 			? 'https://rpc.ankr.com/polygon'

@@ -13,7 +13,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 	const infoRef = useRef(null)
 	const infoSuccess = useRef(null)
 	const gasRef = useRef(null)
-	const { addressTo, amountSend, chooseCoin } = useSelector(
+	const { addressTo, amountSend, chooseCoin, addressWallet } = useSelector(
 		(state) => state.wallet
 	)
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
@@ -43,8 +43,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 		gasRef.current?.close()
 	}
 	const onSendTransaction = () => {
-		const addressFrom = dataUser.filter((d) => d.name == currentAccount)[0]
-			.address
+		const addressFrom = addressWallet
 		const privateKey = dataUser.filter((d) => d.name == currentAccount)[0]
 			.privateKey
 		const amount = fixNum(
@@ -81,11 +80,7 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 						</WalletText>
 						<View style={styles.item}>
 							<WalletText size='m' color='dark'>
-								{dataUser.map((d) => {
-									if (d.name === currentAccount) {
-										return d.address.slice(0, 13) + '...' + d.address.slice(-10)
-									}
-								})}
+								{addressWallet.slice(0, 13) + '...' + addressWallet.slice(-10)}
 							</WalletText>
 						</View>
 					</View>

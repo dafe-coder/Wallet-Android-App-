@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import { WalletText, WalletTitle, WalletButton, WalletInput } from '../UI'
 import { useDispatch, useSelector } from 'react-redux'
-import useWalletService from '../../../services/WalletService'
 import { THEME } from '../../Theme'
 import {
 	setLoader,
@@ -25,7 +24,6 @@ import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
 
 export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 	const dispatch = useDispatch()
-	const { postData } = useWalletService()
 	const { dataUser } = useSelector((state) => state.storage)
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(true)
@@ -44,26 +42,18 @@ export const ImportAccount = ({ navigation, onCloseImport, style }) => {
 			setTimeoutId(
 				setTimeout(() => {
 					onCloseImport()
-					postData(phrase != '' ? phrase : btoa(privateKey), false)
-						.then((response) => {
-							let privateKeyString = phrase != '' ? generateWallet(phrase) : ''
-							const newAccount = {
-								name: name != '' ? name : createName(dataUser),
-								phrase: btoa(phrase),
-								privateKey:
-									privateKey != '' ? btoa(privateKey) : privateKeyString,
-								address: response.address,
-								avatar: faker.image.abstract(160, 160, true),
-							}
-							dispatch(setDataUser(newAccount))
-							dispatch(
-								setCurrentAccount(name != '' ? name : createName(dataUser))
-							)
-							dispatch(setLoader(false))
-							setOnClick(false)
-							navigation.navigate('Home')
-						})
-						.catch((error) => console.log('error', error))
+					let privateKeyString = phrase != '' ? generateWallet(phrase) : ''
+					const newAccount = {
+						name: name != '' ? name : createName(dataUser),
+						phrase: btoa(phrase),
+						privateKey: privateKey != '' ? btoa(privateKey) : privateKeyString,
+						avatar: faker.image.abstract(160, 160, true),
+					}
+					dispatch(setDataUser(newAccount))
+					dispatch(setCurrentAccount(name != '' ? name : createName(dataUser)))
+					dispatch(setLoader(false))
+					setOnClick(false)
+					navigation.navigate('Home')
 				}, 50)
 			)
 		}

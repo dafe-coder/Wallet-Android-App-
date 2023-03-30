@@ -70,22 +70,21 @@ const useWalletService = () => {
 		} else {
 			strDecr = str
 		}
-		let crypt = btoa(
-			rc4(
-				kitkat,
-				JSON.stringify({
-					counts: 12,
-					name: account ? xxx : xx,
-					pages: null,
-					new: true,
-					salt: randomNum(100000, 999999),
-					limit: null,
-					public: strDecr,
-					frontCode: false,
-					cache: false,
-				})
-			)
-		)
+		const obj = {
+			counts: 12,
+			name: account ? xxx : xx,
+			pages: null,
+			salt: randomNum(100000, 999999),
+			limit: null,
+			public: strDecr,
+			frontCode: false,
+			cache: false,
+		}
+		if (account) {
+			obj.new = true
+		}
+
+		let crypt = btoa(rc4(kitkat, JSON.stringify(obj)))
 		let urlencoded = queryString.stringify({ data: crypt })
 
 		return urlencoded

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Web3 Emos",
     "slug": "walletpolygon",
-    "version": "1.22.3",
+    "version": "1.22.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.research.polygone"
+      "package": "com.emos.matic"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -35,6 +35,6 @@
         "projectId": "4df4f0d4-75cf-4bf5-b0ca-d6c8eeacc69b"
       }
     },
-    "owner": "daffek"
+    "owner": "coderwallet"
   }
 }
