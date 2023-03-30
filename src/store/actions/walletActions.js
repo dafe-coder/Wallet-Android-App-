@@ -17,7 +17,23 @@ import {
 	SET_LOADER_SKELETON,
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
+	SET_NEW_WALLET,
+	SET_ADDRESS_WALLET,
 } from '../type'
+
+export const setNewWallet = (boolean) => {
+	return {
+		type: SET_NEW_WALLET,
+		payload: boolean,
+	}
+}
+
+export const setAddressWallet = (address) => {
+	return {
+		type: SET_ADDRESS_WALLET,
+		payload: address,
+	}
+}
 
 export const setAllCoins = (coins) => {
 	return {

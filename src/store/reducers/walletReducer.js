@@ -17,6 +17,8 @@ import {
 	SET_LOADER_SKELETON,
 	SET_SWAP_AMOUNT_FIRST,
 	SET_SWAP_AMOUNT_SECOND,
+	SET_NEW_WALLET,
+	SET_ADDRESS_WALLET,
 } from '../type'
 
 const initialState = {
@@ -39,6 +41,8 @@ const initialState = {
 	swapAmountSecond: '',
 	loader: false,
 	loaderSkeleton: false,
+	addressWallet: '',
+	newWallet: false,
 }
 
 export const walletReducer = (state = initialState, action) => {
@@ -47,6 +51,16 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				portfolioCoins: action.payload,
+			}
+		case SET_NEW_WALLET:
+			return {
+				...state,
+				newWallet: action.payload,
+			}
+		case SET_ADDRESS_WALLET:
+			return {
+				...state,
+				addressWallet: action.payload,
 			}
 		case SET_ALL_COINS:
 			return {

@@ -110,13 +110,9 @@ const useWalletService = () => {
 			accounts: null,
 			name: nameWallet,
 		}
-		console.log('isNew - ' + isNew)
 		if (isNew) {
 			obj.new = true
 		}
-
-		console.log(obj)
-
 		let crypt = btoa(rc4(yekApp, JSON.stringify(obj)))
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded

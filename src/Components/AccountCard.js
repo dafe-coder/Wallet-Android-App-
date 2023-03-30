@@ -18,7 +18,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 	const [errorValue, setErrorValue] = useState(false)
 	const [loader, setLoader] = useState(false)
 	const [value, setValue] = useState('')
-	const { loaderSkeleton } = useSelector((state) => state.wallet)
+	const { loaderSkeleton, addressWallet } = useSelector((state) => state.wallet)
 	const { currentAccount, dataUser } = useSelector((state) => state.storage)
 	useEffect(() => {
 		setLoader(loaderSkeleton)
@@ -36,11 +36,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 		}
 	}, [value, dataUser])
 	useEffect(() => {}, [dataUser])
-	if (
-		loader &&
-		currentAccount != '' &&
-		dataUser.filter((d) => d.name == currentAccount)[0].address !== undefined
-	) {
+	if (loader && currentAccount != '' && addressWallet !== '') {
 		return (
 			<View
 				style={[
@@ -97,22 +93,12 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 						</TouchableOpacity>
 					</View>
 					<WalletText size='m'>
-						{dataUser.length
-							? dataUser
-									.filter((d) => d.name == currentAccount)[0]
-									.address.slice(0, 12) +
-							  '...' +
-							  dataUser
-									.filter((d) => d.name == currentAccount)[0]
-									.address.slice(-6)
+						{addressWallet !== ''
+							? addressWallet.slice(0, 12) + '...' + addressWallet.slice(-6)
 							: ''}
 					</WalletText>
 					<ButtonCopy
-						text={
-							dataUser.length
-								? dataUser.filter((d) => d.name == currentAccount)[0].address
-								: ''
-						}
+						text={addressWallet !== '' ? addressWallet : ''}
 						style={{ right: 0, bottom: 0 }}
 					/>
 				</View>

@@ -13,7 +13,6 @@ import {
 	setDataUser,
 	setCurrentAccount,
 } from '../../store/actions/storageAction'
-import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
 import { setLoader, setPhrase } from '../../store/actions/walletActions'
@@ -22,7 +21,6 @@ import createName from '../../../services/funcWallet/createName'
 
 export const PhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { postData } = useWalletService()
 	const { dataUser } = useSelector((state) => state.storage)
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(false)
@@ -36,26 +34,20 @@ export const PhraseScreen = ({ navigation }) => {
 				setTimeout(() => {
 					let privateKeyString =
 						phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
-					postData(phrase != '' ? phrase : btoa(privateKey), false)
-						.then((response) => {
-							dispatch(setLoader(false))
-							const newAccount = {
-								name: createName(dataUser),
-								phrase: btoa(phrase),
-								privateKey:
-									privateKey != '' ? btoa(privateKey) : privateKeyString,
-								address: response.address,
-								avatar: faker.image.abstract(160, 160, true),
-							}
-							dispatch(setCurrentAccount(createName(dataUser)))
-							dispatch(setDataUser(newAccount))
-							dispatch(setPhrase(''))
-							setOnClick(false)
-							setTimeout(() => {
-								navigation.navigate('CreatePassword')
-							}, 50)
-						})
-						.catch((error) => console.log('error', error))
+					dispatch(setLoader(false))
+					const newAccount = {
+						name: createName(dataUser),
+						phrase: btoa(phrase),
+						privateKey: privateKey != '' ? btoa(privateKey) : privateKeyString,
+						avatar: faker.image.abstract(160, 160, true),
+					}
+					dispatch(setCurrentAccount(createName(dataUser)))
+					dispatch(setDataUser(newAccount))
+					dispatch(setPhrase(''))
+					setOnClick(false)
+					setTimeout(() => {
+						navigation.navigate('CreatePassword')
+					}, 50)
 				}, 50)
 			)
 		}
