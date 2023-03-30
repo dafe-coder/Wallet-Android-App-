@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Wallet",
+    "name": "Buy BIT",
     "slug": "WalletApk",
-    "version": "2.01.14",
+    "version": "3.1.15",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#0C0B07"
       },
-      "package": "com.webbit.wallet"
+      "package": "com.bitbybit.manage"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -5,6 +5,9 @@ export default function fixNum(num) {
 		length++
 		return el !== '0'
 	})
+	if (length > 15) {
+		return Number(num).toFixedNoRounding(2)
+	}
 	if (numArr[0].length == 1 && numArr[0] != 1 && --length > 0 && num > 0) {
 		return Number(num).toFixedNoRounding(length + 2)
 	} else if (numArr[0].length == 1 && length >= 2) {
