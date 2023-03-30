@@ -53,9 +53,18 @@ import {
 	NotificationComponent,
 	ImportStepsComponent,
 	ImportComponent,
+	SentSuccessComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'SentSuccess',
+		options: () => ({
+			headerShown: false,
+			title: '',
+		}),
+		component: SentSuccessComponent,
+	},
 	{
 		name: 'ImportWallet',
 		options: ({ navigation }) => ({
@@ -419,7 +428,7 @@ export function MyStack() {
 				style={{ flex: 1 }}
 				initialRouteName={
 					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'Home'
+					'BackupWords'
 				}
 				screenOptions={{
 					headerShadowVisible: false,
@@ -494,8 +503,8 @@ export function MyStack() {
 					component={ConfirmTransactionComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
-						title: 'Confirm Transaction',
-						headerLeft: () => <BackBtn navigation={navigation} />,
+						title: '',
+						headerRight: () => <BackBtn navigation={navigation} />,
 					})}
 				/>
 				<Stack.Screen

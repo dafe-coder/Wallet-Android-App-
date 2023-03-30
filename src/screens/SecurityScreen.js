@@ -3,19 +3,30 @@ import { View, StyleSheet } from 'react-native'
 import { WalletText, WalletButton } from './../Components/UI/'
 import { THEME } from './../Theme'
 import { SwitchButton } from './../Components/UI/SwitchButton'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAskPin } from '../store/actions/storageAction'
 
-export const SecurityScreen = () => {
+export const SecurityScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
+	const { askPin } = useSelector((state) => state.storage)
+
+	const onAskPin = (askPin) => {
+		dispatch(setAskPin(askPin))
+	}
+
 	return (
 		<View style={{ flex: 1, paddingTop: 70 }}>
 			<View style={{ alignItems: 'center', marginBottom: 40 }}>
 				<WalletText style={{ marginBottom: 24 }}>
 					Authentication & PIN code
 				</WalletText>
-				<WalletButton>Change my PIN code</WalletButton>
+				<WalletButton onPress={() => navigation.navigate('CreatePassword')}>
+					Change my PIN code
+				</WalletButton>
 			</View>
 			<View style={styles.item}>
 				<WalletText fw='bold'>Ask for PIN code at launch</WalletText>
-				<SwitchButton />
+				<SwitchButton enabled={askPin} setEnabled={onAskPin} />
 			</View>
 		</View>
 	)

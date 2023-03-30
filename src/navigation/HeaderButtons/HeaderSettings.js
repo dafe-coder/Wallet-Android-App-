@@ -71,9 +71,15 @@ export const HeaderSettings = ({ navigation }) => {
 				onPress={() => setIsOpen(!isOpen)}
 				activeOpacity={0.7}
 				style={styles.btn}>
-				<View style={styles.circle} />
-				<View style={styles.circle} />
-				<View style={styles.circle} />
+				{isOpen ? (
+					<View style={styles.circleBtn}>
+						<View style={styles.circle} />
+						<View style={styles.circle} />
+						<View style={styles.circle} />
+					</View>
+				) : (
+					<SvgIcon type='user' />
+				)}
 			</TouchableOpacity>
 			<View style={[styles.body, !isOpen && { display: 'none' }]}>
 				<TouchableOpacity
@@ -162,6 +168,12 @@ const styles = StyleSheet.create({
 		backgroundColor: THEME.PRIMARY,
 	},
 	btn: {
+		height: 22,
+		width: 22,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	circleBtn: {
 		backgroundColor: THEME.WHITE,
 		height: 22,
 		width: 22,

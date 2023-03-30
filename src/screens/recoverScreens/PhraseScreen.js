@@ -17,7 +17,6 @@ import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
 import { setLoader, setPhrase } from '../../store/actions/walletActions'
-import { faker } from '@faker-js/faker'
 import createName from '../../../services/funcWallet/createName'
 import { WalletModal, RestoreWallet } from '../../Components/modal'
 
@@ -62,7 +61,6 @@ export const PhraseScreen = ({ navigation, route }) => {
 									privateKey:
 										privateKey != '' ? btoa(privateKey) : privateKeyString,
 									address: response.address,
-									avatar: faker.image.abstract(160, 160, true),
 								}
 								dispatch(setCurrentAccount(createName(dataUser)))
 								dispatch(setDataUser(newAccount))

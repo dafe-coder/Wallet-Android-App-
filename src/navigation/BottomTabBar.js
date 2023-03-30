@@ -20,7 +20,6 @@ export function MyTabBar({ state, descriptors, navigation }) {
 						: route.name
 
 				const isFocused = state.index === index
-
 				const onPress = () => {
 					const event = navigation.emit({
 						type: 'tabPress',

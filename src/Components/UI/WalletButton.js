@@ -1,7 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
 import { THEME } from './../../Theme'
-import { SvgIcon } from './../svg/svg'
 
 export const WalletButton = ({
 	disabled = false,
@@ -64,7 +63,8 @@ export const WalletButton = ({
 			activeOpacity={disabled ? 1 : 0.8}>
 			<View
 				style={[
-					size == 'm' ? { width: 200 } : {},
+					size == 'm' && { width: 200 },
+					size == 'sm' && { width: 100 },
 					styles.btn,
 					bgColor,
 					disabled && styles.disabled,

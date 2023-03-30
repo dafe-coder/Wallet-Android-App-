@@ -8,23 +8,53 @@ import {
 	ScrollView,
 } from 'react-native'
 import { WalletKeyboard, WalletText } from './../Components/UI/'
-import { SelectCoinSent } from '../Components'
 import { WalletButton } from './../Components/UI/WalletButton'
-import { useSelector, useDispatch } from 'react-redux'
-import { SvgIcon } from './../Components/svg/svg'
 import { THEME } from '../Theme'
 import { ChooseCoin } from './../Components/ChooseCoin'
+import fixNum from '../../services/funcWallet/fixNum'
+import { WalletModal } from '../Components/modal'
+import { useSelector } from 'react-redux'
 
-export const SentScreen = ({ navigation }) => {
-	const { chooseCoin } = useSelector((state) => state.wallet)
+export const SentScreen = ({ navigation, route }) => {
+	const { allCoins } = useSelector((state) => state.wallet)
+	const coin = route.params.item && route.params.item
 	const [btnDisabled, setBtnDisabled] = useState(true)
-	const [value, setValue] = useState('')
+	const [openFunds, setOpenFunds] = useState(false)
+	const [ethCoin, setEthCoin] = useState({})
+	const [value, setValue] = useState(0)
+	const [balance, setBalance] = useState(0)
+
+	React.useEffect(() => {
+		setEthCoin(allCoins.find((item) => item.symbol.toLowerCase() === 'eth'))
+	}, [allCoins])
 
 	const onSubmitSent = () => {
 		if (!btnDisabled) {
-			navigation.navigate('ConfirmTransaction')
+			if (ethCoin.market_data.balance > 0) {
+				navigation.navigate('ConfirmTransaction')
+			} else {
+				setOpenFunds(true)
+			}
 		}
 	}
+
+	const onMax = () => {
+		setValue(fixNum(coin.market_data.balance_crypto.usd).toString())
+		setBalance(fixNum(coin.market_data.balance).toString())
+	}
+
+	React.useEffect(() => {
+		if (+value <= coin.market_data.balance_crypto.usd && +value > 0) {
+			setBtnDisabled(false)
+		} else {
+			setBtnDisabled(true)
+		}
+
+		if (value != '' + value > 0) {
+			setBalance(fixNum(Number(value) * coin.market_data.current_price.usd))
+		}
+	}, [value])
+
 	return (
 		<ScrollView
 			contentContainerStyle={{
@@ -52,11 +82,16 @@ export const SentScreen = ({ navigation }) => {
 							placeholder='$ 0'
 							value={value.length ? '$ ' + value : ''}
 						/>
-						<TouchableOpacity style={styles.maxBtn} activeOpacity={0.7}>
+						<TouchableOpacity
+							style={styles.maxBtn}
+							activeOpacity={0.7}
+							onPress={onMax}>
 							<Text style={styles.maxBtnText}>MAX</Text>
 						</TouchableOpacity>
 					</View>
-					<WalletText style={{ fontSize: 12, marginTop: 10 }}>0 ETH</WalletText>
+					<WalletText style={{ fontSize: 12, marginTop: 10 }}>
+						{balance} {coin.symbol.toUpperCase()}
+					</WalletText>
 				</View>
 				<View
 					style={{
@@ -66,22 +101,30 @@ export const SentScreen = ({ navigation }) => {
 					}}></View>
 			</View>
 			<View style={{ alignItems: 'center' }}>
-				<ChooseCoin style={{ marginTop: 70 }} />
+				<ChooseCoin setValue={setValue} coin={coin} style={{ marginTop: 70 }} />
 				<WalletKeyboard
 					style={{ marginTop: 50, marginBottom: 30 }}
 					setValue={setValue}
 				/>
-				<WalletButton disabled={btnDisabled} onPress={onSubmitSent}>
+				<WalletButton size='m' disabled={btnDisabled} onPress={onSubmitSent}>
 					Send
 				</WalletButton>
 			</View>
+			<WalletModal isVisible={openFunds} styleBody={{ paddingHorizontal: 70 }}>
+				<WalletText fw='bold' center size='m' style={{ marginBottom: 40 }}>
+					Not enough funds.
+				</WalletText>
+				<WalletButton onPress={() => setOpenFunds(false)} size='sm'>
+					Ok
+				</WalletButton>
+			</WalletModal>
 		</ScrollView>
 	)
 }
 
 const styles = StyleSheet.create({
 	maxBtn: {
-		backgroundColor: ' rgba(82, 140, 254, 0.2)',
+		backgroundColor: 'rgba(82, 140, 254, 0.2)',
 		borderRadius: 6,
 		paddingHorizontal: 6,
 		paddingVertical: 4,

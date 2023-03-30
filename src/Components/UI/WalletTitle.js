@@ -16,6 +16,9 @@ export const WalletTitle = ({ style, children, color, size, fw = 'reg' }) => {
 			break
 	}
 	switch (size) {
+		case 'l':
+			sizeTitle = { fontSize: 38, lineHeight: 46 }
+			break
 		case 'm':
 			sizeTitle = { fontSize: 28, lineHeight: 34 }
 			break

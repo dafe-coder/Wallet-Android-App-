@@ -9,7 +9,7 @@ export const WalletNav = ({ navigation }) => {
 		<View style={styles.wrap}>
 			<TouchableOpacity
 				activeOpacity={0.7}
-				onPress={() => navigation.navigate('Sent')}
+				onPress={() => navigation.navigate('ChooseCryptos')}
 				style={[
 					styles.item,
 					styles.itemLeft,

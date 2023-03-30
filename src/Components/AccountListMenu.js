@@ -7,7 +7,7 @@ export const AccountListMenu = ({ onPress }) => {
 		{
 			image: 'wallet-case',
 			title: 'Wallet',
-			topLine: false,
+			topLine: true,
 			onPress: onPress,
 		},
 		{
@@ -73,7 +73,5 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		marginTop: 30,
 		marginBottom: 70,
-		borderBottomColor: THEME.DISABLED_TEXT,
-		borderBottomWidth: 1,
 	},
 })

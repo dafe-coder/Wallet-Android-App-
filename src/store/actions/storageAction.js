@@ -9,7 +9,43 @@ import {
 	SET_SHARE_ANALYTICS,
 	SET_CHOOSE_ASSETS,
 	SET_INIT_CHOOSE_ASSETS,
+	SET_ASK_PIN,
+	SWITCH_NOTIFICATIONS,
+	SWITCH_TRANSACTIONS,
+	SWITCH_WALLET_CONNECTS,
+	SET_BACKUP,
 } from '../type'
+
+export const setBackup = (boolean) => {
+	return {
+		type: SET_BACKUP,
+		payload: boolean,
+	}
+}
+export const switchWalletConnects = (boolean) => {
+	return {
+		type: SWITCH_WALLET_CONNECTS,
+		payload: boolean,
+	}
+}
+export const switchTransactions = (boolean) => {
+	return {
+		type: SWITCH_TRANSACTIONS,
+		payload: boolean,
+	}
+}
+export const switchNotifications = (boolean) => {
+	return {
+		type: SWITCH_NOTIFICATIONS,
+		payload: boolean,
+	}
+}
+export const setAskPin = (boolean) => {
+	return {
+		type: SET_ASK_PIN,
+		payload: boolean,
+	}
+}
 
 export const setPassword = (password) => {
 	return {

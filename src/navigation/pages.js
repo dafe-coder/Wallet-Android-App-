@@ -50,8 +50,12 @@ import {
 	NotificationScreen,
 	ImportStepsScreen,
 	ImportScreen,
+	SentSuccessScreen,
 } from '../screens'
 
+export const SentSuccessComponent = (props) => {
+	return <SentSuccessScreen {...props} />
+}
 export const ImportComponent = (props) => {
 	return <ImportScreen {...props} />
 }

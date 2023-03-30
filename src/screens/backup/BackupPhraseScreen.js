@@ -60,7 +60,7 @@ export const BackupPhraseScreen = ({ navigation }) => {
 								.map(
 									(item, i) =>
 										i >= length && (
-											<WalletText style={{ marginBottom: 16 }}>
+											<WalletText key={i} style={{ marginBottom: 16 }}>
 												<Text style={{ color: THEME.DISABLED_TEXT }}>
 													{i + 1}.
 												</Text>{' '}
@@ -71,7 +71,7 @@ export const BackupPhraseScreen = ({ navigation }) => {
 						</View>
 					</View>
 				</Card>
-				<View style={{ alignItems: 'center' }}>
+				<View style={{ alignItems: 'center', marginBottom: 20 }}>
 					<Alert color='red' style={{ marginHorizontal: 24 }}>
 						Never share recovery phrase with {'\n'}anyone, store it securely!
 					</Alert>
@@ -83,7 +83,7 @@ export const BackupPhraseScreen = ({ navigation }) => {
 				<View
 					style={{
 						alignItems: 'center',
-						marginTop: 50,
+						marginTop: 'auto',
 						paddingHorizontal: 24,
 					}}>
 					<WalletButton

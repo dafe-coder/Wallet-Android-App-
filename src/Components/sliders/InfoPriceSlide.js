@@ -4,7 +4,6 @@ import { View, StyleSheet, ImageBackground } from 'react-native'
 import { THEME } from '../../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../../services/funcWallet/fixNum'
-import { SvgIcon } from './../svg/svg'
 export const InfoPriseSlide = () => {
 	const { portfolioBalance } = useSelector((state) => state.wallet)
 	const { currentNetwork } = useSelector((state) => state.storage)
@@ -81,13 +80,13 @@ const styles = StyleSheet.create({
 	redBox: {
 		backgroundColor: 'rgba(222, 57, 87, 0.2)',
 		borderRadius: 6,
-		paddingHorizontal: 6,
+		paddingRight: 6,
 		paddingVertical: 4,
 	},
 	greenBox: {
 		backgroundColor: ' rgba(72, 212, 158, 0.2)',
 		borderRadius: 6,
-		paddingHorizontal: 6,
+		paddingRight: 6,
 		paddingVertical: 4,
 	},
 	bgImage: {

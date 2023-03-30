@@ -9,6 +9,11 @@ import {
 	SET_CHOOSE_ASSETS,
 	SET_SHARE_ANALYTICS,
 	SET_INIT_CHOOSE_ASSETS,
+	SET_ASK_PIN,
+	SWITCH_NOTIFICATIONS,
+	SWITCH_TRANSACTIONS,
+	SWITCH_WALLET_CONNECTS,
+	SET_BACKUP,
 } from '../type'
 const initialState = {
 	password: '',
@@ -20,10 +25,40 @@ const initialState = {
 		{ id: 1, coins: ['eth', 'matic', 'tether'] },
 	],
 	analytics: true,
+	askPin: true,
+	notifications: true,
+	transactions: true,
+	walletConnects: false,
+	backup: false,
 }
 
 export const storageReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case SET_BACKUP:
+			return {
+				...state,
+				backup: action.payload,
+			}
+		case SWITCH_NOTIFICATIONS:
+			return {
+				...state,
+				notifications: action.payload,
+			}
+		case SWITCH_TRANSACTIONS:
+			return {
+				...state,
+				transactions: action.payload,
+			}
+		case SWITCH_WALLET_CONNECTS:
+			return {
+				...state,
+				walletConnects: action.payload,
+			}
+		case SET_ASK_PIN:
+			return {
+				...state,
+				askPin: action.payload,
+			}
 		case CREATE_PASSWORD:
 			return {
 				...state,

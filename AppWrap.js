@@ -83,9 +83,11 @@ export const AppWrap = ({ children }) => {
 	}, [allCoins, chooseAssets, currentNetwork])
 
 	useEffect(() => {
-		getAllTokens(setLoadingOtherCoins).then((data) => {
-			setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
-		})
+		getAllTokens(setLoadingOtherCoins)
+			.then((data) => {
+				setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+			})
+			.catch((err) => console.log(err))
 	}, [])
 
 	useEffect(() => {

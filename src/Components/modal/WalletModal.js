@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Modal, Button, StyleSheet, Text } from 'react-native'
 import { THEME } from '../../Theme'
 
-export const WalletModal = ({ isVisible, children }) => {
+export const WalletModal = ({ isVisible, children, styleBody }) => {
 	return (
 		<Modal
 			animationType={'fade'}
@@ -12,7 +12,7 @@ export const WalletModal = ({ isVisible, children }) => {
 				console.log('Modal has been closed.')
 			}}>
 			<View style={styles.contentWrap}>
-				<View style={styles.modal}>{children}</View>
+				<View style={[styles.modal, styleBody]}>{children}</View>
 			</View>
 		</Modal>
 	)

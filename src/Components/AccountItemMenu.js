@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
 	},
 	topLine: {
 		borderColor: THEME.DISABLED_TEXT,
-		borderTopWidth: 1,
+		borderBottomWidth: 1,
 	},
 })

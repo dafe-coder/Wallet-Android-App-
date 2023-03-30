@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, StyleSheet, Image, FlatList } from 'react-native'
+import {
+	TouchableOpacity,
+	View,
+	StyleSheet,
+	Image,
+	FlatList,
+} from 'react-native'
 import { THEME } from '../Theme'
 import { WalletText } from '../Components/UI'
 import { useSelector } from 'react-redux'
@@ -8,9 +14,6 @@ import { SearchButton } from '../Components'
 import { TitleLeft } from '../navigation'
 export const ChooseCryptosScreen = ({ navigation }) => {
 	const { allCoins } = useSelector((state) => state.wallet)
-	React.useEffect(() => {
-		console.log(allCoins)
-	}, [allCoins])
 
 	React.useEffect(() => {
 		navigation.setOptions({
@@ -18,9 +21,17 @@ export const ChooseCryptosScreen = ({ navigation }) => {
 		})
 	}, [navigation])
 
+	const onChooseCrypto = (item) => {
+		navigation.navigate('Sent', { item })
+	}
+
 	const coin = React.useCallback(({ item }) => {
 		return (
-			<View key={item.id} style={styles.item}>
+			<TouchableOpacity
+				onPress={() => onChooseCrypto(item)}
+				key={item.id}
+				style={styles.item}
+				activeOpacity={0.7}>
 				<View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
 					<Image
 						resizeMode='contain'
@@ -42,7 +53,7 @@ export const ChooseCryptosScreen = ({ navigation }) => {
 						{'$ ' + fixNum(item.market_data.balance_crypto.usd)}
 					</WalletText>
 				</View>
-			</View>
+			</TouchableOpacity>
 		)
 	}, [])
 	return (

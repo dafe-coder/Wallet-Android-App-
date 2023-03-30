@@ -14,6 +14,7 @@ export const WalletInput = ({
 	return (
 		<View style={{ ...styles.body, ...style }}>
 			<TextInput
+				multiline
 				style={[styles.input, styleInput]}
 				placeholder={placeholder}
 				placeholderTextColor={THEME.WHITE}

@@ -3,7 +3,29 @@ import { View, StyleSheet } from 'react-native'
 import { WalletText } from './../Components/UI/'
 import { SwitchButton } from './../Components/UI/SwitchButton'
 import { THEME } from '../Theme'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+	switchNotifications,
+	switchTransactions,
+	switchWalletConnects,
+} from './../store/actions/storageAction'
+
 export const NotificationScreen = ({ navigation }) => {
+	const dispatch = useDispatch()
+	const { notifications, transactions, walletConnects } = useSelector(
+		(state) => state.storage
+	)
+
+	const onNotifications = (value) => {
+		dispatch(switchNotifications(value))
+	}
+	const onTransactions = (value) => {
+		dispatch(switchTransactions(value))
+	}
+	const onWalletConnects = (value) => {
+		dispatch(switchWalletConnects(value))
+	}
+
 	return (
 		<View style={{ flex: 1, paddingHorizontal: 24 }}>
 			<View>
@@ -11,7 +33,7 @@ export const NotificationScreen = ({ navigation }) => {
 					<WalletText fw='bold' size='m'>
 						Activate notifications
 					</WalletText>
-					<SwitchButton />
+					<SwitchButton setEnabled={onNotifications} enabled={notifications} />
 				</View>
 			</View>
 			<View style={{ marginTop: 24 }}>
@@ -20,15 +42,18 @@ export const NotificationScreen = ({ navigation }) => {
 				</WalletText>
 				<View style={styles.item}>
 					<WalletText fw='bold' size='m'>
-						Activate notifications
+						Transactions
 					</WalletText>
-					<SwitchButton />
+					<SwitchButton setEnabled={onTransactions} enabled={transactions} />
 				</View>
 				<View style={styles.item}>
 					<WalletText fw='bold' size='m'>
 						WalletConnect
 					</WalletText>
-					<SwitchButton />
+					<SwitchButton
+						setEnabled={onWalletConnects}
+						enabled={walletConnects}
+					/>
 				</View>
 			</View>
 		</View>

@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import {
-	Text,
-	View,
-	TextInput,
-	StyleSheet,
-	TouchableOpacity,
-} from 'react-native'
+import { Text, View, TextInput, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
-import { ButtonCopy } from './UI/'
+import { ButtonCopy, WalletText } from './UI/'
 import { setPhrase, setPrivateKey } from '../store/actions/walletActions'
 import { useDispatch } from 'react-redux'
+import { SvgIcon } from './svg/svg'
 
 export const PhraseBox = ({
 	edit,
@@ -17,6 +12,8 @@ export const PhraseBox = ({
 	setBtnDisabled,
 	phrase = '',
 	paste,
+	textAlert,
+	alert,
 }) => {
 	const dispatch = useDispatch()
 	const [active, setActive] = useState(true)
@@ -94,6 +91,18 @@ export const PhraseBox = ({
 					underlineColorAndroid='transparent'
 				/>
 			</View>
+			{alert && (
+				<View style={styles.alert}>
+					<View style={{ flexBasis: '9%', marginTop: 6 }}>
+						<SvgIcon type='alert' />
+					</View>
+					<View style={{ flexBasis: '89%' }}>
+						<WalletText color='blue' style={{ marginLeft: 8 }}>
+							{textAlert}
+						</WalletText>
+					</View>
+				</View>
+			)}
 			<ButtonCopy
 				setText={setText}
 				paste={paste}
@@ -112,6 +121,15 @@ export const PhraseBox = ({
 }
 
 const styles = StyleSheet.create({
+	alert: {
+		marginTop: 20,
+		backgroundColor: THEME.GREY,
+		borderRadius: 10,
+		padding: 16,
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
+		alignItems: 'flex-start',
+	},
 	textarea: {
 		paddingVertical: 20,
 		fontSize: 14,
