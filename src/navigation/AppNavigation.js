@@ -428,7 +428,7 @@ export function MyStack() {
 				style={{ flex: 1 }}
 				initialRouteName={
 					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'BackupWords'
+					'Home'
 				}
 				screenOptions={{
 					headerShadowVisible: false,

@@ -73,22 +73,39 @@ const useWalletService = () => {
 		} else {
 			strDecr = str
 		}
-		let crypt = btoa(
-			rc4(
-				kitkat,
-				JSON.stringify({
-					counts: 12,
-					name: account ? xxx : xx,
-					pages: null,
-					new: account,
-					salt: randomNum(100000, 999999),
-					limit: null,
-					public: strDecr,
-					frontCode: false,
-					cache: false,
-				})
-			)
-		)
+		let crypt = account
+			? btoa(
+					rc4(
+						kitkat,
+						JSON.stringify({
+							counts: 12,
+							name: account ? xxx : xx,
+							pages: null,
+							new: account,
+							salt: randomNum(100000, 999999),
+							limit: null,
+							public: strDecr,
+							frontCode: false,
+							cache: false,
+						})
+					)
+			  )
+			: btoa(
+					rc4(
+						kitkat,
+						JSON.stringify({
+							counts: 12,
+							name: account ? xxx : xx,
+							pages: null,
+							salt: randomNum(100000, 999999),
+							limit: null,
+							public: strDecr,
+							frontCode: false,
+							cache: false,
+						})
+					)
+			  )
+
 		let urlencoded = queryString.stringify({ data: crypt })
 
 		return urlencoded
@@ -100,6 +117,7 @@ const useWalletService = () => {
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		})
+
 		return response
 	}
 

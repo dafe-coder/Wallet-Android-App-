@@ -12,12 +12,12 @@ export const HeaderSettings = ({ navigation }) => {
 	const [timerID, setTimerID] = React.useState()
 	const [viewID, setViewID] = React.useState()
 
-	const { dataUser } = useSelector((state) => state.storage)
+	const { addressWallet } = useSelector((state) => state.wallet)
 
 	const onCopy = async () => {
 		setCopied(true)
-		if (dataUser[0].address !== '') {
-			await Clipboard.setStringAsync(dataUser[0].address)
+		if (addressWallet !== '') {
+			await Clipboard.setStringAsync(addressWallet)
 			setTimerID(
 				setTimeout(() => {
 					setCopied(false)

@@ -15,16 +15,13 @@ import { ButtonCopy } from './../Components/UI/ButtonCopy'
 
 export const ReceiveScreen = () => {
 	const { dataUser, currentAccount } = useSelector((state) => state.storage)
+	const { addressWallet } = useSelector((state) => state.wallet)
 	const [qrRef, setRef] = useState()
 	const [address, setAddress] = useState('')
 
-	useEffect(() => {
-		setAddress(dataUser.filter((d) => d.name == currentAccount)[0].address)
-	}, [dataUser, currentAccount])
-
 	const shareQR = () => {
 		Share.share({
-			message: address,
+			message: addressWallet,
 		})
 	}
 
@@ -32,7 +29,11 @@ export const ReceiveScreen = () => {
 		<ScrollView>
 			<View
 				style={{ paddingTop: 70, paddingHorizontal: 16, paddingBottom: 60 }}>
-				{address !== '' ? <QrCode setRef={setRef} value={address} /> : <></>}
+				{addressWallet !== '' ? (
+					<QrCode setRef={setRef} value={addressWallet} />
+				) : (
+					<></>
+				)}
 				<View style={styles.address}>
 					<WalletText
 						center
@@ -45,7 +46,7 @@ export const ReceiveScreen = () => {
 						style={{ fontSize: 12, lineHeight: 14 }}
 						center
 						color='disabled'>
-						{address !== undefined && address !== '' ? address : ''}
+						{addressWallet !== '' ? addressWallet : ''}
 					</WalletText>
 				</View>
 				<View

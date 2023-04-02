@@ -13,7 +13,9 @@ import {
 	setPortfolioTransactions,
 	setPortfolioBalance,
 	setChooseCoin,
+	setNewWallet,
 	setLoaderSkeleton,
+	setAddressWallet,
 } from './src/store/actions/walletActions'
 import { Image } from 'react-native'
 import { THEME } from './src/Theme'
@@ -27,9 +29,8 @@ export const AppWrap = ({ children }) => {
 	const [otherCoins, setOtherCoins] = useState([])
 	const [portfolioAssets, setPortfolioAssets] = useState([])
 	const { getAllTokens, postData, getToken } = useWalletService()
-	const { loader, portfolioBalance, allCoins, updateWallet } = useSelector(
-		(state) => state.wallet
-	)
+	const { newWallet, loader, portfolioBalance, allCoins, updateWallet } =
+		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount, currentNetwork, chooseAssets } =
 		useSelector((state) => state.storage)
 
@@ -97,11 +98,13 @@ export const AppWrap = ({ children }) => {
 				if (item.name == currentAccount) {
 					setLoadingBalanceCoins(true)
 
-					postData(item.phrase != '' ? item.phrase : item.privateKey, false)
+					postData(item.phrase != '' ? item.phrase : item.privateKey, newWallet)
 						.then((response) => {
+							dispatch(setNewWallet(false))
 							const coins = response.positions.positions.filter(
 								(item) => item.chain == currentNetwork.title.toLowerCase()
 							)
+							dispatch(setAddressWallet(response.address))
 							setLoadingBalanceCoins(false)
 							setPortfolioAssets(rebuildObjPortfolio(coins))
 							dispatch(setPortfolioTransactions(response.transactions))

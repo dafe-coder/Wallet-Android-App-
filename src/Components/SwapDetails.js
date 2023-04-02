@@ -4,6 +4,7 @@ import { WalletText } from './UI/WalletText'
 import { THEME } from '../Theme'
 import fixNum from './../../services/funcWallet/fixNum'
 import { useSelector } from 'react-redux'
+
 export const SwapDetails = ({
 	chooseCoinSwapFirst,
 	chooseCoinSwapSecond,
@@ -32,33 +33,30 @@ export const SwapDetails = ({
 	}, [chooseCoinSwapFirst, chooseCoinSwapSecond])
 
 	return (
-		<View style={{ marginBottom: 26 }}>
+		<View style={{ marginBottom: 26, marginTop: 32 }}>
 			<View
 				style={{
 					marginBottom: 7,
 					flexDirection: 'row',
 					justifyContent: 'space-between',
-					paddingHorizontal: 20,
 				}}>
 				<WalletText color='disabled'>Swap Details</WalletText>
-				<WalletText color='disabled'>
-					{chooseCoinSwapFirst.symbol.toUpperCase()}\
-					<Text style={{ color: THEME.DARK }}>
-						{chooseCoinSwapSecond.symbol.toUpperCase()}
-					</Text>
-				</WalletText>
 			</View>
 			<View style={styles.wrap}>
 				<View style={styles.item}>
-					<WalletText color='disabled'>Rate</WalletText>
-					<WalletText color='dark'>
+					<WalletText color='white'>Slippage</WalletText>
+					<WalletText color='disabled'>2%</WalletText>
+				</View>
+				<View style={styles.item}>
+					<WalletText color='white'>Rate</WalletText>
+					<WalletText color='disabled'>
 						1 {chooseCoinSwapFirst.symbol.toUpperCase()} ~ {priceTokenEnd}{' '}
 						{chooseCoinSwapSecond.symbol.toUpperCase()}
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='disabled'>Fee</WalletText>
-					<WalletText color='dark'>
+					<WalletText color='white'>Fee</WalletText>
+					<WalletText color='disabled'>
 						≈{' '}
 						{currentNetwork.title.toLowerCase() !== 'polygon'
 							? eth != null
@@ -70,12 +68,12 @@ export const SwapDetails = ({
 					</WalletText>
 				</View>
 				<View style={styles.item}>
-					<WalletText color='disabled'>Price impact</WalletText>
-					<WalletText color='dark'>{'<'}0.01%</WalletText>
+					<WalletText color='white'>Price impact</WalletText>
+					<WalletText color='disabled'>{'<'}0.01%</WalletText>
 				</View>
 				<View style={[styles.item, { borderBottomWidth: 0 }]}>
-					<WalletText color='disabled'>Minimum received</WalletText>
-					<WalletText color='dark'>
+					<WalletText color='white'>Minimum received</WalletText>
+					<WalletText color='disabled'>
 						{confirm
 							? swapAmountSecond +
 							  ' ' +
@@ -89,11 +87,11 @@ export const SwapDetails = ({
 							styles.item,
 							{ borderBottomWidth: 0, alignItems: 'flex-start' },
 						]}>
-						<WalletText size='m' color='dark'>
+						<WalletText size='m' color='disabled'>
 							Transaction cost
 						</WalletText>
 						<View>
-							<WalletText style={{ marginBottom: 5 }} size='m' color='dark'>
+							<WalletText style={{ marginBottom: 5 }} size='m' color='disabled'>
 								-
 								{currentNetwork.title.toLowerCase() !== 'polygon'
 									? eth != null && swapAmountFirst != ''
@@ -153,15 +151,9 @@ export const SwapDetails = ({
 }
 
 const styles = StyleSheet.create({
-	wrap: {
-		borderRadius: 10,
-		backgroundColor: THEME.GREY_LIGHT_BG,
-	},
+	wrap: {},
 	item: {
-		paddingHorizontal: 20,
-		paddingVertical: 10,
-		borderBottomWidth: 1,
-		borderBottomColor: THEME.GREY_LIGHT,
+		paddingVertical: 8,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',

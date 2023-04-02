@@ -6,9 +6,14 @@ import { SvgIcon } from './svg/svg'
 import Animated from 'react-native-reanimated'
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity)
 
-import { Rules, SelectCoinSent } from './'
-
-export const SearchButton = ({ width, active, style, onPress }) => {
+export const SearchButton = ({
+	value,
+	setValue,
+	width,
+	active,
+	style,
+	onPress,
+}) => {
 	return (
 		<View style={styles.btn}>
 			<AnimatedTouchable
@@ -21,7 +26,14 @@ export const SearchButton = ({ width, active, style, onPress }) => {
 						Search
 					</WalletText>
 				)}
-				{active && <TextInput style={styles.input} autoFocus />}
+				{active && (
+					<TextInput
+						value={value}
+						onChangeText={setValue}
+						style={styles.input}
+						autoFocus
+					/>
+				)}
 			</AnimatedTouchable>
 		</View>
 	)

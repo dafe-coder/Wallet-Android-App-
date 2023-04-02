@@ -10,15 +10,14 @@ import {
 	setClearDataUser,
 	setCurrentAccount,
 } from '../../store/actions/storageAction'
-import useWalletService from '../../../services/WalletService'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
 import { setLoader, setPhrase } from '../../store/actions/walletActions'
 import createName from '../../../services/funcWallet/createName'
+import { faker } from '@faker-js/faker'
 
 export const ImportScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { postData } = useWalletService()
 	const { dataUser } = useSelector((state) => state.storage)
 
 	const [btnDisabled, setBtnDisabled] = React.useState(true)
@@ -58,25 +57,21 @@ export const ImportScreen = ({ navigation }) => {
 				setTimeout(() => {
 					let privateKeyString =
 						value != '' ? (privateKeyString = generateWallet(value)) : ''
-					postData(value, false)
-						.then((response) => {
-							dispatch(setLoader(false))
-							const newAccount = {
-								name: createName(dataUser),
-								phrase: btoa(value),
-								privateKey: privateKeyString,
-								address: response.address,
-							}
-							dispatch(setClearDataUser())
-							dispatch(setCurrentAccount(createName(dataUser)))
-							dispatch(setDataUser(newAccount))
-							dispatch(setPhrase(''))
-							setOnClick(false)
-							setTimeout(() => {
-								navigation.navigate('CreatePassword')
-							}, 50)
-						})
-						.catch((error) => console.log('error', error))
+					dispatch(setLoader(false))
+					const newAccount = {
+						name: createName(dataUser),
+						phrase: btoa(value),
+						privateKey: privateKeyString,
+						avatar: faker.image.abstract(160, 160, true),
+					}
+					dispatch(setClearDataUser())
+					dispatch(setCurrentAccount(createName(dataUser)))
+					dispatch(setDataUser(newAccount))
+					dispatch(setPhrase(''))
+					setOnClick(false)
+					setTimeout(() => {
+						navigation.navigate('CreatePassword')
+					}, 50)
 				}, 50)
 			)
 		}

@@ -19,8 +19,22 @@ import {
 	SET_SWAP_AMOUNT_SECOND,
 	SET_LOCK_WALLET,
 	SET_UPDATE_WALLET,
+	SET_NEW_WALLET,
+	SET_ADDRESS_WALLET,
 } from '../type'
 
+export const setNewWallet = (boolean) => {
+	return {
+		type: SET_NEW_WALLET,
+		payload: boolean,
+	}
+}
+export const setAddressWallet = (phrase) => {
+	return {
+		type: SET_ADDRESS_WALLET,
+		payload: phrase,
+	}
+}
 export const setLockWallet = (lock) => {
 	return {
 		type: SET_LOCK_WALLET,

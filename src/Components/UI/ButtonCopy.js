@@ -8,7 +8,6 @@ export const ButtonCopy = ({ style, text, paste = false, setText }) => {
 	const [color, setColor] = useState(false)
 
 	const onPressBtn = () => {
-		console.log(1)
 		paste ? onPaste() : onCopy()
 		setColor(true)
 		setTimeout(() => {

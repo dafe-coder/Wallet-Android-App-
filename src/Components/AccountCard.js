@@ -19,7 +19,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 	const [errorValue, setErrorValue] = useState(false)
 	const [loader, setLoader] = useState(false)
 	const [value, setValue] = useState('')
-	const { loaderSkeleton, portfolioBalance } = useSelector(
+	const { loaderSkeleton, portfolioBalance, addressWallet } = useSelector(
 		(state) => state.wallet
 	)
 	const { currentAccount, dataUser, currentNetwork } = useSelector(
@@ -27,8 +27,8 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 	)
 
 	React.useEffect(() => {
-		console.log(currentNetwork)
-	}, [currentNetwork])
+		console.log(addressWallet)
+	}, [addressWallet])
 
 	useEffect(() => {
 		setLoader(loaderSkeleton)
@@ -46,24 +46,14 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 		}
 	}, [value, dataUser])
 	useEffect(() => {}, [dataUser])
-	if (
-		loader &&
-		currentAccount != '' &&
-		dataUser.filter((d) => d.name == currentAccount)[0].address !== undefined
-	) {
+	if (loader && currentAccount != '' && addressWallet !== '') {
 		return (
 			<View style={[styles.wrap, style]}>
 				<View style={styles.info}>
 					<View style={{ flexDirection: 'row', marginBottom: 4 }}>
 						<WalletText size='m'>
-							{dataUser.length
-								? dataUser
-										.filter((d) => d.name == currentAccount)[0]
-										.address.slice(0, 22) +
-								  '...' +
-								  dataUser
-										.filter((d) => d.name == currentAccount)[0]
-										.address.slice(-4)
+							{addressWallet !== ''
+								? addressWallet.slice(0, 22) + '...' + addressWallet.slice(-4)
 								: ''}
 						</WalletText>
 					</View>

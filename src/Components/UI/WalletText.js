@@ -12,175 +12,42 @@ export const WalletText = ({
 	fw = 'regular',
 	styleWrap,
 }) => {
-	switch (color) {
-		case 'white':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.white,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'white-dark':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.whiteDark,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'disabled':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.disabled,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'gold':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.gold,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'dark':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.dark,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'green-light':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.greenLight,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'red':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.red,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'yellow':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.yellow,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-		case 'blue':
-			return (
-				<View style={styleWrap}>
-					<Text
-						style={[
-							styles.blue,
-							size == 'sm' ? styles.sm : styles.m,
-							upperCase && styles.upperCase,
-							center && styles.center,
-							fw == 'regular'
-								? { fontFamily: 'mt-reg' }
-								: { fontFamily: 'mt-semi-bold' },
-							style,
-						]}>
-						{children}
-					</Text>
-				</View>
-			)
-	}
+	return (
+		<View style={styleWrap}>
+			<Text
+				style={[
+					color === 'white' && styles.white, ////// COLOR /////
+					color === 'white-dark' && styles.whiteDark,
+					color === 'disabled' && styles.disabled,
+					color === 'gold' && styles.gold,
+					color === 'dark' && styles.dark,
+					color === 'green-light' && styles.greenLight,
+					color === 'red' && styles.red,
+					color === 'yellow' && styles.yellow,
+					color === 'blue' && styles.blue,
+					size == 'xs' && styles.xs, ////// SIZE /////
+					size == 'sm' && styles.sm,
+					size == 'm' && styles.m,
+					upperCase && styles.upperCase,
+					center && styles.center,
+					fw == 'regular' && { fontFamily: 'mt-reg' }, ////// FONT WEIGHT /////
+					fw == 'bold' && { fontFamily: 'mt-semi-bold' },
+					fw == 'med' && { fontFamily: 'mt-med' },
+					style,
+				]}>
+				{children}
+			</Text>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
 	textPrimary: {
 		color: THEME.WHITE,
+	},
+	xs: {
+		fontSize: 12,
+		lineHeight: 14,
 	},
 	sm: {
 		fontSize: 14,

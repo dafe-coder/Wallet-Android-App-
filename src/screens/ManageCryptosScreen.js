@@ -9,16 +9,34 @@ import {
 	withSpring,
 	withTiming,
 } from 'react-native-reanimated'
+import { useSelector } from 'react-redux'
 
 export const ManageCryptosScreen = ({ navigation, route }) => {
 	const [active, setActive] = React.useState(false)
+	const [value, setValue] = React.useState('')
+	const [filteredCoins, setFilteredCoins] = React.useState([])
 	const offsetWidth = useSharedValue('40%')
-
+	const { allCoins } = useSelector((state) => state.wallet)
 	const width = useAnimatedStyle(() => {
 		return {
 			width: withSpring(offsetWidth.value),
 		}
 	})
+
+	React.useEffect(() => {
+		setFilteredCoins(allCoins)
+	}, [allCoins])
+
+	React.useEffect(() => {
+		if (value !== '') {
+			const filtered = allCoins.filter(
+				(item) => item.symbol.includes(value) || item.name.includes(value)
+			)
+			setFilteredCoins(filtered)
+		} else {
+			setFilteredCoins(allCoins)
+		}
+	}, [value])
 
 	const onAnim = () => {
 		offsetWidth.value = withTiming('40%', {
@@ -82,7 +100,10 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 							default.
 						</WalletText>
 					) : (
-						<ChooseCryptosHome style={{ marginTop: 10 }} />
+						<ChooseCryptosHome
+							allCoins={filteredCoins}
+							style={{ marginTop: 10 }}
+						/>
 					)}
 					{!isHome && <ChooseCryptos style={isHome && { marginTop: 30 }} />}
 					{!isHome && (
@@ -103,6 +124,8 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 			</ScrollView>
 			{isHome && (
 				<SearchButton
+					value={value}
+					setValue={setValue}
 					width={width}
 					active={active}
 					onPress={onOpenSearch}

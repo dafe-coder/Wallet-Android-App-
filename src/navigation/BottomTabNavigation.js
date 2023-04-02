@@ -5,6 +5,7 @@ import {
 	TransactionHistoryPageComponent,
 	AccountComponent,
 	BuyComponent,
+	SwapComponent,
 } from './pages'
 const Tab = createBottomTabNavigator()
 import { THEME } from '../Theme'
@@ -73,6 +74,14 @@ export default function BottomTabNavigator() {
 					options={{
 						title: 'Add Cash',
 						headerLeft: () => <></>,
+					}}
+				/>
+				<Tab.Screen
+					name='Swap'
+					component={SwapComponent}
+					options={{
+						headerTitle: () => <></>,
+						headerLeft: () => <TitleLeft>Settings account</TitleLeft>,
 					}}
 				/>
 				<Tab.Screen

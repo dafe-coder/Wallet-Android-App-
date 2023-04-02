@@ -1,79 +1,77 @@
 import React from 'react'
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import { WalletTitle, WalletText } from './../UI'
+import { WalletText } from './../UI'
 import { THEME } from './../../Theme'
-import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentNetwork } from '../../store/actions/storageAction'
-import { SvgIcon } from '../svg/svg'
 
-export const ChangeCurrentNetwork = ({ onPress, navigation }) => {
-	const { currentNetwork } = useSelector((state) => state.storage)
-	const dispatch = useDispatch()
-
-	const networks = [
-		{
-			id: 0,
-			title: 'Polygon',
-			img: require('../../../assets/network/pol.png'),
-			choose: currentNetwork.title == 'Polygon',
-		},
-		{
-			id: 1,
-			title: 'Ethereum',
-			img: require('../../../assets/network/eth.png'),
-			choose: currentNetwork.title == 'Ethereum',
-		},
-	]
-	const onChooseNetwork = (item) => {
-		navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
-		dispatch(setCurrentNetwork({ title: item.title, id: item.id }))
-		onPress()
-	}
+export const ChangeCurrentNetwork = ({ network, onPress }) => {
 	return (
 		<View style={{ width: '100%' }}>
-			<WalletTitle style={{ marginBottom: 30 }}>Select Network</WalletTitle>
-			<View>
-				{networks.map((n) => {
-					return (
-						<TouchableOpacity
-							onPress={() => onChooseNetwork(n)}
-							activeOpacity={0.7}
-							style={styles.item}
-							key={n.id}>
-							<View style={styles.info}>
-								<Image
-									source={n.img}
-									style={{
-										width: 36,
-										height: 36,
-										overflow: 'hidden',
-										borderRadius: 50,
-									}}
-								/>
-								<WalletText style={{ marginLeft: 12 }} size='m'>
-									{n.title}
-								</WalletText>
-							</View>
-							{n.choose ? <SvgIcon type='check' /> : <></>}
-						</TouchableOpacity>
-					)
-				})}
-			</View>
+			<TouchableOpacity
+				onPress={() => onPress('Ethereum')}
+				activeOpacity={0.7}
+				style={[styles.item, { marginBottom: 30 }]}>
+				<Image
+					resizeMode='cover'
+					style={styles.image}
+					source={require('../../../assets/network/eth.png')}
+				/>
+
+				<WalletText>Ethereum</WalletText>
+				<View
+					style={[
+						styles.circle,
+						network == 'Ethereum' && {
+							backgroundColor: THEME.VIOLET,
+							borderColor: THEME.VIOLET,
+						},
+					]}
+				/>
+			</TouchableOpacity>
+			<TouchableOpacity
+				onPress={() => onPress('Polygon')}
+				activeOpacity={0.7}
+				style={styles.item}>
+				<Image
+					resizeMode='cover'
+					style={styles.image}
+					source={require('../../../assets/network/pol.png')}
+				/>
+				<WalletText>Polygon</WalletText>
+				<View
+					style={[
+						styles.circle,
+						network == 'Polygon' && {
+							backgroundColor: THEME.VIOLET,
+							borderColor: THEME.VIOLET,
+						},
+					]}
+				/>
+			</TouchableOpacity>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	item: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		paddingVertical: 7,
-		borderBottomColor: THEME.GREY_LIGHT,
-		borderBottomWidth: 1,
+	image: {
+		width: 40,
+		height: 40,
+		borderRadius: 50,
+		overflow: 'hidden',
+		marginRight: 10,
 	},
-	info: {
+	item: {
+		width: '100%',
 		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
+	circle: {
+		// backgroundColor: THEME.VIOLET,
+		borderColor: THEME.DISABLED_TEXT,
+		borderWidth: 1,
+		width: 18,
+		height: 18,
+		borderRadius: 50,
+		marginLeft: 'auto',
 	},
 })

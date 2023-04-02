@@ -5,8 +5,7 @@ import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 
-export const ChooseCryptosHome = ({ style }) => {
-	const { allCoins } = useSelector((state) => state.wallet)
+export const ChooseCryptosHome = ({ allCoins, style }) => {
 	return (
 		<View style={style}>
 			{allCoins.map((item) => (

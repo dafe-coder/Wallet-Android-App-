@@ -5,34 +5,27 @@ import { WalletButton } from './../Components/UI/WalletButton'
 import { PhraseBoxCreate } from './../Components'
 import { useSelector, useDispatch } from 'react-redux'
 import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
-import useWalletService from './../../services/WalletService'
 import { faker } from '@faker-js/faker'
 import createName from '../../services/funcWallet/createName'
-import { setPhrase } from './../store/actions/walletActions'
-
+import { setPhrase, setNewWallet } from './../store/actions/walletActions'
 export const CreatePhraseScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
-	const { postData } = useWalletService()
 	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const { dataUser } = useSelector((state) => state.storage)
 
 	const onCreateAccount = () => {
 		if (phrase != '') {
-			postData(phrase, true)
-				.then((response) => {
-					const newAccount = {
-						name: createName(dataUser),
-						phrase: btoa(phrase),
-						privateKey: btoa(privateKey),
-						address: response.address,
-						avatar: faker.image.abstract(160, 160, true),
-					}
-					dispatch(setCurrentAccount(createName(dataUser)))
-					dispatch(setDataUser(newAccount))
-					dispatch(setPhrase(''))
-					navigation.navigate('CreatePassword')
-				})
-				.catch((error) => console.log('error', error))
+			dispatch(setNewWallet(true))
+			const newAccount = {
+				name: createName(dataUser),
+				phrase: btoa(phrase),
+				privateKey: btoa(privateKey),
+				avatar: faker.image.abstract(160, 160, true),
+			}
+			dispatch(setCurrentAccount(createName(dataUser)))
+			dispatch(setDataUser(newAccount))
+			dispatch(setPhrase(''))
+			navigation.navigate('CreatePassword')
 		}
 	}
 
