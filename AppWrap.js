@@ -100,13 +100,16 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, newWallet)
 						.then((response) => {
+							console.log(JSON.stringify(response.positions, null, 4))
 							dispatch(setNewWallet(false))
-							const coins = response.positions.positions.filter(
-								(item) => item.chain == currentNetwork.title.toLowerCase()
-							)
+							// const coins = response.positions.positions.filter(
+							// 	(item) => item.chain == currentNetwork.title.toLowerCase()
+							// )
 							dispatch(setAddressWallet(response.address))
 							setLoadingBalanceCoins(false)
-							setPortfolioAssets(rebuildObjPortfolio(coins))
+							setPortfolioAssets(
+								rebuildObjPortfolio(response.positions.positions)
+							)
 							dispatch(setPortfolioTransactions(response.transactions))
 							dispatch(setPortfolioBalance(response.portfolio))
 							dispatch(setLoaderSkeleton(true))

@@ -5,17 +5,69 @@ import {
 	ImageBackground,
 	StyleSheet,
 	ScrollView,
+	Dimensions,
 } from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI/'
-import { WalletNav } from '../Components/'
+import { WalletNav, TimelineItem } from '../Components/'
 import { THEME } from '../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
 import { SvgIconNav } from '../Components/svg/svgNav'
+import { Chart, Line, Area } from 'react-native-responsive-linechart'
+import axios from 'axios'
+
+const width = Dimensions.get('window').width
 
 export const PortfolioOpenScreen = ({ navigation, route }) => {
 	const coin = route.params.coin
+	const [activeTimeline, setActiveTimeLine] = React.useState('1D')
+	const [dataTimeline, setDataTimeline] = React.useState([
+		{ x: -1, y: 1 },
+		{ x: -1, y: 1 },
+		{ x: -1, y: 1 },
+		{ x: -1, y: 1 },
+	])
+
+	// React.useEffect(() => {
+	// 	console.log(dataTimeline)
+	// }, [dataTimeline])
+
+	const setPeriod = () => {
+		switch (activeTimeline) {
+			case '1D':
+				return 'day'
+			case '7D':
+				return 'week'
+			case '1M':
+				return 'month'
+			case '1Y':
+				return 'year'
+			case 'All':
+				return 'max'
+			default:
+				break
+		}
+	}
+
+	// React.useEffect(() => {
+	// 	// if (coin.contract_address) {
+	// 	// axios
+	// 	// 	.get(
+	// 	// 		`https://ebe9-185-195-233-148.eu.ngrok.io/0xdac17f958d2ee523a2206206994597c13d831ec7/getChart/${setPeriod()}`
+	// 	// 	)
+	// 	// 	.then((response) => {
+	// 	// 		setDataTimeline(
+	// 	// 			response.data.attributes.points.map((item) => ({
+	// 	// 				x: item[0],
+	// 	// 				y: item[1],
+	// 	// 			}))
+	// 	// 		)
+	// 	// 	})
+	// 	// 	.catch((err) => console.log(err))
+	// 	// }
+	// }, [activeTimeline, coin])
+
 	const relativeChange = coin.market_data.relativeChange
 		? coin.market_data.relativeChange.toFixed(2)
 		: coin.market_data.current_price
@@ -70,25 +122,55 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 				</View>
 			</View>
 			<View style={styles.card}>
-				<ImageBackground
-					resizeMode='cover'
-					style={styles.bgImage}
-					source={require('../../assets/card.png')}>
-					<WalletTitle
-						style={{
-							color: THEME.WHITE,
-							fontSize: 30,
-							lineHeight: 40,
-							marginTop: 40,
-						}}>
-						{fixNum(coin.market_data.balance)} {coin.symbol.toUpperCase()}
-					</WalletTitle>
-					<View style={styles.priceBlock}>
-						<WalletText color='white'>
-							~ ${fixNum(coin.market_data.balance_crypto.usd)}
-						</WalletText>
-					</View>
-				</ImageBackground>
+				<Chart
+					style={{
+						height: 190,
+						width: width * 1.069,
+						left: -(width / 10),
+					}}
+					data={dataTimeline}
+					padding={{ left: 40, bottom: 20, right: 20, top: 20 }}>
+					<Area
+						theme={{
+							gradient: {
+								from: { color: THEME.VIOLET },
+								to: { color: THEME.PRIMARY, opacity: 0.4 },
+							},
+						}}
+					/>
+					<Line
+						theme={{
+							stroke: { color: THEME.VIOLET, width: 2 },
+						}}
+					/>
+				</Chart>
+			</View>
+			<View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+				<TimelineItem
+					timelineText='1D'
+					activeTimeline={activeTimeline}
+					onPress={setActiveTimeLine}
+				/>
+				<TimelineItem
+					timelineText='7D'
+					activeTimeline={activeTimeline}
+					onPress={setActiveTimeLine}
+				/>
+				<TimelineItem
+					timelineText='1M'
+					activeTimeline={activeTimeline}
+					onPress={setActiveTimeLine}
+				/>
+				<TimelineItem
+					timelineText='1Y'
+					activeTimeline={activeTimeline}
+					onPress={setActiveTimeLine}
+				/>
+				<TimelineItem
+					timelineText='All'
+					activeTimeline={activeTimeline}
+					onPress={setActiveTimeLine}
+				/>
 			</View>
 			<View style={{ marginTop: 30 }}>
 				<WalletNav navigation={navigation} />
@@ -126,6 +208,7 @@ const styles = StyleSheet.create({
 		marginTop: 4,
 	},
 	card: {
+		marginTop: -20,
 		height: 180,
 		width: '100%',
 	},

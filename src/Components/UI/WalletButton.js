@@ -8,6 +8,7 @@ export const WalletButton = ({
 	arrow = true,
 	type = 'violet',
 	style,
+	styleBtn,
 	children,
 	onPress,
 	checked = false,
@@ -67,6 +68,7 @@ export const WalletButton = ({
 					size == 'sm' && { width: 100 },
 					styles.btn,
 					bgColor,
+					styleBtn,
 					disabled && styles.disabled,
 					arrow
 						? {}

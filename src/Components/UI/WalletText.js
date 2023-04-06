@@ -25,6 +25,7 @@ export const WalletText = ({
 					color === 'red' && styles.red,
 					color === 'yellow' && styles.yellow,
 					color === 'blue' && styles.blue,
+					size == 's' && styles.s, ////// SIZE /////
 					size == 'xs' && styles.xs, ////// SIZE /////
 					size == 'sm' && styles.sm,
 					size == 'm' && styles.m,
@@ -44,6 +45,10 @@ export const WalletText = ({
 const styles = StyleSheet.create({
 	textPrimary: {
 		color: THEME.WHITE,
+	},
+	s: {
+		fontSize: 10,
+		lineHeight: 16,
 	},
 	xs: {
 		fontSize: 12,

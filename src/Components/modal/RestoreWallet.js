@@ -22,7 +22,8 @@ export const RestoreWallet = ({
 				<View style={{ flexDirection: 'row', marginTop: 37 }}>
 					<WalletButton
 						onPress={onConfirm}
-						style={{ width: '37%', marginRight: '5%' }}>
+						styleBtn={{ paddingHorizontal: 0 }}
+						style={{ width: 120, marginRight: '5%' }}>
 						I understand
 					</WalletButton>
 					<WalletButton
