@@ -2,9 +2,11 @@ import React from 'react'
 import { View, ImageBackground, StyleSheet, Dimensions } from 'react-native'
 import { WalletText } from './../Components/UI/WalletText'
 import { WalletButton } from './../Components/UI/WalletButton'
+import { useSelector } from 'react-redux'
 
 const width = Dimensions.get('window').width
 export const WalletSuccessScreen = ({ navigation }) => {
+	const { addressWallet } = useSelector((state) => state.wallet)
 	return (
 		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 			<View
@@ -34,12 +36,16 @@ export const WalletSuccessScreen = ({ navigation }) => {
 						center
 						style={{ fontSize: 12, marginTop: 20 }}
 						color='disabled'>
-						0xDACa159F870Ba0DAba0708d8794c2Ec9d988f6B4
+						{addressWallet}
 					</WalletText>
 				</View>
 			</View>
 			<View style={{ position: 'absolute', bottom: 40, zIndex: 10 }}>
-				<WalletButton onPress={() => navigation.navigate('Home')}>
+				<WalletButton
+					size='m'
+					onPress={() =>
+						navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
+					}>
 					Continue
 				</WalletButton>
 			</View>

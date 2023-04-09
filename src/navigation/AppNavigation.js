@@ -54,9 +54,18 @@ import {
 	ImportStepsComponent,
 	ImportComponent,
 	SentSuccessComponent,
+	CreateWalletComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
+	{
+		name: 'CreateWallet',
+		options: () => ({
+			headerShown: true,
+			title: 'Create Wallet',
+		}),
+		component: CreateWalletComponent,
+	},
 	{
 		name: 'SentSuccess',
 		options: () => ({
@@ -428,7 +437,7 @@ export function MyStack() {
 				style={{ flex: 1 }}
 				initialRouteName={
 					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'Home'
+					'CreateWallet'
 				}
 				screenOptions={{
 					headerShadowVisible: false,

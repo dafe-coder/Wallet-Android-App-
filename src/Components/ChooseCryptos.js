@@ -3,50 +3,70 @@ import { View, StyleSheet } from 'react-native'
 import { SvgCoin } from './svg/svgCoin'
 import { WalletText, SwitchButton } from './UI'
 import { THEME } from '../Theme'
-const coins = [
-	{
-		id: 1,
-		title: 'Bitcoin',
-		symbol: 'Btc',
-		image: <SvgCoin type='btc' />,
-		switch: true,
-		balance: 0.0,
-	},
-	{
-		id: 2,
-		title: 'Ethereum',
-		symbol: 'Eth',
-		image: <SvgCoin type='eth' />,
-		switch: true,
-		balance: 0.0,
-	},
-	{
-		id: 3,
-		title: 'BNB',
-		symbol: 'BNB',
-		image: <SvgCoin type='bnb' />,
-		switch: true,
-		balance: 0,
-	},
-	{
-		id: 4,
-		title: 'Polygon',
-		symbol: 'Matic',
-		image: <SvgCoin type='polygon' />,
-		switch: true,
-		balance: 0,
-	},
-	{
-		id: 5,
-		title: 'Avalanche',
-		symbol: 'Avax',
-		image: <SvgCoin type='avax' />,
-		switch: true,
-		balance: 0,
-	},
-]
+import { useSelector, useDispatch } from 'react-redux'
+import { setChooseAssets } from '../store/actions/storageAction'
 
 export const ChooseCryptos = ({ style }) => {
+	const dispatch = useDispatch()
+	const { chooseAssets } = useSelector((state) => state.storage)
+	const [coins, setCoins] = React.useState([
+		{
+			id: 1,
+			title: 'Bitcoin',
+			symbol: 'Btc',
+			image: <SvgCoin type='btc' />,
+			switch: true,
+			balance: 0.0,
+		},
+		{
+			id: 2,
+			title: 'Ethereum',
+			symbol: 'Eth',
+			image: <SvgCoin type='eth' />,
+			switch: true,
+			balance: 0.0,
+		},
+		{
+			id: 3,
+			title: 'BNB',
+			symbol: 'BNB',
+			image: <SvgCoin type='bnb' />,
+			switch: true,
+			balance: 0,
+		},
+		{
+			id: 4,
+			title: 'Polygon',
+			symbol: 'Matic',
+			image: <SvgCoin type='polygon' />,
+			switch: true,
+			balance: 0,
+		},
+		{
+			id: 5,
+			title: 'Avalanche',
+			symbol: 'Aave',
+			image: <SvgCoin type='avax' />,
+			switch: true,
+			balance: 0,
+		},
+	])
+
+	React.useEffect(() => {
+		const newArr = coins.map((item) => {
+			const switchItem = chooseAssets.includes(item.symbol.toLowerCase())
+			return {
+				...item,
+				switch: switchItem,
+			}
+		})
+		setCoins(newArr)
+	}, [chooseAssets])
+
+	const onChooseAssets = (active, coin) => {
+		dispatch(setChooseAssets(coin.symbol.toLowerCase()))
+	}
+
 	return (
 		<View style={style}>
 			{coins.map((item) => (
@@ -62,7 +82,12 @@ export const ChooseCryptos = ({ style }) => {
 						</WalletText>
 					</View>
 
-					<SwitchButton style={{ marginLeft: 'auto' }} enabled={true} />
+					<SwitchButton
+						coin={item}
+						setEnabled={onChooseAssets}
+						style={{ marginLeft: 'auto' }}
+						enabled={item.switch}
+					/>
 				</View>
 			))}
 		</View>

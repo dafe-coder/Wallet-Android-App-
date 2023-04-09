@@ -26,10 +26,6 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 		(state) => state.storage
 	)
 
-	React.useEffect(() => {
-		console.log(addressWallet)
-	}, [addressWallet])
-
 	useEffect(() => {
 		setLoader(loaderSkeleton)
 	}, [loaderSkeleton])
@@ -62,13 +58,7 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 						fw='bold'
 						size='m'
 						style={{ marginTop: 12 }}>
-						$
-						{' ' +
-							fixNum(
-								portfolioBalance[
-									currentNetwork.title.toLowerCase() + '_assets_value'
-								]
-							)}
+						${' ' + fixNum(portfolioBalance['total_value'])}
 					</WalletTitle>
 				</View>
 			</View>

@@ -35,11 +35,7 @@ export const InfoPriseSlide = () => {
 							marginTop: 7,
 							fontFamily: 'mt-semi-bold',
 						}}>
-						${' '}
-						{balance.absolute_change_24h &&
-							fixNum(
-								balance[`${currentNetwork.title.toLowerCase()}_assets_value`]
-							)}
+						$ {balance.absolute_change_24h && fixNum(balance['total_value'])}
 					</WalletTitle>
 					<View style={styles.priceBlock}>
 						<WalletText

@@ -45,7 +45,7 @@ export const BackupPhraseScreen = ({ navigation }) => {
 								.map(
 									(item, i) =>
 										i < length && (
-											<WalletText style={{ marginBottom: 16 }}>
+											<WalletText style={{ marginBottom: 16 }} key={i}>
 												<Text style={{ color: THEME.DISABLED_TEXT }}>
 													{i + 1}.
 												</Text>{' '}

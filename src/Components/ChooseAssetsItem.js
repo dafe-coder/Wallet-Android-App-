@@ -24,11 +24,8 @@ export const ChooseAssetsItem = ({ onPress, coin, chooseAssets }) => {
 				</WalletText>
 			</View>
 			<View style={styles.circle}>
-				{chooseAssets.find((item) => item.id == currentNetwork.id).coins
-					.length &&
-				chooseAssets
-					.find((item) => item.id == currentNetwork.id)
-					.coins.includes(coin.symbol.toLowerCase()) ? (
+				{chooseAssets.length &&
+				chooseAssets.includes(coin.symbol.toLowerCase()) ? (
 					<View style={styles.circleFilled} />
 				) : (
 					<></>

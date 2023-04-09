@@ -51,10 +51,14 @@ import {
 	ImportStepsScreen,
 	ImportScreen,
 	SentSuccessScreen,
+	CreateWalletScreen,
 } from '../screens'
 
 export const SentSuccessComponent = (props) => {
 	return <SentSuccessScreen {...props} />
+}
+export const CreateWalletComponent = (props) => {
+	return <CreateWalletScreen {...props} />
 }
 export const ImportComponent = (props) => {
 	return <ImportScreen {...props} />

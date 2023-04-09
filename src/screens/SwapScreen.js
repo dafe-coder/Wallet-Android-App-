@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import {
 	ScrollView,
 	Image,
@@ -7,7 +7,7 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 import { WalletTitle, WalletText, WalletButton } from '../Components/UI'
-import { SelectCoinSwap, SwapDetails, WalletBottomSheet } from '../Components'
+import { SelectCoinSwap } from '../Components'
 import { useSelector, useDispatch } from 'react-redux'
 import {
 	setChooseCoinSwapSecond,
@@ -26,8 +26,6 @@ export const SwapScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 
 	const { currentNetwork, dataUser } = useSelector((state) => state.storage)
-	const firstSwapRef = useRef(null)
-	const secondSwapRef = useRef(null)
 	const { chooseCoin, chooseCoinSwapSecond, allCoins, addressWallet } =
 		useSelector((state) => state.wallet)
 
@@ -43,7 +41,7 @@ export const SwapScreen = ({ navigation }) => {
 	React.useEffect(() => {
 		navigation.setOptions({
 			headerLeft: () => (
-				<View style={{ paddingBottom: 10 }}>
+				<View style={{ paddingBottom: 10, paddingLeft: 11 }}>
 					<WalletText>Swap in:</WalletText>
 					<TouchableOpacity
 						onPress={() => setOpenModal(true)}
@@ -63,81 +61,13 @@ export const SwapScreen = ({ navigation }) => {
 	if (!isReady) {
 		return <BusyIndicator></BusyIndicator>
 	}
-	const onOpenFirstSwap = () => {
-		firstSwapRef.current?.expand()
-	}
-	const onCloseFirstSwap = async (coin) => {
-		firstSwapRef.current?.close()
-		if (
-			coin.id.toLowerCase() !== 'ethereum' &&
-			coin.id.toLowerCase() !== 'eth' &&
-			coin.id.length < 15
-		) {
-			await getToken(setTokenIsLoading, coin.id).then((data) => {
-				const coinInfo = {
-					...coin,
-					contract_address: data.platforms[
-						currentNetwork.title.toLowerCase() == 'polygon'
-							? 'polygon-pos'
-							: 'ethereum'
-					]
-						? data.platforms[
-								currentNetwork.title.toLowerCase() == 'polygon'
-									? 'polygon-pos'
-									: 'ethereum'
-						  ]
-						: '',
-				}
-				dispatch(setChooseCoin(coinInfo))
-			})
-		} else {
-			dispatch(setChooseCoin(coin))
-		}
-	}
-	const onOpenSecondSwap = () => {
-		secondSwapRef.current?.expand()
-	}
-	const onCloseSecondSwap = async (coin) => {
-		secondSwapRef.current?.close()
-		if (
-			coin.id.toLowerCase() !== 'ethereum' &&
-			coin.id.toLowerCase() !== 'eth' &&
-			coin.id.length < 15
-		) {
-			await getToken(setTokenIsLoading, coin.id).then((data) => {
-				const coinInfo = {
-					...coin,
-					contract_address: data.platforms[
-						currentNetwork.title.toLowerCase() == 'polygon'
-							? 'polygon-pos'
-							: 'ethereum'
-					]
-						? data.platforms[
-								currentNetwork.title.toLowerCase() == 'polygon'
-									? 'polygon-pos'
-									: 'ethereum'
-						  ]
-						: '',
-				}
-				dispatch(setChooseCoinSwapSecond(coinInfo))
-			})
-		} else {
-			dispatch(setChooseCoinSwapSecond(coin))
-		}
-	}
 
-	const onSwapCoins = () => {
-		const frst = chooseCoin
-		const scnd = chooseCoinSwapSecond
-		dispatch(setChooseCoin(scnd))
-		dispatch(setChooseCoinSwapSecond(frst))
-	}
 	return (
 		<ScrollView
 			style={{
 				flex: 1,
 				paddingTop: 29,
-				paddingHorizontal: 16,
+				paddingHorizontal: 24,
 				paddingBottom: 30,
 			}}>
 			<View style={styles.itemProfile}>
@@ -153,25 +83,8 @@ export const SwapScreen = ({ navigation }) => {
 					</WalletText>
 				</View>
 			</View>
-			{chooseCoin != null && chooseCoinSwapSecond != null ? (
-				<SelectCoinSwap
-					onSwapCoins={onSwapCoins}
-					chooseCoinSwapFirst={chooseCoin}
-					chooseCoinSwapSecond={chooseCoinSwapSecond}
-					onOpenFirstSwap={onOpenFirstSwap}
-					onOpenSecondSwap={onOpenSecondSwap}
-				/>
-			) : (
-				<></>
-			)}
-			{chooseCoin != null && chooseCoinSwapSecond != null ? (
-				<SwapDetails
-					chooseCoinSwapFirst={chooseCoin}
-					chooseCoinSwapSecond={chooseCoinSwapSecond}
-				/>
-			) : (
-				<></>
-			)}
+
+			<SelectCoinSwap network={network} />
 			<View style={{ alignItems: 'center', marginBottom: 160, marginTop: 32 }}>
 				<WalletButton
 					size='m'

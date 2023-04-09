@@ -23,7 +23,9 @@ export const Card = ({
 					source={
 						size == 'm'
 							? require('../../assets/bg-card.png')
-							: require('../../assets/bg-card-wallet-sm.png')
+							: size == 's'
+							? require('../../assets/bg-card-wallet-sm.png')
+							: require('../../assets/bg-card-long.png')
 					}
 				/>
 			</View>

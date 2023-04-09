@@ -10,8 +10,10 @@ import {
 	withTiming,
 } from 'react-native-reanimated'
 import { useSelector } from 'react-redux'
+import { BackBtn } from '../navigation'
 
 export const ManageCryptosScreen = ({ navigation, route }) => {
+	const isHome = route.params && route.params.home
 	const [active, setActive] = React.useState(false)
 	const [value, setValue] = React.useState('')
 	const [filteredCoins, setFilteredCoins] = React.useState([])
@@ -79,11 +81,11 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 						Manage cryptos
 					</WalletText>
 				),
+				headerRight: () => <BackBtn navigation={navigation} />,
 				headerTitle: () => <></>,
 			})
 		}
 	}, [])
-	const isHome = route.params.home
 	return (
 		<View style={{ flex: 1 }}>
 			<ScrollView

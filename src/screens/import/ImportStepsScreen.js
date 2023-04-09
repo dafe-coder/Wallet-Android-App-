@@ -4,9 +4,15 @@ import { WalletTitle, WalletText } from '../../Components/UI'
 import { Card } from './../../Components/Card'
 import { THEME } from './../../Theme'
 import { SvgIcon } from '../../Components/svg/svg'
-
+import { useSelector } from 'react-redux'
 export const ImportStepsScreen = ({ navigation }) => {
+	const { backup } = useSelector((state) => state.storage)
 	const [isDisabled, setIsDisabled] = React.useState(false)
+
+	React.useEffect(() => {
+		setIsDisabled(!backup)
+	}, [backup])
+
 	const goImport = () => {
 		if (!isDisabled) navigation.navigate('ImportWallet')
 	}
@@ -34,8 +40,8 @@ export const ImportStepsScreen = ({ navigation }) => {
 					<WalletText
 						color='disabled'
 						style={{ marginTop: 10, fontSize: 12, lineHeight: 14 }}>
-						This step is required, even if your current Name wallet is empty,
-						for security.
+						This step is required, even if your current{'\n'}Name wallet is
+						empty, for security.
 					</WalletText>
 					<View style={styles.arrow}>
 						<SvgIcon type='arrow-right' />

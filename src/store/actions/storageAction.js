@@ -14,6 +14,7 @@ import {
 	SWITCH_TRANSACTIONS,
 	SWITCH_WALLET_CONNECTS,
 	SET_BACKUP,
+	CLEAR_CHOOSE_ASSETS,
 } from '../type'
 
 export const setBackup = (boolean) => {
@@ -104,5 +105,10 @@ export const setInitChooseAssets = (arr) => {
 	return {
 		type: SET_INIT_CHOOSE_ASSETS,
 		payload: arr,
+	}
+}
+export const clearChooseAssets = () => {
+	return {
+		type: CLEAR_CHOOSE_ASSETS,
 	}
 }

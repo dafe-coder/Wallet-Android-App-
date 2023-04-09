@@ -34,7 +34,11 @@ export const TutorialSecondScreen = ({ navigation }) => {
 						style={{ marginTop: '40%' }}
 						title='A non-custodial & secure wallet for'>
 						<View
-							style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+							style={{
+								marginVertical: 75,
+								flexDirection: 'row',
+								justifyContent: 'space-between',
+							}}>
 							{coins.map((item, i) => (
 								<View key={i} style={styles.coinBlock}>
 									<SvgCoin type={item} />

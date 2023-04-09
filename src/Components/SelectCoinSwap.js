@@ -10,173 +10,221 @@ import {
 import { WalletText } from './UI'
 import { THEME } from '../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
-import { PercentButtons } from './PercentButtons'
 import { SvgIcon } from './svg/svg'
-import { useDispatch } from 'react-redux'
-import {
-	setSwapAmountFirst,
-	setSwapAmountSecond,
-} from './../store/actions/walletActions'
+import { useSelector } from 'react-redux'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { SwapDetails } from './SwapDetails'
 
-export const SelectCoinSwap = ({
-	onSwapCoins,
-	onOpenFirstSwap,
-	onOpenSecondSwap,
-	chooseCoinSwapFirst,
-	chooseCoinSwapSecond,
-	style,
-}) => {
-	const dispatch = useDispatch()
+export const SelectCoinSwap = ({ network, style }) => {
+	const route = useRoute()
+	const navigation = useNavigation()
+
+	const { allCoins, chooseCoin, chooseCoinSwapSecond } = useSelector(
+		(state) => state.wallet
+	)
+
 	const [firstAmount, setFirstAmount] = useState('0')
 	const [secondAmount, setSecondAmount] = useState('0')
+	const [frstData, setFirstData] = useState(null)
+	const [secondData, setSecondData] = useState(null)
 
-	useEffect(() => {
-		setSecondAmount(
-			fixNum(
-				(firstAmount * chooseCoinSwapFirst.market_data.current_price.usd) /
-					chooseCoinSwapSecond.market_data.current_price.usd
+	React.useEffect(() => {
+		if (allCoins.length) {
+			const filtered = allCoins.filter(
+				(item) =>
+					!item.market_data.chain ||
+					item.market_data.chain == network.toLowerCase()
 			)
-		)
-		dispatch(
-			setSwapAmountSecond(
-				fixNum(
-					(firstAmount * chooseCoinSwapFirst.market_data.current_price.usd) /
-						chooseCoinSwapSecond.market_data.current_price.usd
-				)
+			setFirstData(filtered[0])
+			setSecondData(
+				filtered.find((item) => item.symbol.toLowerCase() === 'usdt')
 			)
-		)
-		dispatch(setSwapAmountFirst(firstAmount))
-	}, [firstAmount, chooseCoinSwapFirst, chooseCoinSwapSecond])
+		}
+	}, [allCoins, network])
 
-	const onMax = () => {
-		setFirstAmount(fixNum(chooseCoinSwapFirst.market_data.balance))
+	React.useEffect(() => {
+		if (route.params !== undefined) {
+			setFirstData(route.params.itemFirst)
+			setSecondData(route.params.itemSecond)
+		}
+	}, [route.params])
+
+	const onSwapCoins = () => {
+		const frst = frstData
+		const scnd = secondData
+		setFirstData(scnd)
+		setSecondData(frst)
 	}
 
-	return (
-		<View style={[styles.wrap, style]}>
-			<View style={[styles.item, styles.itemTopBlock]}>
-				<View
-					style={{
-						justifyContent: 'space-between',
-						flexDirection: 'row',
-						alignItems: 'center',
-					}}>
-					<WalletText color='disabled'>You sell</WalletText>
-					<View style={{ flexDirection: 'row' }}>
-						<WalletText
-							color='disabled'
-							style={{ flexDirection: 'row', alignItems: 'center' }}>
-							Balance:{'  '}
-							<Text style={{ color: THEME.WHITE }}>
-								{fixNum(chooseCoinSwapFirst.market_data.balance)}
-							</Text>
-						</WalletText>
-						<TouchableOpacity
-							style={{ marginLeft: 5 }}
-							onPress={onMax}
-							activeOpacity={0.7}>
-							<WalletText color='white'>Max</WalletText>
-						</TouchableOpacity>
-					</View>
-				</View>
-				<View
-					style={{
-						justifyContent: 'space-between',
-						flexDirection: 'row',
-						marginTop: 10,
-					}}>
-					<TouchableOpacity
-						activeOpacity={0.7}
-						onPress={onOpenFirstSwap}
-						style={styles.chooseCoin}>
-						<Image
-							style={styles.image}
-							source={{ uri: chooseCoinSwapFirst.image.thumb }}
-						/>
-						<WalletText fw='med' color='dark' style={{ marginHorizontal: 7 }}>
-							{chooseCoinSwapFirst.symbol.toUpperCase()}
-						</WalletText>
+	useEffect(() => {
+		if (frstData !== null && secondData !== null) {
+			setSecondAmount(
+				fixNum(
+					(firstAmount * frstData.market_data.current_price.usd) /
+						secondData.market_data.current_price.usd
+				)
+			)
+			setFirstAmount(firstAmount)
+		}
+	}, [firstAmount, frstData, secondData])
 
-						<SvgIcon
+	const onMax = () => {
+		setFirstAmount(fixNum(frstData.market_data.balance))
+	}
+
+	if (frstData !== null && secondData !== null) {
+		return (
+			<>
+				<View style={[styles.wrap, style]}>
+					<View style={[styles.item, styles.itemTopBlock]}>
+						<View
 							style={{
-								transform: [{ rotate: '90deg' }],
-							}}
-							width={13}
-							height={13}
-							type='play'
-							fill={THEME.VIOLET}
-						/>
+								justifyContent: 'space-between',
+								flexDirection: 'row',
+								alignItems: 'center',
+							}}>
+							<WalletText color='disabled'>You sell</WalletText>
+							<View style={{ flexDirection: 'row' }}>
+								<WalletText
+									color='disabled'
+									style={{ flexDirection: 'row', alignItems: 'center' }}>
+									Balance:{'  '}
+									<Text style={{ color: THEME.WHITE }}>
+										{fixNum(frstData.market_data.balance)}
+									</Text>
+								</WalletText>
+								<TouchableOpacity
+									style={{ marginLeft: 5 }}
+									onPress={onMax}
+									activeOpacity={0.7}>
+									<WalletText color='white'>Max</WalletText>
+								</TouchableOpacity>
+							</View>
+						</View>
+						<View
+							style={{
+								justifyContent: 'space-between',
+								flexDirection: 'row',
+								marginTop: 10,
+							}}>
+							<TouchableOpacity
+								activeOpacity={0.7}
+								onPress={() =>
+									navigation.navigate('ChooseCryptos', {
+										from: 'swapFirst',
+										coinSwap: secondData,
+										network,
+									})
+								}
+								style={styles.chooseCoin}>
+								<Image
+									style={styles.image}
+									source={{ uri: frstData.image.thumb }}
+								/>
+								<WalletText
+									fw='med'
+									color='dark'
+									style={{ marginHorizontal: 7 }}>
+									{frstData.symbol.toUpperCase()}
+								</WalletText>
+
+								<SvgIcon
+									style={{
+										transform: [{ rotate: '90deg' }],
+									}}
+									width={13}
+									height={13}
+									type='play'
+									fill={THEME.VIOLET}
+								/>
+							</TouchableOpacity>
+							<TextInput
+								value={firstAmount}
+								onChangeText={setFirstAmount}
+								placeholderTextColor={THEME.WHITE}
+								style={styles.input}
+								placeholder='0.0'
+								keyboardType='numeric'
+								cursorColor={THEME.VIOLET}
+							/>
+						</View>
+						<View style={{ marginTop: 16 }}>
+							<WalletText color='disabled'>{frstData.name}</WalletText>
+						</View>
+					</View>
+					<TouchableOpacity
+						onPress={onSwapCoins}
+						activeOpacity={0.9}
+						style={[
+							styles.swapBtn,
+							{ margin: 0, marginRight: 'auto', marginLeft: 'auto' },
+						]}>
+						<View style={styles.btn}>
+							<SvgIcon type='swap' />
+						</View>
 					</TouchableOpacity>
-					<TextInput
-						value={firstAmount}
-						onChangeText={setFirstAmount}
-						placeholderTextColor={THEME.WHITE}
-						style={styles.input}
-						placeholder='0.0'
-						keyboardType='numeric'
-						cursorColor={THEME.VIOLET}
-					/>
-				</View>
-				<View style={{ marginTop: 16 }}>
-					<WalletText color='disabled'>{chooseCoinSwapFirst.name}</WalletText>
-				</View>
-			</View>
-			<TouchableOpacity
-				onPress={onSwapCoins}
-				activeOpacity={0.9}
-				style={[
-					styles.swapBtn,
-					{ margin: 0, marginRight: 'auto', marginLeft: 'auto' },
-				]}>
-				<View style={styles.btn}>
-					<SvgIcon type='swap' />
-				</View>
-			</TouchableOpacity>
-			<View style={[styles.item, { marginTop: 25 }]}>
-				<View
-					style={{
-						justifyContent: 'space-between',
-						flexDirection: 'row',
-						alignItems: 'center',
-					}}>
-					<WalletText color='disabled'>You buy</WalletText>
-					<View style={{ flexDirection: 'row' }}>
-						<WalletText
-							color='disabled'
-							style={{ flexDirection: 'row', alignItems: 'center' }}>
-							<Text style={{ color: THEME.WHITE }}>{fixNum(secondAmount)}</Text>
-						</WalletText>
+					<View style={[styles.item, { marginTop: 25 }]}>
+						<View
+							style={{
+								justifyContent: 'space-between',
+								flexDirection: 'row',
+								alignItems: 'center',
+							}}>
+							<WalletText color='disabled'>You buy</WalletText>
+							<View style={{ flexDirection: 'row' }}>
+								<WalletText
+									color='disabled'
+									style={{ flexDirection: 'row', alignItems: 'center' }}>
+									<Text style={{ color: THEME.WHITE }}>
+										{fixNum(secondAmount)}
+									</Text>
+								</WalletText>
+							</View>
+						</View>
+						<View style={{ flexDirection: 'row', marginTop: 10 }}>
+							<TouchableOpacity
+								onPress={() =>
+									navigation.navigate('ChooseCryptos', {
+										from: 'swapSecond',
+										coinSwap: frstData,
+										network,
+									})
+								}
+								activeOpacity={0.7}
+								style={styles.chooseCoin}>
+								<Image
+									style={styles.image}
+									source={{ uri: secondData.image.thumb }}
+								/>
+								<WalletText color='dark' style={{ marginHorizontal: 7 }}>
+									{secondData.symbol.toUpperCase()}
+								</WalletText>
+								<SvgIcon
+									style={{
+										transform: [{ rotate: '90deg' }],
+									}}
+									width={13}
+									height={13}
+									type='play'
+									fill={THEME.VIOLET}
+								/>
+							</TouchableOpacity>
+						</View>
+						<View style={{ marginTop: 16 }}>
+							<WalletText color='disabled'>{secondData.name}</WalletText>
+						</View>
 					</View>
 				</View>
-				<View style={{ flexDirection: 'row', marginTop: 10 }}>
-					<TouchableOpacity
-						onPress={onOpenSecondSwap}
-						activeOpacity={0.7}
-						style={styles.chooseCoin}>
-						<Image
-							style={styles.image}
-							source={{ uri: chooseCoinSwapSecond.image.thumb }}
-						/>
-						<WalletText color='dark' style={{ marginHorizontal: 7 }}>
-							{chooseCoinSwapSecond.symbol.toUpperCase()}
-						</WalletText>
-						<SvgIcon
-							style={{
-								transform: [{ rotate: '90deg' }],
-							}}
-							width={13}
-							height={13}
-							type='play'
-							fill={THEME.VIOLET}
-						/>
-					</TouchableOpacity>
-				</View>
-				<View style={{ marginTop: 16 }}>
-					<WalletText color='disabled'>{chooseCoinSwapSecond.name}</WalletText>
-				</View>
-			</View>
-		</View>
-	)
+				<SwapDetails
+					currentNetwork={network}
+					chooseCoinSwapFirst={frstData}
+					chooseCoinSwapSecond={secondData}
+				/>
+			</>
+		)
+	} else {
+		return <></>
+	}
 }
 
 const styles = StyleSheet.create({

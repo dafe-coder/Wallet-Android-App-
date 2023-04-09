@@ -9,6 +9,7 @@ import {
 	setDataUser,
 	setClearDataUser,
 	setCurrentAccount,
+	clearChooseAssets,
 } from '../../store/actions/storageAction'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
@@ -22,7 +23,6 @@ export const ImportScreen = ({ navigation }) => {
 
 	const [btnDisabled, setBtnDisabled] = React.useState(true)
 	const [value, setValue] = React.useState('')
-	const [active, setActive] = React.useState(true)
 	const [onClick, setOnClick] = React.useState(false)
 	const [timeoutID, setTimeoutId] = React.useState(null)
 
@@ -31,37 +31,35 @@ export const ImportScreen = ({ navigation }) => {
 		if (
 			textArr.length == 12 ||
 			textArr.length == 15 ||
-			(textArr.length == 24 && text !== '')
+			textArr.length == 24 ||
+			(text !== '' && textArr.length < 2 && text.length === 64)
 		) {
-			setActive(true)
 			setBtnDisabled(false)
 		} else {
 			setBtnDisabled(true)
-			setActive(false)
 		}
 	}
 
 	React.useEffect(() => {
-		if (value !== '' && value.trim().split(' ').length > 2) {
+		if (value !== '' && value.length > 2) {
 			validPhrase(value)
-		} else {
-			setBtnDisabled(true)
 		}
 	}, [value])
 
 	const onImport = () => {
 		if (!onClick && !btnDisabled) {
+			dispatch(clearChooseAssets())
 			dispatch(setLoader(true))
 			setOnClick(true)
 			setTimeoutId(
 				setTimeout(() => {
 					let privateKeyString =
-						value != '' ? (privateKeyString = generateWallet(value)) : ''
+						value.trim().split(' ').length > 2 ? generateWallet(value) : value
 					dispatch(setLoader(false))
 					const newAccount = {
 						name: createName(dataUser),
-						phrase: btoa(value),
-						privateKey: privateKeyString,
+						phrase: value.trim().split(' ').length > 2 ? btoa(value) : '',
+						privateKey: btoa(privateKeyString),
 						avatar: faker.image.abstract(160, 160, true),
 					}
 					dispatch(setClearDataUser())
@@ -93,7 +91,9 @@ export const ImportScreen = ({ navigation }) => {
 			<View>
 				<View style={{ paddingHorizontal: 24 }}>
 					<WalletInput
-						styleInput={[!active && { borderBottomColor: 'red' }]}
+						styleInput={[
+							value !== '' && btnDisabled && { borderBottomColor: 'red' },
+						]}
 						setValue={setValue}
 						value={value}
 						placeholder={`Enter or paste here the 12 or 24 words ${'\n'}from your recovery phrase.`}

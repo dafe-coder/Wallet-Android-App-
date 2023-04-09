@@ -159,6 +159,7 @@ export function rebuildObjPortfolio(list) {
 				relativeChange: obj.asset.price
 					? obj.asset.price.relative_change_24h
 					: 0,
+				chain: obj.chain,
 			},
 			image: {
 				thumb: obj.asset.icon_url,

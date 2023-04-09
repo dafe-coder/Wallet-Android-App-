@@ -9,12 +9,12 @@ export const SwapDetails = ({
 	chooseCoinSwapFirst,
 	chooseCoinSwapSecond,
 	confirm,
+	currentNetwork,
 }) => {
 	const [priceTokenEnd, setPriceTokenEnd] = useState('')
 	const { allCoins, swapAmountSecond, swapAmountFirst } = useSelector(
 		(state) => state.wallet
 	)
-	const { currentNetwork } = useSelector((state) => state.storage)
 	const [eth, setEth] = useState(null)
 	const [matic, setMatic] = useState(null)
 
@@ -58,7 +58,7 @@ export const SwapDetails = ({
 					<WalletText color='white'>Fee</WalletText>
 					<WalletText color='disabled'>
 						≈{' '}
-						{currentNetwork.title.toLowerCase() !== 'polygon'
+						{currentNetwork.toLowerCase() !== 'polygon'
 							? eth != null
 								? fixNum(1 / eth.market_data.current_price.usd)
 								: +' ETH'
@@ -71,80 +71,10 @@ export const SwapDetails = ({
 					<WalletText color='white'>Price impact</WalletText>
 					<WalletText color='disabled'>{'<'}0.01%</WalletText>
 				</View>
-				<View style={[styles.item, { borderBottomWidth: 0 }]}>
-					<WalletText color='white'>Minimum received</WalletText>
-					<WalletText color='disabled'>
-						{confirm
-							? swapAmountSecond +
-							  ' ' +
-							  chooseCoinSwapSecond.symbol.toUpperCase()
-							: '<0.01%'}
-					</WalletText>
+				<View style={styles.item}>
+					<WalletText color='white'>Arrival Time</WalletText>
+					<WalletText color='disabled'>{'<'}30 min</WalletText>
 				</View>
-				{confirm ? (
-					<View
-						style={[
-							styles.item,
-							{ borderBottomWidth: 0, alignItems: 'flex-start' },
-						]}>
-						<WalletText size='m' color='disabled'>
-							Transaction cost
-						</WalletText>
-						<View>
-							<WalletText style={{ marginBottom: 5 }} size='m' color='disabled'>
-								-
-								{currentNetwork.title.toLowerCase() !== 'polygon'
-									? eth != null && swapAmountFirst != ''
-										? fixNum(
-												(1 / eth.market_data.current_price.usd +
-													Number(swapAmountFirst)) *
-													eth.market_data.current_price.usd
-										  )
-										: ''
-									: matic != null && swapAmountFirst != ''
-									? fixNum(
-											(0.01 / matic.market_data.current_price.usd +
-												Number(swapAmountFirst)) *
-												matic.market_data.current_price.usd
-									  )
-									: ''}
-								${' '}
-								<Text style={{ color: THEME.VIOLET }}>
-									{currentNetwork.title.toLowerCase() !== 'polygon'
-										? eth != null && swapAmountFirst != ''
-											? fixNum(
-													1 / eth.market_data.current_price.usd +
-														Number(swapAmountFirst)
-											  )
-											: ''
-										: matic != null && swapAmountFirst != ''
-										? fixNum(
-												0.01 / matic.market_data.current_price.usd +
-													Number(swapAmountFirst)
-										  )
-										: ''}
-								</Text>
-							</WalletText>
-							<View
-								style={{
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 50,
-									borderWidth: 1,
-									borderColor: '#DACEF0',
-									paddingVertical: 2,
-									paddingHorizontal: 5,
-									width: null,
-								}}>
-								<WalletText style={{ fontSize: 12, color: THEME.VIOLET }}>
-									7% Refund
-								</WalletText>
-							</View>
-						</View>
-					</View>
-				) : (
-					<></>
-				)}
 			</View>
 		</View>
 	)

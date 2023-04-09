@@ -39,11 +39,8 @@ export const CreatePasswordScreen = ({ navigation }) => {
 				dispatch(setLoader(true))
 				setTimeout(() => {
 					dispatch(setLoader(false))
-					navigation.reset({
-						index: 0,
-						routes: [{ name: 'Home' }],
-					})
-				}, 3000)
+					navigation.navigate('ManageCryptos')
+				}, 1000)
 			} else if (pin !== pinPrev) {
 				setPinPrev('')
 				setPin('')

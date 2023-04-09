@@ -3,12 +3,12 @@ import { View } from 'react-native'
 import { THEME } from './../../Theme'
 import { Switch } from 'react-native-switch'
 
-export const SwitchButton = ({ style, enabled, setEnabled }) => {
+export const SwitchButton = ({ coin, style, enabled = false, setEnabled }) => {
 	return (
 		<View style={style}>
 			<Switch
 				value={enabled}
-				onValueChange={(val) => setEnabled(val)}
+				onValueChange={(val) => setEnabled(val, coin)}
 				disabled={false}
 				circleSize={12}
 				barHeight={22}

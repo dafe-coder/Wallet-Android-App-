@@ -4,7 +4,12 @@ import { WalletText } from '../Components/UI'
 import { WalletButton } from './../Components/UI/WalletButton'
 import { PhraseBoxCreate } from './../Components'
 import { useSelector, useDispatch } from 'react-redux'
-import { setDataUser, setCurrentAccount } from '../store/actions/storageAction'
+import {
+	setDataUser,
+	setCurrentAccount,
+	clearChooseAssets,
+	setClearDataUser,
+} from '../store/actions/storageAction'
 import { faker } from '@faker-js/faker'
 import createName from '../../services/funcWallet/createName'
 import { setPhrase, setNewWallet } from './../store/actions/walletActions'
@@ -22,7 +27,9 @@ export const CreatePhraseScreen = ({ navigation }) => {
 				privateKey: btoa(privateKey),
 				avatar: faker.image.abstract(160, 160, true),
 			}
+			dispatch(setClearDataUser())
 			dispatch(setCurrentAccount(createName(dataUser)))
+			dispatch(clearChooseAssets())
 			dispatch(setDataUser(newAccount))
 			dispatch(setPhrase(''))
 			navigation.navigate('CreatePassword')

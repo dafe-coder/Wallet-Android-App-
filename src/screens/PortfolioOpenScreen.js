@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
 	TouchableOpacity,
 	View,
-	ImageBackground,
+	Text,
 	StyleSheet,
 	ScrollView,
 	Dimensions,
@@ -16,22 +16,31 @@ import { SvgIcon } from './../Components/svg/svg'
 import { SvgIconNav } from '../Components/svg/svgNav'
 import { Chart, Line, Area } from 'react-native-responsive-linechart'
 import axios from 'axios'
-
+import useWalletService from './../../services/WalletService'
 const width = Dimensions.get('window').width
 
 export const PortfolioOpenScreen = ({ navigation, route }) => {
 	const coin = route.params.coin
+	const { getToken } = useWalletService()
 	const [activeTimeline, setActiveTimeLine] = React.useState('1D')
-	const [dataTimeline, setDataTimeline] = React.useState([
-		{ x: -1, y: 1 },
-		{ x: -1, y: 1 },
-		{ x: -1, y: 1 },
-		{ x: -1, y: 1 },
-	])
+	const [dataTimeline, setDataTimeline] = React.useState([])
+	const [coinContractAddress, setCoinContractAddress] = React.useState('')
+	const [loadedToken, setLoadedToken] = React.useState(true)
 
-	// React.useEffect(() => {
-	// 	console.log(dataTimeline)
-	// }, [dataTimeline])
+	React.useEffect(() => {
+		if (coin.id.length < 15 && coin.id != 'eth') {
+			getToken(setLoadedToken, coin.id)
+				.then((response) => setCoinContractAddress(response.platforms.ethereum))
+				.catch((err) => console.log(err))
+		} else {
+			setLoadedToken(false)
+			setCoinContractAddress(
+				coin.id === 'eth'
+					? '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+					: coin.id
+			)
+		}
+	}, [coin])
 
 	const setPeriod = () => {
 		switch (activeTimeline) {
@@ -50,23 +59,23 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 		}
 	}
 
-	// React.useEffect(() => {
-	// 	// if (coin.contract_address) {
-	// 	// axios
-	// 	// 	.get(
-	// 	// 		`https://ebe9-185-195-233-148.eu.ngrok.io/0xdac17f958d2ee523a2206206994597c13d831ec7/getChart/${setPeriod()}`
-	// 	// 	)
-	// 	// 	.then((response) => {
-	// 	// 		setDataTimeline(
-	// 	// 			response.data.attributes.points.map((item) => ({
-	// 	// 				x: item[0],
-	// 	// 				y: item[1],
-	// 	// 			}))
-	// 	// 		)
-	// 	// 	})
-	// 	// 	.catch((err) => console.log(err))
-	// 	// }
-	// }, [activeTimeline, coin])
+	React.useEffect(() => {
+		if (!loadedToken && coinContractAddress != '') {
+			axios
+				.get(
+					`https://ebe9-185-195-233-148.eu.ngrok.io/${coinContractAddress}/getChart/${setPeriod()}`
+				)
+				.then((response) => {
+					setDataTimeline(
+						response.data.attributes.points.map((item) => ({
+							x: item[0],
+							y: item[1],
+						}))
+					)
+				})
+				.catch((err) => console.log(err))
+		}
+	}, [activeTimeline, coin, coinContractAddress])
 
 	const relativeChange = coin.market_data.relativeChange
 		? coin.market_data.relativeChange.toFixed(2)
@@ -115,63 +124,79 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 							? { backgroundColor: 'rgba(72, 212, 158, 0.2)' }
 							: { backgroundColor: 'rgba(222, 57, 87, 0.2)' },
 					]}>
-					<WalletText>
-						<SvgIcon style={{ marginRight: 6 }} type='bottom-arrow' />
-						{relativeChange}%
+					<SvgIcon
+						type='bottom-arrow'
+						style={{ transform: [{ rotate: '-90deg' }] }}
+						fill={relativeChange > 0 ? THEME.GREEN_LIGHT : THEME.RED}
+					/>
+					<WalletText
+						fw='bold'
+						style={{ marginLeft: 6 }}
+						color={relativeChange > 0 ? 'green-light' : 'red'}>
+						{relativeChange.slice('-')}%
 					</WalletText>
 				</View>
 			</View>
-			<View style={styles.card}>
-				<Chart
-					style={{
-						height: 190,
-						width: width * 1.069,
-						left: -(width / 10),
-					}}
-					data={dataTimeline}
-					padding={{ left: 40, bottom: 20, right: 20, top: 20 }}>
-					<Area
-						theme={{
-							gradient: {
-								from: { color: THEME.VIOLET },
-								to: { color: THEME.PRIMARY, opacity: 0.4 },
-							},
-						}}
-					/>
-					<Line
-						theme={{
-							stroke: { color: THEME.VIOLET, width: 2 },
-						}}
-					/>
-				</Chart>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-				<TimelineItem
-					timelineText='1D'
-					activeTimeline={activeTimeline}
-					onPress={setActiveTimeLine}
-				/>
-				<TimelineItem
-					timelineText='7D'
-					activeTimeline={activeTimeline}
-					onPress={setActiveTimeLine}
-				/>
-				<TimelineItem
-					timelineText='1M'
-					activeTimeline={activeTimeline}
-					onPress={setActiveTimeLine}
-				/>
-				<TimelineItem
-					timelineText='1Y'
-					activeTimeline={activeTimeline}
-					onPress={setActiveTimeLine}
-				/>
-				<TimelineItem
-					timelineText='All'
-					activeTimeline={activeTimeline}
-					onPress={setActiveTimeLine}
-				/>
-			</View>
+			{dataTimeline.length ? (
+				<>
+					<View style={styles.card}>
+						<Chart
+							style={{
+								marginTop: 10,
+								height: 190,
+								width: width * 1.069,
+								left: -(width / 10),
+							}}
+							data={dataTimeline}
+							padding={{ left: 40, bottom: 20, right: 20, top: 20 }}>
+							<Area
+								theme={{
+									gradient: {
+										from: { color: THEME.VIOLET },
+										to: { color: THEME.PRIMARY, opacity: 0.4 },
+									},
+								}}
+							/>
+							<Line
+								theme={{
+									stroke: { color: THEME.VIOLET, width: 2 },
+								}}
+							/>
+						</Chart>
+					</View>
+					<View
+						style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+						<TimelineItem
+							timelineText='1D'
+							activeTimeline={activeTimeline}
+							onPress={setActiveTimeLine}
+						/>
+						<TimelineItem
+							timelineText='7D'
+							activeTimeline={activeTimeline}
+							onPress={setActiveTimeLine}
+						/>
+						<TimelineItem
+							timelineText='1M'
+							activeTimeline={activeTimeline}
+							onPress={setActiveTimeLine}
+						/>
+						<TimelineItem
+							timelineText='1Y'
+							activeTimeline={activeTimeline}
+							onPress={setActiveTimeLine}
+						/>
+						<TimelineItem
+							timelineText='All'
+							activeTimeline={activeTimeline}
+							onPress={setActiveTimeLine}
+						/>
+					</View>
+				</>
+			) : (
+				<></>
+			)}
+
 			<View style={{ marginTop: 30 }}>
 				<WalletNav navigation={navigation} />
 			</View>
@@ -202,7 +227,9 @@ const styles = StyleSheet.create({
 		paddingBottom: 14,
 	},
 	boxPercent: {
-		paddingHorizontal: 6,
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: 9,
 		paddingVertical: 4,
 		borderRadius: 6,
 		marginTop: 4,

@@ -17,13 +17,29 @@ export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 						{title}
 					</WalletText>
 				</View>
-				<SvgIcon fill={THEME.WHITE} type='play' />
+				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+					{title == 'Backup' && (
+						<View style={styles.circleCheck}>
+							<SvgIcon fill={THEME.GREEN_LIGHT} type='check' />
+						</View>
+					)}
+					<SvgIcon fill={THEME.WHITE} type='play' />
+				</View>
 			</View>
 		</TouchableOpacity>
 	)
 }
 
 const styles = StyleSheet.create({
+	circleCheck: {
+		width: 24,
+		height: 24,
+		borderRadius: 50,
+		backgroundColor: '#1A1B28',
+		marginRight: 20,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	circle: {
 		width: 30,
 		height: 30,

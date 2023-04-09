@@ -12,8 +12,30 @@ import { useSelector } from 'react-redux'
 import fixNum from '../../services/funcWallet/fixNum'
 import { SearchButton } from '../Components'
 import { TitleLeft } from '../navigation'
-export const ChooseCryptosScreen = ({ navigation }) => {
+import useWalletService from '../../services/WalletService'
+export const ChooseCryptosScreen = ({ navigation, route }) => {
+	const { getToken } = useWalletService()
+	const from = route.params ? route.params.from : undefined
+	const network = route.params ? route.params.network : undefined
+	const coinSwap = route.params ? route.params.coinSwap : undefined
 	const { allCoins } = useSelector((state) => state.wallet)
+	const [filteredCoins, setFilteredCoins] = React.useState([])
+
+	React.useEffect(() => {
+		if (
+			(allCoins.length && from == 'swapFirst' && network !== undefined) ||
+			(allCoins.length && from == 'swapSecond' && network !== undefined)
+		) {
+			const filtered = allCoins.filter(
+				(item) =>
+					!item.market_data.chain ||
+					item.market_data.chain == network.toLowerCase()
+			)
+			setFilteredCoins(filtered)
+		} else if (from === undefined) {
+			setFilteredCoins(allCoins)
+		}
+	}, [allCoins, from, network])
 
 	React.useEffect(() => {
 		navigation.setOptions({
@@ -22,9 +44,39 @@ export const ChooseCryptosScreen = ({ navigation }) => {
 	}, [navigation])
 
 	const onChooseCrypto = (item) => {
-		navigation.navigate('Sent', { item })
+		if (from == 'swapFirst') {
+			if (
+				item.id.toLowerCase() !== 'ethereum' &&
+				item.id.toLowerCase() !== 'eth' &&
+				item.id.length < 15
+			) {
+				// getToken(false, item.id).then((data) => {
+				// 	const coinInfo = {
+				// 		...item,
+				// 		contract_address: data.platforms[
+				// 			currentNetwork.title.toLowerCase() == 'polygon'
+				// 				? 'polygon-pos'
+				// 				: 'ethereum'
+				// 		]
+				// 			? data.platforms[
+				// 					currentNetwork.title.toLowerCase() == 'polygon'
+				// 						? 'polygon-pos'
+				// 						: 'ethereum'
+				// 			  ]
+				// 			: '',
+				// 	}
+				// })
+				navigation.navigate('Swap', {
+					itemFirst: coinInfo,
+					itemSecond: coinSwap,
+				})
+			} else if (from == 'swapSecond') {
+				navigation.navigate('Swap', { itemSecond: item, itemFirst: coinSwap })
+			} else {
+				navigation.navigate('Sent', { item })
+			}
+		}
 	}
-
 	const coin = React.useCallback(({ item }) => {
 		return (
 			<TouchableOpacity
@@ -60,8 +112,10 @@ export const ChooseCryptosScreen = ({ navigation }) => {
 		<View style={{ flex: 1, marginTop: 20 }}>
 			<FlatList
 				initialNumToRender={8}
-				keyExtractor={(item) => item.id}
-				data={allCoins}
+				keyExtractor={(item) =>
+					item.contract_address !== '' ? item.contract_address : item.id
+				}
+				data={filteredCoins}
 				renderItem={(item) => coin(item)}
 			/>
 			<SearchButton />

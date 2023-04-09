@@ -14,22 +14,20 @@ import {
 	SWITCH_TRANSACTIONS,
 	SWITCH_WALLET_CONNECTS,
 	SET_BACKUP,
+	CLEAR_CHOOSE_ASSETS,
 } from '../type'
 const initialState = {
 	password: '',
 	currentNetwork: { title: 'Polygon', id: 0 },
 	dataUser: [],
 	currentAccount: '',
-	chooseAssets: [
-		{ id: 0, coins: ['eth', 'matic', 'tether'] },
-		{ id: 1, coins: ['eth', 'matic', 'tether'] },
-	],
+	chooseAssets: ['eth', 'matic', 'avax', 'wbtc'],
 	analytics: true,
 	askPin: true,
 	notifications: true,
 	transactions: true,
 	walletConnects: false,
-	backup: false,
+	backup: true,
 }
 
 export const storageReducer = (state = initialState, action) => {
@@ -99,75 +97,25 @@ export const storageReducer = (state = initialState, action) => {
 				...state,
 				dataUser: newArrDelete,
 			}
-		case SET_INIT_CHOOSE_ASSETS:
-			let arrAssetsInit = []
-			if (state.currentNetwork.id == 0) {
-				arrAssetsInit = [
-					...state.chooseAssets.filter(
-						(item) => item.id !== state.currentNetwork.id
-					),
-					{
-						id: state.currentNetwork.id,
-						coins: [
-							...action.payload,
-							...state.chooseAssets
-								.find((item) => item.id == state.currentNetwork.id)
-								.coins.filter((item) => !action.payload.includes(item)),
-						],
-					},
-				]
-			} else {
-				arrAssetsInit = [
-					...state.chooseAssets.filter(
-						(item) => item.id !== state.currentNetwork.id
-					),
-					{
-						id: state.currentNetwork.id,
-						coins: [
-							...action.payload,
-							...state.chooseAssets
-								.find((item) => item.id == state.currentNetwork.id)
-								.coins.filter((item) => !action.payload.includes(item)),
-						],
-					},
-				]
+		case CLEAR_CHOOSE_ASSETS:
+			return {
+				...state,
+				chooseAssets: ['eth', 'matic', 'avax', 'wbtc'],
 			}
+		case SET_INIT_CHOOSE_ASSETS:
+			let arrAssetsInit = [
+				...action.payload,
+				...state.chooseAssets.filter((item) => !action.payload.includes(item)),
+			]
 			return {
 				...state,
 				chooseAssets: arrAssetsInit,
 			}
 		case SET_CHOOSE_ASSETS:
 			const newArrAssets =
-				state.chooseAssets
-					.find((item) => item.id == state.currentNetwork.id)
-					.coins.includes(action.payload) == false
-					? [
-							...state.chooseAssets.filter(
-								(item) => item.id !== state.currentNetwork.id
-							),
-							{
-								id: state.currentNetwork.id,
-								coins: [
-									...state.chooseAssets.find(
-										(item) => item.id == state.currentNetwork.id
-									).coins,
-									action.payload,
-								],
-							},
-					  ]
-					: [
-							...state.chooseAssets.filter(
-								(item) => item.id !== state.currentNetwork.id
-							),
-							{
-								id: state.currentNetwork.id,
-								coins: [
-									...state.chooseAssets
-										.find((item) => item.id == state.currentNetwork.id)
-										.coins.filter((item) => item !== action.payload),
-								],
-							},
-					  ]
+				state.chooseAssets.includes(action.payload) == false
+					? [...state.chooseAssets, action.payload]
+					: [...state.chooseAssets.filter((item) => item !== action.payload)]
 			return {
 				...state,
 				chooseAssets: newArrAssets,

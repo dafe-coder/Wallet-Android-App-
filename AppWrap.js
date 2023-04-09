@@ -20,7 +20,10 @@ import {
 import { Image } from 'react-native'
 import { THEME } from './src/Theme'
 import { setChooseCoinSwapSecond } from './src/store/actions/walletActions'
-import { setInitChooseAssets } from './src/store/actions/storageAction'
+import {
+	clearChooseAssets,
+	setInitChooseAssets,
+} from './src/store/actions/storageAction'
 
 export const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
@@ -57,9 +60,7 @@ export const AppWrap = ({ children }) => {
 	useEffect(() => {
 		if (allCoins.length) {
 			const arr = allCoins.filter((coin) =>
-				chooseAssets
-					.find((item) => item.id == currentNetwork.id)
-					.coins.includes(coin.symbol.toLowerCase())
+				chooseAssets.includes(coin.symbol.toLowerCase())
 			)
 			dispatch(setPortfolioCoins(arr))
 			allCoins.forEach((c) => {
@@ -100,7 +101,6 @@ export const AppWrap = ({ children }) => {
 
 					postData(item.phrase != '' ? item.phrase : item.privateKey, newWallet)
 						.then((response) => {
-							console.log(JSON.stringify(response.positions, null, 4))
 							dispatch(setNewWallet(false))
 							// const coins = response.positions.positions.filter(
 							// 	(item) => item.chain == currentNetwork.title.toLowerCase()
