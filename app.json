@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Web3 Emos",
+    "name": "Protect ID",
     "slug": "walletpolygon",
-    "version": "1.22.4",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.emos.matic"
+      "package": "com.block.protect"
     },
     "web": {
       "favicon": "./assets/favicon.png"

