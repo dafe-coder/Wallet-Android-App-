@@ -17,7 +17,7 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 	const [active, setActive] = React.useState(false)
 	const [value, setValue] = React.useState('')
 	const [filteredCoins, setFilteredCoins] = React.useState([])
-	const offsetWidth = useSharedValue('40%')
+	const offsetWidth = useSharedValue('45%')
 	const { allCoins } = useSelector((state) => state.wallet)
 	const width = useAnimatedStyle(() => {
 		return {
@@ -26,13 +26,11 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 	})
 
 	React.useEffect(() => {
-		setFilteredCoins(allCoins)
-	}, [allCoins])
-
-	React.useEffect(() => {
 		if (value !== '') {
 			const filtered = allCoins.filter(
-				(item) => item.symbol.includes(value) || item.name.includes(value)
+				(item) =>
+					item.symbol.toLowerCase().includes(value.toLowerCase()) ||
+					item.name.toLowerCase().includes(value.toLowerCase())
 			)
 			setFilteredCoins(filtered)
 		} else {
@@ -41,7 +39,7 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 	}, [value])
 
 	const onAnim = () => {
-		offsetWidth.value = withTiming('40%', {
+		offsetWidth.value = withTiming('45%', {
 			duration: 500,
 			easing: Easing.inOut(Easing.cubic),
 		})
@@ -86,44 +84,39 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 			})
 		}
 	}, [])
+
 	return (
 		<View style={{ flex: 1 }}>
-			<ScrollView
-				contentContainerStyle={{
-					justifyContent: 'space-between',
-					paddingBottom: 40,
-				}}>
-				<View style={{ marginBottom: 50 }}>
-					{!isHome ? (
-						<WalletText
-							size='m'
-							style={{ paddingHorizontal: 24, marginBottom: 30 }}>
-							Choose what tokens will be {'\n'}displayed in your wallet by
-							default.
-						</WalletText>
-					) : (
-						<ChooseCryptosHome
-							allCoins={filteredCoins}
-							style={{ marginTop: 10 }}
-						/>
-					)}
-					{!isHome && <ChooseCryptos style={isHome && { marginTop: 30 }} />}
-					{!isHome && (
-						<WalletText
-							color='disabled'
-							style={{ paddingHorizontal: 24, marginTop: -10 }}>
-							You can always change this later! ☺️
-						</WalletText>
-					)}
-				</View>
-				{!isHome && (
-					<View style={{ paddingHorizontal: 24, alignItems: 'center' }}>
-						<WalletButton onPress={() => navigation.navigate('WalletSuccess')}>
-							Go to my wallet
-						</WalletButton>
-					</View>
+			<View style={!isHome && { marginBottom: 50 }}>
+				{!isHome ? (
+					<WalletText
+						size='m'
+						style={{ paddingHorizontal: 24, marginBottom: 30 }}>
+						Choose what tokens will be {'\n'}displayed in your wallet by
+						default.
+					</WalletText>
+				) : (
+					<ChooseCryptosHome
+						allCoins={filteredCoins}
+						style={{ marginTop: 10 }}
+					/>
 				)}
-			</ScrollView>
+				{!isHome && <ChooseCryptos style={isHome && { marginTop: 30 }} />}
+				{!isHome && (
+					<WalletText
+						color='disabled'
+						style={{ paddingHorizontal: 24, marginTop: -10 }}>
+						You can always change this later! ☺️
+					</WalletText>
+				)}
+			</View>
+			{!isHome && (
+				<View style={{ paddingHorizontal: 24, alignItems: 'center' }}>
+					<WalletButton onPress={() => navigation.navigate('WalletSuccess')}>
+						Go to my wallet
+					</WalletButton>
+				</View>
+			)}
 			{isHome && (
 				<SearchButton
 					value={value}

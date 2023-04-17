@@ -12,10 +12,10 @@ export const ChooseCryptos = ({ style }) => {
 	const [coins, setCoins] = React.useState([
 		{
 			id: 1,
-			title: 'Bitcoin',
-			symbol: 'Btc',
-			image: <SvgCoin type='btc' />,
-			switch: true,
+			title: 'Arbitrum',
+			symbol: 'Arb',
+			image: <SvgCoin type='arb' />,
+			switch: false,
 			balance: 0.0,
 		},
 		{
@@ -23,7 +23,7 @@ export const ChooseCryptos = ({ style }) => {
 			title: 'Ethereum',
 			symbol: 'Eth',
 			image: <SvgCoin type='eth' />,
-			switch: true,
+			switch: false,
 			balance: 0.0,
 		},
 		{
@@ -31,7 +31,7 @@ export const ChooseCryptos = ({ style }) => {
 			title: 'BNB',
 			symbol: 'BNB',
 			image: <SvgCoin type='bnb' />,
-			switch: true,
+			switch: false,
 			balance: 0,
 		},
 		{
@@ -39,15 +39,15 @@ export const ChooseCryptos = ({ style }) => {
 			title: 'Polygon',
 			symbol: 'Matic',
 			image: <SvgCoin type='polygon' />,
-			switch: true,
+			switch: false,
 			balance: 0,
 		},
 		{
 			id: 5,
-			title: 'Avalanche',
+			title: 'Aave',
 			symbol: 'Aave',
-			image: <SvgCoin type='avax' />,
-			switch: true,
+			image: <SvgCoin type='aave' />,
+			switch: false,
 			balance: 0,
 		},
 	])

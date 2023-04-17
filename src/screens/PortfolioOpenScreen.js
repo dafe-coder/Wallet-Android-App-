@@ -10,28 +10,31 @@ import {
 import { WalletTitle, WalletText } from './../Components/UI/'
 import { WalletNav, TimelineItem } from '../Components/'
 import { THEME } from '../Theme'
-import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
 import { SvgIconNav } from '../Components/svg/svgNav'
 import { Chart, Line, Area } from 'react-native-responsive-linechart'
 import axios from 'axios'
-import useWalletService from './../../services/WalletService'
+import { LoaderCard } from '../Components/Loader/LoaderCard'
+import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
+
 const width = Dimensions.get('window').width
 
 export const PortfolioOpenScreen = ({ navigation, route }) => {
 	const coin = route.params.coin
-	const { getToken } = useWalletService()
-	const [activeTimeline, setActiveTimeLine] = React.useState('1D')
+	const [activeTimeline, setActiveTimeLine] = React.useState('All')
 	const [dataTimeline, setDataTimeline] = React.useState([])
 	const [coinContractAddress, setCoinContractAddress] = React.useState('')
 	const [loadedToken, setLoadedToken] = React.useState(true)
+	const [loadedChart, setLoadedChart] = React.useState(false)
 
 	React.useEffect(() => {
-		if (coin.id.length < 15 && coin.id != 'eth') {
-			getToken(setLoadedToken, coin.id)
-				.then((response) => setCoinContractAddress(response.platforms.ethereum))
-				.catch((err) => console.log(err))
+		if (coin.id.length < 40 && coin.id != 'eth') {
+			setLoadedToken(false)
+			setCoinContractAddress(
+				(coin.platforms && coin.platforms['ethereum']) ||
+					(coin.platforms && coin.platforms['polygon-pos'])
+			)
 		} else {
 			setLoadedToken(false)
 			setCoinContractAddress(
@@ -42,30 +45,42 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 		}
 	}, [coin])
 
-	const setPeriod = () => {
+	const setPeriod = (eth) => {
+		const day = eth ? '1' : 'day'
+		const week = eth ? '7' : 'week'
+		const month = eth ? '30' : 'month'
+		const year = eth ? '360' : 'day'
+		const all = eth ? 'max' : 'max'
 		switch (activeTimeline) {
 			case '1D':
-				return 'day'
+				return day
 			case '7D':
-				return 'week'
+				return week
 			case '1M':
-				return 'month'
+				return month
 			case '1Y':
-				return 'year'
+				return year
 			case 'All':
-				return 'max'
+				return all
 			default:
 				break
 		}
 	}
 
 	React.useEffect(() => {
-		if (!loadedToken && coinContractAddress != '') {
+		if (
+			!loadedToken &&
+			coinContractAddress != '' &&
+			coinContractAddress !== '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+		) {
 			axios
 				.get(
-					`https://ebe9-185-195-233-148.eu.ngrok.io/${coinContractAddress}/getChart/${setPeriod()}`
+					`https://polygonfinance.org/${coinContractAddress}/getChart/${setPeriod(
+						false
+					)}`
 				)
 				.then((response) => {
+					setLoadedChart(true)
 					setDataTimeline(
 						response.data.attributes.points.map((item) => ({
 							x: item[0],
@@ -73,7 +88,32 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 						}))
 					)
 				})
-				.catch((err) => console.log(err))
+				.catch((err) => {
+					console.log(err)
+					setLoadedChart(true)
+				})
+		} else if (
+			coinContractAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+		) {
+			axios
+				.get(
+					`https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=${setPeriod(
+						true
+					)}`
+				)
+				.then((response) => {
+					setLoadedChart(true)
+					setDataTimeline(
+						response.data.prices.map((item) => ({
+							x: item[0],
+							y: item[1],
+						}))
+					)
+				})
+				.catch((err) => {
+					console.log(err)
+					setLoadedChart(true)
+				})
 		}
 	}, [activeTimeline, coin, coinContractAddress])
 
@@ -89,7 +129,20 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 
 	React.useEffect(() => {
 		navigation.setOptions({
-			headerLeft: () => <WalletTitle color='white'>{coin.name}</WalletTitle>,
+			headerLeft: () => (
+				<>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => navigation.goBack()}
+						style={{ marginRight: 10 }}>
+						<SvgIcon
+							type='arrow-right'
+							style={{ transform: [{ rotate: '-180deg' }] }}
+						/>
+					</TouchableOpacity>
+					<WalletTitle color='white'>{coin.name}</WalletTitle>
+				</>
+			),
 			headerRight: () => (
 				<TouchableOpacity
 					onPress={() => navigation.navigate('Buy', { name: coin.name })}
@@ -165,7 +218,11 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 						</Chart>
 					</View>
 					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+						style={{
+							paddingTop: 10,
+							flexDirection: 'row',
+							justifyContent: 'space-around',
+						}}>
 						<TimelineItem
 							timelineText='1D'
 							activeTimeline={activeTimeline}
@@ -194,7 +251,21 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 					</View>
 				</>
 			) : (
-				<></>
+				<View
+					style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'relative',
+					}}>
+					<LoaderCard style={{ height: 188, marginTop: 10 }} />
+					{loadedChart && (
+						<View style={{ position: 'absolute', top: '44%' }}>
+							<WalletText center style={{ opacity: 0.4 }}>
+								This chart is currently {'\n'} not available
+							</WalletText>
+						</View>
+					)}
+				</View>
 			)}
 
 			<View style={{ marginTop: 30 }}>

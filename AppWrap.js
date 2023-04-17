@@ -8,22 +8,19 @@ import useWalletService, {
 } from './services/WalletService'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-	setPortfolioCoins,
 	setAllCoins,
 	setPortfolioTransactions,
 	setPortfolioBalance,
-	setChooseCoin,
 	setNewWallet,
 	setLoaderSkeleton,
 	setAddressWallet,
+	setAllCoinsSwap,
+	setPortfolioCoins,
 } from './src/store/actions/walletActions'
 import { Image } from 'react-native'
 import { THEME } from './src/Theme'
-import { setChooseCoinSwapSecond } from './src/store/actions/walletActions'
-import {
-	clearChooseAssets,
-	setInitChooseAssets,
-} from './src/store/actions/storageAction'
+import { setInitChooseAssets } from './src/store/actions/storageAction'
+import coins from './src/coins.json'
 
 export const AppWrap = ({ children }) => {
 	const dispatch = useDispatch()
@@ -31,63 +28,24 @@ export const AppWrap = ({ children }) => {
 	const [loadingBalanceCoins, setLoadingBalanceCoins] = useState(true)
 	const [otherCoins, setOtherCoins] = useState([])
 	const [portfolioAssets, setPortfolioAssets] = useState([])
-	const { getAllTokens, postData, getToken } = useWalletService()
-	const { newWallet, loader, portfolioBalance, allCoins, updateWallet } =
+	const { getAllTokens, postData } = useWalletService()
+	const { newWallet, loader, portfolioBalance, updateWallet, allCoins } =
 		useSelector((state) => state.wallet)
 	const { dataUser, currentAccount, currentNetwork, chooseAssets } =
 		useSelector((state) => state.storage)
 
-	const addedAddressToken = async (c, setChooseCoin) => {
-		await getToken(false, c.id).then((data) => {
-			const coinInfo = {
-				...c,
-				contract_address: data.platforms[
-					currentNetwork.title.toLowerCase() == 'polygon'
-						? 'polygon-pos'
-						: 'ethereum'
-				]
-					? data.platforms[
-							currentNetwork.title.toLowerCase() == 'polygon'
-								? 'polygon-pos'
-								: 'ethereum'
-					  ]
-					: '',
-			}
-			dispatch(setChooseCoin(coinInfo))
-		})
-	}
-
-	useEffect(() => {
-		if (allCoins.length) {
-			const arr = allCoins.filter((coin) =>
-				chooseAssets.includes(coin.symbol.toLowerCase())
-			)
-			dispatch(setPortfolioCoins(arr))
-			allCoins.forEach((c) => {
-				if (
-					currentNetwork.title == 'Ethereum' &&
-					c.symbol.toLowerCase() == 'eth'
-				) {
-					dispatch(setChooseCoin(c))
-				} else if (
-					currentNetwork.title == 'Polygon' &&
-					c.symbol.toLowerCase() == 'matic'
-				) {
-					dispatch(setChooseCoin(c))
-				}
-				if (c.symbol.toLowerCase() == 'usdt' && c.id.length > 8) {
-					dispatch(setChooseCoinSwapSecond(c))
-				} else if (c.symbol.toLowerCase() == 'usdt') {
-					addedAddressToken(c, setChooseCoinSwapSecond)
-				}
-			})
-		}
-	}, [allCoins, chooseAssets, currentNetwork])
-
 	useEffect(() => {
 		getAllTokens(setLoadingOtherCoins)
 			.then((data) => {
-				setOtherCoins(rebuildObjPortfolioDefaultCoins(data))
+				const dataCoins = rebuildObjPortfolioDefaultCoins(data)
+				const withAddress = dataCoins.map((item) => {
+					const address = coins.find((coin) => coin.id == item.id).platforms
+					return {
+						...item,
+						platforms: address,
+					}
+				})
+				setOtherCoins(withAddress)
 			})
 			.catch((err) => console.log(err))
 	}, [])
@@ -119,7 +77,14 @@ export const AppWrap = ({ children }) => {
 			})
 		}
 	}, [dataUser, currentAccount, currentNetwork, updateWallet])
-
+	useEffect(() => {
+		if (allCoins.length) {
+			const arr = allCoins.filter((coin) =>
+				chooseAssets.includes(coin.symbol.toLowerCase())
+			)
+			dispatch(setPortfolioCoins(arr))
+		}
+	}, [allCoins, chooseAssets])
 	useEffect(() => {
 		if (
 			!loadingBalanceCoins &&
@@ -132,9 +97,37 @@ export const AppWrap = ({ children }) => {
 				item.symbol.toLowerCase()
 			)
 			let filtered = otherCoins.filter(
-				(coin) => balanceArr.indexOf(coin.symbol.toLowerCase()) === -1
+				(coin) => balanceArr.includes(coin.symbol) == false
 			)
+			let filteredSwap = otherCoins.map((coin) => {
+				if (balanceArr.indexOf(coin.symbol.toLowerCase()) === -1) {
+					return coin
+				} else if (coin.symbol !== 'eth') {
+					let chain = ''
+					const itemWithChain = portfolioAssets.find(
+						(item) => item.symbol.toLowerCase() == coin.symbol.toLowerCase()
+					).market_data.chain
+					switch (itemWithChain) {
+						case 'ethereum':
+							chain = 'polygon'
+							break
+						case 'polygon':
+							chain = 'ethereum'
+							break
+						default:
+							chain = itemWithChain
+							break
+					}
+					return {
+						...coin,
+						chain,
+					}
+				} else {
+					return coin
+				}
+			})
 			dispatch(setAllCoins([...portfolioAssets, ...filtered]))
+			dispatch(setAllCoinsSwap([...portfolioAssets, ...filteredSwap]))
 			dispatch(setInitChooseAssets(balanceArr))
 		} else if (
 			!loadingBalanceCoins &&

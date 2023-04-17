@@ -4,6 +4,7 @@ import {
 	View,
 	StyleSheet,
 	Image,
+	Keyboard,
 	FlatList,
 } from 'react-native'
 import { THEME } from '../Theme'
@@ -12,69 +13,124 @@ import { useSelector } from 'react-redux'
 import fixNum from '../../services/funcWallet/fixNum'
 import { SearchButton } from '../Components'
 import { TitleLeft } from '../navigation'
-import useWalletService from '../../services/WalletService'
+import {
+	useAnimatedStyle,
+	useSharedValue,
+	Easing,
+	withSpring,
+	withTiming,
+} from 'react-native-reanimated'
+
 export const ChooseCryptosScreen = ({ navigation, route }) => {
-	const { getToken } = useWalletService()
+	const offsetWidth = useSharedValue('45%')
 	const from = route.params ? route.params.from : undefined
 	const network = route.params ? route.params.network : undefined
 	const coinSwap = route.params ? route.params.coinSwap : undefined
-	const { allCoins } = useSelector((state) => state.wallet)
+	const { allCoins, allCoinsSwap } = useSelector((state) => state.wallet)
 	const [filteredCoins, setFilteredCoins] = React.useState([])
+	const [active, setActive] = React.useState(false)
+	const [value, setValue] = React.useState('')
+	const [coinsData, setCoinsData] = React.useState([])
+	const width = useAnimatedStyle(() => {
+		return {
+			width: withSpring(offsetWidth.value),
+		}
+	})
 
 	React.useEffect(() => {
 		if (
-			(allCoins.length && from == 'swapFirst' && network !== undefined) ||
-			(allCoins.length && from == 'swapSecond' && network !== undefined)
+			(allCoinsSwap.length && from == 'swapFirst' && network !== undefined) ||
+			(allCoinsSwap.length && from == 'swapSecond' && network !== undefined)
 		) {
-			const filtered = allCoins.filter(
-				(item) =>
-					!item.market_data.chain ||
+			const filtered = allCoinsSwap.filter((item) => {
+				return (
+					(item.chain && item.chain == network.toLowerCase()) ||
+					(item.chain == undefined &&
+						item.platforms &&
+						item.platforms[
+							network == 'Ethereum' ? 'ethereum' : 'polygon-pos'
+						] !== undefined) ||
 					item.market_data.chain == network.toLowerCase()
+				)
+			})
+			setCoinsData(filtered)
+		} else {
+			setCoinsData(allCoins)
+		}
+	}, [allCoinsSwap, route, network])
+
+	React.useEffect(() => {
+		if (value !== '' && coinsData.length) {
+			const filtered = coinsData.filter(
+				(item) =>
+					item.symbol.toLowerCase().includes(value.toLowerCase()) ||
+					item.name.toLowerCase().includes(value.toLowerCase())
 			)
 			setFilteredCoins(filtered)
-		} else if (from === undefined) {
-			setFilteredCoins(allCoins)
+		} else {
+			setFilteredCoins(coinsData)
 		}
-	}, [allCoins, from, network])
+	}, [value, coinsData])
+
+	const onAnim = () => {
+		offsetWidth.value = withTiming('45%', {
+			duration: 500,
+			easing: Easing.inOut(Easing.cubic),
+		})
+	}
+	const onAnimEnd = () => {
+		offsetWidth.value = withTiming('100%', {
+			duration: 500,
+			easing: Easing.inOut(Easing.cubic),
+		})
+	}
+
+	React.useEffect(() => {
+		const showSubscription = Keyboard.addListener('keyboardDidHide', () => {
+			setActive(false)
+		})
+		return () => {
+			showSubscription.remove()
+		}
+	}, [Keyboard])
+	React.useEffect(() => {
+		if (active == false) {
+			onAnim()
+		} else {
+			onAnimEnd()
+		}
+	}, [active])
+
+	const onOpenSearch = () => {
+		setActive(!active)
+	}
 
 	React.useEffect(() => {
 		navigation.setOptions({
-			headerLeft: () => <TitleLeft>Choose a crypto to send</TitleLeft>,
+			headerLeft: () => (
+				<TitleLeft>
+					Choose a crypto to{' '}
+					{(from == 'swapFirst' && network !== undefined) ||
+					(from == 'swapSecond' && network !== undefined)
+						? 'swap'
+						: 'send'}
+				</TitleLeft>
+			),
 		})
 	}, [navigation])
 
 	const onChooseCrypto = (item) => {
 		if (from == 'swapFirst') {
-			if (
-				item.id.toLowerCase() !== 'ethereum' &&
-				item.id.toLowerCase() !== 'eth' &&
-				item.id.length < 15
-			) {
-				// getToken(false, item.id).then((data) => {
-				// 	const coinInfo = {
-				// 		...item,
-				// 		contract_address: data.platforms[
-				// 			currentNetwork.title.toLowerCase() == 'polygon'
-				// 				? 'polygon-pos'
-				// 				: 'ethereum'
-				// 		]
-				// 			? data.platforms[
-				// 					currentNetwork.title.toLowerCase() == 'polygon'
-				// 						? 'polygon-pos'
-				// 						: 'ethereum'
-				// 			  ]
-				// 			: '',
-				// 	}
-				// })
-				navigation.navigate('Swap', {
-					itemFirst: coinInfo,
-					itemSecond: coinSwap,
-				})
-			} else if (from == 'swapSecond') {
-				navigation.navigate('Swap', { itemSecond: item, itemFirst: coinSwap })
-			} else {
-				navigation.navigate('Sent', { item })
-			}
+			navigation.navigate('Swap', {
+				itemFirst: item,
+				itemSecond: coinSwap,
+			})
+		} else if (from == 'swapSecond') {
+			navigation.navigate('Swap', { itemSecond: item, itemFirst: coinSwap })
+		} else if (from == 'Buy') {
+			navigation.navigate('Buy', { name: item.symbol })
+		} else {
+			navigation.navigate('Sent', { item })
 		}
 	}
 	const coin = React.useCallback(({ item }) => {
@@ -111,14 +167,23 @@ export const ChooseCryptosScreen = ({ navigation, route }) => {
 	return (
 		<View style={{ flex: 1, marginTop: 20 }}>
 			<FlatList
+				ListFooterComponent={() => <></>}
+				ListFooterComponentStyle={{ paddingBottom: 100 }}
 				initialNumToRender={8}
 				keyExtractor={(item) =>
 					item.contract_address !== '' ? item.contract_address : item.id
 				}
 				data={filteredCoins}
-				renderItem={(item) => coin(item)}
+				renderItem={coin}
 			/>
-			<SearchButton />
+			<SearchButton
+				value={value}
+				setValue={setValue}
+				width={width}
+				active={active}
+				onPress={onOpenSearch}
+				style={active && { justifyContent: 'flex-start' }}
+			/>
 		</View>
 	)
 }

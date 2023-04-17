@@ -12,49 +12,20 @@ import { THEME } from '../Theme'
 import fixNum from '../../services/funcWallet/fixNum'
 import { SvgIcon } from './svg/svg'
 import { useSelector } from 'react-redux'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { SwapDetails } from './SwapDetails'
 
-export const SelectCoinSwap = ({ network, style }) => {
-	const route = useRoute()
+export const SelectCoinSwap = ({
+	onSwapCoins,
+	firstAmount = 0,
+	setFirstAmount,
+	frstData,
+	secondData,
+	style,
+	network,
+}) => {
 	const navigation = useNavigation()
-
-	const { allCoins, chooseCoin, chooseCoinSwapSecond } = useSelector(
-		(state) => state.wallet
-	)
-
-	const [firstAmount, setFirstAmount] = useState('0')
 	const [secondAmount, setSecondAmount] = useState('0')
-	const [frstData, setFirstData] = useState(null)
-	const [secondData, setSecondData] = useState(null)
-
-	React.useEffect(() => {
-		if (allCoins.length) {
-			const filtered = allCoins.filter(
-				(item) =>
-					!item.market_data.chain ||
-					item.market_data.chain == network.toLowerCase()
-			)
-			setFirstData(filtered[0])
-			setSecondData(
-				filtered.find((item) => item.symbol.toLowerCase() === 'usdt')
-			)
-		}
-	}, [allCoins, network])
-
-	React.useEffect(() => {
-		if (route.params !== undefined) {
-			setFirstData(route.params.itemFirst)
-			setSecondData(route.params.itemSecond)
-		}
-	}, [route.params])
-
-	const onSwapCoins = () => {
-		const frst = frstData
-		const scnd = secondData
-		setFirstData(scnd)
-		setSecondData(frst)
-	}
 
 	useEffect(() => {
 		if (frstData !== null && secondData !== null) {

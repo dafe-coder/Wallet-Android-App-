@@ -21,7 +21,7 @@ const initialState = {
 	currentNetwork: { title: 'Polygon', id: 0 },
 	dataUser: [],
 	currentAccount: '',
-	chooseAssets: ['eth', 'matic', 'avax', 'wbtc'],
+	chooseAssets: ['eth', 'matic'],
 	analytics: true,
 	askPin: true,
 	notifications: true,

@@ -13,8 +13,9 @@ import { SvgIcon } from './../Components/svg/svg'
 // 				useNativeDriver: false,
 // 			})
 // 		)
-import { setLoader } from '../store/actions/walletActions'
-export const CreatePasswordScreen = ({ navigation }) => {
+
+export const CreatePasswordScreen = ({ navigation, route }) => {
+	const from = route.params !== undefined ? route.params.from : undefined
 	const [pin, setPin] = useState('')
 	const [pinPrev, setPinPrev] = useState('')
 	const [nextStep, setNextStep] = useState(false)
@@ -36,11 +37,11 @@ export const CreatePasswordScreen = ({ navigation }) => {
 			setNextStep(false)
 			if (pin === pinPrev) {
 				dispatch(setPassword(pinPrev))
-				dispatch(setLoader(true))
-				setTimeout(() => {
-					dispatch(setLoader(false))
+				if (from !== undefined && from == 'Settings') {
+					navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
+				} else {
 					navigation.navigate('ManageCryptos')
-				}, 1000)
+				}
 			} else if (pin !== pinPrev) {
 				setPinPrev('')
 				setPin('')

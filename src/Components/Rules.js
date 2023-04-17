@@ -8,24 +8,21 @@ export const Rules = ({ style }) => {
 		<View style={style}>
 			<Hyperlink
 				onPress={(url, text) =>
-					url === 'https://polygonfinance.org/assets/pp-polygon.txt' ||
-					url === 'https://polygonfinance.org/assets/pp-polygon.txt1'
+					url === 'https://robinhood.com/us/en/support/articles/privacy-policy/'
 						? Linking.openURL(
-								'https://polygonfinance.org/assets/pp-polygon.txt'
+								'https://robinhood.com/us/en/support/articles/privacy-policy/'
 						  ).catch((err) => console.error('An error occurred', err))
 						: alert(url)
 				}
 				linkStyle={styles.link}
 				linkText={(url, text) =>
-					url === 'https://polygonfinance.org/assets/pp-polygon.txt'
-						? 'Terms of use'
-						: url === 'https://polygonfinance.org/assets/pp-polygon.txt1'
-						? 'Privacy policy'
-						: url
+					url ===
+						'https://robinhood.com/us/en/support/articles/privacy-policy/' &&
+					'Terms of use'
 				}>
 				<Text style={styles.text}>
 					By proceeding, you agree to App Name
-					https://polygonfinance.org/assets/pp-polygon.txt
+					https://robinhood.com/us/en/support/articles/privacy-policy/
 				</Text>
 			</Hyperlink>
 		</View>

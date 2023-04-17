@@ -34,6 +34,7 @@ export const TutorialThirdScreen = ({ navigation }) => {
 						title='Access the world of cryto & DeFi'>
 						<View style={{ justifyContent: 'center', alignItems: 'center' }}>
 							<Image
+								resizeMode='contain'
 								style={{ width: '100%', maxWidth: 326, maxHeight: 158 }}
 								source={require('../../../assets/coins-tutorial.png')}
 							/>

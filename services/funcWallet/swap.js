@@ -15,7 +15,7 @@ export function swapCoins(
 	console.log(fromAddress, toAddress)
 
 	const RPC_URL =
-		currentNetwork.title.toLowerCase() == 'polygon'
+		currentNetwork.toLowerCase() == 'polygon'
 			? 'https://rpc.ankr.com/polygon'
 			: 'https://rpc.ankr.com/eth'
 
@@ -25,7 +25,7 @@ export function swapCoins(
 	async function approve(tokenAddress, tokenAmount) {
 		try {
 			let response = null
-			if (currentNetwork.title.toLowerCase() == 'polygon') {
+			if (currentNetwork.toLowerCase() == 'polygon') {
 				response = await fetch(
 					`https://api.1inch.io/v5.0/137/approve/transaction?tokenAddress=${tokenAddress}&amount=${tokenAmount}`
 				)
@@ -40,14 +40,14 @@ export function swapCoins(
 				data.from = wallet.address
 				tx = await web3.eth.sendTransaction(data)
 				if (tx.status) {
-					// console.log('Approval Successful! :)')
+					console.log('Approval Successful! :)')
 				} else {
 					console.log('Approval Unsuccessful! :( ')
 				}
 			}
 		} catch (error) {
 			setLoader(false)
-			// console.log('could not approve token', error)
+			console.log('could not approve token', error)
 			setTimeout(() => {
 				onOpenGas()
 			}, 1000)
@@ -63,7 +63,7 @@ export function swapCoins(
 				await approve(fromTokenAddress, tokenAmount)
 			}
 			let response = null
-			if (currentNetwork.title.toLowerCase() == 'polygon') {
+			if (currentNetwork.toLowerCase() == 'polygon') {
 				response = await fetch(
 					`https://api.1inch.io/v5.0/137/swap?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${tokenAmount}&fromAddress=${wallet.address}&slippage=1`
 				)
@@ -77,22 +77,22 @@ export function swapCoins(
 				data.tx.gas = 1000000
 				tx = await web3.eth.sendTransaction(data.tx)
 				if (tx.status) {
-					// console.log('swap successfull :)', JSON.stringify(tx, null, 4))
+					console.log('swap successfull :)', JSON.stringify(tx, null, 4))
 					setLoader(false)
 					setTimeout(() => {
-						onOpenSuccess()
+						onOpenSuccess(tx.transactionHash)
 					}, 1000)
 				} else {
 					setLoader(false)
 					setTimeout(() => {
 						onOpenGas()
 					}, 1000)
-					// console.log('swap failed :)')
+					console.log('swap failed :)')
 				}
 			}
 		} catch (error) {
 			setLoader(false)
-			// console.log('swapper encounter an error below', error)
+			console.log('swapper encounter an error below', error)
 			setTimeout(() => {
 				onOpenGas()
 			}, 1000)

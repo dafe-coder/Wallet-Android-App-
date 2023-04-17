@@ -29,6 +29,7 @@ export const WalletText = ({
 					size == 'xs' && styles.xs, ////// SIZE /////
 					size == 'sm' && styles.sm,
 					size == 'm' && styles.m,
+					size == 'xl' && styles.xl,
 					upperCase && styles.upperCase,
 					center && styles.center,
 					fw == 'regular' && { fontFamily: 'mt-reg' }, ////// FONT WEIGHT /////
@@ -60,6 +61,10 @@ const styles = StyleSheet.create({
 	},
 	m: {
 		fontSize: 16,
+		lineHeight: 22,
+	},
+	xl: {
+		fontSize: 18,
 		lineHeight: 22,
 	},
 	white: {

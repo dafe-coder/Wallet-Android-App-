@@ -13,9 +13,11 @@ import {
 } from '../../store/actions/storageAction'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
-import { setLoader, setPhrase } from '../../store/actions/walletActions'
+import { setPhrase } from '../../store/actions/walletActions'
 import createName from '../../../services/funcWallet/createName'
 import { faker } from '@faker-js/faker'
+
+import { LoadingText } from '../../Components/Loader'
 
 export const ImportScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -49,17 +51,17 @@ export const ImportScreen = ({ navigation }) => {
 	const onImport = () => {
 		if (!onClick && !btnDisabled) {
 			dispatch(clearChooseAssets())
-			dispatch(setLoader(true))
 			setOnClick(true)
 			setTimeoutId(
 				setTimeout(() => {
 					let privateKeyString =
-						value.trim().split(' ').length > 2 ? generateWallet(value) : value
-					dispatch(setLoader(false))
+						value.trim().split(' ').length > 2
+							? generateWallet(value)
+							: btoa(value)
 					const newAccount = {
 						name: createName(dataUser),
 						phrase: value.trim().split(' ').length > 2 ? btoa(value) : '',
-						privateKey: btoa(privateKeyString),
+						privateKey: privateKeyString,
 						avatar: faker.image.abstract(160, 160, true),
 					}
 					dispatch(setClearDataUser())
@@ -159,7 +161,7 @@ export const ImportScreen = ({ navigation }) => {
 			</View>
 			<View style={{ alignItems: 'center', marginTop: 40 }}>
 				<WalletButton disabled={btnDisabled} size='m' onPress={onImport}>
-					Import
+					{onClick ? <LoadingText /> : 'Import'}
 				</WalletButton>
 			</View>
 		</ScrollView>

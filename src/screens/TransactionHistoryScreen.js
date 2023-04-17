@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import useIsReady from '../../hooks/useIsReady'
 import { BusyIndicator } from '../Components/Loader'
 
-const arrList = Array.from(new Array(6).keys())
+const arrList = Array.from(new Array(0).keys())
 export const TransactionHistoryScreen = ({ navigation }) => {
 	const { transactions } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = useState([])
@@ -24,14 +24,18 @@ export const TransactionHistoryScreen = ({ navigation }) => {
 	}
 	return (
 		<>
-			<ScrollView style={{ paddingTop: 29 }}>
-				<View style={{ paddingHorizontal: 24, paddingBottom: 70 }}>
+			<ScrollView style={{ paddingTop: 29, flexGrow: 1 }}>
+				<View
+					style={{
+						paddingHorizontal: 24,
+						paddingBottom: 70,
+					}}>
 					{transactionList.length < 1 ? (
 						<View
 							style={{
 								position: 'relative',
-								marginTop: 24,
-								height: 450,
+								marginTop: 34,
+								height: 505,
 							}}>
 							{arrList.map((_, i) => (
 								<View
@@ -40,6 +44,7 @@ export const TransactionHistoryScreen = ({ navigation }) => {
 										width: '100%',
 										height: 60,
 										marginBottom: 17,
+										opacity: 0.5,
 									}}>
 									<Image
 										resizeMode='contain'
@@ -60,6 +65,7 @@ export const TransactionHistoryScreen = ({ navigation }) => {
 									bottom: 0,
 									justifyContent: 'center',
 									alignItems: 'center',
+									opacity: 0.4,
 								}}>
 								<WalletText size='m' center color='white'>
 									Your activity will {'\n'}appear here!

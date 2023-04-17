@@ -4,8 +4,11 @@ import { THEME } from '../Theme'
 import { WalletText } from './UI'
 import { SvgIconNav } from './svg/svgNav'
 import { SvgIcon } from './svg/svg'
+import { useSelector } from 'react-redux'
 
 export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
+	const { backup } = useSelector((state) => state.storage)
+
 	return (
 		<TouchableOpacity activeOpacity={0.7} onPress={() => onPress(title)}>
 			<View style={[{ ...styles.item }, topLine ? { ...styles.topLine } : {}]}>
@@ -18,7 +21,7 @@ export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 					</WalletText>
 				</View>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-					{title == 'Backup' && (
+					{title == 'Backup' && backup && (
 						<View style={styles.circleCheck}>
 							<SvgIcon fill={THEME.GREEN_LIGHT} type='check' />
 						</View>

@@ -55,6 +55,7 @@ import {
 	ImportComponent,
 	SentSuccessComponent,
 	CreateWalletComponent,
+	SwapSuccessComponent,
 } from './pages'
 const Stack = createNativeStackNavigator()
 const screens = [
@@ -73,6 +74,14 @@ const screens = [
 			title: '',
 		}),
 		component: SentSuccessComponent,
+	},
+	{
+		name: 'SwapSuccess',
+		options: () => ({
+			headerShown: false,
+			title: '',
+		}),
+		component: SwapSuccessComponent,
 	},
 	{
 		name: 'ImportWallet',
@@ -436,8 +445,7 @@ export function MyStack() {
 			<Stack.Navigator
 				style={{ flex: 1 }}
 				initialRouteName={
-					// dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'Login'
-					'CreateWallet'
+					dataUser.length ? (lockWallet ? 'Unlock' : 'Home') : 'TutorialFirst'
 				}
 				screenOptions={{
 					headerShadowVisible: false,
@@ -484,7 +492,9 @@ export function MyStack() {
 					options={({ navigation }) => ({
 						headerShown: true,
 						headerTitle: () => <></>,
-						headerLeft: () => <DoubleButtons navigation={navigation} />,
+						headerLeft: () => (
+							<DoubleButtons active={false} navigation={navigation} />
+						),
 						headerRight: () => <BackBtn navigation={navigation} />,
 					})}
 				/>

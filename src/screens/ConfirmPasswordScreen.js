@@ -1,11 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../Theme'
-import { WalletText } from '../Components/UI'
 import { useDispatch, useSelector } from 'react-redux'
 import PincodeInput from 'react-native-pincode-input'
-import { setLoader } from '../store/actions/walletActions'
-import { SvgIcon } from '../Components/svg/svg'
 import {
 	setPassword,
 	setCurrentAccount,
@@ -35,17 +32,13 @@ export const ConfirmPasswordScreen = ({ navigation, route }) => {
 			} else if (route.params && route.params.from === 'backupRestore') {
 				navigation.navigate('RecoverPhrase', { from: 'backupRestore' })
 			} else {
-				dispatch(setLoader(true))
-				setTimeout(() => {
-					dispatch(setPassword(''))
-					dispatch(setCurrentAccount(''))
-					dispatch(setClearDataUser())
-					navigation.reset({
-						index: 0,
-						routes: [{ name: 'Login' }],
-					})
-					dispatch(setLoader(false))
-				}, 3000)
+				dispatch(setPassword(''))
+				dispatch(setCurrentAccount(''))
+				dispatch(setClearDataUser())
+				navigation.reset({
+					index: 0,
+					routes: [{ name: 'TutorialFirst' }],
+				})
 			}
 			setPin('')
 		} else if (pin.length === 6 && pin !== password) {

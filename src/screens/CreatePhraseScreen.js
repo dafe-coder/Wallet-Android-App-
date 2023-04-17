@@ -55,7 +55,7 @@ export const CreatePhraseScreen = ({ navigation }) => {
 						color: '#8247E5',
 					}}
 					center>
-					Read Carefilly
+					Read Carefully
 				</WalletText>
 				<WalletText center size='m'>
 					This is your Recovery Phrase. Write it down on a paper and keep it in

@@ -9,6 +9,9 @@ export const DAppsScreen = ({ navigation }) => {
 	React.useEffect(() => {
 		navigation.setOptions({
 			headerTransparent: true,
+			headerStyle: {
+				backgroundColor: 'transparent',
+			},
 		})
 	}, [navigation])
 	return (

@@ -12,7 +12,7 @@ import { Card } from './../../Components'
 import { SvgCoin } from '../../Components/svg/svgCoin'
 const width = Dimensions.get('window').width
 import { THEME } from '../../Theme'
-const coins = ['btc', 'eth', 'bnb', 'polygon', 'avax']
+const coins = ['arb', 'eth', 'bnb', 'polygon', 'aave']
 export const TutorialSecondScreen = ({ navigation }) => {
 	return (
 		<View

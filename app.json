@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Polygon ID",
+    "name": "Robin Wallet",
     "slug": "robinhood",
     "version": "2.01.14",
     "orientation": "portrait",
@@ -8,9 +8,7 @@
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ECE9F2"
+      "backgroundColor": "#010210"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +23,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.poly.webid"
+      "package": "com.hood.batman"
     },
     "web": {
       "favicon": "./assets/favicon.png"

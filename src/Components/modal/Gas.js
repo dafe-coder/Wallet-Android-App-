@@ -6,25 +6,13 @@ import { WalletButton } from '../UI/WalletButton'
 
 export const Gas = ({ onPress }) => {
 	return (
-		<View
-			style={{
-				flex: 1,
-				justifyContent: 'space-between',
-				paddingBottom: 37,
-			}}>
-			<View
-				style={{
-					alignItems: 'center',
-					height: 100,
-				}}>
-				<SvgIcon type='alert' />
-				<WalletText size='m' style={{ color: '#632DBC', marginTop: 32 }}>
-					Not enough funds
-				</WalletText>
-			</View>
-			<WalletButton onPress={onPress} type='border' arrow={false}>
-				ok
+		<>
+			<WalletText fw='bold' center size='m' style={{ marginBottom: 40 }}>
+				Not enough funds.
+			</WalletText>
+			<WalletButton style={{ width: 100 }} onPress={onPress} size='sm'>
+				Ok
 			</WalletButton>
-		</View>
+		</>
 	)
 }

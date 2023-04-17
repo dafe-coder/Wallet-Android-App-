@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { WalletText, WalletTitle } from '../UI/'
-import { View, StyleSheet, ImageBackground } from 'react-native'
+import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native'
 import { THEME } from '../../Theme'
 import { useSelector } from 'react-redux'
 import fixNum from './../../../services/funcWallet/fixNum'
+import { LoaderCard } from '../Loader/LoaderCard'
+import { useHeaderHeight } from '@react-navigation/elements'
+const width = Dimensions.get('window').width
 export const InfoPriseSlide = () => {
+	const height = useHeaderHeight()
 	const { portfolioBalance } = useSelector((state) => state.wallet)
-	const { currentNetwork } = useSelector((state) => state.storage)
 	const [balance, setBalance] = useState(null)
 	useEffect(() => {
 		if (portfolioBalance != null) setBalance(portfolioBalance)
@@ -17,8 +20,10 @@ export const InfoPriseSlide = () => {
 			style={{
 				position: 'relative',
 				paddingHorizontal: 24,
-				paddingTop: 170,
 				marginBottom: 30,
+				justifyContent: 'center',
+				alignItems: 'center',
+				marginTop: height + 20,
 			}}>
 			<ImageBackground
 				style={styles.bgImage}
@@ -66,7 +71,7 @@ export const InfoPriseSlide = () => {
 					</View>
 				</View>
 			) : (
-				<></>
+				<LoaderCard />
 			)}
 		</View>
 	)
@@ -86,10 +91,9 @@ const styles = StyleSheet.create({
 		paddingVertical: 4,
 	},
 	bgImage: {
-		width: 400,
-		height: 400,
+		width: width * 1.3,
+		height: width * 1.4,
 		position: 'absolute',
-		top: 10,
 	},
 	wrap: {
 		flex: 1,
@@ -99,6 +103,7 @@ const styles = StyleSheet.create({
 		padding: 24,
 		paddingBottom: 28,
 		borderRadius: 24,
+		width: '100%',
 	},
 	imageUp: {
 		marginRight: 4,

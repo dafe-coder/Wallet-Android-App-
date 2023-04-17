@@ -20,7 +20,10 @@ export const SecurityScreen = ({ navigation }) => {
 				<WalletText style={{ marginBottom: 24 }}>
 					Authentication & PIN code
 				</WalletText>
-				<WalletButton onPress={() => navigation.navigate('CreatePassword')}>
+				<WalletButton
+					onPress={() =>
+						navigation.navigate('CreatePassword', { from: 'Settings' })
+					}>
 					Change my PIN code
 				</WalletButton>
 			</View>

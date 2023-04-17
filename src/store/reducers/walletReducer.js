@@ -21,11 +21,13 @@ import {
 	SET_UPDATE_WALLET,
 	SET_NEW_WALLET,
 	SET_ADDRESS_WALLET,
+	SET_ALL_COINS_SWAP,
 } from '../type'
 
 const initialState = {
 	portfolioCoins: [],
 	allCoins: [],
+	allCoinsSwap: [],
 	transactions: [],
 	password: '111111',
 	dateTransaction: [],
@@ -70,6 +72,11 @@ export const walletReducer = (state = initialState, action) => {
 			return {
 				...state,
 				allCoins: action.payload,
+			}
+		case SET_ALL_COINS_SWAP:
+			return {
+				...state,
+				allCoinsSwap: action.payload,
 			}
 		case SET_LOCK_WALLET:
 			return {

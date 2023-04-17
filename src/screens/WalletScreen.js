@@ -24,7 +24,7 @@ export const WalletScreen = ({ navigation }) => {
 		portfolioSort,
 		loaderSkeleton,
 	} = useSelector((state) => state.wallet)
-	const { chooseAssets } = useSelector((state) => state.storage)
+	const { chooseAssets, backup } = useSelector((state) => state.storage)
 
 	React.useEffect(() => {
 		navigation.setOptions({
@@ -72,6 +72,7 @@ export const WalletScreen = ({ navigation }) => {
 	return (
 		<>
 			<ScrollView
+				overScrollMode='never'
 				style={{
 					flex: 1,
 				}}>
@@ -115,6 +116,8 @@ export const WalletScreen = ({ navigation }) => {
 						/>
 					) : (
 						<View style={{ marginBottom: 105 }}>
+							<LoaderListItem style={{ marginBottom: 10 }} />
+							<LoaderListItem style={{ marginBottom: 10 }} />
 							<LoaderListItem style={{ marginBottom: 10 }} />
 							<LoaderListItem style={{ marginBottom: 10 }} />
 							<LoaderListItem style={{ marginBottom: 10 }} />

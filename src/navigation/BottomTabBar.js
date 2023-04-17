@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
 	item: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		width: 84,
-		height: 52,
+		width: 80,
+		height: 44,
 		borderRadius: 50,
 		backgroundColor: THEME.GREY,
 	},

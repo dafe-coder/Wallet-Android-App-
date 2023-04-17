@@ -21,6 +21,7 @@ import {
 	SET_UPDATE_WALLET,
 	SET_NEW_WALLET,
 	SET_ADDRESS_WALLET,
+	SET_ALL_COINS_SWAP,
 } from '../type'
 
 export const setNewWallet = (boolean) => {
@@ -44,6 +45,12 @@ export const setLockWallet = (lock) => {
 export const setAllCoins = (coins) => {
 	return {
 		type: SET_ALL_COINS,
+		payload: coins,
+	}
+}
+export const setAllCoinsSwap = (coins) => {
+	return {
+		type: SET_ALL_COINS_SWAP,
 		payload: coins,
 	}
 }

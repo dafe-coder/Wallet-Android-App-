@@ -11,76 +11,85 @@ import { PhraseBox } from './../../Components/PhraseBox'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	setDataUser,
+	setClearDataUser,
 	setCurrentAccount,
+	clearChooseAssets,
 } from '../../store/actions/storageAction'
 import 'react-native-get-random-values'
 import generateWallet from './../../../services/funcWallet/generateAddress'
-import { setLoader, setPhrase } from '../../store/actions/walletActions'
+import { setPhrase } from '../../store/actions/walletActions'
 import createName from '../../../services/funcWallet/createName'
 import { WalletModal, RestoreWallet } from '../../Components/modal'
 import { faker } from '@faker-js/faker'
+import { LoadingText } from '../../Components/Loader'
 
 export const PhraseScreen = ({ navigation, route }) => {
+	const from = route.params !== undefined ? route.params.from : undefined
 	const dispatch = useDispatch()
 	const { dataUser } = useSelector((state) => state.storage)
-	const { phrase, privateKey } = useSelector((state) => state.wallet)
 	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [onClick, setOnClick] = useState(false)
-	const [timeoutID, setTimeoutId] = useState(null)
-	const [titleBtn, setTitleBtn] = useState('Import Wallet')
+	const [value, setValue] = React.useState('')
+	const [titleBtn, setTitleBtn] = useState('Import')
 	const [lastModal, setLastModal] = useState(false)
 	const [isVisible, setIsVisible] = useState(false)
+	const [timeoutID, setTimeoutId] = React.useState(null)
+	React.useEffect(() => {
+		return () => {
+			clearTimeout(timeoutID)
+		}
+	}, [])
 
 	useEffect(() => {
-		if (route.params && route.params.from === 'backupRestore') {
+		if (from !== undefined && from === 'backupRestore') {
 			navigation.setOptions({
 				title: 'Restore another wallet',
 			})
 			setTitleBtn('Restore')
 		}
 	}, [navigation, route])
-
+	const createAccount = () => {
+		setOnClick(true)
+		setTimeoutId(
+			setTimeout(() => {
+				dispatch(clearChooseAssets())
+				let privateKeyString =
+					value.trim().split(' ').length > 2
+						? generateWallet(value)
+						: btoa(value)
+				const newAccount = {
+					name: createName(dataUser),
+					phrase: value.trim().split(' ').length > 2 ? btoa(value) : '',
+					privateKey: privateKeyString,
+					avatar: faker.image.abstract(160, 160, true),
+				}
+				dispatch(setClearDataUser())
+				dispatch(setCurrentAccount(createName(dataUser)))
+				dispatch(setDataUser(newAccount))
+				dispatch(setPhrase(''))
+				setOnClick(false)
+				navigation.navigate('CreatePassword')
+			}, 100)
+		)
+	}
 	const submitRestore = () => {
-		if (!onClick && route.params && route.params.from === 'backupRestore') {
+		if (!onClick && from !== undefined && from === 'backupRestore') {
 			setIsVisible(true)
-		} else {
-			if (!onClick) {
-				dispatch(setLoader(true))
-				setOnClick(true)
-				setTimeoutId(
-					setTimeout(() => {
-						let privateKeyString =
-							phrase != '' ? (privateKeyString = generateWallet(phrase)) : ''
-						dispatch(setLoader(false))
-						const newAccount = {
-							name: createName(dataUser),
-							phrase: btoa(phrase),
-							privateKey:
-								privateKey != '' ? btoa(privateKey) : privateKeyString,
-							avatar: faker.image.abstract(160, 160, true),
-						}
-						dispatch(setCurrentAccount(createName(dataUser)))
-						dispatch(setDataUser(newAccount))
-						dispatch(setPhrase(''))
-						setOnClick(false)
-						setTimeout(() => {
-							navigation.navigate('CreatePassword')
-						}, 50)
-					}, 50)
-				)
-			}
+		} else if (!onClick && !btnDisabled) {
+			createAccount()
 		}
 	}
-
-	useEffect(() => {
-		return () => {
-			clearTimeout(timeoutID)
-		}
-	}, [])
 
 	const onDecline = () => {
 		setIsVisible(false)
 		setLastModal(false)
+	}
+
+	const restoreWallet = () => {
+		onDecline()
+		if (!onClick && !btnDisabled) {
+			createAccount()
+		}
 	}
 
 	return (
@@ -89,7 +98,13 @@ export const PhraseScreen = ({ navigation, route }) => {
 			accessible={false}>
 			<View style={styles.body}>
 				<View>
-					<PhraseBox setBtnDisabled={setBtnDisabled} paste />
+					<PhraseBox
+						style={{ paddingHorizontal: 24 }}
+						text={value}
+						setText={setValue}
+						setBtnDisabled={setBtnDisabled}
+						paste
+					/>
 				</View>
 				<View
 					style={{
@@ -101,11 +116,12 @@ export const PhraseScreen = ({ navigation, route }) => {
 						checked
 						disabled={btnDisabled}
 						onPress={submitRestore}>
-						{titleBtn}
+						{onClick ? <LoadingText /> : titleBtn}
 					</WalletButton>
 				</View>
 				<WalletModal isVisible={isVisible}>
 					<RestoreWallet
+						onConfirmLast={restoreWallet}
 						onConfirm={() => setLastModal(true)}
 						onDecline={onDecline}
 						last={lastModal}

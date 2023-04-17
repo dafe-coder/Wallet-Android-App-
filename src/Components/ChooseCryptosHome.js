@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, FlatList } from 'react-native'
 import { WalletText, SwitchButton } from './UI'
 import { THEME } from '../Theme'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,34 +28,54 @@ export const ChooseCryptosHome = ({ allCoins, style }) => {
 		}
 	}, [chooseAssets, allCoins])
 
+	const coin = React.useCallback(({ item }) => {
+		return (
+			<View
+				key={item.contract_address !== '' ? item.contract_address : item.id}
+				style={styles.item}>
+				<Image
+					resizeMode='cover'
+					style={{
+						borderRadius: 100,
+						overflow: 'hidden',
+						marginRight: 8,
+						width: 40,
+						height: 40,
+					}}
+					source={{ uri: item.image.thumb }}
+				/>
+				<View>
+					<WalletText size='m' fw='bold'>
+						{item.name}
+					</WalletText>
+					<WalletText style={{ fontSize: 12 }}>
+						{fixNum(item.market_data.balance) + ' '}
+						{item.symbol.toUpperCase()}
+					</WalletText>
+				</View>
+
+				<SwitchButton
+					coin={item}
+					setEnabled={onChooseAssets}
+					style={{ marginLeft: 'auto' }}
+					enabled={item.switch}
+				/>
+			</View>
+		)
+	}, [])
+
 	return (
 		<View style={style}>
-			{checkedSwitch.map((item) => (
-				<View
-					key={item.contract_address !== '' ? item.contract_address : item.id}
-					style={styles.item}>
-					<Image
-						style={{ marginRight: 8, width: 40, height: 40 }}
-						source={{ uri: item.image.thumb }}
-					/>
-					<View>
-						<WalletText size='m' fw='bold'>
-							{item.name}
-						</WalletText>
-						<WalletText style={{ fontSize: 12 }}>
-							{fixNum(item.market_data.balance) + ' '}
-							{item.symbol.toUpperCase()}
-						</WalletText>
-					</View>
-
-					<SwitchButton
-						coin={item}
-						setEnabled={onChooseAssets}
-						style={{ marginLeft: 'auto' }}
-						enabled={item.switch}
-					/>
-				</View>
-			))}
+			<FlatList
+				ListFooterComponent={() => <></>}
+				ListFooterComponentStyle={{ paddingBottom: 100 }}
+				initialNumToRender={8}
+				data={checkedSwitch}
+				keyExtractor={(item) =>
+					item.contract_address !== '' ? item.contract_address : item.id
+				}
+				renderItem={coin}
+			/>
 		</View>
 	)
 }

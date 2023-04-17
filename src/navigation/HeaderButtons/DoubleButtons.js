@@ -3,19 +3,18 @@ import { TouchableOpacity, View, StyleSheet } from 'react-native'
 import { THEME } from '../../Theme'
 import { WalletText } from './../../Components/UI/WalletText'
 
-export const DoubleButtons = ({ navigation }) => {
-	const [active, setActive] = React.useState(true)
+export const DoubleButtons = ({ active, navigation }) => {
 	const onPressButton = () => {
 		navigation.reset({
 			index: 0,
 			routes: [{ name: 'Home' }],
 		})
-		setActive(true)
 	}
+
 	const onPressButtonSecond = () => {
 		navigation.navigate('TransactionHistory')
-		setActive(false)
 	}
+
 	return (
 		<View style={styles.wrap}>
 			<TouchableOpacity

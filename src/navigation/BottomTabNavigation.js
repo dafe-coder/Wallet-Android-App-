@@ -65,7 +65,9 @@ export default function BottomTabNavigator() {
 					options={({ navigation }) => ({
 						headerTitle: () => <></>,
 						headerRight: () => <HeaderSettings navigation={navigation} />,
-						headerLeft: () => <DoubleButtons navigation={navigation} />,
+						headerLeft: () => (
+							<DoubleButtons active={true} navigation={navigation} />
+						),
 					})}
 				/>
 				<Tab.Screen

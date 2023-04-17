@@ -85,9 +85,10 @@ export const TransactionItem = ({
 									  '...' +
 									  itemData.address_to.slice(-4)
 									: itemData.address_to
-								: itemData.changes[0].asset.symbol +
-								  ' / ' +
-								  (itemData.changes[1] ? itemData.changes[1].asset.symbol : '')}
+								: itemData.changes[1] &&
+								  itemData.changes[1].asset.symbol +
+										' / ' +
+										(itemData.changes[0] && itemData.changes[0].asset.symbol)}
 						</WalletText>
 					</View>
 				</View>

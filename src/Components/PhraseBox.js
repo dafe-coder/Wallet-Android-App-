@@ -8,6 +8,8 @@ import { SvgIcon } from './svg/svg'
 
 export const PhraseBox = ({
 	edit,
+	text,
+	setText,
 	style,
 	setBtnDisabled,
 	phrase = '',
@@ -18,7 +20,6 @@ export const PhraseBox = ({
 	const dispatch = useDispatch()
 	const [active, setActive] = useState(true)
 	const [success, setSuccess] = useState('default')
-	const [text, setText] = useState('')
 
 	useEffect(() => {
 		if (text !== '' && text.trim().split(' ').length > 2) {
@@ -54,7 +55,7 @@ export const PhraseBox = ({
 
 	const validKey = (text) => {
 		let textArr = text.trim().split(' ')
-		if (textArr.length == 1 && text.length > 40) {
+		if (textArr.length == 1 && text.length == 64) {
 			setSuccess('success')
 			setBtnDisabled(false)
 			dispatch(setPrivateKey(text))

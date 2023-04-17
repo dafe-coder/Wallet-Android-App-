@@ -13,6 +13,7 @@ export const HeaderSettings = ({ navigation }) => {
 	const [viewID, setViewID] = React.useState()
 
 	const { addressWallet } = useSelector((state) => state.wallet)
+	const { dataUser } = useSelector((state) => state.storage)
 
 	const onCopy = async () => {
 		setCopied(true)
@@ -98,16 +99,22 @@ export const HeaderSettings = ({ navigation }) => {
 						{!copied ? 'Copy Address' : 'Address has been copied!'}
 					</WalletText>
 				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={onViewPhrase}
-					style={styles.item}
-					activeOpacity={0.7}>
-					<View style={styles.circleMenu} />
-					<WalletText style={{ fontFamily: 'mt-med' }} color={'disabled'}>
-						View Recovery Phrase
-					</WalletText>
-					<SvgIcon type='play' fill={THEME.DISABLED_TEXT} style={styles.svg} />
-				</TouchableOpacity>
+				{dataUser[0] && dataUser[0].phrase !== '' && (
+					<TouchableOpacity
+						onPress={onViewPhrase}
+						style={styles.item}
+						activeOpacity={0.7}>
+						<View style={styles.circleMenu} />
+						<WalletText style={{ fontFamily: 'mt-med' }} color={'disabled'}>
+							View Recovery Phrase
+						</WalletText>
+						<SvgIcon
+							type='play'
+							fill={THEME.DISABLED_TEXT}
+							style={styles.svg}
+						/>
+					</TouchableOpacity>
+				)}
 				<TouchableOpacity
 					onPress={onViewKey}
 					style={styles.item}

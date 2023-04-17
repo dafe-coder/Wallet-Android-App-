@@ -6,24 +6,24 @@ const width = Dimensions.get('window').width
 
 export const LoaderCard = ({ style }) => (
 	<SkeletonLoader
-		style={{ flex: 1, borderRadius: 5 }}
-		boneColor={THEME.GREY_LIGHT}
-		highlightColor={THEME.GREY_LIGHT_BG}>
+		style={[
+			{ height: 126, borderRadius: 24, width: '100%', overflow: 'hidden' },
+			style,
+		]}
+		boneColor={THEME.GREY}
+		highlightColor='#1D1C2D'>
 		<SkeletonLoader.Container
 			style={[
 				{
 					flex: 1,
 					flexDirection: 'row',
 					alignItems: 'center',
-					borderRadius: 15,
+					borderRadius: 24,
 				},
-				style,
 			]}>
 			<SkeletonLoader.Item
 				style={{
-					width: width,
-					height: 72,
-					borderRadius: 15,
+					borderRadius: 24,
 				}}
 			/>
 		</SkeletonLoader.Container>

