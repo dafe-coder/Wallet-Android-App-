@@ -6,7 +6,7 @@ export const WalletButton = ({
 	disabled = false,
 	size = 'auto',
 	arrow = true,
-	type = 'violet',
+	type = 'white',
 	style,
 	styleBtn,
 	children,
@@ -66,6 +66,7 @@ export const WalletButton = ({
 				style={[
 					size == 'm' && { width: 200 },
 					size == 'sm' && { width: 100 },
+					size == 'auto' && { width: '100%' },
 					styles.btn,
 					bgColor,
 					styleBtn,
@@ -111,8 +112,8 @@ const styles = StyleSheet.create({
 		borderColor: THEME.WHITE,
 	},
 	btn: {
-		borderRadius: 30,
-		paddingVertical: 17.5,
+		borderRadius: 8,
+		paddingVertical: 15,
 		paddingHorizontal: 24,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		lineHeight: 17,
 		textAlign: 'center',
-		fontFamily: 'mt-semi-bold',
+		fontFamily: 'int-semi-bold',
+		fontFamily: 'int-bold',
 	},
 	disabled: {
 		borderColor: THEME.GREY,

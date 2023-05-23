@@ -31,17 +31,14 @@ export const WalletKeyboardNum = ({ setItem, item }) => {
 			style={[styles.numBtn, { alignItems: item.justifyContent }]}
 			activeOpacity={0.8}>
 			<WalletText
-				color='disabled'
+				color='white'
 				style={[styles.num, active && { color: THEME.WHITE }]}
 				styleWrap={[
 					styles.wrapText,
 					active && { backgroundColor: THEME.VIOLET },
 				]}>
 				{item.value == 'clear' ? (
-					<SvgIcon
-						type='clear'
-						fill={!active ? THEME.DISABLED_TEXT : THEME.WHITE}
-					/>
+					<SvgIcon type='clear' fill={!active ? THEME.WHITE : THEME.WHITE} />
 				) : (
 					item.value
 				)}

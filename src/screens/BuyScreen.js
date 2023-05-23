@@ -25,8 +25,16 @@ export const BuyScreen = ({ route, navigation }) => {
 	}, [])
 
 	return (
-		<ScrollView style={{ flexGrow: 1, paddingTop: 70 }}>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+		<ScrollView style={{ flexGrow: 1 }}>
+			<WalletText size='m' center fw='bold'>
+				Add Cash
+			</WalletText>
+			<View
+				style={{
+					paddingTop: 70,
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}>
 				<View
 					style={{
 						width: '100%',
@@ -46,19 +54,20 @@ export const BuyScreen = ({ route, navigation }) => {
 						marginTop: 10,
 					}}
 					activeOpacity={0.7}>
-					<WalletText style={{ fontSize: 12, marginRight: 10 }}>
-						0 {name.toUpperCase()}
+					<WalletText
+						color='white-dark'
+						style={{ fontSize: 12, marginRight: 10 }}>
+						{name.toUpperCase()}
 					</WalletText>
-					<SvgIcon type='play' width={9} fill={THEME.WHITE} />
+					<SvgIcon type='play' width={9} fill={THEME.DARK_TEXT} />
 				</TouchableOpacity>
 			</View>
 			<WalletKeyboard
 				setValue={setValue}
-				style={{ paddingHorizontal: 24, marginTop: 70, marginBottom: 40 }}
+				style={{ paddingHorizontal: 24, marginTop: 40, marginBottom: 20 }}
 			/>
-			<View style={{ alignItems: 'center', marginBottom: 170 }}>
+			<View style={{ marginBottom: 170, paddingHorizontal: 20 }}>
 				<WalletButton
-					size='m'
 					onPress={() =>
 						Linking.openURL('https://www.moonpay.com/buy').catch((err) =>
 							console.error('An error occurred', err)
@@ -76,7 +85,7 @@ const styles = StyleSheet.create({
 		lineHeight: 46,
 		fontSize: 38,
 		color: THEME.WHITE,
-		fontFamily: 'mt-med',
+		fontFamily: 'int-med',
 		minWidth: 100,
 		textAlign: 'center',
 	},

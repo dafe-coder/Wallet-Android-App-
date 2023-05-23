@@ -14,10 +14,10 @@ export default function useCachedResources() {
 
 				// Load fonts
 				await Font.loadAsync({
-					'mt-semi-bold': require('../assets/fonts/GothamPro-Bold.ttf'),
+					'int-semi-bold': require('../assets/fonts/GothamPro-Bold.ttf'),
 					'gt-medium': require('../assets/fonts/GothamPro-Medium.ttf'),
-					'mt-med': require('../assets/fonts/Ubuntu-Medium.ttf'),
-					'mt-reg': require('../assets/fonts/Ubuntu-Regular.ttf'),
+					'int-med': require('../assets/fonts/Ubuntu-Medium.ttf'),
+					'int-reg': require('../assets/fonts/Ubuntu-Regular.ttf'),
 				})
 			} catch (e) {
 				// We might want to provide this error information to an error reporting service

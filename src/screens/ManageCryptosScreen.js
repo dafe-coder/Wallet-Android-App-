@@ -10,7 +10,6 @@ import {
 	withTiming,
 } from 'react-native-reanimated'
 import { useSelector } from 'react-redux'
-import { BackBtn } from '../navigation'
 
 export const ManageCryptosScreen = ({ navigation, route }) => {
 	const isHome = route.params && route.params.home
@@ -71,53 +70,50 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 		setActive(!active)
 	}
 
-	React.useEffect(() => {
-		if (isHome) {
-			navigation.setOptions({
-				headerLeft: () => (
-					<WalletText color='disabled' size='m' style={{ marginLeft: 10 }}>
-						Manage cryptos
-					</WalletText>
-				),
-				headerRight: () => <BackBtn navigation={navigation} />,
-				headerTitle: () => <></>,
-			})
-		}
-	}, [])
-
-	return (
-		<View style={{ flex: 1 }}>
-			<View style={!isHome && { marginBottom: 50 }}>
-				{!isHome ? (
+	if (!isHome) {
+		return (
+			<ScrollView
+				contentContainerStyle={{
+					flexGrow: 1,
+					justifyContent: 'space-between',
+				}}>
+				<View style={{ marginBottom: 50 }}>
 					<WalletText
+						color='white-dark'
 						size='m'
-						style={{ paddingHorizontal: 24, marginBottom: 30 }}>
-						Choose what tokens will be {'\n'}displayed in your wallet by
+						style={{ paddingHorizontal: 20, marginBottom: 30 }}>
+						Choose what tokens will be displayed {'\n'}in your wallet by
 						default.
 					</WalletText>
-				) : (
-					<ChooseCryptosHome
-						allCoins={filteredCoins}
-						style={{ marginTop: 10 }}
-					/>
-				)}
-				{!isHome && <ChooseCryptos style={isHome && { marginTop: 30 }} />}
-				{!isHome && (
+					<ChooseCryptos style={isHome && { marginTop: 30 }} />
 					<WalletText
-						color='disabled'
-						style={{ paddingHorizontal: 24, marginTop: -10 }}>
+						size='xs'
+						center
+						color='white'
+						style={{ paddingHorizontal: 20, marginTop: 5 }}>
 						You can always change this later! ☺️
 					</WalletText>
-				)}
-			</View>
-			{!isHome && (
-				<View style={{ paddingHorizontal: 24, alignItems: 'center' }}>
+				</View>
+				<View
+					style={{
+						paddingHorizontal: 20,
+						marginBottom: 40,
+					}}>
 					<WalletButton onPress={() => navigation.navigate('WalletSuccess')}>
 						Go to my wallet
 					</WalletButton>
 				</View>
-			)}
-			{isHome && (
+			</ScrollView>
+		)
+	} else {
+		return (
+			<View style={{ flexGrow: 1 }}>
+				<View>
+					<ChooseCryptosHome
+						allCoins={filteredCoins}
+						style={{ marginTop: 10 }}
+					/>
+				</View>
 				<SearchButton
 					value={value}
 					setValue={setValue}
@@ -126,7 +122,7 @@ export const ManageCryptosScreen = ({ navigation, route }) => {
 					onPress={onOpenSearch}
 					style={active && { justifyContent: 'flex-start' }}
 				/>
-			)}
-		</View>
-	)
+			</View>
+		)
+	}
 }

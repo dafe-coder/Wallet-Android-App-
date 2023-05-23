@@ -3,9 +3,9 @@ import { View, StyleSheet } from 'react-native'
 import { THEME } from './../Theme'
 
 const count = Array.from(new Array(3).keys())
-export const Indicators = ({ active = 1, activeLast }) => {
+export const Indicators = ({ active = 1, activeLast, style }) => {
 	return (
-		<View style={styles.wrap}>
+		<View style={[styles.wrap, style]}>
 			{count.map((_, i) => (
 				<View
 					key={i}
@@ -22,21 +22,21 @@ export const Indicators = ({ active = 1, activeLast }) => {
 
 const styles = StyleSheet.create({
 	activeLast: {
-		backgroundColor: THEME.VIOLET,
+		backgroundColor: THEME.WHITE,
 	},
 	wrap: {
 		flexDirection: 'row',
-		marginBottom: 40,
+		marginBottom: 80,
+		marginTop: 30,
 	},
 	indicator: {
-		height: 8,
-		width: 8,
-		backgroundColor: '#1A1B28',
+		height: 4,
+		width: 64,
+		backgroundColor: '#8B8C8E',
 		borderRadius: 50,
-		marginEnd: 12,
+		marginEnd: 6,
 	},
 	active: {
-		backgroundColor: THEME.VIOLET,
-		width: 24,
+		backgroundColor: THEME.WHITE,
 	},
 })

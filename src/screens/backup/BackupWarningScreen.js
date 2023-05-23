@@ -1,22 +1,10 @@
 import React from 'react'
 import { ScrollView, Dimensions, View, StyleSheet, Text } from 'react-native'
-import { Card } from '../../Components/Card'
 import { WalletButton, WalletText } from '../../Components/UI'
-import { SubscribeBlock } from '../../Components/UI'
 import { SvgIcon } from './../../Components/svg/svg'
 import { THEME } from './../../Theme'
 
-const width = Dimensions.get('window').width
 export const BackupWarningScreen = ({ navigation }) => {
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTransparent: true,
-			headerStyle: {
-				backgroundColor: 'transparent',
-			},
-		})
-	}, [navigation])
-
 	return (
 		<ScrollView contentContainerStyle={styles.wrap}>
 			<View
@@ -24,11 +12,9 @@ export const BackupWarningScreen = ({ navigation }) => {
 					flex: 1,
 					justifyContent: 'space-between',
 				}}>
-				<Card
-					styleBody={{ paddingHorizontal: 24 }}
-					imgSize={{ height: width * 1.4, top: -20 }}>
-					<WalletText size='m' style={{ marginBottom: 32 }}>
-						Wallet Name now will show your recovery phrase.
+				<View style={{ paddingHorizontal: 20 }}>
+					<WalletText color='white-dark' size='m' style={{ marginBottom: 24 }}>
+						Wallet Name now will show your {'\n'}recovery phrase.
 					</WalletText>
 					<View
 						style={{
@@ -49,17 +35,16 @@ export const BackupWarningScreen = ({ navigation }) => {
 							for your {'\n'} recovery phrase.
 						</WalletText>
 					</View>
-				</Card>
+				</View>
 				<View
 					style={{
-						alignItems: 'center',
 						marginTop: 50,
-						paddingHorizontal: 24,
+						paddingHorizontal: 20,
 					}}>
 					<WalletButton
 						onPress={() => navigation.navigate('BackupPhrase')}
 						type='white'
-						style={{ width: 200, marginTop: 32, marginBottom: 40 }}>
+						style={{ marginTop: 32, marginBottom: 40 }}>
 						I understand
 					</WalletButton>
 				</View>
@@ -70,7 +55,7 @@ export const BackupWarningScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		paddingTop: 160,
+		paddingTop: 20,
 		flexGrow: 1,
 	},
 })

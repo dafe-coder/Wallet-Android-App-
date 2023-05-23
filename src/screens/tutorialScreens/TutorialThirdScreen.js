@@ -5,21 +5,22 @@ import {
 	Image,
 	StyleSheet,
 	Dimensions,
+	ScrollView,
 } from 'react-native'
 import { WalletText, WalletButton } from '../../Components/UI'
 import { Indicators } from '../../Components/Indicators'
-import { Card } from '../../Components'
 const width = Dimensions.get('window').width
-import { THEME } from '../../Theme'
+import { WalletTitle } from './../../Components/UI/WalletTitle'
 
 export const TutorialThirdScreen = ({ navigation }) => {
 	return (
-		<View
-			style={{
+		<ScrollView
+			contentContainerStyle={{
 				position: 'relative',
-				flex: 1,
+				flexGrow: 1,
 				justifyContent: 'space-between',
 				paddingBottom: 40,
+				paddingTop: 30,
 			}}>
 			<View>
 				<View style={styles.center}>
@@ -29,41 +30,43 @@ export const TutorialThirdScreen = ({ navigation }) => {
 						onPress={() => navigation.navigate('TutorialEnd')}>
 						<WalletText color='white'>Skip</WalletText>
 					</TouchableOpacity>
-					<Card
-						style={{ marginTop: '40%' }}
-						title='Access the world of cryto & DeFi'>
-						<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-							<Image
-								resizeMode='contain'
-								style={{ width: '100%', maxWidth: 326, maxHeight: 158 }}
-								source={require('../../../assets/coins-tutorial.png')}
-							/>
-						</View>
-					</Card>
+					<Indicators active={3} />
+					<View
+						style={{
+							marginBottom: 10,
+							justifyContent: 'center',
+							alignItems: 'center',
+						}}>
+						<Image
+							resizeMode='cover'
+							style={styles.logoBig}
+							source={require('../../../assets/logoBig.png')}
+						/>
+						<WalletTitle size='m' color='white'>
+							Access the world {'\n'}of cryto & DeFi
+						</WalletTitle>
+						<Image
+							resizeMode='contain'
+							style={{ width: width - 40, marginTop: -30 }}
+							source={require('../../../assets/coins-tutorial.png')}
+						/>
+					</View>
 				</View>
 			</View>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Indicators active={3} />
+			<View style={{ paddingHorizontal: 20 }}>
 				<WalletButton onPress={() => navigation.navigate('TutorialEnd')}>
 					Continue
 				</WalletButton>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
 const styles = StyleSheet.create({
-	coinBlock: {
-		backgroundColor: THEME.GREY,
-		width: 44,
-		height: 44,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
 	logoBig: {
-		height: width / 1.14,
-		width: width / 1.14,
+		height: 100,
+		width: 100,
+		marginBottom: 50,
 	},
 	center: {
 		justifyContent: 'center',
@@ -71,8 +74,8 @@ const styles = StyleSheet.create({
 	},
 	skipLink: {
 		position: 'absolute',
-		right: 25,
-		top: 50,
+		right: 20,
+		top: 20,
 		zIndex: 10,
 	},
 })

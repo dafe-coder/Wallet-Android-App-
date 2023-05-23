@@ -40,7 +40,7 @@ export const TransactionFee = () => {
 				{!active ? (
 					<WalletText fw='bold' size='m'>
 						⚡️ Instant{' '}
-						<Text style={{ fontFamily: 'mt-reg', color: THEME.DISABLED_TEXT }}>
+						<Text style={{ fontFamily: 'int-reg', color: THEME.DISABLED_TEXT }}>
 							(0 to 30 minutes)
 						</Text>
 					</WalletText>
@@ -56,17 +56,17 @@ export const TransactionFee = () => {
 
 const styles = StyleSheet.create({
 	box: {
-		backgroundColor: THEME.GREY,
+		backgroundColor: THEME.BLACK,
 		borderRadius: 24,
 		paddingHorizontal: 16,
 		paddingVertical: 30,
 	},
 	tumblers: {
 		position: 'absolute',
-		right: 12,
-		top: 12,
+		right: 7,
+		top: 7,
 		borderRadius: 40,
-		backgroundColor: THEME.PRIMARY,
+		backgroundColor: THEME.BLACK,
 		flexDirection: 'row',
 		padding: 5,
 	},
@@ -74,6 +74,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 12,
 		paddingVertical: 4,
 		borderRadius: 40,
+		backgroundColor: THEME.PRIMARY,
+		marginLeft: 8.5,
 	},
 	activeBtn: {
 		backgroundColor: THEME.VIOLET,

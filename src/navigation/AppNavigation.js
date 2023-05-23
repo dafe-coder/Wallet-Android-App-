@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { BackBtn, TextBtn } from './'
 import { Text } from 'react-native'
 import BottomTabNavigator from './BottomTabNavigation'
-import { DoubleButtons, TitleLeft, HeaderSettings } from './'
+import { DoubleButtons } from './'
 
 import {
 	SentComponent,
@@ -85,125 +85,118 @@ const screens = [
 	},
 	{
 		name: 'ImportWallet',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
-			title: '',
-			headerLeft: () => (
-				<TitleLeft>
-					Import an existing wallet using {'\n'}a recovery phrase
-				</TitleLeft>
-			),
-			headerRight: () => <BackBtn navigation={navigation} />,
-		}),
+			title: `Import an existing wallet using ${'\n'}a recovery phrase`,
+			headerRight: () => <BackBtn />,
+		},
 		component: ImportComponent,
 	},
 	{
 		name: 'ImportSteps',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: '',
-			headerRight: () => <BackBtn navigation={navigation} />,
-		}),
+			headerRight: () => <BackBtn />,
+		},
 		component: ImportStepsComponent,
 	},
 	{
 		name: 'Notification',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
-			title: '',
-			headerLeft: () => <TitleLeft>Notifications</TitleLeft>,
-			headerRight: () => <BackBtn navigation={navigation} />,
-		}),
+			title: 'Notifications',
+			headerRight: () => <BackBtn />,
+		},
 		component: NotificationComponent,
 	},
 	{
 		name: 'DApps',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'dApps',
-			headerRight: () => <BackBtn navigation={navigation} />,
-		}),
+			headerRight: () => <BackBtn />,
+		},
 		component: DAppsComponent,
 	},
 	{
 		name: 'About',
 		options: () => ({
 			headerShown: true,
-			title: '',
-			headerLeft: () => <TitleLeft>About</TitleLeft>,
+			title: 'About',
 		}),
 		component: AboutComponent,
 	},
 	{
 		name: 'Security',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Security',
-		}),
+		},
 		component: SecurityComponent,
 	},
 	{
 		name: 'BackupWords',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Finish backup',
-		}),
+		},
 		component: BackupWordsComponent,
 	},
 	{
 		name: 'BackupPhrase',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Save your phrase',
-		}),
+		},
 		component: BackupPhraseComponent,
 	},
 	{
 		name: 'BackupWarning',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Warning',
-		}),
+		},
 		component: BackupWarningComponent,
 	},
 	{
 		name: 'BackupSubscribe',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Manual backup',
-		}),
+		},
 		component: BackupSubscribeComponent,
 	},
 	{
 		name: 'BackupPrimary',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: 'Manual backup',
-		}),
+		},
 		component: BackupPrimaryComponent,
 	},
 	{
 		name: 'SentAddress',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: '',
-		}),
+		},
 		component: SentAddressComponent,
 	},
 	{
 		name: 'ChooseCryptos',
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
 			title: '',
-		}),
+		},
 		component: ChooseCryptosComponent,
 	},
 	{
@@ -219,6 +212,7 @@ const screens = [
 		options: {
 			headerShown: true,
 			title: 'Manage cryptos',
+			headerRight: () => <BackBtn />,
 		},
 		component: ManageCryptosComponent,
 	},
@@ -256,20 +250,20 @@ const screens = [
 	},
 	{
 		name: 'CreatePhrase',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Polygon',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 		component: CreatePhraseComponent,
 	},
 	{
 		name: 'ConfirmSwap',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Confirm Transaction',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 		component: ConfirmSwapComponent,
 	},
 	{
@@ -283,11 +277,11 @@ const screens = [
 	},
 	{
 		name: 'RiskAlert',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: '',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 		component: RiskAlertComponent,
 	},
 	{
@@ -301,41 +295,39 @@ const screens = [
 	},
 	{
 		name: 'ExportPhraseCopy',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Your recovery phrase',
-			headerRight: () => <BackBtn navigation={navigation} go='home' />,
-		}),
+			headerRight: () => <BackBtn go='home' />,
+		},
 		component: ExportPhraseCopyComponent,
 	},
 	{
 		name: 'ExportPrivateKeyCopy',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Your private key',
-			headerRight: () => <BackBtn navigation={navigation} go='home' />,
-		}),
+			headerRight: () => <BackBtn go='home' />,
+		},
 		component: ExportPrivateKeyCopyComponent,
 	},
 
 	{
 		name: 'EditProfile',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
-			title: 'Settings',
-			headerLeft: () => <TitleLeft>Wallet name</TitleLeft>,
+			title: 'Wallet',
 			headerRight: () => <></>,
-			headerTitle: () => <></>,
-		}),
+		},
 		component: EditProfileComponent,
 	},
 	{
 		name: 'ExportPhrase',
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Export Account - Secret Phrase',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 		component: ExportPhraseComponent,
 	},
 	{
@@ -351,20 +343,20 @@ const screens = [
 	{
 		name: 'RecoverPhrase',
 		component: PhraseComponent,
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Add wallet',
 			headerLeft: () => <></>,
-		}),
+		},
 	},
 	{
 		name: 'Subscribe',
 		component: SubscribeComponent,
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Before We Begin',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 	},
 	{
 		name: 'CreatePassword',
@@ -394,29 +386,29 @@ const screens = [
 	{
 		name: 'ExportPrivateKey',
 		component: ExportPrivateKeyComponent,
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Export Account - Private Key',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 	},
 	{
 		name: 'SubscribeCreate',
 		component: SubscribeCreateComponent,
-		options: ({ navigation }) => ({
+		options: {
 			headerShown: true,
 			title: 'Before We Begin',
-			headerLeft: () => <BackBtn navigation={navigation} />,
-		}),
+			headerLeft: () => <BackBtn />,
+		},
 	},
 	{
 		name: 'ConfirmPassword',
 		component: ConfirmPasswordComponent,
-		options: ({ navigation }) => ({
-			headerRight: () => <BackBtn navigation={navigation} />,
+		options: {
+			headerRight: () => <BackBtn />,
 			headerShown: true,
-			title: 'Confirm PIN code',
-		}),
+			title: 'Enter Ordinals Wallet Passcode',
+		},
 	},
 	{
 		name: 'Scanner',
@@ -450,7 +442,7 @@ export function MyStack() {
 				screenOptions={{
 					headerShadowVisible: false,
 					headerBackVisible: false,
-					headerTitleAlign: 'center',
+					headerTitleAlign: 'left',
 					headerStyle: {
 						backgroundColor: THEME.PRIMARY,
 					},
@@ -458,9 +450,10 @@ export function MyStack() {
 					headerTitle: (title) => (
 						<Text
 							style={{
-								fontFamily: 'mt-reg',
+								paddingLeft: 6,
+								fontFamily: 'int-semi-bold',
 								color: THEME.WHITE,
-								fontSize: 24,
+								fontSize: 16,
 							}}>
 							{title.children}
 						</Text>
@@ -477,81 +470,81 @@ export function MyStack() {
 				<Stack.Screen
 					name='Home'
 					component={BottomTabNavigator}
-					options={({ navigation }) => ({
-						headerRight: () => <BackBtn navigation={navigation} />,
+					options={{
+						headerRight: () => <BackBtn />,
 						headerShown: false,
 						contentStyle: {
 							borderTopColor: 'transparent',
 							borderTopWidth: 0,
 						},
-					})}
+					}}
 				/>
 				<Stack.Screen
 					name='TransactionHistory'
 					component={TransactionHistoryComponent}
 					options={({ navigation }) => ({
 						headerShown: true,
-						headerTitle: () => <></>,
-						headerLeft: () => (
+						headerTitleAlign: 'center',
+						headerLeft: () => <></>,
+						headerTitle: () => (
 							<DoubleButtons active={false} navigation={navigation} />
 						),
-						headerRight: () => <BackBtn navigation={navigation} />,
+						headerRight: () => <BackBtn />,
 					})}
 				/>
 				<Stack.Screen
 					name='PortfolioOpen'
 					component={PortfolioOpenComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: '',
-						headerLeft: () => <BackBtn navigation={navigation} />,
-					})}
+						headerLeft: () => <BackBtn />,
+					}}
 				/>
 				<Stack.Screen
 					name='Receive'
 					component={ReceiveComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: 'Receive',
-						headerLeft: () => <></>,
-						headerRight: () => <BackBtn navigation={navigation} />,
-					})}
+						headerRight: () => <BackBtn />,
+					}}
 				/>
 				<Stack.Screen
 					name='ConfirmTransaction'
 					component={ConfirmTransactionComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: '',
-						headerRight: () => <BackBtn navigation={navigation} />,
-					})}
+						headerRight: () => <BackBtn />,
+					}}
 				/>
 				<Stack.Screen
 					name='Sent'
 					component={SentComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: '',
-						headerRight: () => <BackBtn navigation={navigation} />,
-					})}
+						headerRight: () => <BackBtn />,
+					}}
 				/>
 				<Stack.Screen
 					name='Contacts'
 					component={ContactsComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: 'Contacts',
-						headerLeft: () => <BackBtn navigation={navigation} />,
-					})}
+						headerLeft: () => <BackBtn />,
+					}}
 				/>
 				<Stack.Screen
 					name='Settings'
 					component={SettingsComponent}
-					options={({ navigation }) => ({
+					options={{
 						headerShown: true,
 						title: 'Settings',
-						headerLeft: () => <BackBtn navigation={navigation} />,
-					})}
+						headerLeft: () => <BackBtn />,
+					}}
 				/>
 			</Stack.Navigator>
 		</>

@@ -17,7 +17,8 @@ import { useSelector } from 'react-redux'
 
 export const SentScreen = ({ navigation, route }) => {
 	const { allCoins } = useSelector((state) => state.wallet)
-	const coin = route.params.item && route.params.item
+	const coin =
+		route.params !== undefined && route.params.item && route.params.item
 	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [openFunds, setOpenFunds] = useState(false)
 	const [ethCoin, setEthCoin] = useState({})
@@ -31,7 +32,7 @@ export const SentScreen = ({ navigation, route }) => {
 	const onSubmitSent = () => {
 		if (!btnDisabled) {
 			if (ethCoin.market_data.balance > 0) {
-				navigation.navigate('ConfirmTransaction')
+				navigation.navigate('SentAddress')
 			} else {
 				setOpenFunds(true)
 			}
@@ -71,7 +72,6 @@ export const SentScreen = ({ navigation, route }) => {
 				<View style={{ justifyContent: 'center', alignItems: 'center' }}>
 					<View
 						style={{
-							width: '100%',
 							justifyContent: 'center',
 							alignItems: 'center',
 							flexDirection: 'row',
@@ -100,13 +100,13 @@ export const SentScreen = ({ navigation, route }) => {
 						justifyContent: 'space-between',
 					}}></View>
 			</View>
-			<View style={{ alignItems: 'center' }}>
+			<View>
 				<ChooseCoin setValue={setValue} coin={coin} style={{ marginTop: 70 }} />
 				<WalletKeyboard
-					style={{ marginTop: 50, marginBottom: 30 }}
+					style={{ marginTop: 30, marginBottom: 30 }}
 					setValue={setValue}
 				/>
-				<WalletButton size='m' disabled={btnDisabled} onPress={onSubmitSent}>
+				<WalletButton disabled={btnDisabled} onPress={onSubmitSent}>
 					Send
 				</WalletButton>
 			</View>
@@ -124,15 +124,15 @@ export const SentScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
 	maxBtn: {
-		backgroundColor: 'rgba(82, 140, 254, 0.2)',
-		borderRadius: 6,
-		paddingHorizontal: 6,
-		paddingVertical: 4,
 		position: 'absolute',
-		right: 0,
+		right: -60,
 		zIndex: 10,
 	},
-	maxBtnText: { color: THEME.VIOLET, fontSize: 10, fontFamily: 'mt-semi-bold' },
+	maxBtnText: {
+		color: THEME.VIOLET,
+		fontSize: 12,
+		fontFamily: 'int-semi-bold',
+	},
 	qrButton: {
 		position: 'absolute',
 		bottom: 19,
@@ -143,8 +143,8 @@ const styles = StyleSheet.create({
 		lineHeight: 46,
 		fontSize: 38,
 		color: THEME.WHITE,
-		fontFamily: 'mt-med',
-		minWidth: 100,
+		fontFamily: 'int-med',
+		minWidth: 60,
 		textAlign: 'center',
 	},
 })

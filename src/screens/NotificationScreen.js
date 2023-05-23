@@ -27,34 +27,24 @@ export const NotificationScreen = ({ navigation }) => {
 	}
 
 	return (
-		<View style={{ flex: 1, paddingHorizontal: 24 }}>
-			<View>
-				<View style={styles.item}>
-					<WalletText fw='bold' size='m'>
-						Activate notifications
-					</WalletText>
-					<SwitchButton setEnabled={onNotifications} enabled={notifications} />
-				</View>
-			</View>
-			<View style={{ marginTop: 24 }}>
-				<WalletText color='disabled' size='m'>
-					Wallet
+		<View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 5 }}>
+			<View style={styles.item}>
+				<WalletText fw='bold' size='m'>
+					Activate notifications
 				</WalletText>
-				<View style={styles.item}>
-					<WalletText fw='bold' size='m'>
-						Transactions
-					</WalletText>
-					<SwitchButton setEnabled={onTransactions} enabled={transactions} />
-				</View>
-				<View style={styles.item}>
-					<WalletText fw='bold' size='m'>
-						WalletConnect
-					</WalletText>
-					<SwitchButton
-						setEnabled={onWalletConnects}
-						enabled={walletConnects}
-					/>
-				</View>
+				<SwitchButton setEnabled={onNotifications} enabled={notifications} />
+			</View>
+			<View style={styles.item}>
+				<WalletText fw='bold' size='m'>
+					Transactions
+				</WalletText>
+				<SwitchButton setEnabled={onTransactions} enabled={transactions} />
+			</View>
+			<View style={styles.item}>
+				<WalletText fw='bold' size='m'>
+					WalletConnect
+				</WalletText>
+				<SwitchButton setEnabled={onWalletConnects} enabled={walletConnects} />
 			</View>
 		</View>
 	)
@@ -62,11 +52,14 @@ export const NotificationScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	item: {
-		paddingVertical: 20,
-		borderBottomColor: THEME.DISABLED_TEXT,
+		paddingVertical: 16,
 		borderBottomWidth: 1,
 		alignItems: 'center',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		backgroundColor: THEME.BLACK,
+		borderRadius: 16,
+		marginBottom: 10,
+		paddingHorizontal: 16,
 	},
 })

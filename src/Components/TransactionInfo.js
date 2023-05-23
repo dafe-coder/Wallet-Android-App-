@@ -40,7 +40,7 @@ export const TransactionInfo = ({ chooseCoin, amountSend, style, onPress }) => {
 				<WalletText size='m' color='dark'>
 					Total
 				</WalletText>
-				<WalletText color='dark' size='m' style={{ fontFamily: 'mt-reg' }}>
+				<WalletText color='dark' size='m' style={{ fontFamily: 'int-reg' }}>
 					≈
 					{fixNum(
 						Number(amountSend) / chooseCoin.market_data.current_price.usd

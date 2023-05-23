@@ -34,12 +34,12 @@ export const AccountListMenu = ({ onPress }) => {
 			topLine: true,
 			onPress: onPress,
 		},
-		// {
-		// 	image: 'paid',
-		// 	title: 'Currency',
-		// 	topLine: true,
-		// 	onPress: onPress,
-		// },
+		{
+			image: 'code',
+			title: 'RPC Node ',
+			topLine: true,
+			onPress: onPress,
+		},
 		{
 			image: 'radio',
 			title: 'Wallet Connect',
@@ -49,7 +49,7 @@ export const AccountListMenu = ({ onPress }) => {
 		{
 			image: 'info',
 			title: 'About',
-			topLine: true,
+			topLine: false,
 			onPress: onPress,
 		},
 	]
@@ -70,8 +70,12 @@ export const AccountListMenu = ({ onPress }) => {
 
 const styles = StyleSheet.create({
 	list: {
-		marginHorizontal: 16,
-		marginTop: 30,
+		marginHorizontal: 20,
+		paddingVertical: 7,
+		marginTop: 5,
+		backgroundColor: THEME.BLACK,
 		marginBottom: 70,
+		borderRadius: 16,
+		paddingHorizontal: 16,
 	},
 })

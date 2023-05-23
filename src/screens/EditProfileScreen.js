@@ -42,7 +42,7 @@ export const EditProfileScreen = ({ navigation }) => {
 						activeOpacity={0.7}>
 						<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 							<SvgIconNav type='reorder' />
-							<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+							<WalletText fw='bold' size='m' style={{ marginLeft: 16 }}>
 								View Recovery Phrase
 							</WalletText>
 						</View>
@@ -57,7 +57,7 @@ export const EditProfileScreen = ({ navigation }) => {
 					activeOpacity={0.7}>
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<SvgIconNav type='key' />
-						<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+						<WalletText fw='bold' size='m' style={{ marginLeft: 16 }}>
 							View Private Key
 						</WalletText>
 					</View>
@@ -69,11 +69,14 @@ export const EditProfileScreen = ({ navigation }) => {
 					onPress={() => setIsVisible(true)}>
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<SvgIconNav type='trash' />
-						<WalletText fw='bold' size='m' style={{ marginLeft: 8 }}>
+						<WalletText
+							color='red'
+							fw='bold'
+							size='m'
+							style={{ marginLeft: 16 }}>
 							Delete wallet
 						</WalletText>
 					</View>
-					<SvgIcon fill={THEME.WHITE} type='play' />
 				</TouchableOpacity>
 			</View>
 			<WalletModal setIsVisible={setIsVisible} isVisible={isVisible}>
@@ -91,9 +94,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		paddingVertical: 20,
-		borderBottomColor: THEME.DISABLED_TEXT,
+		padding: 16,
+		backgroundColor: THEME.BLACK,
+		marginBottom: 10,
+		borderRadius: 16,
+		paddingVertical: 25,
 		borderBottomWidth: 1,
-		paddingRight: 10,
 	},
 })

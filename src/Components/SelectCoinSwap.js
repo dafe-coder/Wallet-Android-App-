@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
 		color: THEME.WHITE,
 		fontSize: 24,
 		lineHeight: 24,
-		fontFamily: 'mt-semi-bold',
+		fontFamily: 'int-semi-bold',
 		borderLeftColor: THEME.VIOLET,
 		borderLeftWidth: 2,
 		paddingLeft: 5,

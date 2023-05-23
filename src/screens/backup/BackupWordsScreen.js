@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { WalletText, WalletInput, WalletButton } from './../../Components/UI'
+import { View, ScrollView, TextInput, StyleSheet } from 'react-native'
+import { WalletText, WalletButton } from './../../Components/UI'
 import { useSelector, useDispatch } from 'react-redux'
 import { WalletModal } from './../../Components/modal'
 import { setBackup } from './../../store/actions/storageAction'
+import { THEME } from '../../Theme'
+import { WordsComponent } from './WordsComponent'
 
 export const BackupWordsScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
@@ -11,6 +13,7 @@ export const BackupWordsScreen = ({ navigation }) => {
 	const [word1, setWord1] = React.useState('')
 	const [word2, setWord2] = React.useState('')
 	const [word3, setWord3] = React.useState('')
+	const [word4, setWord4] = React.useState('')
 	const [valid1, setValid1] = React.useState(false)
 	const [valid2, setValid2] = React.useState(false)
 	const [valid3, setValid3] = React.useState(false)
@@ -18,6 +21,18 @@ export const BackupWordsScreen = ({ navigation }) => {
 
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [isOpenErr, setIsOpenErr] = React.useState(false)
+
+	const chooseWord = (item) => {
+		if (word1 == '') {
+			setWord1(item)
+		} else if (word2 == '') {
+			setWord2(item)
+		} else if (word3 == '') {
+			setWord3(item)
+		} else if (word4 == '') {
+			setWord4(item)
+		}
+	}
 
 	React.useEffect(() => {
 		if (atob(dataUser[0].phrase).split(' ')[5] === word1.toLowerCase()) {
@@ -71,30 +86,58 @@ export const BackupWordsScreen = ({ navigation }) => {
 			contentContainerStyle={{
 				flexGrow: 1,
 				justifyContent: 'space-between',
-				paddingHorizontal: 24,
-				marginTop: 30,
-				paddingBottom: 40,
+				paddingHorizontal: 20,
+				marginTop: 20,
 			}}>
 			<View>
-				<WalletText size='m' center>
+				<WalletText color='white-dark' size='m' center>
 					Check you have made a correct backup by entering the corresponding
 					words from your recovery phrase below.
 				</WalletText>
-				<View style={{ marginTop: 30 }}>
-					<WalletInput setValue={setWord1} value={word1} placeholder='word 6' />
-					<WalletInput setValue={setWord2} value={word2} placeholder='word 8' />
-					<WalletInput
-						setValue={setWord3}
-						value={word3}
-						placeholder='word 12'
-					/>
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						flexWrap: 'wrap',
+						marginTop: 30,
+					}}>
+					<View style={styles.itemInput}>
+						<WalletText>1.</WalletText>
+						<TextInput
+							style={styles.input}
+							value={word1}
+							onChangeText={setWord1}
+						/>
+					</View>
+					<View style={styles.itemInput}>
+						<WalletText>7.</WalletText>
+						<TextInput
+							style={styles.input}
+							value={word1}
+							onChangeText={setWord1}
+						/>
+					</View>
+					<View style={styles.itemInput}>
+						<WalletText>2.</WalletText>
+						<TextInput
+							style={styles.input}
+							value={word1}
+							onChangeText={setWord1}
+						/>
+					</View>
+					<View style={styles.itemInput}>
+						<WalletText>8.</WalletText>
+						<TextInput
+							style={styles.input}
+							value={word1}
+							onChangeText={setWord1}
+						/>
+					</View>
 				</View>
+				<WordsComponent />
 			</View>
-			<View style={{ alignItems: 'center', marginTop: 40 }}>
-				<WalletButton
-					onPress={onCheckPhrase}
-					style={{ width: 200 }}
-					disabled={disabledBtn}>
+			<View style={{ marginTop: 40, marginBottom: 40 }}>
+				<WalletButton onPress={onCheckPhrase} disabled={disabledBtn}>
 					Done
 				</WalletButton>
 			</View>
@@ -127,3 +170,20 @@ export const BackupWordsScreen = ({ navigation }) => {
 		</ScrollView>
 	)
 }
+
+const styles = StyleSheet.create({
+	itemInput: {
+		paddingVertical: 8,
+		paddingHorizontal: 16,
+		backgroundColor: THEME.BLACK,
+		borderRadius: 16,
+		flexBasis: '47.4%',
+		marginBottom: 10,
+		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	input: {
+		paddingLeft: 10,
+		color: THEME.WHITE,
+	},
+})

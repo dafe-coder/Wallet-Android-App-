@@ -97,9 +97,9 @@ export const PhraseScreen = ({ navigation, route }) => {
 			onPress={() => Keyboard.dismiss()}
 			accessible={false}>
 			<View style={styles.body}>
-				<View>
+				<View style={{ width: '100%', paddingHorizontal: 20 }}>
 					<PhraseBox
-						style={{ paddingHorizontal: 24 }}
+						style={{ width: '100%' }}
 						text={value}
 						setText={setValue}
 						setBtnDisabled={setBtnDisabled}
@@ -108,11 +108,13 @@ export const PhraseScreen = ({ navigation, route }) => {
 				</View>
 				<View
 					style={{
-						paddingHorizontal: 16,
+						paddingHorizontal: 20,
+						marginTop: 100,
+						width: '100%',
 					}}>
 					<WalletButton
-						size='m'
-						type='violet'
+						size='auto'
+						type='white'
 						checked
 						disabled={btnDisabled}
 						onPress={submitRestore}>
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
 		lineHeight: 50,
 		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'mt-semi-bold',
+		fontFamily: 'int-semi-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

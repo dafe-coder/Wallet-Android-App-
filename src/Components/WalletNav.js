@@ -3,8 +3,10 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from './../Theme'
 import { SvgIconNav } from './svg/svgNav'
+import { useNavigation } from '@react-navigation/native'
 
-export const WalletNav = ({ navigation }) => {
+export const WalletNav = () => {
+	const navigation = useNavigation()
 	return (
 		<View style={styles.wrap}>
 			<TouchableOpacity
@@ -35,21 +37,16 @@ export const WalletNav = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
+		position: 'absolute',
 		flexDirection: 'row',
-		justifyContent: 'center',
-	},
-	itemLeft: {
-		backgroundColor: THEME.GREY,
-	},
-	itemRight: {
-		borderWidth: 1,
-		borderColor: THEME.WHITE,
+		justifyContent: 'space-between',
+		width: '100%',
+		bottom: 16,
+		paddingHorizontal: 16,
 	},
 	item: {
-		paddingVertical: 14,
-		width: '47%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		borderRadius: 50,
+		backgroundColor: 'transparent',
 	},
 })

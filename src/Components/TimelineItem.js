@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { WalletText } from './UI'
+import { THEME } from './../Theme'
 
 export const TimelineItem = ({ activeTimeline, timelineText, onPress }) => {
 	return (
@@ -11,7 +12,11 @@ export const TimelineItem = ({ activeTimeline, timelineText, onPress }) => {
 				styles.itemChooseTimeline,
 				activeTimeline === timelineText && styles.activeChooseTimeline,
 			]}>
-			<WalletText size='s'>{timelineText}</WalletText>
+			<WalletText
+				size='s'
+				color={activeTimeline === timelineText ? 'white' : 'white-dark'}>
+				{timelineText}
+			</WalletText>
 		</TouchableOpacity>
 	)
 }
@@ -25,6 +30,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	activeChooseTimeline: {
-		backgroundColor: '#303037',
+		backgroundColor: THEME.PRIMARY,
+		borderRadius: 16,
 	},
 })

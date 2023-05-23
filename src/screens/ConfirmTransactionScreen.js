@@ -21,12 +21,12 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				<WalletTitle fw='bold' color='white' size='l'>
 					$ 0
 				</WalletTitle>
-				<WalletText style={{ fontSize: 12, marginTop: 12 }}>
+				<WalletText color='white-dark' style={{ marginTop: 12 }}>
 					00050076 ETH
 				</WalletText>
 			</View>
 			<View style={{ paddingHorizontal: 24, marginTop: 60, marginBottom: 50 }}>
-				<WalletText size='m' color='disabled'>
+				<WalletText fw='bold' color='white-dark'>
 					Send to address
 				</WalletText>
 				<View style={styles.addressBox}>
@@ -35,9 +35,9 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 				<TransactionFee />
 			</View>
 			<View
-				style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 40 }}>
-				<WalletText color='disabled' style={{ marginBottom: 20, fontSize: 12 }}>
-					AppName cannot recover any lost funds.
+				style={{ paddingHorizontal: 20, marginTop: 'auto', marginBottom: 40 }}>
+				<WalletText center color='disabled' style={{ marginBottom: 20 }}>
+					Ordinals Wallet cannot recover any lost funds.
 				</WalletText>
 				<WalletButton onPress={onSent}>Confirm transaction</WalletButton>
 			</View>
@@ -47,11 +47,11 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	addressBox: {
-		borderColor: THEME.DISABLED_TEXT,
+		borderColor: THEME.GREY,
 		borderWidth: 1,
 		paddingHorizontal: 16,
-		paddingVertical: 20,
-		borderRadius: 6,
+		paddingVertical: 16,
+		borderRadius: 16,
 		marginTop: 16,
 		marginBottom: 30,
 	},

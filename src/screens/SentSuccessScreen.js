@@ -11,23 +11,25 @@ export const SentSuccessScreen = ({ navigation }) => {
 				style={{
 					justifyContent: 'center',
 					alignItems: 'center',
-					marginTop: -height / 5,
+					flex: 1,
 				}}>
 				<Image
 					resizeMode='contain'
 					style={{
-						position: 'absolute',
-						width: width * 1.2,
-						height: width * 1.2,
+						width: 86,
+						height: 86,
+						marginBottom: 24,
 					}}
 					source={require('../../assets/success.png')}
 				/>
-				<WalletText style={{ top: height / 4.5 }}>
-					Your transaction has been sent.
+				<WalletText
+					center
+					style={{ fontSize: 20, lineHeight: 26, fontFamily: 'int-bold' }}>
+					Your transaction{'\n'} has been sent.
 				</WalletText>
 			</View>
 			<View style={styles.btn}>
-				<WalletButton onPress={() => navigation.navigate('Home')} size='m'>
+				<WalletButton onPress={() => navigation.navigate('Home')}>
 					Ok
 				</WalletButton>
 			</View>
@@ -37,11 +39,7 @@ export const SentSuccessScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	btn: {
-		position: 'absolute',
-		left: 0,
-		right: 0,
-		bottom: 40,
-		justifyContent: 'center',
-		alignItems: 'center',
+		marginBottom: 40,
+		paddingHorizontal: 20,
 	},
 })

@@ -7,14 +7,6 @@ import { SubscribeBlock } from '../../Components/UI/'
 const width = Dimensions.get('window').width
 export const BackupSubscribeScreen = ({ navigation }) => {
 	const [chk1, setChk1] = React.useState(false)
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTransparent: true,
-			headerStyle: {
-				backgroundColor: 'transparent',
-			},
-		})
-	}, [navigation])
 
 	return (
 		<ScrollView contentContainerStyle={styles.wrap}>
@@ -23,28 +15,25 @@ export const BackupSubscribeScreen = ({ navigation }) => {
 					flex: 1,
 					justifyContent: 'space-between',
 				}}>
-				<Card
-					styleBody={{ paddingHorizontal: 24 }}
-					imgSize={{ height: width * 1.4, top: -20 }}>
-					<WalletText size='m' style={{ marginBottom: 32 }}>
+				<View style={{ flex: 1, paddingHorizontal: 20 }}>
+					<WalletText color='white-dark' size='m' style={{ marginBottom: 21 }}>
 						Wallet Name will display the 12 words of your recovery phrase. This
 						is your password and the only way to restore your wallet.
 					</WalletText>
-					<WalletText size='m'>
+					<WalletText color='white-dark' size='m'>
 						To backup your recovery phrase
 						{'\n'}
-						{'\n'} Either write it on a paper that you will store in a safe
+						{'\n'}Either write it on a paper that you will store in a safe
 						place;
 					</WalletText>
-				</Card>
+				</View>
 				<View
 					style={{
-						alignItems: 'center',
 						marginTop: 50,
-						paddingHorizontal: 24,
+						paddingHorizontal: 20,
 					}}>
 					<SubscribeBlock check={chk1} setCheck={setChk1}>
-						<WalletText style={{ marginLeft: 20 }}>
+						<WalletText color='white-dark' style={{ marginLeft: 20 }}>
 							I understand that if I lose my recovery {'\n'}phrase, I will lose
 							my funds.
 						</WalletText>
@@ -53,7 +42,7 @@ export const BackupSubscribeScreen = ({ navigation }) => {
 						checked
 						onPress={() => navigation.navigate('BackupWarning')}
 						disabled={!chk1}
-						style={{ width: 200, marginTop: 32, marginBottom: 40 }}>
+						style={{ marginTop: 17, marginBottom: 40 }}>
 						Continue
 					</WalletButton>
 				</View>
@@ -64,7 +53,7 @@ export const BackupSubscribeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		paddingTop: 160,
+		paddingTop: 20,
 		flexGrow: 1,
 	},
 })

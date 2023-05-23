@@ -11,14 +11,12 @@ export const WalletSuccessScreen = ({ navigation }) => {
 		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 			<View
 				style={{
+					flex: 1,
 					justifyContent: 'center',
 					alignItems: 'center',
 				}}>
 				<View
 					style={{
-						position: 'relative',
-						width: 170,
-						height: 170,
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}>
@@ -28,21 +26,20 @@ export const WalletSuccessScreen = ({ navigation }) => {
 						source={require('../../assets/success.png')}
 					/>
 				</View>
-				<View style={{ marginTop: 50 }}>
-					<WalletText center>
-						Congratulations! {'\n'}You have successfully added a{'\n'}new wallet
+				<View style={{ marginTop: 24 }}>
+					<WalletText center size='xl' fw='bold'>
+						Congratulations! {'\n'}You have successfully{'\n'}added a new wallet
 					</WalletText>
 					<WalletText
 						center
 						style={{ fontSize: 12, marginTop: 20 }}
-						color='disabled'>
+						color='white-dark'>
 						{addressWallet}
 					</WalletText>
 				</View>
 			</View>
-			<View style={{ position: 'absolute', bottom: 40, zIndex: 10 }}>
+			<View style={{ width: '100%', paddingHorizontal: 20, marginBottom: 40 }}>
 				<WalletButton
-					size='m'
 					onPress={() =>
 						navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
 					}>
@@ -55,7 +52,7 @@ export const WalletSuccessScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	img: {
-		width: width,
-		height: width,
+		width: 86,
+		height: 86,
 	},
 })

@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { WalletTitle, WalletText } from '../../Components/UI'
-import { Card } from './../../Components/Card'
 import { THEME } from './../../Theme'
 import { SvgIcon } from '../../Components/svg/svg'
 import { useSelector } from 'react-redux'
@@ -17,43 +16,35 @@ export const ImportStepsScreen = ({ navigation }) => {
 		if (!isDisabled) navigation.navigate('ImportWallet')
 	}
 	return (
-		<View style={{ flex: 1, paddingTop: 40 }}>
-			<WalletTitle color='white'>
+		<View style={{ flex: 1, paddingHorizontal: 20 }}>
+			<WalletTitle size='m' color='white' style={{ marginBottom: 40 }}>
 				Follow these steps to {'\n'} import your wallet
 			</WalletTitle>
 
-			<Card style={{ marginTop: 40 }}>
-				<TouchableOpacity
-					onPress={() =>
-						navigation.navigate('ConfirmPassword', { from: 'backup' })
-					}
-					activeOpacity={0.7}
-					style={{
-						borderBottomColor: THEME.GREY,
-						borderBottomWidth: 1,
-						paddingBottom: 30,
-						position: 'relative',
-					}}>
-					<WalletText size='m' fw='bold'>
-						Create a backup for you {'\n'}current Name Wallet
-					</WalletText>
-					<WalletText
-						color='disabled'
-						style={{ marginTop: 10, fontSize: 12, lineHeight: 14 }}>
-						This step is required, even if your current{'\n'}Name wallet is
-						empty, for security.
-					</WalletText>
-					<View style={styles.arrow}>
-						<SvgIcon type='arrow-right' />
-					</View>
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={{
-						marginTop: 30,
-						position: 'relative',
-					}}
-					onPress={goImport}
-					activeOpacity={isDisabled ? 1 : 0.7}>
+			<TouchableOpacity
+				onPress={() =>
+					navigation.navigate('ConfirmPassword', { from: 'backup' })
+				}
+				activeOpacity={0.7}
+				style={styles.item}>
+				<WalletText size='m' fw='bold'>
+					Create a backup for you {'\n'}current Name Wallet
+				</WalletText>
+				<WalletText
+					color='white-dark'
+					style={{ marginTop: 10, fontSize: 12, lineHeight: 14 }}>
+					This step is required, even if your current{'\n'}Name wallet is empty,
+					for security.
+				</WalletText>
+				<View style={styles.arrow}>
+					<SvgIcon type='arrow-right' />
+				</View>
+			</TouchableOpacity>
+			<TouchableOpacity
+				style={[styles.item, { marginTop: 10 }]}
+				onPress={goImport}
+				activeOpacity={isDisabled ? 1 : 0.7}>
+				<View style={isDisabled && { opacity: 0.4 }}>
 					<WalletText
 						color={isDisabled ? 'disabled' : 'white'}
 						size='m'
@@ -62,52 +53,34 @@ export const ImportStepsScreen = ({ navigation }) => {
 					</WalletText>
 					<View style={{ flexDirection: 'row', marginTop: 10 }}>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/meta.png')}
+							source={require('../../../assets/logo/1.png')}
 						/>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/mask.png')}
+							source={require('../../../assets/logo/2.png')}
 						/>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/enjin.png')}
+							source={require('../../../assets/logo/3.png')}
 						/>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/vector.png')}
+							source={require('../../../assets/logo/4.png')}
 						/>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/exodus.png')}
+							source={require('../../../assets/logo/5.png')}
 						/>
 						<Image
-							style={[
-								styles.logo,
-								isDisabled && { tintColor: THEME.DISABLED_TEXT },
-							]}
+							style={[styles.logo]}
 							resizeMode='cover'
-							source={require('../../../assets/logo/dots.png')}
+							source={require('../../../assets/logo/5.png')}
 						/>
 					</View>
 					<View style={styles.arrow}>
@@ -116,17 +89,24 @@ export const ImportStepsScreen = ({ navigation }) => {
 							fill={isDisabled && THEME.DISABLED_TEXT}
 						/>
 					</View>
-				</TouchableOpacity>
-			</Card>
+				</View>
+			</TouchableOpacity>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
+	item: {
+		backgroundColor: THEME.BLACK,
+		borderRadius: 16,
+		paddingHorizontal: 13,
+		paddingVertical: 24,
+		position: 'relative',
+	},
 	arrow: {
 		position: 'absolute',
-		top: 0,
-		right: 0,
+		top: 24,
+		right: 13,
 	},
 	logo: {
 		marginRight: 6,

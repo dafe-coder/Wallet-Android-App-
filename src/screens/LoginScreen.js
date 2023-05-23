@@ -12,10 +12,10 @@ export const LoginScreen = ({ navigation }) => {
 		<View style={styles.body}>
 			<View style={styles.logoWrap}>
 				<View style={{ marginBottom: 20 }}>
-					<Image
+					{/* <Image
 						source={require('../../assets/logo/wallet-logo.png')}
 						style={{ width: 149, height: 115 }}
-					/>
+					/> */}
 				</View>
 				<SvgIcon type='logo-text' style={{ maxWidth: 310, width: '80%' }} />
 			</View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 		lineHeight: 50,
 		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'mt-semi-bold',
+		fontFamily: 'int-semi-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

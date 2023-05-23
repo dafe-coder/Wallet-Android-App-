@@ -3,7 +3,6 @@ import {
 	View,
 	StyleSheet,
 	Image,
-	Dimensions,
 	TouchableOpacity,
 	ScrollView,
 } from 'react-native'
@@ -12,13 +11,14 @@ import { THEME } from './../../Theme'
 import { SvgIcon } from './../../Components/svg/svg'
 import { Rules } from './../../Components/Rules'
 
-const width = Dimensions.get('window').width
 export const TutorialEndScreen = ({ navigation }) => {
 	return (
 		<ScrollView
 			contentContainerStyle={{
+				flexGrow: 1,
 				justifyContent: 'space-between',
 				paddingBottom: 20,
+				paddingTop: 70,
 			}}>
 			<View>
 				<View style={styles.center}>
@@ -27,23 +27,20 @@ export const TutorialEndScreen = ({ navigation }) => {
 						style={styles.logoBig}
 						source={require('../../../assets/logoBig.png')}
 					/>
-					<WalletTitle color='white' style={{ marginBottom: 40 }}>
-						Let's get {'\n'} you started!
+					<WalletTitle size='m' color='white' style={{ marginBottom: 40 }}>
+						Let's get you {'\n'} started!
 					</WalletTitle>
 				</View>
 				<View style={styles.card}>
 					<TouchableOpacity
 						activeOpacity={0.7}
 						onPress={() => navigation.navigate('CreateWallet')}
-						style={[
-							styles.cardItem,
-							{ borderBottomColor: THEME.GREY, borderBottomWidth: 1 },
-						]}>
-						<View style={{ paddingRight: 40 }}>
-							<WalletText style={{ marginBottom: 10 }} size='m'>
+						style={styles.cardItem}>
+						<View style={{ paddingRight: 30 }}>
+							<WalletText fw='bold' style={{ marginBottom: 10 }} size='m'>
 								Get a new wallet
 							</WalletText>
-							<WalletText color='disabled'>
+							<WalletText color='disabled' size='xs'>
 								I am new to crypto, or I want a shiny new wallet!
 							</WalletText>
 						</View>
@@ -56,12 +53,12 @@ export const TutorialEndScreen = ({ navigation }) => {
 						onPress={() => navigation.navigate('RecoverPhrase')}
 						style={styles.cardItem}>
 						<View style={{ paddingRight: 40 }}>
-							<WalletText style={{ marginBottom: 10 }} size='m'>
+							<WalletText fw='bold' style={{ marginBottom: 10 }} size='m'>
 								Import an existing wallet
 							</WalletText>
-							<WalletText color='disabled'>
-								I already have a wallet and I want to access my cryptos in App
-								Name
+							<WalletText color='disabled' size='xs'>
+								I already have a wallet and I want to {'\n'} access my cryptos
+								in Ordinals Wallet
 							</WalletText>
 						</View>
 						<View style={styles.svg}>
@@ -80,21 +77,25 @@ export const TutorialEndScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	svg: {
 		position: 'absolute',
-		right: 0,
-		top: 27,
+		right: 20,
+		top: 23,
 	},
 	cardItem: {
 		position: 'relative',
-		paddingVertical: 30,
-		paddingHorizontal: 20,
+		paddingVertical: 24,
+		paddingHorizontal: 25,
+		backgroundColor: THEME.BLACK,
+		borderRadius: 24,
+		marginBottom: 10,
 	},
 	card: {
-		marginHorizontal: 24,
+		marginHorizontal: 20,
 		marginBottom: 40,
 	},
 	logoBig: {
-		height: width / 1.14,
-		width: width / 1.14,
+		height: 160,
+		width: 160,
+		marginBottom: 50,
 	},
 	center: {
 		justifyContent: 'center',

@@ -1,45 +1,26 @@
 import React from 'react'
-import { Dimensions, View } from 'react-native'
-import { Card } from '../Components'
-import { WalletText, WalletButton } from '../Components/UI'
-import { SvgIcon } from './../Components/svg/svg'
+import { View } from 'react-native'
+import { WalletText, WalletButton, WalletTitle } from '../Components/UI'
 
-const width = Dimensions.get('window').width
 export const DAppsScreen = ({ navigation }) => {
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTransparent: true,
-			headerStyle: {
-				backgroundColor: 'transparent',
-			},
-		})
-	}, [navigation])
 	return (
 		<View
 			style={{
 				flex: 1,
-				paddingTop: 220,
 				paddingBottom: 40,
 				justifyContent: 'space-between',
 			}}>
-			<Card
-				size='sm'
-				styleBody={{ alignItems: 'center' }}
-				imgSize={{ width: width * 1.55, top: -15, left: -5 }}>
-				<SvgIcon type='qrCode' />
-				<WalletText style={{ marginTop: 16 }} size='m' center>
+			<View style={{ flex: 1, justifyContent: 'center' }}>
+				<WalletTitle center color='disabled'>
 					No dApp connected yet.
+				</WalletTitle>
+			</View>
+			<View style={{ paddingHorizontal: 20 }}>
+				<WalletText center style={{ marginBottom: 24 }}>
+					Your Name Wallet is compatible with{'/n'} WalletConnect.
 				</WalletText>
-			</Card>
-			<View style={{ alignItems: 'center', paddingHorizontal: 24 }}>
-				<WalletText center>
-					Your Name Wallet is compatible with WalletConnect.
-				</WalletText>
-				<WalletText style={{ marginTop: 16, marginBottom: 32 }}>
-					Tap to connect a dApp.
-				</WalletText>
-				<WalletButton onPress={() => navigation.goBack()} size='m'>
-					Done
+				<WalletButton onPress={() => navigation.goBack()}>
+					Continue
 				</WalletButton>
 			</View>
 		</View>

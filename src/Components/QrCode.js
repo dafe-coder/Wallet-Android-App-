@@ -8,7 +8,7 @@ export const QrCode = ({ value, setRef }) => {
 		<View style={styles.block}>
 			<QRCode
 				value={value}
-				color='black'
+				color={THEME.PRIMARY}
 				backgroundColor='white'
 				size={200}
 				getRef={(c) => setRef(c)}

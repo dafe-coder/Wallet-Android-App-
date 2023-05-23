@@ -163,7 +163,7 @@ export const SelectCoinSent = ({ setBtnDisabled, style, onChooseCoin }) => {
 						<TouchableOpacity activeOpacity={0.7} onPress={onMax}>
 							<View style={styles.maxBtn}>
 								<WalletText
-									style={{ color: THEME.PRIMARY, fontFamily: 'mt-med' }}>
+									style={{ color: THEME.PRIMARY, fontFamily: 'int-med' }}>
 									MAX
 								</WalletText>
 							</View>
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 	input: {
 		color: THEME.DARK_TEXT,
 		fontSize: 16,
-		fontFamily: 'mt-reg',
+		fontFamily: 'int-reg',
 		height: 25,
 	},
 	logo: {

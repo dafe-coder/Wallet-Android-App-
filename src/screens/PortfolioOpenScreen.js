@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
 	TouchableOpacity,
 	View,
-	Text,
 	StyleSheet,
 	ScrollView,
 	Dimensions,
+	Image,
 } from 'react-native'
 import { WalletTitle, WalletText } from './../Components/UI/'
-import { WalletNav, TimelineItem } from '../Components/'
+import { TimelineItem } from '../Components/'
 import { THEME } from '../Theme'
 import fixNum from './../../services/funcWallet/fixNum'
 import { SvgIcon } from './../Components/svg/svg'
@@ -16,7 +16,6 @@ import { SvgIconNav } from '../Components/svg/svgNav'
 import { Chart, Line, Area } from 'react-native-responsive-linechart'
 import axios from 'axios'
 import { LoaderCard } from '../Components/Loader/LoaderCard'
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory'
 
 const width = Dimensions.get('window').width
 
@@ -140,7 +139,9 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 							style={{ transform: [{ rotate: '-180deg' }] }}
 						/>
 					</TouchableOpacity>
-					<WalletTitle color='white'>{coin.name}</WalletTitle>
+					<WalletText size='m' color='white'>
+						{coin.name}
+					</WalletText>
 				</>
 			),
 			headerRight: () => (
@@ -163,35 +164,71 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 				paddingHorizontal: 16,
 				paddingTop: 29,
 			}}>
-			<View style={{ alignItems: 'flex-start', marginBottom: 6 }}>
-				<WalletText color='disabled' style={{ marginBottom: 4 }}>
-					Price
-				</WalletText>
-				<WalletText color='white' size='m' style={{ marginBottom: 10 }}>
-					$ {fixNum(coin.market_data.current_price.usd)}
-				</WalletText>
-				<View
-					style={[
-						styles.boxPercent,
-						relativeChange > 0
-							? { backgroundColor: 'rgba(72, 212, 158, 0.2)' }
-							: { backgroundColor: 'rgba(222, 57, 87, 0.2)' },
-					]}>
-					<SvgIcon
-						type='bottom-arrow'
-						style={{ transform: [{ rotate: '-90deg' }] }}
-						fill={relativeChange > 0 ? THEME.GREEN_LIGHT : THEME.RED}
-					/>
-					<WalletText
-						fw='bold'
-						style={{ marginLeft: 6 }}
-						color={relativeChange > 0 ? 'green-light' : 'red'}>
-						{relativeChange.slice('-')}%
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginBottom: 24,
+				}}>
+				<View style={{ alignItems: 'flex-start', marginBottom: 6 }}>
+					<WalletText color='disabled' style={{ marginBottom: 4 }}>
+						Price
 					</WalletText>
+					<WalletText color='white' size='m' style={{ marginBottom: 10 }}>
+						$ {fixNum(coin.market_data.current_price.usd)}
+					</WalletText>
+					<View
+						style={[
+							styles.boxPercent,
+							relativeChange > 0
+								? { backgroundColor: 'rgba(72, 212, 158, 0.2)' }
+								: { backgroundColor: 'rgba(222, 57, 87, 0.2)' },
+						]}>
+						<SvgIcon
+							type='bottom-arrow'
+							height={10}
+							width={10}
+							style={{
+								transform: [{ rotate: '-90deg' }],
+							}}
+							fill={relativeChange > 0 ? THEME.GREEN_LIGHT : THEME.RED}
+						/>
+						<WalletText
+							size='s'
+							fw='bold'
+							style={{ marginLeft: 6 }}
+							color={relativeChange > 0 ? 'green-light' : 'red'}>
+							{relativeChange.slice('-')}%
+						</WalletText>
+					</View>
+				</View>
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => navigation.navigate('Sent', { item: coin })}
+						style={{ marginRight: 24 }}>
+						<WalletText fw='bold' color='white'>
+							Send
+						</WalletText>
+					</TouchableOpacity>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => navigation.navigate('Receive')}>
+						<WalletText fw='bold' color='white'>
+							Receive
+						</WalletText>
+					</TouchableOpacity>
 				</View>
 			</View>
+
 			{dataTimeline.length ? (
-				<>
+				<View style={styles.cardBlack}>
 					<View style={styles.card}>
 						<Chart
 							style={{
@@ -249,7 +286,7 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 							onPress={setActiveTimeLine}
 						/>
 					</View>
-				</>
+				</View>
 			) : (
 				<View
 					style={{
@@ -257,7 +294,7 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 						alignItems: 'center',
 						position: 'relative',
 					}}>
-					<LoaderCard style={{ height: 188, marginTop: 10 }} />
+					<LoaderCard style={{ height: 236, marginTop: 10 }} />
 					{loadedChart && (
 						<View style={{ position: 'absolute', top: '44%' }}>
 							<WalletText center style={{ opacity: 0.4 }}>
@@ -267,22 +304,27 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 					)}
 				</View>
 			)}
-
-			<View style={{ marginTop: 30 }}>
-				<WalletNav navigation={navigation} />
-			</View>
-			<View style={{ marginBottom: 40, marginTop: 50 }}>
+			<View style={{ marginBottom: 40, marginTop: 32 }}>
 				<WalletText style={{ marginBottom: 25 }} color='disabled' size='m'>
 					Available Balance
 				</WalletText>
 				<View style={styles.item}>
-					<WalletTitle color='white'>
-						$ {fixNum(coin.market_data.balance_crypto.usd)}
-					</WalletTitle>
-					<WalletText style={{ fontSize: 12, lineHeight: 14, marginTop: 4 }}>
-						{fixNum(coin.market_data.balance) + ' '}
-						{coin.symbol.toUpperCase()}
-					</WalletText>
+					<Image
+						style={styles.itemImg}
+						resizeMode='cover'
+						source={{ uri: coin.image.thumb }}
+					/>
+					<View>
+						<WalletText size='m' color='white'>
+							$ {fixNum(coin.market_data.balance_crypto.usd)}
+						</WalletText>
+						<WalletText
+							color='white-dark'
+							style={{ fontSize: 14, lineHeight: 17, marginTop: 4 }}>
+							{fixNum(coin.market_data.balance) + ' '}
+							{coin.symbol.toUpperCase()}
+						</WalletText>
+					</View>
 				</View>
 			</View>
 		</ScrollView>
@@ -290,12 +332,25 @@ export const PortfolioOpenScreen = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
+	cardBlack: {
+		borderRadius: 16,
+		backgroundColor: THEME.BLACK,
+		paddingVertical: 24,
+	},
+	itemImg: {
+		width: 40,
+		height: 40,
+		borderRadius: 50,
+		overflow: 'hidden',
+		marginRight: 16,
+	},
 	item: {
+		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		alignItems: 'flex-start',
-		borderBottomColor: 'rgba(185, 193, 217, 0.2)',
-		borderBottomWidth: 1,
-		paddingBottom: 14,
+		alignItems: 'center',
+		backgroundColor: THEME.BLACK,
+		borderRadius: 16,
+		padding: 16,
 	},
 	boxPercent: {
 		flexDirection: 'row',

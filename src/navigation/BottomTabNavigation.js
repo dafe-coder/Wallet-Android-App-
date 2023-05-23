@@ -43,14 +43,14 @@ export default function BottomTabNavigator() {
 						paddingRight: 16,
 					},
 					headerLeftContainerStyle: {
-						paddingLeft: 16,
+						paddingLeft: 9,
 					},
-					headerTitleAlign: 'center',
+					headerTitleAlign: 'left',
 					headerTitle: (title) => (
 						<Text
 							style={{
-								fontFamily: 'mt-reg',
-								color: THEME.DISABLED_TEXT,
+								fontFamily: 'int-reg',
+								color: THEME.WHITE,
 								fontSize: 16,
 							}}>
 							{title.children}
@@ -63,9 +63,10 @@ export default function BottomTabNavigator() {
 					name='Wallet'
 					component={WalletComponent}
 					options={({ navigation }) => ({
-						headerTitle: () => <></>,
+						headerTitleAlign: 'center',
+						headerLeft: () => <></>,
 						headerRight: () => <HeaderSettings navigation={navigation} />,
-						headerLeft: () => (
+						headerTitle: () => (
 							<DoubleButtons active={true} navigation={navigation} />
 						),
 					})}
@@ -76,6 +77,7 @@ export default function BottomTabNavigator() {
 					options={{
 						title: 'Add Cash',
 						headerLeft: () => <></>,
+						headerTitle: () => <></>,
 					}}
 				/>
 				<Tab.Screen
@@ -83,15 +85,14 @@ export default function BottomTabNavigator() {
 					component={SwapComponent}
 					options={{
 						headerTitle: () => <></>,
-						headerLeft: () => <TitleLeft>Settings account</TitleLeft>,
+						title: 'Swap',
 					}}
 				/>
 				<Tab.Screen
 					name='Account'
 					component={AccountComponent}
 					options={{
-						headerTitle: () => <></>,
-						headerLeft: () => <TitleLeft>Settings account</TitleLeft>,
+						title: 'Settings account',
 					}}
 				/>
 			</Tab.Navigator>

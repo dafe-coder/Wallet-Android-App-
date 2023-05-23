@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, Dimensions, View, StyleSheet, Text } from 'react-native'
-import { Card, Alert } from '../../Components/'
+import { Alert } from '../../Components/'
 import { WalletButton, WalletText } from '../../Components/UI'
 import { THEME } from '../../Theme'
 import { useSelector } from 'react-redux'
@@ -10,14 +10,6 @@ const width = Dimensions.get('window').width
 export const BackupPhraseScreen = ({ navigation }) => {
 	const { dataUser } = useSelector((state) => state.storage)
 	let length = atob(dataUser[0].phrase).split(' ').length / 2
-	React.useEffect(() => {
-		navigation.setOptions({
-			headerTransparent: true,
-			headerStyle: {
-				backgroundColor: 'transparent',
-			},
-		})
-	}, [navigation])
 
 	return (
 		<ScrollView contentContainerStyle={styles.wrap}>
@@ -26,70 +18,71 @@ export const BackupPhraseScreen = ({ navigation }) => {
 					flex: 1,
 					justifyContent: 'space-between',
 				}}>
-				<Card
-					style={{ paddingHorizontal: 24, marginBottom: 22 }}
-					styleBody={{ paddingHorizontal: 24, paddingBottom: 28 }}
-					imgSize={{ height: width * 1.5, top: -20 }}>
-					<WalletText center style={{ marginBottom: 32 }}>
+				<View style={{ paddingHorizontal: 24, marginBottom: 22 }}>
+					<WalletText
+						size='m'
+						color='white-dark'
+						center
+						style={{ marginBottom: 32 }}>
 						Write this 12 words carefully, or save {'\n'} them to a password
 						manager.
 					</WalletText>
 					<View
 						style={{
 							flexDirection: 'row',
-							justifyContent: 'space-around',
+							justifyContent: 'space-between',
 						}}>
-						<View>
+						<View style={{ width: '47%' }}>
 							{atob(dataUser[0].phrase)
 								.split(' ')
 								.map(
 									(item, i) =>
 										i < length && (
-											<WalletText style={{ marginBottom: 16 }} key={i}>
-												<Text style={{ color: THEME.DISABLED_TEXT }}>
-													{i + 1}.
-												</Text>{' '}
-												{item}
-											</WalletText>
+											<View key={i} style={styles.itemWord}>
+												<WalletText size='m'>
+													<Text>{i + 1}.</Text> {item}
+												</WalletText>
+											</View>
 										)
 								)}
 						</View>
-						<View>
+						<View style={{ width: '47%' }}>
 							{atob(dataUser[0].phrase)
 								.split(' ')
 								.map(
 									(item, i) =>
 										i >= length && (
-											<WalletText key={i} style={{ marginBottom: 16 }}>
-												<Text style={{ color: THEME.DISABLED_TEXT }}>
-													{i + 1}.
-												</Text>{' '}
-												{item}
-											</WalletText>
+											<View key={i} style={styles.itemWord}>
+												<WalletText size='m'>
+													<Text>{i + 1}.</Text> {item}
+												</WalletText>
+											</View>
 										)
 								)}
 						</View>
 					</View>
-				</Card>
-				<View style={{ alignItems: 'center', marginBottom: 20 }}>
-					<Alert color='red' style={{ marginHorizontal: 24 }}>
-						Never share recovery phrase with {'\n'}anyone, store it securely!
-					</Alert>
 					<ButtonCopy
 						text={atob(dataUser[0].phrase)}
-						style={{ marginTop: 30 }}
+						style={{ marginTop: 10 }}
 					/>
 				</View>
 				<View
 					style={{
-						alignItems: 'center',
 						marginTop: 'auto',
-						paddingHorizontal: 24,
+						paddingHorizontal: 20,
 					}}>
+					<Alert
+						color='red'
+						style={{
+							marginHorizontal: 20,
+							marginBottom: 17,
+						}}>
+						Never share recovery phrase {'\n'}with anyone, store it securely!
+					</Alert>
 					<WalletButton
 						onPress={() => navigation.navigate('BackupWords')}
 						type='white'
-						style={{ width: 200, marginTop: 32, marginBottom: 40 }}>
+						style={{ marginBottom: 40 }}>
 						Next
 					</WalletButton>
 				</View>
@@ -99,8 +92,15 @@ export const BackupPhraseScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+	itemWord: {
+		backgroundColor: THEME.BLACK,
+		paddingHorizontal: 16,
+		paddingVertical: 8,
+		borderRadius: 16,
+		marginBottom: 10,
+	},
 	wrap: {
-		paddingTop: 160,
+		paddingTop: 20,
 		flexGrow: 1,
 	},
 })

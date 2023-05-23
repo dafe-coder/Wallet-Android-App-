@@ -43,7 +43,7 @@ export function MyTabBar({ state, descriptors, navigation }) {
 					switch (label) {
 						case 'Add Cash':
 							return 'buy'
-						case 'Account':
+						case 'Settings account':
 							return 'cog'
 						default:
 							return label.toLowerCase()
@@ -60,15 +60,18 @@ export function MyTabBar({ state, descriptors, navigation }) {
 						testID={options.tabBarTestID}
 						onLongPress={onLongPress}
 						onPress={onPress}>
-						<View
-							style={[
-								styles.item,
-								isFocused ? { backgroundColor: '#fff' } : {},
-							]}>
+						<View style={[styles.item]}>
 							<SvgIconNav
-								type={initSvgType(label)}
-								fill={isFocused ? '#000' : '#fff'}
+								type={
+									isFocused
+										? initSvgType(label) + '-filled'
+										: initSvgType(label)
+								}
+								fill={isFocused ? '#000' : '#9C9DA8'}
 							/>
+							{isFocused && (
+								<SvgIconNav style={{ marginTop: 8 }} type='circle' />
+							)}
 						</View>
 					</TouchableOpacity>
 				)
@@ -84,7 +87,12 @@ const styles = StyleSheet.create({
 		width: 80,
 		height: 44,
 		borderRadius: 50,
-		backgroundColor: THEME.GREY,
+	},
+	circle: {
+		width: 10,
+		height: 10,
+		borderRadius: 50,
+		backgroundColor: THEME.VIOLET,
 	},
 	wrap: {
 		width: '100.3%',
@@ -95,7 +103,7 @@ const styles = StyleSheet.create({
 		bottom: -2,
 		left: -1,
 		position: 'absolute',
-		backgroundColor: 'transparent',
+		backgroundColor: THEME.PRIMARY,
 	},
 	polygon: {
 		position: 'absolute',
@@ -104,16 +112,5 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		top: 0,
 		width: '100%',
-	},
-	mainBtn: {
-		width: 56,
-		height: 56,
-		backgroundColor: '#8247E5',
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: 50,
-		// elevation: 24,
-		// shadowColor: THEME.VIOLET,
-		// overflow: 'hidden',
 	},
 })

@@ -1,15 +1,7 @@
 import React from 'react'
-import {
-	TouchableOpacity,
-	View,
-	Image,
-	StyleSheet,
-	Dimensions,
-} from 'react-native'
+import { TouchableOpacity, View, Image, StyleSheet } from 'react-native'
 import { WalletTitle, WalletText, WalletButton } from './../../Components/UI'
 import { Indicators } from './../../Components/Indicators'
-
-const width = Dimensions.get('window').width
 
 export const TutorialFirstScreen = ({ navigation }) => {
 	return (
@@ -19,6 +11,7 @@ export const TutorialFirstScreen = ({ navigation }) => {
 				flex: 1,
 				justifyContent: 'space-between',
 				paddingBottom: 40,
+				paddingTop: 30,
 			}}>
 			<View>
 				<View style={styles.center}>
@@ -28,6 +21,7 @@ export const TutorialFirstScreen = ({ navigation }) => {
 						onPress={() => navigation.navigate('TutorialEnd')}>
 						<WalletText color='white'>Skip</WalletText>
 					</TouchableOpacity>
+					<Indicators active={1} style={{ marginBottom: 120 }} />
 					<Image
 						resizeMode='cover'
 						style={styles.logoBig}
@@ -35,13 +29,15 @@ export const TutorialFirstScreen = ({ navigation }) => {
 					/>
 				</View>
 				<View style={styles.center}>
-					<WalletTitle style={{ width: 222 }} color='white'>
+					<WalletTitle
+						size='m'
+						style={{ width: 252, marginTop: 50 }}
+						color='white'>
 						The crypto wallet for everyone
 					</WalletTitle>
 				</View>
 			</View>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Indicators active={1} />
+			<View style={{ paddingHorizontal: 20 }}>
 				<WalletButton onPress={() => navigation.navigate('TutorialSecond')}>
 					Continue
 				</WalletButton>
@@ -52,8 +48,8 @@ export const TutorialFirstScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	logoBig: {
-		height: width / 1.14,
-		width: width / 1.14,
+		height: 160,
+		width: 160,
 	},
 	center: {
 		justifyContent: 'center',
@@ -61,8 +57,8 @@ const styles = StyleSheet.create({
 	},
 	skipLink: {
 		position: 'absolute',
-		right: 25,
-		top: 50,
+		right: 20,
+		top: 20,
 		zIndex: 10,
 	},
 })

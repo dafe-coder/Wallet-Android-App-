@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { SvgCoin } from './svg/svgCoin'
+import { View, StyleSheet, Image } from 'react-native'
 import { WalletText, SwitchButton } from './UI'
 import { THEME } from '../Theme'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,7 +13,7 @@ export const ChooseCryptos = ({ style }) => {
 			id: 1,
 			title: 'Arbitrum',
 			symbol: 'Arb',
-			image: <SvgCoin type='arb' />,
+			image: require('../../assets/logo/1.png'),
 			switch: false,
 			balance: 0.0,
 		},
@@ -22,7 +21,7 @@ export const ChooseCryptos = ({ style }) => {
 			id: 2,
 			title: 'Ethereum',
 			symbol: 'Eth',
-			image: <SvgCoin type='eth' />,
+			image: require('../../assets/logo/3.png'),
 			switch: false,
 			balance: 0.0,
 		},
@@ -30,7 +29,7 @@ export const ChooseCryptos = ({ style }) => {
 			id: 3,
 			title: 'BNB',
 			symbol: 'BNB',
-			image: <SvgCoin type='bnb' />,
+			image: require('../../assets/logo/4.png'),
 			switch: false,
 			balance: 0,
 		},
@@ -38,7 +37,7 @@ export const ChooseCryptos = ({ style }) => {
 			id: 4,
 			title: 'Polygon',
 			symbol: 'Matic',
-			image: <SvgCoin type='polygon' />,
+			image: require('../../assets/logo/5.png'),
 			switch: false,
 			balance: 0,
 		},
@@ -46,7 +45,7 @@ export const ChooseCryptos = ({ style }) => {
 			id: 5,
 			title: 'Aave',
 			symbol: 'Aave',
-			image: <SvgCoin type='aave' />,
+			image: require('../../assets/logo/6.png'),
 			switch: false,
 			balance: 0,
 		},
@@ -71,7 +70,11 @@ export const ChooseCryptos = ({ style }) => {
 		<View style={style}>
 			{coins.map((item) => (
 				<View key={item.id} style={styles.item}>
-					<View style={styles.coinBlock}>{item.image}</View>
+					<Image
+						resizeMode='cover'
+						style={styles.coinImg}
+						source={item.image}
+					/>
 					<View>
 						<WalletText size='m' fw='bold'>
 							{item.title}
@@ -81,7 +84,6 @@ export const ChooseCryptos = ({ style }) => {
 							{item.symbol.toUpperCase()}
 						</WalletText>
 					</View>
-
 					<SwitchButton
 						coin={item}
 						setEnabled={onChooseAssets}
@@ -95,23 +97,22 @@ export const ChooseCryptos = ({ style }) => {
 }
 
 const styles = StyleSheet.create({
-	coinBlock: {
-		backgroundColor: THEME.GREY,
-		width: 44,
-		height: 44,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center',
+	coinImg: {
+		width: 40,
+		height: 40,
+		borderRadius: 50,
 		marginRight: 8,
+		overflow: 'hidden',
 	},
 	item: {
-		marginHorizontal: 24,
-		paddingRight: 6,
+		marginHorizontal: 20,
+		paddingHorizontal: 16,
+		paddingVertical: 16,
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
-		paddingBottom: 16,
-		marginBottom: 24,
-		borderBottomColor: THEME.DISABLED_TEXT,
-		borderBottomWidth: 1,
+		alignItems: 'center',
+		marginBottom: 10,
+		backgroundColor: THEME.BLACK,
+		borderRadius: 16,
 	},
 })

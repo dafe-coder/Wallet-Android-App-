@@ -12,13 +12,15 @@ export const SubscribeBlock = ({ check, setCheck, children }) => {
 			checkedIcon={<SvgIcon type='check-box-checked' />}
 			title={children}
 			containerStyle={{
+				position: 'relative',
+				left: -14,
 				width: '100%',
 				backgroundColor: 'transparent',
 				borderWidth: 0,
 				justifyContent: 'flex-start',
 				alignItems: 'flex-start',
 			}}
-			fontFamily='mt-reg'
+			fontFamily='int-reg'
 			textStyle={{
 				color: THEME.WHITE,
 				fontSize: 14,

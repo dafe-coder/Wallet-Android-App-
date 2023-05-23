@@ -32,9 +32,9 @@ export const WalletText = ({
 					size == 'xl' && styles.xl,
 					upperCase && styles.upperCase,
 					center && styles.center,
-					fw == 'regular' && { fontFamily: 'mt-reg' }, ////// FONT WEIGHT /////
-					fw == 'bold' && { fontFamily: 'mt-semi-bold' },
-					fw == 'med' && { fontFamily: 'mt-med' },
+					fw == 'regular' && { fontFamily: 'int-reg' }, ////// FONT WEIGHT /////
+					fw == 'bold' && { fontFamily: 'int-semi-bold' },
+					fw == 'med' && { fontFamily: 'int-med' },
 					style,
 				]}>
 				{children}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 	},
 	xs: {
 		fontSize: 12,
-		lineHeight: 14,
+		lineHeight: 14.4,
 	},
 	sm: {
 		fontSize: 14,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 		color: THEME.WHITE,
 	},
 	whiteDark: {
-		color: THEME.DARK,
+		color: THEME.DARK_TEXT,
 	},
 	gold: {
 		color: THEME.VIOLET,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 		color: THEME.RED,
 	},
 	dark: {
-		color: THEME.DARK,
+		color: THEME.PRIMARY,
 	},
 	yellow: {
 		color: THEME.YELLOW,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	disabled: {
-		color: THEME.DISABLED_TEXT,
+		color: THEME.GREY,
 	},
 	blue: {
 		color: THEME.BLUE,

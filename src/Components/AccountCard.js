@@ -70,15 +70,15 @@ export const AccountCard = ({ style, navigation, edit = false }) => {
 
 const styles = StyleSheet.create({
 	wrap: {
-		borderColor: THEME.DISABLED_TEXT,
+		borderColor: THEME.GREY,
 		borderWidth: 1,
-		borderRadius: 6,
+		borderRadius: 16,
 		padding: 16,
 		flexDirection: 'row',
 		position: 'relative',
 	},
 	input: {
-		fontFamily: 'mt-reg',
+		fontFamily: 'int-reg',
 		minWidth: 90,
 		maxWidth: 200,
 		color: THEME.DARK_TEXT,

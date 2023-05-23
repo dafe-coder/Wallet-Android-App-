@@ -21,12 +21,17 @@ export const AccountItemMenu = ({ image, title, topLine, onPress }) => {
 					</WalletText>
 				</View>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-					{title == 'Backup' && backup && (
+					{title == 'Backup' && backup ? (
 						<View style={styles.circleCheck}>
-							<SvgIcon fill={THEME.GREEN_LIGHT} type='check' />
+							<SvgIcon fill={THEME.GREEN_LIGHT} type='circle-success' />
 						</View>
+					) : title == 'Backup' ? (
+						<View style={styles.circleCheck}>
+							<SvgIcon fill={THEME.GREEN_LIGHT} type='circle-error' />
+						</View>
+					) : (
+						<></>
 					)}
-					<SvgIcon fill={THEME.WHITE} type='play' />
 				</View>
 			</View>
 		</TouchableOpacity>
@@ -38,8 +43,6 @@ const styles = StyleSheet.create({
 		width: 24,
 		height: 24,
 		borderRadius: 50,
-		backgroundColor: '#1A1B28',
-		marginRight: 20,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -56,13 +59,12 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		paddingRight: 17,
 	},
 	img: {
 		marginRight: 20,
 	},
 	topLine: {
-		borderColor: THEME.DISABLED_TEXT,
+		borderColor: THEME.GREY,
 		borderBottomWidth: 1,
 	},
 })

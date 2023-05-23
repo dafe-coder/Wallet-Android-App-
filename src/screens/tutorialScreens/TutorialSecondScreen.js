@@ -1,18 +1,15 @@
 import React from 'react'
-import {
-	TouchableOpacity,
-	View,
-	Image,
-	StyleSheet,
-	Dimensions,
-} from 'react-native'
-import { WalletText, WalletButton } from '../../Components/UI'
+import { TouchableOpacity, View, StyleSheet, Image } from 'react-native'
+import { WalletText, WalletButton, WalletTitle } from '../../Components/UI'
 import { Indicators } from '../../Components/Indicators'
-import { Card } from './../../Components'
-import { SvgCoin } from '../../Components/svg/svgCoin'
-const width = Dimensions.get('window').width
-import { THEME } from '../../Theme'
-const coins = ['arb', 'eth', 'bnb', 'polygon', 'aave']
+const coins = [
+	{ img: require('../../../assets/logo/1.png') },
+	{ img: require('../../../assets/logo/2.png') },
+	{ img: require('../../../assets/logo/3.png') },
+	{ img: require('../../../assets/logo/4.png') },
+	{ img: require('../../../assets/logo/5.png') },
+]
+
 export const TutorialSecondScreen = ({ navigation }) => {
 	return (
 		<View
@@ -21,6 +18,7 @@ export const TutorialSecondScreen = ({ navigation }) => {
 				flex: 1,
 				justifyContent: 'space-between',
 				paddingBottom: 40,
+				paddingTop: 30,
 			}}>
 			<View>
 				<View style={styles.center}>
@@ -30,29 +28,42 @@ export const TutorialSecondScreen = ({ navigation }) => {
 						onPress={() => navigation.navigate('TutorialEnd')}>
 						<WalletText color='white'>Skip</WalletText>
 					</TouchableOpacity>
-					<Card
-						style={{ marginTop: '40%' }}
-						title='A non-custodial & secure wallet for'>
-						<View
-							style={{
-								marginVertical: 75,
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-							}}>
-							{coins.map((item, i) => (
-								<View key={i} style={styles.coinBlock}>
-									<SvgCoin type={item} />
-								</View>
-							))}
-						</View>
-						<WalletText center size='m' color='disabled'>
-							and many more
-						</WalletText>
-					</Card>
+					<Indicators active={2} />
+					<Image
+						resizeMode='cover'
+						style={styles.logoBig}
+						source={require('../../../assets/logoBig.png')}
+					/>
+					<WalletTitle
+						size='m'
+						style={{ width: 254, marginTop: 50 }}
+						color='white'>
+						A non-custodial & secure wallet for
+					</WalletTitle>
+					<View
+						style={{
+							width: 265,
+							marginTop: 35,
+							marginBottom: 24,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+						}}>
+						{coins.map((item, i) => (
+							<View key={i} style={styles.coinBlock}>
+								<Image
+									style={styles.img}
+									resizeMode='contain'
+									source={item.img}
+								/>
+							</View>
+						))}
+					</View>
+					<WalletText center size='m' color='disabled'>
+						and many more
+					</WalletText>
 				</View>
 			</View>
-			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
-				<Indicators active={2} />
+			<View style={{ paddingHorizontal: 20 }}>
 				<WalletButton onPress={() => navigation.navigate('TutorialThird')}>
 					Continue
 				</WalletButton>
@@ -62,17 +73,14 @@ export const TutorialSecondScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-	coinBlock: {
-		backgroundColor: THEME.GREY,
-		width: 44,
-		height: 44,
-		borderRadius: 6,
-		justifyContent: 'center',
-		alignItems: 'center',
+	img: {
+		width: 40,
+		height: 40,
+		borderRadius: 50,
 	},
 	logoBig: {
-		height: width / 1.14,
-		width: width / 1.14,
+		height: 100,
+		width: 100,
 	},
 	center: {
 		justifyContent: 'center',
@@ -80,8 +88,8 @@ const styles = StyleSheet.create({
 	},
 	skipLink: {
 		position: 'absolute',
-		right: 25,
-		top: 50,
+		right: 20,
+		top: 20,
 		zIndex: 10,
 	},
 })

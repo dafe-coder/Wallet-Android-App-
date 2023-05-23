@@ -14,10 +14,8 @@ import { SvgIcon } from './../Components/svg/svg'
 import { ButtonCopy } from './../Components/UI/ButtonCopy'
 
 export const ReceiveScreen = () => {
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	const { addressWallet } = useSelector((state) => state.wallet)
 	const [qrRef, setRef] = useState()
-	const [address, setAddress] = useState('')
 
 	const shareQR = () => {
 		Share.share({
@@ -38,7 +36,7 @@ export const ReceiveScreen = () => {
 					<WalletText
 						center
 						color='white'
-						size='m'
+						size='xl'
 						style={{ marginBottom: 16 }}>
 						My Tokenname address
 					</WalletText>
@@ -56,13 +54,13 @@ export const ReceiveScreen = () => {
 						justifyContent: 'center',
 						marginTop: 48,
 					}}>
-					<ButtonCopy text={address} style={{ marginRight: 20 }} />
+					<ButtonCopy text={addressWallet} style={{ marginRight: 20 }} />
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.link}
 						onPress={shareQR}>
 						<SvgIcon width='24' height='24' type='share' fill={'#9667E5'} />
-						<WalletText fw='bold' color='white' style={{ marginLeft: 8 }}>
+						<WalletText color='white' style={{ marginLeft: 8 }}>
 							Share
 						</WalletText>
 					</TouchableOpacity>
@@ -76,7 +74,6 @@ const styles = StyleSheet.create({
 	link: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: THEME.GREY,
 		borderRadius: 50,
 		justifyContent: 'center',
 		alignItems: 'center',

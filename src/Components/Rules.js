@@ -21,7 +21,7 @@ export const Rules = ({ style }) => {
 					'Terms of use'
 				}>
 				<Text style={styles.text}>
-					By proceeding, you agree to App Name
+					By proceeding, you agree to Ordinals Wallet
 					https://robinhood.com/us/en/support/articles/privacy-policy/
 				</Text>
 			</Hyperlink>
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
 		color: THEME.VIOLET,
 		fontSize: 14,
 		lineHeight: 18,
-		fontFamily: 'mt-reg',
+		fontFamily: 'int-reg',
 	},
 	text: {
 		color: THEME.DISABLED_TEXT,
 		fontSize: 14,
 		lineHeight: 20,
-		fontFamily: 'mt-reg',
+		fontFamily: 'int-reg',
 		textAlign: 'center',
 	},
 })

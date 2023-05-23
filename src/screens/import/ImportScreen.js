@@ -119,7 +119,7 @@ export const ImportScreen = ({ navigation }) => {
 						<WalletText center fw='bold' size='m' style={{ marginBottom: 15 }}>
 							Supported wallets
 						</WalletText>
-						<View
+						{/* <View
 							style={{
 								flexDirection: 'row',
 								marginTop: 10,
@@ -155,7 +155,7 @@ export const ImportScreen = ({ navigation }) => {
 								resizeMode='contain'
 								source={require('../../../assets/logo/dots.png')}
 							/>
-						</View>
+						</View> */}
 					</Card>
 				</View>
 			</View>

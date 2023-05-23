@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 		lineHeight: 50,
 		color: THEME.VIOLET,
 		textTransform: 'uppercase',
-		fontFamily: 'mt-semi-bold',
+		fontFamily: 'int-semi-bold',
 		textAlign: 'center',
 	},
 	whiteTitle: {

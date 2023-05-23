@@ -11,7 +11,7 @@ export const WalletTitle = ({ style, children, color, size, fw = 'reg' }) => {
 			break
 		default:
 			colorTitle = {
-				color: THEME.DARK,
+				color: THEME.GREY,
 			}
 			break
 	}
@@ -30,7 +30,7 @@ export const WalletTitle = ({ style, children, color, size, fw = 'reg' }) => {
 		<Text
 			style={[
 				{ ...styles.title, ...colorTitle, ...sizeTitle, ...style },
-				fw === 'bold' ? { fontFamily: 'mt-semi-bold' } : {},
+				fw === 'bold' ? { fontFamily: 'int-semi-bold' } : {},
 			]}>
 			{children}
 		</Text>
@@ -39,7 +39,7 @@ export const WalletTitle = ({ style, children, color, size, fw = 'reg' }) => {
 
 const styles = StyleSheet.create({
 	title: {
-		fontFamily: 'mt-reg',
+		fontFamily: 'int-reg',
 		textAlign: 'center',
 	},
 })

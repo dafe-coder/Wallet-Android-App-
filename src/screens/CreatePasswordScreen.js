@@ -27,6 +27,18 @@ export const CreatePasswordScreen = ({ navigation, route }) => {
 		pincodeInput.current?.shake()
 	}
 
+	React.useEffect(() => {
+		if (nextStep) {
+			navigation.setOptions({
+				title: 'Confirm PIN code',
+			})
+		} else {
+			navigation.setOptions({
+				title: 'Create PIN code',
+			})
+		}
+	}, [navigation, nextStep])
+
 	const handleOnTextChange = (pin) => {
 		setPin(pin)
 		if (!nextStep && pin.length == 6) {
@@ -57,7 +69,7 @@ export const CreatePasswordScreen = ({ navigation, route }) => {
 				length={6}
 				containerStyle={{
 					width: '100%',
-					height: 60,
+					height: 70,
 					justifyContent: 'center',
 					alignItems: 'center',
 				}}
@@ -66,30 +78,29 @@ export const CreatePasswordScreen = ({ navigation, route }) => {
 					alignItems: 'center',
 				}}
 				circleEmptyStyle={{
-					marginHorizontal: 4,
-					width: 9,
-					height: 9,
+					marginHorizontal: 8,
+					width: 16,
+					height: 16,
 					borderWidth: 1,
 					borderColor: THEME.GREY,
-					backgroundColor: THEME.GREY,
 					borderRadius: 50,
 				}}
 				circleFilledStyle={{
 					backgroundColor: THEME.VIOLET,
-					width: 9,
-					marginHorizontal: 4,
-					height: 9,
+					width: 16,
+					height: 16,
+					marginHorizontal: 8,
 				}}
 				pin={pin}
 				onTextChange={handleOnTextChange}
 			/>
 			{!nextStep ? (
-				<WalletText color='white' center size='m'>
+				<WalletText color='white-dark' center size='sm'>
 					Create a PIN code to secure your wallet.
 				</WalletText>
 			) : (
-				<WalletText color='white' center size='m'>
-					Confirm PIN code.
+				<WalletText style={{ color: 'transparent' }} center size='sm'>
+					Create a PIN code to secure your wallet.
 				</WalletText>
 			)}
 		</View>

@@ -26,7 +26,7 @@ export const PortfolioItem = ({
 					</WalletText>
 					<WalletText
 						style={{ fontSize: 12, lineHeight: 15, marginTop: 4 }}
-						color='white'>
+						color='white-dark'>
 						{fixNum(balance) + ' ' + symbol.toUpperCase()}
 					</WalletText>
 				</View>
@@ -43,6 +43,7 @@ export const PortfolioItem = ({
 							: { backgroundColor: 'rgba(222, 57, 87, 0.2)' },
 					]}>
 					<WalletText
+						fw='bold'
 						style={[
 							{ fontSize: 10, lineHeight: 12 },
 							changePercent > 0
@@ -71,10 +72,11 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 	},
 	item: {
-		borderRadius: 15,
-		paddingVertical: 10,
+		borderRadius: 16,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		marginBottom: 4,
+		backgroundColor: THEME.BLACK,
+		padding: 16,
 	},
 })

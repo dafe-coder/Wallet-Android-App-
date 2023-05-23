@@ -53,9 +53,8 @@ export const ConfirmPasswordScreen = ({ navigation, route }) => {
 				ref={pincodeInput}
 				length={6}
 				containerStyle={{
-					marginTop: 100,
 					width: '100%',
-					height: 60,
+					height: 110,
 					justifyContent: 'center',
 					alignItems: 'center',
 				}}
@@ -64,19 +63,18 @@ export const ConfirmPasswordScreen = ({ navigation, route }) => {
 					alignItems: 'center',
 				}}
 				circleEmptyStyle={{
-					width: 9,
-					height: 9,
+					marginHorizontal: 8,
+					width: 16,
+					height: 16,
 					borderWidth: 1,
 					borderColor: THEME.GREY,
-					backgroundColor: THEME.GREY,
 					borderRadius: 50,
-					marginHorizontal: 4,
 				}}
 				circleFilledStyle={{
 					backgroundColor: THEME.VIOLET,
-					width: 9,
-					marginHorizontal: 4,
-					height: 9,
+					width: 16,
+					height: 16,
+					marginHorizontal: 8,
 				}}
 				pin={pin}
 				onTextChange={handleOnTextChange}
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
 	body: {
 		flex: 1,
 		paddingTop: 40,
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 		paddingBottom: 40,
 	},
 	image: {

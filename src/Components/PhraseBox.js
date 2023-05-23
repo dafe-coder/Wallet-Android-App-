@@ -67,15 +67,15 @@ export const PhraseBox = ({
 
 	return (
 		<View style={[styles.wrap, style, edit ? { marginBottom: 0 } : {}]}>
-			<View pointerEvents={edit ? 'none' : 'auto'}>
+			<View pointerEvents={edit ? 'none' : 'auto'} style={{ width: '100%' }}>
 				<TextInput
 					autoCapitalize='none'
 					style={[
 						styles.textarea,
 						success == 'error'
-							? { borderBottomColor: THEME.RED }
+							? { borderColor: THEME.RED }
 							: success == 'success'
-							? { borderBottomColor: THEME.DARK_TEXT }
+							? { borderColor: THEME.DARK_TEXT }
 							: {},
 						edit ? styles.editInput : {},
 					]}
@@ -86,9 +86,9 @@ export const PhraseBox = ({
 					placeholder={
 						phrase != ''
 							? phrase
-							: `Enter or paste here the 12 or 24${'\n'} words from your recovery phrase, private key.`
+							: `Enter or paste here the 12 or 24${'\n'}words from your recovery phrase, private key.`
 					}
-					placeholderTextColor={THEME.WHITE}
+					placeholderTextColor={THEME.GREY_LIGHT}
 					underlineColorAndroid='transparent'
 				/>
 			</View>
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
 		alignItems: 'flex-start',
 	},
 	textarea: {
+		width: '100%',
 		paddingVertical: 20,
 		fontSize: 14,
 		lineHeight: 17,
@@ -139,9 +140,10 @@ const styles = StyleSheet.create({
 		color: THEME.WHITE,
 		textAlignVertical: 'center',
 		height: 80,
-		textAlign: 'center',
-		borderBottomColor: '#262838',
-		borderBottomWidth: 1,
+		textAlign: 'left',
+		borderColor: THEME.GREY,
+		borderWidth: 1,
+		borderRadius: 16,
 	},
 	wrap: {
 		position: 'relative',

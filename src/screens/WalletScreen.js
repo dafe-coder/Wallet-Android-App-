@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
-import { WalletNav, PortfolioList, WalletBottomSheet } from './../Components/'
+import { Nft, PortfolioList, WalletBottomSheet } from './../Components/'
 import { WalletText } from '../Components/UI'
 import { Filters, ChooseAssets } from './../Components/modal'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,6 +15,7 @@ export const WalletScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const [portfolioCoinsInit, setPortfolioCoinsInit] = useState([])
 	const [filterPortfolioCoins, setFilterPortfolioCoins] = useState([])
+	const [activeNav, setActiveNav] = useState(false)
 	const [filterPortfolioCoinsLoader, setFilterPortfolioCoinsLoader] =
 		useState(false)
 	const {
@@ -77,53 +78,80 @@ export const WalletScreen = ({ navigation }) => {
 					flex: 1,
 				}}>
 				<InfoPriseSlide />
-				<View
-					style={{
-						marginHorizontal: 24,
-						flex: 1,
-						position: 'relative',
-					}}>
-					<WalletNav navigation={navigation} />
-					<View
-						style={{
-							marginTop: 40,
-							marginBottom: 30,
-							justifyContent: 'space-between',
-							flexDirection: 'row',
-						}}>
-						<WalletText size='m' color='disabled'>
+				<View style={styles.nav}>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						style={[styles.navItem, { marginRight: 30 }]}
+						onPress={() => setActiveNav(false)}>
+						<WalletText
+							size='m'
+							fw='bold'
+							color={activeNav ? 'white-dark' : 'white'}>
 							Wallet
 						</WalletText>
-						<TouchableOpacity
-							onPress={() =>
-								navigation.navigate('ManageCryptos', { home: true })
-							}
-							activeOpacity={0.7}
-							style={{ flexDirection: 'row', alignItems: 'center' }}>
-							<WalletText
-								style={{ fontFamily: 'mt-med', marginRight: 6 }}
-								color='gold'>
-								Manage
-							</WalletText>
-							<SvgIcon type='play' />
-						</TouchableOpacity>
-					</View>
-					{filterPortfolioCoinsLoader && loaderSkeleton ? (
-						<PortfolioList
-							navigation={navigation}
-							coins={filterPortfolioCoins}
-							style={{ marginBottom: 105 }}
-						/>
-					) : (
-						<View style={{ marginBottom: 105 }}>
-							<LoaderListItem style={{ marginBottom: 10 }} />
-							<LoaderListItem style={{ marginBottom: 10 }} />
-							<LoaderListItem style={{ marginBottom: 10 }} />
-							<LoaderListItem style={{ marginBottom: 10 }} />
-							<LoaderListItem style={{ marginBottom: 10 }} />
-						</View>
-					)}
+						<View style={[styles.navLine, !activeNav && { display: 'flex' }]} />
+					</TouchableOpacity>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						style={styles.navItem}
+						onPress={() => setActiveNav(true)}>
+						<WalletText
+							size='m'
+							fw='bold'
+							color={!activeNav ? 'white-dark' : 'white'}>
+							NFT
+						</WalletText>
+						<View style={[styles.navLine, activeNav && { display: 'flex' }]} />
+					</TouchableOpacity>
 				</View>
+				{!activeNav ? (
+					<View
+						style={{
+							marginHorizontal: 20,
+							flex: 1,
+							position: 'relative',
+							marginTop: 10,
+						}}>
+						<View
+							style={{
+								marginTop: 20,
+								marginBottom: 16,
+								justifyContent: 'flex-end',
+								flexDirection: 'row',
+							}}>
+							<TouchableOpacity
+								onPress={() =>
+									navigation.navigate('ManageCryptos', { home: true })
+								}
+								activeOpacity={0.7}
+								style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<WalletText
+									style={{ fontFamily: 'int-med', marginRight: 6 }}
+									color='white-dark'>
+									Manage
+								</WalletText>
+								<SvgIcon type='play' fill={THEME.DARK_TEXT} />
+							</TouchableOpacity>
+						</View>
+						{filterPortfolioCoinsLoader && loaderSkeleton ? (
+							<PortfolioList
+								navigation={navigation}
+								coins={filterPortfolioCoins}
+								style={{ marginBottom: 105 }}
+							/>
+						) : (
+							<View style={{ marginBottom: 105 }}>
+								<LoaderListItem style={{ marginBottom: 10 }} />
+								<LoaderListItem style={{ marginBottom: 10 }} />
+								<LoaderListItem style={{ marginBottom: 10 }} />
+								<LoaderListItem style={{ marginBottom: 10 }} />
+								<LoaderListItem style={{ marginBottom: 10 }} />
+							</View>
+						)}
+					</View>
+				) : (
+					<Nft />
+				)}
 			</ScrollView>
 			<WalletBottomSheet ref={filterRef} snapPoints={['55%']}>
 				<Filters onClose={onCloseFilters} />
@@ -140,6 +168,26 @@ export const WalletScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+	nav: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		borderBottomColor: THEME.GREY,
+		borderBottomWidth: 1,
+	},
+	navLine: {
+		height: 2,
+		position: 'absolute',
+		left: 0,
+		right: 0,
+		bottom: 0,
+		zIndex: 1,
+		backgroundColor: THEME.VIOLET,
+		display: 'none',
+	},
+	navItem: {
+		paddingVertical: 16,
+		paddingHorizontal: 6,
+	},
 	btnAddedAsset: {
 		height: 50,
 		width: 50,

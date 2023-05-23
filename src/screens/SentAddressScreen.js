@@ -13,6 +13,12 @@ export const SentAddressScreen = ({ navigation }) => {
 		setValue(text)
 	}
 
+	const confirmAddress = () => {
+		if (!disabledBtn) {
+			navigation.navigate('ConfirmTransaction', { addressFrom: value })
+		}
+	}
+
 	React.useEffect(() => {
 		if (value !== '' && value.includes('0x') && value.length > 10) {
 			setDisabledBtn(false)
@@ -46,21 +52,23 @@ export const SentAddressScreen = ({ navigation }) => {
 					<WalletText
 						width={24}
 						height={24}
-						color='gold'
+						color='white'
 						style={{ marginLeft: 6 }}>
 						Paste from clipboard
 					</WalletText>
 				</TouchableOpacity>
 			</View>
-			<View style={{ alignItems: 'center' }}>
+			<View>
 				<WalletText
 					color='disabled'
 					style={{ fontSize: 12, marginBottom: 20 }}
 					center>
 					Check the address you have copied
 				</WalletText>
-				<WalletButton disabled={disabledBtn}>
-					<WalletText>Preview transaction</WalletText>
+				<WalletButton disabled={disabledBtn} onPress={confirmAddress}>
+					<WalletText color={disabledBtn ? 'white' : 'dark'} fw='bold'>
+						Preview transaction
+					</WalletText>
 				</WalletButton>
 			</View>
 		</View>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 40,
 	},
 	btn: {
-		backgroundColor: THEME.GREY,
+		justifyContent: 'center',
 		borderRadius: 6,
 		marginTop: 16,
 		paddingHorizontal: 16,

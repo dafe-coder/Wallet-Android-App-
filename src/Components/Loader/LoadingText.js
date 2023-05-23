@@ -23,7 +23,7 @@ export const LoadingText = ({ delay = 500 }) => {
 	}, [])
 
 	return (
-		<WalletText fw='bold' size='sm' style={{ lineHeight: 17 }}>
+		<WalletText color='dark' fw='bold' size='sm' style={{ lineHeight: 17 }}>
 			Loading{dots}
 		</WalletText>
 	)
