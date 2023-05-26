@@ -25,7 +25,7 @@ export const WalletModal = ({
 
 const styles = StyleSheet.create({
 	contentWrap: {
-		backgroundColor: 'rgba(1, 2, 16, .9)',
+		backgroundColor: 'rgba(47, 73, 37, .9)',
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -34,13 +34,12 @@ const styles = StyleSheet.create({
 		maxWidth: '90%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: THEME.GREY,
+		backgroundColor: THEME.GREEN_LIGHT,
+		borderWidth: 1,
+		borderColor: THEME.WHITE,
 		paddingHorizontal: 24,
 		paddingVertical: 40,
-		borderRadius: 24,
-	},
-	text: {
-		color: '#3f2949',
-		marginTop: 10,
+		borderRadius: 16,
+		width: '90%',
 	},
 })

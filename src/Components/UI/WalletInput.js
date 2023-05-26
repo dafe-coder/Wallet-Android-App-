@@ -17,7 +17,7 @@ export const WalletInput = ({
 				multiline
 				style={[styles.input, styleInput]}
 				placeholder={placeholder}
-				placeholderTextColor={THEME.DARK_TEXT}
+				placeholderTextColor={THEME.WHITE}
 				value={value}
 				onChangeText={setValue}
 			/>
@@ -37,12 +37,13 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		lineHeight: 17,
 		borderWidth: 1,
-		borderColor: THEME.GREY,
-		paddingHorizontal: 16,
-		paddingVertical: 16,
 		borderRadius: 16,
+		borderColor: THEME.WHITE,
+		backgroundColor: THEME.GREEN_BG,
+		paddingHorizontal: 20,
+		paddingVertical: 16,
 		color: THEME.WHITE,
-		fontFamily: 'int-reg',
+		fontFamily: 'mt-reg',
 	},
 	body: {
 		position: 'relative',

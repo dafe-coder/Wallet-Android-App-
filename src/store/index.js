@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from 'redux'
-import { walletReducer } from './reducers/walletReducer'
-import { storageReducer } from './reducers/storageReducer'
+import { walletReducer } from './slices/walletReducer'
+import { storageReducer } from './slices/storageReducer'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 

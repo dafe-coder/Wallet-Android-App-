@@ -35,15 +35,15 @@ export const ButtonCopy = ({ style, text, paste = false, setText }) => {
 				fill={color ? THEME.WHITE : THEME.WHITE}
 			/>
 			{color && !paste ? (
-				<WalletText size='sm' color='white'>
+				<WalletText color='white' fw='bold'>
 					Copied!
 				</WalletText>
 			) : !color && !paste ? (
-				<WalletText size='sm' color='white'>
+				<WalletText color='white' fw='bold'>
 					Copy
 				</WalletText>
 			) : (
-				<WalletText size='sm'>Paste</WalletText>
+				<WalletText fw='bold'>Paste</WalletText>
 			)}
 		</TouchableOpacity>
 	)
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		paddingHorizontal: 18,
 		paddingVertical: 7,
+		backgroundColor: THEME.VIOLET,
 		justifyContent: 'center',
 		borderRadius: 40,
 		width: 'auto',

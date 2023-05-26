@@ -1,16 +1,15 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { SvgIcon } from './svg/svg'
+import { WalletText } from './UI/WalletText'
 import { THEME } from '../Theme'
-import { WalletText } from './UI'
 
-export const Alert = ({ children, color, style }) => {
+export const Alert = ({ children, title }) => {
 	return (
-		<View style={[styles.alert, style]}>
-			<SvgIcon fill={color === 'red' ? THEME.RED : ''} type='alert' />
-			<WalletText
-				color={color === 'red' ? 'red' : 'blue'}
-				style={{ marginLeft: 8 }}>
+		<View style={styles.wrap}>
+			<WalletText style={{ marginBottom: 10 }} upperCase fw='bold' center>
+				{title}
+			</WalletText>
+			<WalletText center size='s'>
 				{children}
 			</WalletText>
 		</View>
@@ -18,12 +17,11 @@ export const Alert = ({ children, color, style }) => {
 }
 
 const styles = StyleSheet.create({
-	alert: {
-		marginTop: 20,
-		borderRadius: 10,
-		padding: 16,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
+	wrap: {
+		backgroundColor: THEME.GREEN_LIGHT,
+		borderWidth: 1,
+		borderColor: THEME.WHITE,
+		padding: 20,
+		borderRadius: 16,
 	},
 })

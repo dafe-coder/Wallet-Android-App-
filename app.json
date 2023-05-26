@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
-      "backgroundColor": "#010210"
+      "backgroundColor": "#4C9540"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

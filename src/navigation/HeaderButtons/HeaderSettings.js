@@ -94,7 +94,7 @@ export const HeaderSettings = ({ navigation }) => {
 						]}
 					/>
 					<WalletText
-						style={{ fontFamily: 'int-med' }}
+						style={{ fontFamily: 'mt-med' }}
 						color={copied ? 'green-light' : 'disabled'}>
 						{!copied ? 'Copy Address' : 'Address has been copied!'}
 					</WalletText>
@@ -105,7 +105,7 @@ export const HeaderSettings = ({ navigation }) => {
 						style={styles.item}
 						activeOpacity={0.7}>
 						<View style={styles.circleMenu} />
-						<WalletText style={{ fontFamily: 'int-med' }} color={'disabled'}>
+						<WalletText style={{ fontFamily: 'mt-med' }} color={'disabled'}>
 							View Recovery Phrase
 						</WalletText>
 						<SvgIcon
@@ -120,7 +120,7 @@ export const HeaderSettings = ({ navigation }) => {
 					style={styles.item}
 					activeOpacity={0.7}>
 					<View style={styles.circleMenu} />
-					<WalletText style={{ fontFamily: 'int-med' }} color={'disabled'}>
+					<WalletText style={{ fontFamily: 'mt-med' }} color={'disabled'}>
 						View Private Key
 					</WalletText>
 					<SvgIcon type='play' fill={THEME.DISABLED_TEXT} style={styles.svg} />
@@ -130,7 +130,7 @@ export const HeaderSettings = ({ navigation }) => {
 					style={styles.item}
 					activeOpacity={0.7}>
 					<View style={[styles.circleMenu, { backgroundColor: THEME.RED }]} />
-					<WalletText style={{ fontFamily: 'int-med' }} color={'red'}>
+					<WalletText style={{ fontFamily: 'mt-med' }} color={'red'}>
 						Lock
 					</WalletText>
 					<SvgIcon type='lock' fill={THEME.DISABLED_TEXT} style={styles.svg} />

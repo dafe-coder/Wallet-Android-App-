@@ -1,18 +1,24 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
 import { THEME } from './../../Theme'
+import { SvgIcon } from '../svg/svg'
+import { useNavigate } from 'react-router-native'
 
 export const WalletButton = ({
 	disabled = false,
 	size = 'auto',
 	arrow = true,
-	type = 'white',
+	type = 'primary',
 	style,
 	styleBtn,
 	children,
 	onPress,
 	checked = false,
+	icon,
+	to,
+	iconPos = 'left',
 }) => {
+	const navigate = useNavigate()
 	const onPressButton = () => {
 		if (onPress) {
 			if (checked) {
@@ -22,17 +28,25 @@ export const WalletButton = ({
 			} else {
 				onPress()
 			}
+		} else if (to && !disabled) {
+			navigate(to)
 		}
 	}
 
 	let bgColor = null
 
 	switch (type) {
-		case 'violet':
+		case 'primary':
 			bgColor = {
-				backgroundColor: THEME.VIOLET,
+				backgroundColor: 'rgba(255, 255, 255, 0.1)',
 				borderWidth: 1,
-				borderColor: THEME.VIOLET,
+				borderColor: THEME.WHITE,
+			}
+			break
+		case 'link':
+			bgColor = {
+				backgroundColor: 'transparent',
+				borderWidth: 0,
 			}
 			break
 		case 'border':
@@ -79,6 +93,9 @@ export const WalletButton = ({
 								justifyContent: 'center',
 						  },
 				]}>
+				{icon && iconPos == 'left' && (
+					<SvgIcon style={{ marginRight: 10 }} type={icon} />
+				)}
 				<Text
 					style={[
 						styles.text,
@@ -88,6 +105,9 @@ export const WalletButton = ({
 					]}>
 					{children}
 				</Text>
+				{icon && iconPos == 'right' && (
+					<SvgIcon style={{ marginLeft: 10 }} type={icon} />
+				)}
 			</View>
 		</TouchableOpacity>
 	)
@@ -112,8 +132,8 @@ const styles = StyleSheet.create({
 		borderColor: THEME.WHITE,
 	},
 	btn: {
-		borderRadius: 8,
-		paddingVertical: 15,
+		borderRadius: 16,
+		paddingVertical: 17.5,
 		paddingHorizontal: 24,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -129,15 +149,14 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 		lineHeight: 17,
 		textAlign: 'center',
-		fontFamily: 'int-semi-bold',
-		fontFamily: 'int-bold',
+		fontFamily: 'mt-semi-bold',
 	},
 	disabled: {
-		borderColor: THEME.GREY,
-		borderWidth: 1,
-		backgroundColor: THEME.GREY,
+		borderWidth: 0,
+		opacity: 0.4,
+		backgroundColor: 'rgba(255, 255, 255, 0.3)',
 	},
 	disabledText: {
-		color: '#DACEF0',
+		color: THEME.WHITE,
 	},
 })

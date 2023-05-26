@@ -15,7 +15,7 @@ export const HeaderTitle = ({ openModalSelectAccount }) => {
 			onPress={() => openModalSelectAccount()}>
 			<WalletText
 				color='gold'
-				style={{ fontSize: 18, marginRight: 5, fontFamily: 'int-reg' }}>
+				style={{ fontSize: 18, marginRight: 5, fontFamily: 'mt-reg' }}>
 				{currentNetwork.title + ''}
 			</WalletText>
 			<SvgIcon type='check' fill={THEME.VIOLET} />

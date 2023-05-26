@@ -13,7 +13,7 @@ export const WalletText = ({
 	styleWrap,
 }) => {
 	return (
-		<View style={styleWrap}>
+		<View style={[styleWrap, { flexShrink: 1 }]}>
 			<Text
 				style={[
 					color === 'white' && styles.white, ////// COLOR /////
@@ -32,10 +32,11 @@ export const WalletText = ({
 					size == 'xl' && styles.xl,
 					upperCase && styles.upperCase,
 					center && styles.center,
-					fw == 'regular' && { fontFamily: 'int-reg' }, ////// FONT WEIGHT /////
-					fw == 'bold' && { fontFamily: 'int-semi-bold' },
-					fw == 'med' && { fontFamily: 'int-med' },
+					fw == 'regular' && { fontFamily: 'mt-reg' }, ////// FONT WEIGHT /////
+					fw == 'bold' && { fontFamily: 'mt-semi-bold' },
+					fw == 'med' && { fontFamily: 'mt-med' },
 					style,
+					{ flexWrap: 'wrap' },
 				]}>
 				{children}
 			</Text>
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
 	},
 	xs: {
 		fontSize: 12,
-		lineHeight: 14.4,
+		lineHeight: 14,
 	},
 	sm: {
 		fontSize: 14,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
 		color: THEME.WHITE,
 	},
 	whiteDark: {
-		color: THEME.DARK_TEXT,
+		color: THEME.DARK,
 	},
 	gold: {
 		color: THEME.VIOLET,
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
 		color: THEME.RED,
 	},
 	dark: {
-		color: THEME.PRIMARY,
+		color: THEME.DARK,
 	},
 	yellow: {
 		color: THEME.YELLOW,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 	disabled: {
-		color: THEME.GREY,
+		color: THEME.DISABLED_TEXT,
 	},
 	blue: {
 		color: THEME.BLUE,

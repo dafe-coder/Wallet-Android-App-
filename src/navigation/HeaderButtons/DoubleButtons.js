@@ -20,7 +20,11 @@ export const DoubleButtons = ({ active, navigation }) => {
 			<TouchableOpacity
 				activeOpacity={1}
 				onPress={onPressButton}
-				style={[styles.btn, active ? styles.transparent : {}, styles.btnLeft]}>
+				style={[
+					styles.btn,
+					active ? {} : styles.transparent,
+					{ marginRight: 12 },
+				]}>
 				<WalletText fw='bold' color='white'>
 					Wallet
 				</WalletText>
@@ -28,11 +32,7 @@ export const DoubleButtons = ({ active, navigation }) => {
 			<TouchableOpacity
 				activeOpacity={1}
 				onPress={onPressButtonSecond}
-				style={[
-					styles.btn,
-					!active ? styles.transparent : {},
-					styles.btnRight,
-				]}>
+				style={[styles.btn, !active ? {} : styles.transparent]}>
 				<WalletText fw='bold' color='white'>
 					Activity
 				</WalletText>
@@ -44,25 +44,17 @@ export const DoubleButtons = ({ active, navigation }) => {
 const styles = StyleSheet.create({
 	wrap: {
 		flexDirection: 'row',
-		backgroundColor: THEME.BLACK,
-		borderRadius: 24,
-		padding: 4,
+		marginLeft: 15,
 	},
 	btn: {
+		backgroundColor: THEME.VIOLET,
+		borderRadius: 50,
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: 94,
 		height: 29,
 	},
-	btnLeft: {
-		borderTopLeftRadius: 50,
-		borderBottomLeftRadius: 50,
-	},
-	btnRight: {
-		borderTopRightRadius: 50,
-		borderBottomRightRadius: 50,
-	},
 	transparent: {
-		backgroundColor: '#17191E',
+		backgroundColor: THEME.GREY,
 	},
 })

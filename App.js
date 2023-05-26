@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './global'
 import { Provider } from 'react-redux'
-import { MyStack } from './src/navigation/AppNavigation'
 import { store } from './src/store'
-import { NavigationContainer } from '@react-navigation/native'
 import { PortalProvider } from '@gorhom/portal'
 import { THEME } from './src/Theme'
 import { LogBox } from 'react-native'
@@ -16,14 +14,17 @@ LogBox.ignoreLogs([
 ])
 import { useFonts } from 'expo-font'
 import { AppWrap } from './AppWrap'
+import SafeAreaStyle from './src/Components/SafeArea'
+
+import { NativeRouter } from 'react-router-native'
+import { WalletRoutes } from './src/navigation/Navigator'
 
 export default function App() {
 	const [hidePreloader, setHidePreloader] = useState(true)
 	const [fontsLoaded] = useFonts({
-		'int-bold': require('./assets/fonts/Inter-Bold.ttf'),
-		'int-semi-bold': require('./assets/fonts/Inter-SemiBold.ttf'),
-		'int-med': require('./assets/fonts/Inter-Medium.ttf'),
-		'int-reg': require('./assets/fonts/Inter-Regular.ttf'),
+		'mt-semi-bold': require('./assets/fonts/Comfortaa-SemiBold.ttf'),
+		'mt-med': require('./assets/fonts/Comfortaa-Medium.ttf'),
+		'mt-reg': require('./assets/fonts/Comfortaa-Regular.ttf'),
 	})
 	useEffect(() => {
 		setTimeout(() => {
@@ -35,17 +36,19 @@ export default function App() {
 	} else {
 		return (
 			<GestureHandlerRootView
-				style={{ flex: 1, backgroundColor: THEME.PRIMARY }}>
+				style={{
+					paddingHorizontal: 24,
+					backgroundColor: THEME.GREEN,
+					...SafeAreaStyle.AndroidSafeArea,
+				}}>
 				<Provider store={store}>
 					<PortalProvider>
-						<AppWrap>
-							<NavigationContainer
-								style={{ flex: 1 }}
-								theme={{ colors: { background: THEME.PRIMARY } }}>
-								<PreloaderScreen load={hidePreloader} />
-								<MyStack />
-							</NavigationContainer>
-						</AppWrap>
+						{/* <AppWrap>
+							<PreloaderScreen load={hidePreloader} />
+						</AppWrap> */}
+						<NativeRouter>
+							<WalletRoutes />
+						</NativeRouter>
 					</PortalProvider>
 				</Provider>
 			</GestureHandlerRootView>
