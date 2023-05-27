@@ -16,14 +16,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
-      "package": "com.hood.batman"
+      "package": "com.hood.robin"
     },
     "web": {
       "favicon": "./assets/favicon.png"
