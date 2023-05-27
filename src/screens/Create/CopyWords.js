@@ -25,7 +25,7 @@ export const CopyWords = () => {
 					Anyone with your mnemonic can access your wallet assets. Please back
 					up your mnemonic before you receive transfers or delete the app.
 				</Alert>
-				<WalletButton style={{ marginTop: 30 }}>
+				<WalletButton style={{ marginTop: 30 }} to='/verify-mnemonic'>
 					Yes, I’ve Written It Down
 				</WalletButton>
 			</View>

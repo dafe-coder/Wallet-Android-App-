@@ -46,7 +46,7 @@ export default function App() {
 						{/* <AppWrap>
 							<PreloaderScreen load={hidePreloader} />
 						</AppWrap> */}
-						<NativeRouter>
+						<NativeRouter initialEntries={['/wallet']}>
 							<WalletRoutes />
 						</NativeRouter>
 					</PortalProvider>

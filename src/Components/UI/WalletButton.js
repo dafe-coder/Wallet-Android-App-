@@ -63,6 +63,11 @@ export const WalletButton = ({
 				borderColor: THEME.RED,
 			}
 			break
+		case 'green':
+			bgColor = {
+				backgroundColor: '#7CFB5C',
+			}
+			break
 		case 'white':
 			bgColor = {
 				backgroundColor: THEME.WHITE,
@@ -92,6 +97,7 @@ export const WalletButton = ({
 								paddingVertical: 20.5,
 								justifyContent: 'center',
 						  },
+					type == 'green' ? { paddingHorizontal: 0, paddingVertical: 15 } : {},
 				]}>
 				{icon && iconPos == 'left' && (
 					<SvgIcon style={{ marginRight: 10 }} type={icon} />
@@ -101,6 +107,7 @@ export const WalletButton = ({
 						styles.text,
 						styles.textWhite,
 						type == 'white' ? { color: THEME.GREY } : {},
+						type == 'green' ? { color: THEME.BLACK } : {},
 						disabled && styles.disabledText,
 					]}>
 					{children}

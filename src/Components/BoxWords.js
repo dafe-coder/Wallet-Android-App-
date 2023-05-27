@@ -9,7 +9,9 @@ export const BoxWords = ({ arr, setOpenQr }) => {
 		<>
 			<View style={styles.box}>
 				{arr.map((item, id) => (
-					<View style={[styles.word, (id + 1) % 4 == 0 && { marginRight: 0 }]}>
+					<View
+						key={id}
+						style={[styles.word, (id + 1) % 4 == 0 && { marginRight: 0 }]}>
 						<WalletText size='xs' center>
 							{item}
 						</WalletText>

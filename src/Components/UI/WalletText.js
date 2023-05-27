@@ -11,10 +11,12 @@ export const WalletText = ({
 	center = false,
 	fw = 'regular',
 	styleWrap,
+	numberOfLines,
 }) => {
 	return (
 		<View style={[styleWrap, { flexShrink: 1 }]}>
 			<Text
+				numberOfLines={numberOfLines}
 				style={[
 					color === 'white' && styles.white, ////// COLOR /////
 					color === 'white-dark' && styles.whiteDark,

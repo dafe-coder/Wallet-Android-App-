@@ -16,8 +16,8 @@ export const FirstScreen = () => {
 					icon='wallet'>
 					Create wallet
 				</WalletButton>
-				<WalletButton type='link' icon='reload'>
-					Create wallet
+				<WalletButton type='link' icon='reload' to='/count-phrase'>
+					Restore wallet
 				</WalletButton>
 			</View>
 		</View>
