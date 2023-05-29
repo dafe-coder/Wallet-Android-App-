@@ -37,7 +37,6 @@ export default function App() {
 		return (
 			<GestureHandlerRootView
 				style={{
-					paddingHorizontal: 24,
 					backgroundColor: THEME.GREEN,
 					...SafeAreaStyle.AndroidSafeArea,
 				}}>
