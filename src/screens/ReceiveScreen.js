@@ -14,10 +14,8 @@ import { SvgIcon } from './../Components/svg/svg'
 import { ButtonCopy } from './../Components/UI/ButtonCopy'
 
 export const ReceiveScreen = () => {
-	const { dataUser, currentAccount } = useSelector((state) => state.storage)
 	const { addressWallet } = useSelector((state) => state.wallet)
 	const [qrRef, setRef] = useState()
-	const [address, setAddress] = useState('')
 
 	const shareQR = () => {
 		Share.share({
@@ -56,7 +54,7 @@ export const ReceiveScreen = () => {
 						justifyContent: 'center',
 						marginTop: 48,
 					}}>
-					<ButtonCopy text={address} style={{ marginRight: 20 }} />
+					<ButtonCopy text={addressWallet} style={{ marginRight: 20 }} />
 					<TouchableOpacity
 						activeOpacity={0.7}
 						style={styles.link}

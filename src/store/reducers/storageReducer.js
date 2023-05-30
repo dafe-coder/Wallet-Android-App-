@@ -28,6 +28,7 @@ const initialState = {
 	transactions: true,
 	walletConnects: false,
 	backup: true,
+	lockWallet: false, // Fixed its
 }
 
 export const storageReducer = (state = initialState, action) => {

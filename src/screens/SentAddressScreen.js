@@ -4,6 +4,7 @@ import { WalletText, WalletInput, WalletButton } from './../Components/UI/'
 import { SvgIcon } from './../Components/svg/svg'
 import { THEME } from './../Theme'
 import * as Clipboard from 'expo-clipboard'
+
 export const SentAddressScreen = ({ navigation }) => {
 	const [disabledBtn, setDisabledBtn] = React.useState(true)
 	const [value, setValue] = React.useState('')
@@ -20,6 +21,7 @@ export const SentAddressScreen = ({ navigation }) => {
 			setDisabledBtn(true)
 		}
 	}, [value])
+
 	React.useEffect(() => {
 		navigation.setOptions({
 			headerLeft: () => (
@@ -29,6 +31,7 @@ export const SentAddressScreen = ({ navigation }) => {
 			),
 		})
 	}, [navigation])
+
 	return (
 		<View style={styles.wrap}>
 			<View>
@@ -59,7 +62,11 @@ export const SentAddressScreen = ({ navigation }) => {
 					center>
 					Check the address you have copied
 				</WalletText>
-				<WalletButton disabled={disabledBtn}>
+				<WalletButton
+					disabled={disabledBtn}
+					onPress={() =>
+						navigation.navigate('ConfirmTransaction', { addressTo: value })
+					}>
 					<WalletText>Preview transaction</WalletText>
 				</WalletButton>
 			</View>

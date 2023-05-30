@@ -31,7 +31,7 @@ export const SentScreen = ({ navigation, route }) => {
 	const onSubmitSent = () => {
 		if (!btnDisabled) {
 			if (ethCoin.market_data.balance > 0) {
-				navigation.navigate('ConfirmTransaction')
+				navigation.navigate('SentAddress')
 			} else {
 				setOpenFunds(true)
 			}

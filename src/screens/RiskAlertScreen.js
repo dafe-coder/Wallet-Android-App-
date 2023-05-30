@@ -12,23 +12,20 @@ import { useDispatch } from 'react-redux'
 export const RiskAlertScreen = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const onRemoveAll = () => {
-		dispatch(setLoader(true))
-		setTimeout(() => {
-			dispatch(setPassword(''))
-			dispatch(setLoader(false))
-			dispatch(setClearDataUser())
-			dispatch(setCurrentAccount(''))
-			navigation.reset({
-				index: 0,
-				routes: [{ name: 'Login' }],
-			})
-		}, 3000)
+		dispatch(setPassword(''))
+		dispatch(setClearDataUser())
+		dispatch(setCurrentAccount(''))
+		navigation.reset({
+			index: 0,
+			routes: [{ name: 'TutorialFirst' }],
+		})
 	}
 	return (
 		<ScrollView contentContainerStyle={styles.body}>
 			<View style={styles.top}>
 				<SvgIcon type='logo' />
 				<WalletTitle
+					color='white'
 					style={{
 						fontSize: 16,
 						fontFamily: 'mt-med',

@@ -39,10 +39,10 @@ export const AppWrap = ({ children }) => {
 			.then((data) => {
 				const dataCoins = rebuildObjPortfolioDefaultCoins(data)
 				const withAddress = dataCoins.map((item) => {
-					const address = coins.find((coin) => coin.id == item.id).platforms
+					const address = coins.find((coin) => coin.id == item.id)?.platforms
 					return {
 						...item,
-						platforms: address,
+						platforms: address !== undefined ? address : '',
 					}
 				})
 				setOtherCoins(withAddress)

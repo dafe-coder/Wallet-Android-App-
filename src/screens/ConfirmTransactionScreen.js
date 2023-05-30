@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import fixNum from './../../services/funcWallet/fixNum'
 import { TransactionFee } from './../Components/'
 
-export const ConfirmTransactionScreen = ({ navigation }) => {
+export const ConfirmTransactionScreen = ({ navigation, route }) => {
 	const onSent = () => {
 		navigation.navigate('SentSuccess')
 	}
@@ -30,14 +30,20 @@ export const ConfirmTransactionScreen = ({ navigation }) => {
 					Send to address
 				</WalletText>
 				<View style={styles.addressBox}>
-					<WalletText>0xDACa159F870Ba0DAba7cEc9d988...f6B4</WalletText>
+					<WalletText>
+						{route.params !== undefined
+							? route.params.addressTo.slice(0, 28) +
+							  '...' +
+							  route.params.addressTo.slice(-3)
+							: ''}
+					</WalletText>
 				</View>
 				<TransactionFee />
 			</View>
 			<View
 				style={{ alignItems: 'center', marginTop: 'auto', marginBottom: 40 }}>
 				<WalletText color='disabled' style={{ marginBottom: 20, fontSize: 12 }}>
-					AppName cannot recover any lost funds.
+					RobinHood cannot recover any lost funds.
 				</WalletText>
 				<WalletButton onPress={onSent}>Confirm transaction</WalletButton>
 			</View>

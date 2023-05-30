@@ -4,7 +4,7 @@ import randomNum from './funcWallet/randomNum'
 // import CryptoJS from 'crypto-js'
 import { decode as atob, encode as btoa } from 'base-64'
 import queryString from 'query-string'
-import coins from '../coins.json'
+// import coins from '../coins.json'
 
 const useWalletService = () => {
 	const { error, loading, request, clearError } = useHttp()
@@ -12,12 +12,12 @@ const useWalletService = () => {
 	const getAllTokens = async (loaded) => {
 		loaded ? loaded(true) : null
 
-		// const response = await request(
-		// 	new URL(
-		// 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=ethereum-ecosystem&order=market_cap_desc&per_page=100&page=1&sparkline=false'
-		// 	)
-		// )
-		const response = coins
+		const response = await request(
+			new URL(
+				'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=ethereum-ecosystem&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+			)
+		)
+		// const response = coins
 		loaded ? loaded(false) : null
 		return response
 	}

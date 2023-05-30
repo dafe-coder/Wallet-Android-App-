@@ -21,7 +21,7 @@ export const Rules = ({ style }) => {
 					'Terms of use'
 				}>
 				<Text style={styles.text}>
-					By proceeding, you agree to App Name
+					By proceeding, you agree to RobinHood
 					https://robinhood.com/us/en/support/articles/privacy-policy/
 				</Text>
 			</Hyperlink>

@@ -74,7 +74,7 @@ export const SvgIcon = ({ type, fill = '', ...props }) => {
 							x2={11.5258}
 							y2={120.501}
 							gradientUnits='userSpaceOnUse'
-							className='__paint0_linear_59_1783'>
+							id='paint0_linear_59_1783'>
 							<Stop offset={0.0329121} stopColor='#556AFA' />
 							<Stop offset={0.482701} stopColor='#F97EF4' />
 							<Stop offset={1} stopColor='#F7FAFD' />

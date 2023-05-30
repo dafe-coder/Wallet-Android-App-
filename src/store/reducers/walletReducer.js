@@ -45,7 +45,7 @@ const initialState = {
 	swapAmountSecond: '',
 	loader: false,
 	loaderSkeleton: false,
-	lockWallet: false, // Fixed its
+	lockWallet: true, // Fixed its
 	updateWallet: {},
 	newWallet: false,
 	addressWallet: '',
