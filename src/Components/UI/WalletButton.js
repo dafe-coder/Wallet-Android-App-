@@ -17,6 +17,8 @@ export const WalletButton = ({
 	icon,
 	to,
 	iconPos = 'left',
+	iconFill,
+	iconStyle,
 }) => {
 	const navigate = useNavigate()
 	const onPressButton = () => {
@@ -58,7 +60,6 @@ export const WalletButton = ({
 
 		case 'red':
 			bgColor = {
-				backgroundColor: THEME.RED,
 				borderWidth: 1,
 				borderColor: THEME.RED,
 			}
@@ -66,6 +67,11 @@ export const WalletButton = ({
 		case 'green':
 			bgColor = {
 				backgroundColor: '#7CFB5C',
+			}
+			break
+		case 'transparent':
+			bgColor = {
+				backgroundColor: 'transparent',
 			}
 			break
 		case 'white':
@@ -100,7 +106,11 @@ export const WalletButton = ({
 					type == 'green' ? { paddingHorizontal: 0, paddingVertical: 15 } : {},
 				]}>
 				{icon && iconPos == 'left' && (
-					<SvgIcon style={{ marginRight: 10 }} type={icon} />
+					<SvgIcon
+						fill={iconFill}
+						style={[{ marginRight: 10 }, iconStyle]}
+						type={icon}
+					/>
 				)}
 				<Text
 					style={[
@@ -108,12 +118,17 @@ export const WalletButton = ({
 						styles.textWhite,
 						type == 'white' ? { color: THEME.GREY } : {},
 						type == 'green' ? { color: THEME.BLACK } : {},
+						type == 'red' ? { color: THEME.RED } : {},
 						disabled && styles.disabledText,
 					]}>
 					{children}
 				</Text>
 				{icon && iconPos == 'right' && (
-					<SvgIcon style={{ marginLeft: 10 }} type={icon} />
+					<SvgIcon
+						fill={iconFill}
+						style={[{ marginLeft: 10 }, iconStyle]}
+						type={icon}
+					/>
 				)}
 			</View>
 		</TouchableOpacity>

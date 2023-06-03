@@ -10,17 +10,48 @@ export const WalletInput = ({
 	text = '',
 	value,
 	setValue,
+	label = true,
+	textarea,
 }) => {
+	const [showLabel, setShowLabel] = React.useState(false)
+
+	React.useEffect(() => {
+		if (value !== '') {
+			setShowLabel(true)
+		} else {
+			setShowLabel(false)
+		}
+	}, [value])
+
 	return (
 		<View style={{ ...styles.body, ...style }}>
-			<TextInput
-				multiline
-				style={[styles.input, styleInput]}
-				placeholder={placeholder}
-				placeholderTextColor={THEME.WHITE}
-				value={value}
-				onChangeText={setValue}
-			/>
+			{label && showLabel ? (
+				<WalletText size='xs' style={[{ marginBottom: 6 }]}>
+					{placeholder}
+				</WalletText>
+			) : (
+				<></>
+			)}
+
+			{textarea ? (
+				<TextInput
+					placeholder={placeholder}
+					textAlignVertical='top'
+					style={[styles.input, styleInput, { height: 100, lineHeight: 20 }]}
+					placeholderTextColor={THEME.WHITE}
+					multiline
+					value={value}
+					onChangeText={setValue}
+				/>
+			) : (
+				<TextInput
+					style={[styles.input, styleInput]}
+					placeholderTextColor={THEME.WHITE}
+					value={value}
+					placeholder={placeholder}
+					onChangeText={setValue}
+				/>
+			)}
 			{text != '' ? (
 				<WalletText color='dark' style={{ marginTop: 5 }}>
 					{text}
@@ -42,6 +73,7 @@ const styles = StyleSheet.create({
 		backgroundColor: THEME.GREEN_BG,
 		paddingHorizontal: 20,
 		paddingVertical: 16,
+		paddingTop: 13,
 		color: THEME.WHITE,
 		fontFamily: 'mt-reg',
 	},

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 	},
 	xs: {
 		fontSize: 12,
-		lineHeight: 14,
+		lineHeight: 16,
 	},
 	sm: {
 		fontSize: 14,

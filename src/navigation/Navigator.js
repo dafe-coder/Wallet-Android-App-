@@ -15,6 +15,17 @@ import {
 	VerifyMnemonic3,
 	Wallet,
 	Settings,
+	Security,
+	About,
+	ShowPhrase,
+	Buy,
+	Swap,
+	Account,
+	AccountManage,
+	Send,
+	TransactionHistory,
+	PortfolioOpen,
+	ManageAssets,
 } from '../screens'
 
 export const WalletRoutes = () => {
@@ -34,6 +45,21 @@ export const WalletRoutes = () => {
 			<Route exact path='/wallet' element={<Wallet />} />
 			<Route exact path='/receive' element={<Receive />} />
 			<Route exact path='/settings' element={<Settings />} />
+			<Route exact path='/security' element={<Security />} />
+			<Route exact path='/about' element={<About />} />
+			<Route exact path='/show-phrase' element={<ShowPhrase />} />
+			<Route exact path='/buy' element={<Buy />} />
+			<Route exact path='/swap' element={<Swap />} />
+			<Route exact path='/account' element={<Account />} />
+			<Route exact path='/account-manage' element={<AccountManage />} />
+			<Route exact path='/send' element={<Send />} />
+			<Route exact path='/portfolio-open' element={<PortfolioOpen />} />
+			<Route exact path='/manage-assets' element={<ManageAssets />} />
+			<Route
+				exact
+				path='/transaction-history'
+				element={<TransactionHistory />}
+			/>
 		</Routes>
 	)
 }

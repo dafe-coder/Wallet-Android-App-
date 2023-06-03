@@ -1,12 +1,17 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText } from './UI/'
 import { THEME } from '../Theme'
 import fixNum from './../../services/funcWallet/fixNum'
+import { useNavigate } from 'react-router'
 
-export const PortfolioItem = ({ title, price, count, percent, img }) => {
+export const PortfolioItem = ({ title, price, count, percent, img, item }) => {
+	const navigate = useNavigate()
 	return (
-		<View style={styles.item}>
+		<TouchableOpacity
+			onPress={() => navigate('/portfolio-open', { state: item })}
+			activeOpacity={0.7}
+			style={styles.item}>
 			<View style={styles.top}>
 				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 					<Image
@@ -32,7 +37,7 @@ export const PortfolioItem = ({ title, price, count, percent, img }) => {
 					{fixNum(percent)}
 				</WalletText>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

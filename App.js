@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './global'
 import { Provider } from 'react-redux'
-import { store } from './src/store'
+import { store } from './src/store/store'
 import { PortalProvider } from '@gorhom/portal'
 import { THEME } from './src/Theme'
 import { LogBox } from 'react-native'

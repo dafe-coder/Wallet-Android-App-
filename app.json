@@ -23,6 +23,7 @@
       "adaptiveIcon": {
         "backgroundColor": "#632DBC"
       },
+      "softwareKeyboardLayoutMode": "pan",
       "package": "com.hood.batman"
     },
     "web": {

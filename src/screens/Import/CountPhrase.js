@@ -4,7 +4,7 @@ import { Header, Dropdown } from './../../Components/'
 
 export const CountPhrase = () => {
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, paddingHorizontal: 24 }}>
 			<Header title='Import Account' />
 			<Dropdown title='Enter a 12-word recovery phrase'>
 				If you have a recovery phrase consisting of 12 words, choose this option

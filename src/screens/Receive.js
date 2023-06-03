@@ -9,7 +9,7 @@ import { SvgIcon } from '../Components/svg/svg'
 
 export const Receive = () => {
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, paddingHorizontal: 24 }}>
 			<Header title='Payment Information' />
 			<View>
 				<WalletText style={{ marginBottom: 5 }}>Asset Name</WalletText>

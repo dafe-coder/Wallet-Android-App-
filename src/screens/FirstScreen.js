@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingBottom: 25,
+		paddingHorizontal: 24,
 	},
 	img: {
 		marginTop: 'auto',

@@ -5,7 +5,7 @@ import { WalletText, WalletButton } from './../../Components/UI/'
 
 export const ImportEnd = () => {
 	return (
-		<View style={{ flex: 1, marginBottom: 25 }}>
+		<View style={{ flex: 1, paddingHorizontal: 24, marginBottom: 25 }}>
 			<Header title='Restore Wallet' />
 			<WalletText>Confirm the account to be restored:</WalletText>
 			<ImportBalanceCard style={{ marginTop: 25 }} />

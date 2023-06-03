@@ -1,7 +1,6 @@
 export * from './ConnectsApp'
 export * from './AddAccount'
 export * from './ChangeCurrentNetwork'
-export * from './SelectAccount'
 export * from './ImportAccount'
 export * from './AddContact'
 export * from './TransactionFee'

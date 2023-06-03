@@ -10,7 +10,7 @@ export const Dropdown = ({ title, children }) => {
 	const [expand, setExpand] = React.useState(false)
 
 	const onChoose = () => {
-		navigate('/import-data')
+		navigate('/import-data', { state: title })
 	}
 
 	return (
