@@ -98,6 +98,7 @@ export const ImportData = () => {
 			phrase: phrase.split(' ').length > 2 ? btoa(phrase) : '',
 			privateKey:
 				phrase.split(' ').length === 1 ? btoa(phrase) : privateKeyString,
+			coins: ['bnb', 'eth', 'matic'],
 		}
 		dispatch(setData(user))
 		dispatch(setCurrentAccount(walletName))
