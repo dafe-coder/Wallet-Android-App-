@@ -72,6 +72,7 @@ export const PasswordInput = () => {
 	return (
 		<View>
 			<WalletInput
+				password
 				styleInput={
 					passwordValid
 						? { borderColor: THEME.SUCCESS }

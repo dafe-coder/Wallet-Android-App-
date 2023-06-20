@@ -9,7 +9,7 @@ export const Alert = ({ children, title }) => {
 			<WalletText style={{ marginBottom: 10 }} upperCase fw='bold' center>
 				{title}
 			</WalletText>
-			<WalletText center size='s'>
+			<WalletText center size='xs'>
 				{children}
 			</WalletText>
 		</View>

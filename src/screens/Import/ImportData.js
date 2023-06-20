@@ -6,11 +6,16 @@ import {
 	WalletInput,
 	WalletText,
 	PasswordInput,
+	ButtonCopySm,
 } from './../../Components/UI/'
 import { THEME } from '../../Theme'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
-import { setData, setCurrentAccount } from '../../store/slices/storageSlice'
+import {
+	setData,
+	setCurrentAccount,
+	setPassword,
+} from '../../store/slices/storageSlice'
 import generateWallet from '../../../services/funcWallet/generateAddress'
 
 export const ImportData = () => {
@@ -26,11 +31,9 @@ export const ImportData = () => {
 	const [phrase, setPhrase] = React.useState('')
 	const [passwordRepeat, setPasswordRepeat] = React.useState('')
 	const [passwordRepeatValid, setPasswordRepeatValid] = React.useState(null)
-	const [disabledBtn, setDisabledBtn] = React.useState(true)
 	const [phraseValid, setPhraseValid] = React.useState(null)
-	React.useEffect(() => {
-		console.log(dataUser)
-	}, [dataUser])
+	const [disabledBtn, setDisabledBtn] = React.useState(true)
+	const [loadBtn, setLoadBtn] = React.useState(false)
 
 	React.useEffect(() => {
 		if (phraseValid && validName && passwordRepeatValid) {
@@ -91,22 +94,30 @@ export const ImportData = () => {
 	}, [walletName])
 
 	const addedNewAccount = () => {
-		let privateKeyString =
-			phrase.split(' ').length !== 1 ? generateWallet(phrase) : ''
-		const user = {
-			name: walletName,
-			phrase: phrase.split(' ').length > 2 ? btoa(phrase) : '',
-			privateKey:
-				phrase.split(' ').length === 1 ? btoa(phrase) : privateKeyString,
-			coins: ['bnb', 'eth', 'matic'],
+		if (!loadBtn) {
+			setLoadBtn(true)
+			setTimeout(() => {
+				const user = {
+					name: walletName,
+					phrase: phrase.split(' ').length > 2 ? btoa(phrase) : '',
+					privateKey:
+						phrase.split(' ').length === 1
+							? btoa(phrase)
+							: generateWallet(phrase).privateKey,
+					address: '',
+				}
+				dispatch(setData(user))
+				dispatch(setCurrentAccount(walletName))
+				dispatch(setPassword(passwordInit))
+				navigate('/import-end')
+				setLoadBtn(false)
+			}, 50)
 		}
-		dispatch(setData(user))
-		dispatch(setCurrentAccount(walletName))
-		navigate('/import-end')
 	}
 
 	return (
 		<ScrollView
+			keyboardShouldPersistTaps='handled'
 			contentContainerStyle={{
 				flex: 1,
 				paddingHorizontal: 24,
@@ -145,20 +156,27 @@ export const ImportData = () => {
 						You are already using this name for wallet
 					</WalletText>
 				)}
-				<WalletInput
-					styleInput={
-						phraseValid
-							? { borderColor: THEME.SUCCESS }
-							: !phraseValid && phrase !== ''
-							? { borderColor: THEME.RED }
-							: {}
-					}
-					value={phrase}
-					setValue={setPhrase}
-					placeholder='Recovery phrase / private key'
-					textarea
-					style={{ marginBottom: 15 }}
-				/>
+				<View>
+					<WalletInput
+						styleInput={
+							phraseValid
+								? { borderColor: THEME.SUCCESS }
+								: !phraseValid && phrase !== ''
+								? { borderColor: THEME.RED }
+								: {}
+						}
+						value={phrase}
+						setValue={setPhrase}
+						placeholder='Recovery phrase / private key'
+						textarea
+						style={{ marginBottom: 15 }}
+					/>
+					<ButtonCopySm
+						paste
+						setText={setPhrase}
+						style={{ right: 15, bottom: 35 }}
+					/>
+				</View>
 				<PasswordInput />
 				<WalletInput
 					styleInput={
@@ -171,6 +189,7 @@ export const ImportData = () => {
 					value={passwordRepeat}
 					setValue={setPasswordRepeat}
 					placeholder='Repeat password'
+					password
 				/>
 				{!passwordRepeatValid && passwordRepeat !== '' && (
 					<WalletText color='red' size='xs' style={{ marginTop: 10 }}>
@@ -182,7 +201,8 @@ export const ImportData = () => {
 				onPress={addedNewAccount}
 				disabled={disabledBtn}
 				icon='reload'
-				style={{ marginTop: 'auto' }}>
+				style={{ marginTop: 'auto' }}
+				loading={loadBtn}>
 				Restore Wallet
 			</WalletButton>
 		</ScrollView>

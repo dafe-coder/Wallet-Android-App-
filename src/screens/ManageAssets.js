@@ -1,13 +1,16 @@
 import React from 'react'
 import { View, TextInput, StyleSheet, FlatList } from 'react-native'
 import { Header } from '../Components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { THEME } from '../Theme'
 import { SvgIcon } from './../Components/svg/svg'
 import AssetsItem from '../Components/AssetsItem'
+import { setChooseAssets } from '../store/slices/storageSlice'
 
 export const ManageAssets = () => {
+	const dispatch = useDispatch()
 	const { allCoins } = useSelector((state) => state.wallet)
+	const { chooseAssets } = useSelector((state) => state.storage)
 	const [value, setValue] = React.useState('')
 	const [filtered, setFiltered] = React.useState([])
 
@@ -26,8 +29,13 @@ export const ManageAssets = () => {
 		}
 	}, [allCoins, value])
 
+	const onChooseCoin = React.useCallback((coin) => {
+		const coinSymbol = coin.symbol
+		dispatch(setChooseAssets(coinSymbol))
+	}, [])
+
 	const renderItem = React.useCallback(
-		({ item }) => <AssetsItem item={item} />,
+		({ item }) => <AssetsItem item={item} onChooseCoin={onChooseCoin} />,
 		[]
 	)
 	const renderHeader = () => (
@@ -48,13 +56,18 @@ export const ManageAssets = () => {
 	return (
 		<View style={{ flex: 1 }}>
 			<View style={{ paddingHorizontal: 24 }}>
-				<Header title={`Assets (3/${allCoins !== null && allCoins.length})`} />
+				<Header
+					title={`Assets (${chooseAssets.length}/${
+						allCoins !== null && allCoins.length
+					})`}
+				/>
+				{renderHeader()}
 			</View>
 			{filtered.length ? (
 				<FlatList
+					keyboardShouldPersistTaps='handled'
 					style={{ paddingHorizontal: 24 }}
 					initialNumToRender={10}
-					ListHeaderComponent={renderHeader}
 					data={filtered}
 					renderItem={renderItem}
 					ListFooterComponent={() => <View />}

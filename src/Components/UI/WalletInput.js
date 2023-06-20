@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native'
 import { THEME } from '../../Theme'
 import { WalletText } from './WalletText'
+import { SvgIcon } from './../svg/svg'
 
 export const WalletInput = ({
 	style,
@@ -12,8 +13,10 @@ export const WalletInput = ({
 	setValue,
 	label = true,
 	textarea,
+	password,
 }) => {
 	const [showLabel, setShowLabel] = React.useState(false)
+	const [showPass, setShowPass] = React.useState(true)
 
 	React.useEffect(() => {
 		if (value !== '') {
@@ -44,13 +47,28 @@ export const WalletInput = ({
 					onChangeText={setValue}
 				/>
 			) : (
-				<TextInput
-					style={[styles.input, styleInput]}
-					placeholderTextColor={THEME.WHITE}
-					value={value}
-					placeholder={placeholder}
-					onChangeText={setValue}
-				/>
+				<View>
+					<TextInput
+						style={[styles.input, styleInput]}
+						placeholderTextColor={THEME.WHITE}
+						value={value}
+						placeholder={placeholder}
+						onChangeText={setValue}
+						secureTextEntry={password && showPass}
+						autoCorrect={false}
+						returnKeyType='go'
+					/>
+					{password ? (
+						<TouchableOpacity
+							style={{ position: 'absolute', right: 20, bottom: 24 }}
+							activeOpacity={0.7}
+							onPress={() => setShowPass(!showPass)}>
+							<SvgIcon type={showPass ? 'eye-slash' : 'eye'} />
+						</TouchableOpacity>
+					) : (
+						<></>
+					)}
+				</View>
 			)}
 			{text != '' ? (
 				<WalletText color='dark' style={{ marginTop: 5 }}>
@@ -66,7 +84,7 @@ export const WalletInput = ({
 const styles = StyleSheet.create({
 	input: {
 		fontSize: 14,
-		lineHeight: 17,
+		lineHeight: 23,
 		borderWidth: 1,
 		borderRadius: 16,
 		borderColor: THEME.WHITE,

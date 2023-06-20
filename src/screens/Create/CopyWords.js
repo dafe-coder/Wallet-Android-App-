@@ -6,16 +6,15 @@ import { WalletButton, WalletText } from '../../Components/UI'
 import { WalletModal } from './../../Components/modal/WalletModal'
 import QRCode from 'react-native-qrcode-svg'
 import { THEME } from '../../Theme'
+import { useSelector } from 'react-redux'
 
 export const CopyWords = () => {
+	const { phrase } = useSelector((state) => state.wallet)
 	const [openQrModal, setOpenQrModal] = React.useState(false)
 	return (
-		<ScrollView contentContainerStyle={{ flex: 1 }}>
+		<ScrollView contentContainerStyle={{ flex: 1, paddingHorizontal: 24 }}>
 			<Header title='Back Up Wallet' />
-			<BoxWords
-				setOpenQr={setOpenQrModal}
-				arr={[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2]}
-			/>
+			<BoxWords setOpenQr={setOpenQrModal} arr={phrase.split(' ')} />
 			<WalletText style={{ marginTop: 25, marginBottom: 50 }}>
 				Be sure to back up the mnemonic phrase of your wallet, as it will be the
 				only way to recover your assets under all circumstances.
@@ -39,7 +38,7 @@ export const CopyWords = () => {
 					Mnemonic Phrase QR Code
 				</WalletText>
 				<QRCode
-					value='phrase'
+					value={phrase}
 					backgroundColor={THEME.GREEN_LIGHT}
 					color={THEME.WHITE}
 					size={200}

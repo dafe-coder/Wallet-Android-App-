@@ -9,7 +9,8 @@ export function swapCoins(
 	currentNetwork,
 	onOpenSuccess,
 	onOpenGas,
-	chooseCoin
+	chooseCoin,
+	setHash
 ) {
 	setLoader(true)
 	console.log(fromAddress, toAddress)
@@ -80,7 +81,8 @@ export function swapCoins(
 					console.log('swap successfull :)', JSON.stringify(tx, null, 4))
 					setLoader(false)
 					setTimeout(() => {
-						onOpenSuccess(tx.transactionHash)
+						onOpenSuccess(true)
+						setHash(tx.transactionHash)
 					}, 1000)
 				} else {
 					setLoader(false)

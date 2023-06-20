@@ -7,25 +7,30 @@ import { ButtonCopySm, WalletButton } from './../Components/UI/'
 import { WalletModal } from './../Components/modal/WalletModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import {
-	resetWallet,
-	setDeleteWallet,
-	setCurrentAccount,
-} from '../store/slices/storageSlice'
+import { resetWallet, setDeleteWallet } from '../store/slices/storageSlice'
+import { setDataWallet } from '../store/slices/walletSlice'
 
 export const AccountManage = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { currentAccount, dataUser } = useSelector((state) => state.storage)
-	const { walletAddress } = useSelector((state) => state.wallet)
 	const [deleteOpen, setDeleteOpen] = React.useState(false)
+	const [currentAccountData, setCurrentAccountData] = React.useState(null)
+
+	React.useEffect(() => {
+		if (dataUser !== null) {
+			setCurrentAccountData(
+				dataUser.find((item) => item.name === currentAccount)
+			)
+		}
+	}, [dataUser])
 
 	const onDeleteAccount = () => {
 		if (dataUser !== null && dataUser.length > 1) {
-			navigate(-1)
-			setDeleteOpen(false)
 			dispatch(setDeleteWallet(currentAccount))
-			dispatch(setCurrentAccount(dataUser[0].name))
+			setDeleteOpen(false)
+			dispatch(setDataWallet(null))
+			navigate(-1)
 		} else {
 			navigate('/')
 			dispatch(resetWallet())
@@ -37,20 +42,30 @@ export const AccountManage = () => {
 			<Header title='Account' />
 			<View style={styles.card}>
 				<WalletText style={{ marginBottom: 10 }} fw='bold'>
-					Wallet 1
+					{currentAccountData !== null ? currentAccountData.name : ''}
 				</WalletText>
-				<WalletText>{walletAddress}</WalletText>
-				<ButtonCopySm text={walletAddress} style={{ bottom: 16, right: 16 }} />
+				<WalletText numberOfLines={1} style={{ width: '90%' }}>
+					{currentAccountData !== null ? currentAccountData.address : ''}
+				</WalletText>
+				<ButtonCopySm
+					text={currentAccountData !== null ? currentAccountData.address : ''}
+					style={{ bottom: 16, right: 16 }}
+				/>
 			</View>
+			{currentAccountData !== null && currentAccountData.phrase !== '' ? (
+				<WalletButton
+					to='/show-phrase'
+					style={{ marginTop: 18, marginTop: 15 }}
+					type='border'
+					styleBtn={{ justifyContent: 'flex-start' }}>
+					View recovery phrase
+				</WalletButton>
+			) : (
+				<></>
+			)}
 			<WalletButton
-				to='/show-phrase'
-				style={{ marginTop: 18, marginBottom: 15 }}
-				type='border'
-				styleBtn={{ justifyContent: 'flex-start' }}>
-				View recovery phrase
-			</WalletButton>
-			<WalletButton
-				to='/show-key'
+				style={{ marginTop: 15 }}
+				to='/show-privateKey'
 				type='border'
 				styleBtn={{ justifyContent: 'flex-start' }}>
 				View private key

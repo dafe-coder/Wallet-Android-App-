@@ -2,8 +2,7 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { WalletText, CheckBox } from './UI'
 
-export const SubmitText = ({ children, style }) => {
-	const [checked, setChecked] = React.useState(false)
+export const SubmitText = ({ children, style, checked, setChecked }) => {
 	return (
 		<TouchableOpacity
 			activeOpacity={0.7}

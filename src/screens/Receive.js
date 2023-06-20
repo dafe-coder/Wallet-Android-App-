@@ -5,19 +5,31 @@ import { WalletText } from './../Components/UI/'
 import { ChooseCoin } from '../Components'
 import QRCode from 'react-native-qrcode-svg'
 import { THEME } from '../Theme'
-import { SvgIcon } from '../Components/svg/svg'
+import { useSelector } from 'react-redux'
+import { ButtonCopySm } from './../Components/UI/ButtonCopySm'
+import { useLocation } from 'react-router-native'
 
 export const Receive = () => {
+	const { walletAddress } = useSelector((state) => state.wallet)
+	const { state } = useLocation()
+	const [chooseCoinName, setChooseCoinName] = React.useState('PEPE Coin')
+
+	React.useEffect(() => {
+		if (state !== null) {
+			setChooseCoinName(state.item.name)
+		}
+	}, [state])
+
 	return (
 		<View style={{ flex: 1, paddingHorizontal: 24 }}>
-			<Header title='Payment Information' />
+			<Header backPath='/wallet' title='Payment Information' />
 			<View>
 				<WalletText style={{ marginBottom: 5 }}>Asset Name</WalletText>
-				<ChooseCoin />
+				<ChooseCoin title={chooseCoinName.toUpperCase()} />
 			</View>
 			<View style={{ alignItems: 'center', marginTop: 80 }}>
 				<QRCode
-					value='phrase'
+					value={walletAddress}
 					backgroundColor={THEME.GREEN_LIGHT}
 					color={THEME.WHITE}
 					size={120}
@@ -30,11 +42,12 @@ export const Receive = () => {
 				<WalletText fw='bold'>Your wallet address</WalletText>
 				<View style={styles.input}>
 					<WalletText fw='bold' numberOfLines={1}>
-						3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5
+						{walletAddress}
 					</WalletText>
-					<TouchableOpacity style={{ marginLeft: 10 }} activeOpacity={0.7}>
-						<SvgIcon type='copy' />
-					</TouchableOpacity>
+					<ButtonCopySm
+						text={walletAddress}
+						style={{ position: 'relative', marginLeft: 10 }}
+					/>
 				</View>
 			</View>
 		</View>

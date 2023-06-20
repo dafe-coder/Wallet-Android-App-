@@ -2,12 +2,7 @@ import React from 'react'
 import { View, Modal, StyleSheet } from 'react-native'
 import { THEME } from '../../Theme'
 
-export const WalletModal = ({
-	setIsVisible,
-	isVisible,
-	children,
-	styleBody,
-}) => {
+export const WalletModal = ({ isVisible, children, styleBody }) => {
 	return (
 		<Modal
 			animationType={'fade'}

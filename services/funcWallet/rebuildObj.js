@@ -17,7 +17,9 @@ export function rebuildObjPortfolio(list) {
 				percent: obj.attributes.changes.percent_1d,
 			},
 			image: {
-				thumb: obj.attributes.fungible_info.icon.url,
+				thumb:
+					obj.attributes.fungible_info.icon &&
+					obj.attributes.fungible_info.icon.url,
 			},
 		}
 	})
@@ -34,7 +36,11 @@ export function rebuildObjPortfolioDefaultCoins(list) {
 				current_price: obj.current_price,
 				balance: 0,
 				balance_crypto: 0,
-				relativeChange: obj.price_change_percentage_24h,
+				chain: '',
+			},
+			changes: {
+				absolute: obj.price_change_24h,
+				percent: obj.price_change_percentage_24h,
 			},
 			image: {
 				thumb: obj.image,

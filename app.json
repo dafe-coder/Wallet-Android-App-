@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Robin Wallet",
-    "slug": "robinhood",
-    "version": "2.01.14",
+    "name": "Pepe Wallet",
+    "slug": "pepe",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/favicon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "jsEngine": "hermes",
     "splash": {
@@ -21,17 +21,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#632DBC"
+        "backgroundColor": "#4C9540"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.hood.batman"
+      "package": "com.pepe.meme"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "328ef7d5-061a-4eb7-a476-50c06d4d4f59"
+        "projectId": "80ba646a-c26f-48bb-ab52-ba2f133c3df4"
       }
     },
     "owner": "coderwallet"

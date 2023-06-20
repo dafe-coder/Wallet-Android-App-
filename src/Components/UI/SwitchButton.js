@@ -12,7 +12,7 @@ export const SwitchButton = ({ coin, style, enabled = false, setEnabled }) => {
 		<View style={style}>
 			<Switch
 				value={enabled}
-				onValueChange={(val) => setEnabled(val, coin)}
+				onValueChange={(val) => setEnabled(coin)}
 				disabled={false}
 				circleSize={8}
 				barHeight={19}

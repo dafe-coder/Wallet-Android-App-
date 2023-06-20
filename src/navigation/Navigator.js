@@ -26,6 +26,13 @@ import {
 	TransactionHistory,
 	PortfolioOpen,
 	ManageAssets,
+	DetailsSettings,
+	ChooseCryptoPage,
+	Network,
+	ChooseCurrencyPage,
+	ShowPrivateKey,
+	WelcomeBack,
+	RiskAlert,
 } from '../screens'
 
 export const WalletRoutes = () => {
@@ -55,6 +62,13 @@ export const WalletRoutes = () => {
 			<Route exact path='/send' element={<Send />} />
 			<Route exact path='/portfolio-open' element={<PortfolioOpen />} />
 			<Route exact path='/manage-assets' element={<ManageAssets />} />
+			<Route exact path='/details-settings' element={<DetailsSettings />} />
+			<Route exact path='/choose-crypto' element={<ChooseCryptoPage />} />
+			<Route exact path='/network' element={<Network />} />
+			<Route exact path='/choose-currency' element={<ChooseCurrencyPage />} />
+			<Route exact path='/show-privateKey' element={<ShowPrivateKey />} />
+			<Route exact path='/welcome-back' element={<WelcomeBack />} />
+			<Route exact path='/risk-alert' element={<RiskAlert />} />
 			<Route
 				exact
 				path='/transaction-history'

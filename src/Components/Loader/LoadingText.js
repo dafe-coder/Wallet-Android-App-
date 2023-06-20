@@ -1,5 +1,6 @@
 import React from 'react'
 import { WalletText } from './../UI/WalletText'
+import { WalletTitle } from '../UI'
 
 export const LoadingText = ({ delay = 500 }) => {
 	const [dots, setDots] = React.useState('')
@@ -23,8 +24,11 @@ export const LoadingText = ({ delay = 500 }) => {
 	}, [])
 
 	return (
-		<WalletText fw='bold' size='sm' style={{ lineHeight: 17 }}>
+		<WalletTitle
+			color='white'
+			fw='bold'
+			style={{ position: 'absolute', bottom: 40 }}>
 			Loading{dots}
-		</WalletText>
+		</WalletTitle>
 	)
 }

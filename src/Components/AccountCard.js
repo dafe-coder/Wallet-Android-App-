@@ -6,6 +6,7 @@ import { WalletText } from './UI/WalletText'
 import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentAccount } from '../store/slices/storageSlice'
+import { setDataWallet } from '../store/slices/walletSlice'
 
 export const AccountCard = () => {
 	const dispatch = useDispatch()
@@ -14,6 +15,8 @@ export const AccountCard = () => {
 
 	const chooseAccount = (name) => {
 		dispatch(setCurrentAccount(name))
+		dispatch(setDataWallet(null))
+		navigate('/wallet')
 	}
 
 	return (
@@ -52,7 +55,11 @@ export const AccountCard = () => {
 								color={item.name === currentAccount ? 'green-light' : 'white'}>
 								{item.name}
 							</WalletText>
-							<WalletText>D8ZEVbgf4yPs3MK8dMJJ7Ks...</WalletText>
+							<WalletText>
+								{item.address !== undefined
+									? item.address.slice(0, 23) + '...' + item.address.slice(-5)
+									: ''}
+							</WalletText>
 						</TouchableOpacity>
 					))
 				) : (

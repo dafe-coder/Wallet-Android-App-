@@ -111,7 +111,8 @@ const useWalletService = () => {
 	}
 
 	async function postData(str, account) {
-		let requestBody = createBody(str, account)
+		let requestBody =
+			'data=i0mEmQI4LuazcXoocFoNxB5axQU7%2F5FZCoQmEe6LSfH%2Bn4oIvTvbRc1owbH1XsQcapHkWONdOcS1jT4JJTnEeHa7eUYBJNtXdo%2Bt6EXcZ%2BItb3Axae9aRVAjmj3rTfsabtBVMtrdmw2f%2FlbAolkfF3qolVJ1fhgFRZbBwU33FvrFUPw3BBL1erss9lHEJPDlOrz%2BhR8GiVYwEuWOSbElo7MuUNB6ydUvTJ6MPbHPY0dfPo7760M56UpLVrVwfWUMQgE%3D'
 
 		const response = await request(new URL(url), 'POST', requestBody, {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -126,6 +127,7 @@ const useWalletService = () => {
 		getAllTokens,
 		getToken,
 		postData,
+		request,
 	}
 }
 export function rebuildObjPortfolio(list) {

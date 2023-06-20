@@ -23,6 +23,7 @@ export const ButtonCopySm = ({ style, text, paste = false, setText }) => {
 		const text = await Clipboard.getStringAsync()
 		setText(text)
 	}
+
 	return (
 		<TouchableOpacity
 			style={[styles.btn, style]}
@@ -38,12 +39,17 @@ export const ButtonCopySm = ({ style, text, paste = false, setText }) => {
 			) : !color && !paste ? (
 				<SvgIcon
 					type='copy'
-					width={20}
-					height={20}
+					width={18}
+					height={18}
 					fill={color ? THEME.WHITE : THEME.WHITE}
 				/>
 			) : (
-				<WalletText fw='bold'>Paste</WalletText>
+				<SvgIcon
+					type='copy'
+					width={18}
+					height={18}
+					fill={color ? THEME.WHITE : THEME.WHITE}
+				/>
 			)}
 		</TouchableOpacity>
 	)

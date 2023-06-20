@@ -5,8 +5,31 @@ import { WalletText, WalletInput } from '../../Components/UI'
 import { WalletButton } from './../../Components/UI/WalletButton'
 import { THEME } from '../../Theme'
 import { SvgIcon } from './../../Components/svg/svg'
+import { useSelector } from 'react-redux'
+import { ButtonCopySm } from './../../Components/UI/ButtonCopySm'
 
 export const ShowPhrase = () => {
+	const { dataUser, currentAccount, password } = useSelector(
+		(state) => state.storage
+	)
+	const [phrase, setPhrase] = React.useState('')
+	const [showPhrase, setShowPhrase] = React.useState(false)
+	const [passwordValue, setPasswordValue] = React.useState('')
+
+	React.useEffect(() => {
+		if (dataUser.length && currentAccount !== '') {
+			setPhrase(dataUser.find((item) => item.name === currentAccount).phrase)
+		}
+	}, [dataUser])
+
+	const confirmPassword = () => {
+		if (password === passwordValue) {
+			setShowPhrase(true)
+		} else {
+			setPasswordValue('')
+		}
+	}
+
 	return (
 		<ScrollView
 			keyboardShouldPersistTaps={'handled'}
@@ -25,33 +48,55 @@ export const ShowPhrase = () => {
 					Do not share this phrase with anyone! These words can be used to steal
 					all of your accounts.
 				</Alert>
-				<WalletInput style={{ marginTop: 30 }} placeholder='password' />
-				<View>
-					<View
-						style={{
-							flexDirection: 'row',
-							alignItems: 'center',
-							justifyContent: 'space-between',
-						}}>
-						<WalletText style={{ marginBottom: 10 }}>
-							Your seed phrase
-						</WalletText>
-						<TouchableOpacity activeOpacity={0.7}>
-							<SvgIcon type='copy' />
-						</TouchableOpacity>
+				{!showPhrase ? (
+					<WalletInput
+						password
+						setValue={setPasswordValue}
+						value={passwordValue}
+						style={{ marginTop: 30 }}
+						placeholder='Password'
+					/>
+				) : (
+					<></>
+				)}
+				{showPhrase ? (
+					<View style={{ marginTop: 30 }}>
+						<View
+							style={{
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}>
+							<WalletText style={{ marginBottom: 10 }}>
+								Your seed phrase
+							</WalletText>
+							<ButtonCopySm
+								text={atob(phrase)}
+								style={{ position: 'relative', top: -2 }}
+							/>
+						</View>
+						<View style={styles.wrapPhrase}>
+							<WalletText size='m' fw='bold'>
+								{atob(phrase)}
+							</WalletText>
+						</View>
 					</View>
-					<View style={styles.wrapPhrase}>
-						<WalletText size='m' fw='bold'>
-							scan actual quantum slow miracle raise cash twelve nominee ship
-							oppose media
-						</WalletText>
-					</View>
-				</View>
+				) : (
+					<></>
+				)}
 			</View>
-			<WalletButton style={{ marginTop: 'auto', marginBottom: 10 }}>
-				Next
+			{!showPhrase ? (
+				<WalletButton
+					onPress={confirmPassword}
+					style={{ marginTop: 'auto', marginBottom: 10 }}>
+					Next
+				</WalletButton>
+			) : (
+				<></>
+			)}
+			<WalletButton type='border' to={-1}>
+				Cancel
 			</WalletButton>
-			<WalletButton type='border'>Cancel</WalletButton>
 		</ScrollView>
 	)
 }

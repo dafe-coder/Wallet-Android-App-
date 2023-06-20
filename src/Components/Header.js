@@ -4,22 +4,24 @@ import { WalletText } from './UI/'
 import { SvgIcon } from './svg/svg'
 import { useNavigate } from 'react-router-native'
 
-export const Header = ({ title, page = 'all' }) => {
+export const Header = ({ title, page = 'all', backPath = '' }) => {
 	const navigate = useNavigate()
 
 	return (
 		<View
 			style={[
 				styles.header,
-				page == 'home' && { justifyContent: 'space-between' },
+				(page == 'home' || page == 'swap') && {
+					justifyContent: 'space-between',
+				},
 			]}>
-			{page == 'all' && (
+			{(page == 'all' || page == 'swap') && (
 				<TouchableOpacity
 					style={[
 						styles.backBtn,
-						page == 'home' && { position: 'relative', top: 0 },
+						page == 'swap' && { position: 'relative', top: 0 },
 					]}
-					onPress={() => navigate(-1)}
+					onPress={() => navigate(backPath !== '' ? backPath : -1)}
 					activeOpacity={0.7}>
 					<SvgIcon type='arrow-left' />
 				</TouchableOpacity>
@@ -44,6 +46,13 @@ export const Header = ({ title, page = 'all' }) => {
 					activeOpacity={0.7}
 					onPress={() => navigate('/account')}>
 					<SvgIcon type='user-circle' />
+				</TouchableOpacity>
+			)}
+			{page == 'swap' && (
+				<TouchableOpacity
+					activeOpacity={0.7}
+					onPress={() => navigate('/details-settings')}>
+					<SvgIcon type='cog' width={15} height={15} />
 				</TouchableOpacity>
 			)}
 		</View>

@@ -2,9 +2,15 @@ import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { THEME } from '../Theme'
 import { WalletText, SwitchButton } from './UI'
+import fixNum from '../../services/funcWallet/fixNum'
+import { useSelector } from 'react-redux'
 
-const AssetsItem = ({ item }) => {
+const AssetsItem = ({ item, choose = false, onChooseCoin }) => {
+	const { chooseAssets } = useSelector((state) => state.storage)
 	const [enabled, setEnabled] = React.useState(false)
+	React.useEffect(() => {
+		setEnabled(chooseAssets.includes(item.symbol.toLowerCase()))
+	}, [chooseAssets])
 	return (
 		<View style={styles.item}>
 			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -23,7 +29,11 @@ const AssetsItem = ({ item }) => {
 					{item.name}
 				</WalletText>
 			</View>
-			<SwitchButton enabled={enabled} setEnabled={setEnabled} />
+			{choose ? (
+				<WalletText size='xs'>{fixNum(item.market_data.balance)}</WalletText>
+			) : (
+				<SwitchButton coin={item} enabled={enabled} setEnabled={onChooseCoin} />
+			)}
 		</View>
 	)
 }

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import walletSlice from './slices/walletSlice'
 import storageSlice from './slices/storageSlice'
+import transactionSlice from './slices/transactionSlice'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import { configureStore } from '@reduxjs/toolkit'
@@ -12,13 +13,14 @@ const customizedMiddleware = getDefaultMiddleware({
 const rootReducer = combineReducers({
 	wallet: walletSlice,
 	storage: storageSlice,
+	transaction: transactionSlice,
 })
 
 const rootPersistConfig = {
 	key: 'root',
 	timeout: null,
 	storage: AsyncStorage,
-	blacklist: ['wallet'],
+	blacklist: ['wallet', 'transaction'],
 }
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer)
 export const store = configureStore({

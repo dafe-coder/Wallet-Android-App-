@@ -3,10 +3,27 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { THEME } from './../Theme'
 import { WalletText } from './UI'
 import { SvgIcon } from './svg/svg'
+import * as Clipboard from 'expo-clipboard'
 
 export const BoxWords = ({ arr, setOpenQr }) => {
+	const [copied, setCopied] = React.useState(false)
+	const [timeoutID, setTimeoutID] = React.useState(null)
+	React.useEffect(() => {
+		return () => clearTimeout(timeoutID)
+	}, [])
+
+	const onCopy = async () => {
+		setCopied(true)
+		if (arr.join(' ') !== '') await Clipboard.setStringAsync(arr.join(' '))
+		setTimeoutID(
+			setTimeout(() => {
+				setCopied(false)
+				clearTimeout(timeoutID)
+			}, 1000)
+		)
+	}
 	return (
-		<>
+		<View style={{ width: '100%' }}>
 			<View style={styles.box}>
 				{arr.map((item, id) => (
 					<View
@@ -19,9 +36,22 @@ export const BoxWords = ({ arr, setOpenQr }) => {
 				))}
 			</View>
 			<View style={styles.btns}>
-				<TouchableOpacity style={styles.btn} activeOpacity={0.7}>
-					<SvgIcon style={{ marginRight: 7 }} type='copy' />
-					<WalletText>Copy</WalletText>
+				<TouchableOpacity
+					onPress={onCopy}
+					style={styles.btn}
+					activeOpacity={0.7}>
+					<SvgIcon
+						fill={THEME.SUCCESS}
+						width={14}
+						height={14}
+						style={[{ marginRight: 7 }]}
+						type={copied ? 'check' : 'copy'}
+					/>
+					{copied ? (
+						<WalletText>Copied!</WalletText>
+					) : (
+						<WalletText>Copy</WalletText>
+					)}
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={styles.btn2}
@@ -31,7 +61,7 @@ export const BoxWords = ({ arr, setOpenQr }) => {
 					<WalletText>QR Code</WalletText>
 				</TouchableOpacity>
 			</View>
-		</>
+		</View>
 	)
 }
 
@@ -49,7 +79,7 @@ const styles = StyleSheet.create({
 		flexWrap: 'wrap',
 	},
 	word: {
-		padding: 5,
+		paddingVertical: 5,
 		flexBasis: '23.5%',
 		borderWidth: 1,
 		borderColor: THEME.WHITE,

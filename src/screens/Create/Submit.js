@@ -5,6 +5,7 @@ import { SvgIcon } from './../../Components/svg/svg'
 import { WalletButton, WalletText } from './../../Components/UI/'
 
 export const Submit = () => {
+	const [approve, setApprove] = React.useState(false)
 	return (
 		<ScrollView contentContainerStyle={styles.wrap}>
 			<Header title='Create Wallet' />
@@ -26,11 +27,14 @@ export const Submit = () => {
 				</WalletText>
 			</View>
 			<View style={{ width: '100%', marginTop: 'auto', marginBottom: 25 }}>
-				<SubmitText style={{ marginBottom: 30 }}>
+				<SubmitText
+					checked={approve}
+					setChecked={setApprove}
+					style={{ marginBottom: 30 }}>
 					Make sure nobody looks into your screen unless you want them to have
 					access to your funds.
 				</SubmitText>
-				<WalletButton disabled={false} to='/take-notebook'>
+				<WalletButton disabled={!approve} to='/take-notebook'>
 					{' '}
 					Continue
 				</WalletButton>
@@ -43,5 +47,6 @@ const styles = StyleSheet.create({
 	wrap: {
 		flex: 1,
 		alignItems: 'center',
+		paddingHorizontal: 24,
 	},
 })

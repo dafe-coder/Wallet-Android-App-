@@ -3,23 +3,14 @@ import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 import Animated from 'react-native-reanimated'
 import { THEME } from '../../Theme'
 import { SvgIcon } from './../svg/svg'
+import { LoadingText } from './LoadingText'
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
-export const Preloader = ({ transformLogo, rotate, opacityOut, opacityIn }) => {
+export const Preloader = ({ transformLogo }) => {
 	return (
 		<View style={styles.container}>
-			<Animated.View style={[styles.gradientImg, transformLogo, opacityOut]}>
-				<Animated.View style={rotate}>
-					<Image source={require('../../../assets/circle.png')} />
-				</Animated.View>
-			</Animated.View>
-			<Animated.View style={[styles.gradientImg, opacityIn]}>
-				<Animated.View style={rotate}>
-					<Image source={require('../../../assets/circle2.png')} />
-				</Animated.View>
-			</Animated.View>
 			<Animated.View style={[styles.logoWallet, transformLogo]}>
 				<Image
 					resizeMode='contain'
@@ -53,18 +44,17 @@ const styles = StyleSheet.create({
 		opacity: 1,
 		width: 220,
 		height: 220,
-		backgroundColor: THEME.PRIMARY,
 		borderRadius: 200,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	imgLogo: {
-		width: 90,
+		width: 205,
 	},
 	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: THEME.PRIMARY,
+		backgroundColor: THEME.GREEN,
 	},
 })

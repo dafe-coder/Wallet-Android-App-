@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { View } from 'react-native'
 import { Preloader } from '../Components/Loader/Preloader'
 import { THEME } from './../Theme'
 import Animated, {
@@ -9,32 +10,21 @@ import Animated, {
 	Easing,
 	withDelay,
 } from 'react-native-reanimated'
+import { LoadingText } from '../Components/Loader/LoadingText'
 
 export const PreloaderScreen = ({ load }) => {
 	const offsetLogo = useSharedValue(0)
-	const opacityOut = useSharedValue(1)
 	const opacityIn = useSharedValue(0)
-	const offsetRotate = useSharedValue('0deg')
 
 	const scaleLogo = useAnimatedStyle(() => {
 		return {
 			transform: [{ scale: withSpring(offsetLogo.value) }],
 		}
 	})
-	const opacityOutLogo = useAnimatedStyle(() => {
-		return {
-			opacity: opacityOut.value,
-		}
-	})
+
 	const opacityInLogo = useAnimatedStyle(() => {
 		return {
 			opacity: opacityIn.value,
-		}
-	})
-
-	const rotateLogo = useAnimatedStyle(() => {
-		return {
-			transform: [{ rotate: withSpring(offsetRotate.value) }],
 		}
 	})
 
@@ -43,21 +33,10 @@ export const PreloaderScreen = ({ load }) => {
 			duration: 3000,
 			easing: Easing.inOut(Easing.cubic),
 		})
-		offsetRotate.value = withTiming('460deg', {
-			duration: 12000,
-			easing: Easing.inOut(Easing.cubic),
-		})
-		opacityOut.value = withDelay(
-			4000,
-			withTiming(0, {
-				duration: 3000,
-				easing: Easing.inOut(Easing.cubic),
-			})
-		)
 		opacityIn.value = withDelay(
-			3500,
+			3000,
 			withTiming(1, {
-				duration: 4000,
+				duration: 3000,
 				easing: Easing.bezier(0.2, 0.5, 0.5, 0.5),
 			})
 		)
@@ -82,12 +61,10 @@ export const PreloaderScreen = ({ load }) => {
 					flex: 1,
 				},
 			]}>
-			<Preloader
-				transformLogo={scaleLogo}
-				opacityOut={opacityOutLogo}
-				opacityIn={opacityInLogo}
-				rotate={rotateLogo}
-			/>
+			<Preloader transformLogo={scaleLogo} />
+			<Animated.View style={[{ alignItems: 'center' }, opacityInLogo]}>
+				<LoadingText />
+			</Animated.View>
 		</Animated.View>
 	)
 }

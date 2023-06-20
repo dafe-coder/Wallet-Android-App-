@@ -13,6 +13,7 @@ const menus = [
 
 export const Menu = ({ active = 'home' }) => {
 	const navigate = useNavigate()
+
 	const openPage = (item, to) => {
 		if (active !== item.toLowerCase()) {
 			navigate(to)

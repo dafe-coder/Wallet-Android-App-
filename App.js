@@ -13,11 +13,8 @@ LogBox.ignoreLogs([
 	'Require cycle: node_modules/victory',
 ])
 import { useFonts } from 'expo-font'
-import { AppWrap } from './AppWrap'
 import SafeAreaStyle from './src/Components/SafeArea'
-
-import { NativeRouter } from 'react-router-native'
-import { WalletRoutes } from './src/navigation/Navigator'
+import { InitRouter } from './src/navigation/InitRouter'
 
 export default function App() {
 	const [hidePreloader, setHidePreloader] = useState(true)
@@ -42,12 +39,8 @@ export default function App() {
 				}}>
 				<Provider store={store}>
 					<PortalProvider>
-						{/* <AppWrap>
-							<PreloaderScreen load={hidePreloader} />
-						</AppWrap> */}
-						<NativeRouter initialEntries={['/wallet']}>
-							<WalletRoutes />
-						</NativeRouter>
+						<PreloaderScreen load={hidePreloader} />
+						<InitRouter />
 					</PortalProvider>
 				</Provider>
 			</GestureHandlerRootView>

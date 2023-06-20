@@ -13,40 +13,46 @@ import fixNum from '../../services/funcWallet/fixNum'
 import { THEME } from '../Theme'
 import { SvgIconNav } from './../Components/svg/svgNav'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-native'
+
 export const PortfolioOpen = () => {
+	const navigate = useNavigate()
 	const { state } = useLocation()
 	const { dataWallet } = useSelector((state) => state.wallet)
 	const [transactionList, setTransactionList] = React.useState([])
 
 	React.useEffect(() => {
-		let filtered = dataWallet.transactions.filter(
-			(item) => item.attributes.status !== 'failed'
-		)
-		let filteredToken = filtered.filter(
-			(item) =>
-				item.attributes.transfers[0] &&
-				item.attributes.transfers[0].fungible_info.symbol.toLowerCase() ==
-					state.symbol.toLowerCase()
-		)
-		let filteredTokenSwap = filtered.filter(
-			(item) =>
-				item.attributes.transfers[1] &&
-				item.attributes.transfers[1].fungible_info.symbol.toLowerCase() ==
-					state.symbol.toLowerCase()
-		)
-		let arrFinal = [...filteredToken, ...filteredTokenSwap]
+		if (dataWallet !== null && dataWallet.transactions.length) {
+			let filtered = dataWallet.transactions.filter(
+				(item) => item.attributes.status !== 'failed'
+			)
+			let filteredToken = filtered.filter(
+				(item) =>
+					item.attributes.transfers[0] &&
+					item.attributes.transfers[0].direction !== 'in' &&
+					item.attributes.transfers[0].fungible_info.symbol.toLowerCase() ==
+						state.symbol.toLowerCase()
+			)
+			let filteredTokenSwap = filtered.filter(
+				(item) =>
+					item.attributes.transfers[1] &&
+					item.attributes.transfers[1].fungible_info.symbol.toLowerCase() ==
+						state.symbol.toLowerCase()
+			)
+			let arrFinal = [...filteredToken, ...filteredTokenSwap]
 
-		let arrSorted = arrFinal.sort(function (a, b) {
-			if (a.attributes.mined_at > b.attributes.mined_at) {
-				return -1
-			}
-			if (a.attributes.mined_at < b.attributes.mined_at) {
-				return 1
-			}
-			return 0
-		})
+			let arrSorted = arrFinal.sort(function (a, b) {
+				if (a.attributes.mined_at > b.attributes.mined_at) {
+					return -1
+				}
+				if (a.attributes.mined_at < b.attributes.mined_at) {
+					return 1
+				}
+				return 0
+			})
 
-		setTransactionList(arrSorted)
+			setTransactionList(arrSorted)
+		}
 	}, [state, dataWallet])
 
 	return (
@@ -78,13 +84,17 @@ export const PortfolioOpen = () => {
 				<WalletText>~{fixNum(state.market_data.balance)}</WalletText>
 			</View>
 			<View style={styles.btns}>
-				<TouchableOpacity style={styles.btn}>
+				<TouchableOpacity
+					style={styles.btn}
+					onPress={() => navigate('/send', { state: state })}>
 					<SvgIconNav type='arrow' style={{ marginRight: 10 }} />
 					<WalletText fw='bold' color='black'>
 						Send
 					</WalletText>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.btn}>
+				<TouchableOpacity
+					style={styles.btn}
+					onPress={() => navigate('/receive', { state: { item: state } })}>
 					<SvgIconNav
 						type='arrow'
 						style={{ marginRight: 10, transform: [{ rotate: '180deg' }] }}
@@ -93,7 +103,11 @@ export const PortfolioOpen = () => {
 						Receive
 					</WalletText>
 				</TouchableOpacity>
-				<TouchableOpacity style={[styles.btn, { marginRight: 0 }]}>
+				<TouchableOpacity
+					style={[styles.btn, { marginRight: 0 }]}
+					onPress={() =>
+						navigate('/swap', { state: { item: state, from: 'SwapFirst' } })
+					}>
 					<SvgIconNav type='swap-horizontal' style={{ marginRight: 10 }} />
 					<WalletText fw='bold' color='black'>
 						Swap
@@ -101,10 +115,20 @@ export const PortfolioOpen = () => {
 				</TouchableOpacity>
 			</View>
 			<View style={{ marginBottom: 40 }}>
-				{transactionList.length > 0 &&
+				{transactionList.length > 0 ? (
 					transactionList.map((item, i) => (
 						<TransactionItem key={i} data={item} />
-					))}
+					))
+				) : (
+					<WalletText
+						size='m'
+						fw='bold'
+						style={{ marginTop: 150 }}
+						upperCase
+						center>
+						No transactions
+					</WalletText>
+				)}
 			</View>
 		</ScrollView>
 	)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native'
 import { THEME } from './../../Theme'
 import { SvgIcon } from '../svg/svg'
 import { useNavigate } from 'react-router-native'
@@ -19,6 +19,7 @@ export const WalletButton = ({
 	iconPos = 'left',
 	iconFill,
 	iconStyle,
+	loading,
 }) => {
 	const navigate = useNavigate()
 	const onPressButton = () => {
@@ -49,6 +50,13 @@ export const WalletButton = ({
 			bgColor = {
 				backgroundColor: 'transparent',
 				borderWidth: 0,
+			}
+			break
+		case 'error':
+			bgColor = {
+				backgroundColor: THEME.RED,
+				borderWidth: 1,
+				borderColor: THEME.WHITE,
 			}
 			break
 		case 'border':
@@ -85,7 +93,7 @@ export const WalletButton = ({
 	return (
 		<TouchableOpacity
 			onPress={onPressButton}
-			style={{ ...style }}
+			style={style}
 			activeOpacity={disabled ? 1 : 0.8}>
 			<View
 				style={[
@@ -105,30 +113,44 @@ export const WalletButton = ({
 						  },
 					type == 'green' ? { paddingHorizontal: 0, paddingVertical: 15 } : {},
 				]}>
-				{icon && iconPos == 'left' && (
-					<SvgIcon
-						fill={iconFill}
-						style={[{ marginRight: 10 }, iconStyle]}
-						type={icon}
+				{loading ? (
+					<Image
+						style={{
+							width: 45,
+							height: 45,
+							position: 'absolute',
+						}}
+						resizeMode='contain'
+						source={require('../../../assets/spinner.gif')}
 					/>
-				)}
-				<Text
-					style={[
-						styles.text,
-						styles.textWhite,
-						type == 'white' ? { color: THEME.GREY } : {},
-						type == 'green' ? { color: THEME.BLACK } : {},
-						type == 'red' ? { color: THEME.RED } : {},
-						disabled && styles.disabledText,
-					]}>
-					{children}
-				</Text>
-				{icon && iconPos == 'right' && (
-					<SvgIcon
-						fill={iconFill}
-						style={[{ marginLeft: 10 }, iconStyle]}
-						type={icon}
-					/>
+				) : (
+					<>
+						{icon && iconPos == 'left' && (
+							<SvgIcon
+								fill={iconFill}
+								style={[{ marginRight: 10 }, iconStyle]}
+								type={icon}
+							/>
+						)}
+						<Text
+							style={[
+								styles.text,
+								styles.textWhite,
+								type == 'white' ? { color: THEME.GREY } : {},
+								type == 'green' ? { color: THEME.BLACK } : {},
+								type == 'red' ? { color: THEME.RED } : {},
+								disabled && styles.disabledText,
+							]}>
+							{children}
+						</Text>
+						{icon && iconPos == 'right' && (
+							<SvgIcon
+								fill={iconFill}
+								style={[{ marginLeft: 10 }, iconStyle]}
+								type={icon}
+							/>
+						)}
+					</>
 				)}
 			</View>
 		</TouchableOpacity>
@@ -160,6 +182,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		flexDirection: 'row',
+		minHeight: 55,
 	},
 	textPrimary: {
 		color: THEME.VIOLET,
