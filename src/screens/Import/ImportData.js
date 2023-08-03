@@ -30,7 +30,7 @@ export const ImportData = () => {
 	const [showErrorNameSame, setShowErrorNameSame] = React.useState(null)
 	const [phrase, setPhrase] = React.useState('')
 	const [passwordRepeat, setPasswordRepeat] = React.useState('')
-	const [passwordRepeatValid, setPasswordRepeatValid] = React.useState(null)
+	const [passwordRepeatValid, setPasswordRepeatValid] = React.useState(true)
 	const [phraseValid, setPhraseValid] = React.useState(null)
 	const [disabledBtn, setDisabledBtn] = React.useState(true)
 	const [loadBtn, setLoadBtn] = React.useState(false)
@@ -60,15 +60,15 @@ export const ImportData = () => {
 		}
 	}, [state, phrase])
 
-	React.useEffect(() => {
-		if (passwordRepeat !== '' && passwordInit !== '') {
-			if (passwordInit === passwordRepeat) {
-				setPasswordRepeatValid(true)
-			} else {
-				setPasswordRepeatValid(false)
-			}
-		}
-	}, [passwordRepeat, passwordInit])
+	// React.useEffect(() => {
+	// 	if (passwordRepeat !== '' && passwordInit !== '') {
+	// 		if (passwordInit === passwordRepeat) {
+	// 			setPasswordRepeatValid(true)
+	// 		} else {
+	// 			setPasswordRepeatValid(false)
+	// 		}
+	// 	}
+	// }, [passwordRepeat, passwordInit])
 
 	React.useEffect(() => {
 		if (walletName !== '') {
@@ -109,7 +109,7 @@ export const ImportData = () => {
 				dispatch(setData(user))
 				dispatch(setCurrentAccount(walletName))
 				dispatch(setPassword(passwordInit))
-				navigate('/import-end')
+				navigate('/create-pin', { state: { to: '/import-end' } })
 				setLoadBtn(false)
 			}, 50)
 		}
@@ -177,7 +177,7 @@ export const ImportData = () => {
 						style={{ right: 15, bottom: 35 }}
 					/>
 				</View>
-				<PasswordInput />
+				{/* <PasswordInput />
 				<WalletInput
 					styleInput={
 						passwordRepeatValid
@@ -195,7 +195,7 @@ export const ImportData = () => {
 					<WalletText color='red' size='xs' style={{ marginTop: 10 }}>
 						Passwords doesn’t match!
 					</WalletText>
-				)}
+				)} */}
 			</View>
 			<WalletButton
 				onPress={addedNewAccount}

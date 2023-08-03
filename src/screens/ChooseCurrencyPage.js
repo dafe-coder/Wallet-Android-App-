@@ -27,10 +27,6 @@ export const ChooseCurrencyPage = () => {
 	const [currencyName, setCurrencyName] = React.useState('')
 	const [filtered, setFiltered] = React.useState([])
 
-	React.useEffect(() => {
-		console.log(filtered)
-	}, [filtered])
-
 	const onChoose = (item) => {
 		navigate('/buy')
 		dispatch(setCurrencyBuy(item))

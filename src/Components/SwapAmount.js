@@ -15,7 +15,6 @@ export const SwapAmount = ({
 	if (type == 'in') {
 		const onMax = () => {
 			if (chooseCoin !== null) {
-				console.log(chooseCoin.market_data.balance)
 				setValue(chooseCoin.market_data.balance.toString())
 			}
 		}

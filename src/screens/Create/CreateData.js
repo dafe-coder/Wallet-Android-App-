@@ -1,24 +1,20 @@
 import React from 'react'
 import { View, BackHandler } from 'react-native'
 import { useNavigate } from 'react-router-native'
-import {
-	WalletText,
-	WalletInput,
-	WalletButton,
-	PasswordInput,
-} from './../../Components/UI'
+import { WalletText, WalletInput, WalletButton } from './../../Components/UI'
 import { Header } from '../../Components/'
 import { useDispatch, useSelector } from 'react-redux'
 import { THEME } from '../../Theme'
 import { setWalletName } from '../../store/slices/walletSlice'
 import { setPassword } from '../../store/slices/storageSlice'
+
 export const CreateData = () => {
 	const { passwordInit } = useSelector((state) => state.wallet)
 	const [validName, setValidName] = React.useState(null)
 	const [walletNameValue, setWalletNameValue] = React.useState('')
 	const [showErrorName, setShowErrorName] = React.useState(true)
 	const [passwordRepeat, setPasswordRepeat] = React.useState('')
-	const [passwordRepeatValid, setPasswordRepeatValid] = React.useState(null)
+	const [passwordRepeatValid, setPasswordRepeatValid] = React.useState(true)
 	const [disabledBtn, setDisabledBtn] = React.useState(true)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
@@ -31,17 +27,17 @@ export const CreateData = () => {
 		}
 	}, [validName, passwordRepeatValid])
 
-	React.useEffect(() => {
-		if (passwordRepeat !== '' && passwordInit !== '') {
-			if (passwordInit === passwordRepeat) {
-				setPasswordRepeatValid(true)
-				dispatch(setPassword(passwordInit))
-			} else {
-				dispatch(setPassword(''))
-				setPasswordRepeatValid(false)
-			}
-		}
-	}, [passwordRepeat, passwordInit])
+	// React.useEffect(() => {
+	// 	if (passwordRepeat !== '' && passwordInit !== '') {
+	// 		if (passwordInit === passwordRepeat) {
+	// 			setPasswordRepeatValid(true)
+	// 			dispatch(setPassword(passwordInit))
+	// 		} else {
+	// 			dispatch(setPassword(''))
+	// 			setPasswordRepeatValid(false)
+	// 		}
+	// 	}
+	// }, [passwordRepeat, passwordInit])
 
 	React.useEffect(() => {
 		if (walletNameValue !== '') {
@@ -99,22 +95,10 @@ export const CreateData = () => {
 					Wallet name requires at least 1 and at most 40 letters
 				</WalletText>
 			)}
-			<PasswordInput />
-			<WalletInput
-				password
-				styleInput={
-					passwordRepeatValid
-						? { borderColor: THEME.SUCCESS }
-						: !passwordRepeatValid && passwordRepeat !== ''
-						? { borderColor: THEME.RED }
-						: {}
-				}
-				value={passwordRepeat}
-				setValue={setPasswordRepeat}
-				placeholder='Repeat password'
-			/>
 			<WalletButton
-				to={'/create-submit'}
+				onPress={() =>
+					navigate('/create-pin', { state: { to: '/create-submit' } })
+				}
 				disabled={disabledBtn}
 				icon='wallet'
 				style={{ marginTop: 'auto', marginBottom: 25 }}>

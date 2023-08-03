@@ -3,9 +3,9 @@ import { View, StyleSheet } from 'react-native'
 import { WalletText } from './UI/WalletText'
 import { THEME } from '../Theme'
 
-export const Alert = ({ children, title }) => {
+export const Alert = ({ children, title, style }) => {
 	return (
-		<View style={styles.wrap}>
+		<View style={[styles.wrap, style]}>
 			<WalletText style={{ marginBottom: 10 }} upperCase fw='bold' center>
 				{title}
 			</WalletText>

@@ -34,10 +34,6 @@ export const VerifyMnemonic3 = () => {
 	}, [chooseWord])
 
 	React.useEffect(() => {
-		console.log(validWords)
-	}, [validWords])
-
-	React.useEffect(() => {
 		setChooseWord(validWords[2])
 	}, [validWords])
 

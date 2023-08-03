@@ -33,6 +33,7 @@ import {
 	ShowPrivateKey,
 	WelcomeBack,
 	RiskAlert,
+	CreatePin,
 } from '../screens'
 
 export const WalletRoutes = () => {
@@ -69,6 +70,7 @@ export const WalletRoutes = () => {
 			<Route exact path='/show-privateKey' element={<ShowPrivateKey />} />
 			<Route exact path='/welcome-back' element={<WelcomeBack />} />
 			<Route exact path='/risk-alert' element={<RiskAlert />} />
+			<Route exact path='/create-pin' element={<CreatePin />} />
 			<Route
 				exact
 				path='/transaction-history'

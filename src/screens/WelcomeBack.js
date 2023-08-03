@@ -1,6 +1,11 @@
 import React from 'react'
 import { Image, View, Text, Linking, StyleSheet } from 'react-native'
-import { WalletText, WalletInput, WalletButton } from './../Components/UI'
+import {
+	WalletText,
+	WalletInput,
+	WalletButton,
+	PasswordLogin,
+} from './../Components/UI'
 import Hyperlink from 'react-native-hyperlink'
 import { THEME } from '../Theme'
 import { useNavigate } from 'react-router-native'
@@ -35,12 +40,7 @@ export const WelcomeBack = () => {
 				<WalletText size='m' center fw='bold' style={{ marginBottom: 30 }}>
 					Welcome back
 				</WalletText>
-				<WalletInput
-					setValue={setPasswordValue}
-					value={passwordValue}
-					placeholder='Password'
-					password
-				/>
+				<PasswordLogin focus={false} to='/wallet' />
 				<WalletButton onPress={goWallet} style={{ marginTop: 15 }}>
 					Unlock
 				</WalletButton>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { Header, Alert } from '../../Components'
-import { WalletText, WalletInput } from '../../Components/UI'
+import { WalletText, WalletInput, PasswordLogin } from '../../Components/UI'
 import { WalletButton } from '../../Components/UI/WalletButton'
 import { THEME } from '../../Theme'
 import { SvgIcon } from '../../Components/svg/svg'
@@ -32,6 +32,10 @@ export const ShowPrivateKey = () => {
 		}
 	}
 
+	const onShowPhrase = () => {
+		setShowPhrase(true)
+	}
+
 	return (
 		<ScrollView
 			keyboardShouldPersistTaps={'handled'}
@@ -52,13 +56,7 @@ export const ShowPrivateKey = () => {
 					steal all of your accounts.
 				</Alert>
 				{!showPhrase ? (
-					<WalletInput
-						password
-						setValue={setPasswordValue}
-						value={passwordValue}
-						style={{ marginTop: 30 }}
-						placeholder='Password'
-					/>
+					<PasswordLogin style={{ marginTop: 30 }} callback={onShowPhrase} />
 				) : (
 					<></>
 				)}
