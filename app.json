@@ -2,7 +2,7 @@
   "expo": {
     "name": "Robin Wallet",
     "slug": "robinhood",
-    "version": "2.01.14",
+    "version": "3.0.12",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,7 +18,7 @@
     ],
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#632DBC"
+        "backgroundColor": "#010210"
       },
       "package": "com.hood.robin"
     },
